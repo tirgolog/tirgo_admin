@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable} from 'rxjs';
 
-const API_URL = 'https://tirgo-server.onrender.com';
+const API_URL = 'http://localhost:7790';
 
 @Injectable({
     providedIn: 'root'
