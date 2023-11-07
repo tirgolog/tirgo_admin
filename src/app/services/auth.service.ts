@@ -4,7 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 
 const TOKEN_KEY = 'jwttirgotoken';
-const API_URL = 'https://tirgo-server.onrender.com';
+const API_URL = 'http://localhost:7790';
 
 @Injectable({
    providedIn: 'root'
