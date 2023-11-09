@@ -10,4 +10,4 @@ services:
       - NGINX_PORT=4200
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:rw
-      - ./dist/logist-list:/var/www/orders.dafex.co
+      - ./dist/logist-list:/var/www/admin.tirgo.io
