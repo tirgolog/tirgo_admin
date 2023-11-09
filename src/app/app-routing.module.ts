@@ -51,6 +51,8 @@ import {LoadingComponent} from "./loading/loading.component";
 import {ArchiveComponent} from "./pages/archive/archive.component";
 import {SecuretransComponent} from "./pages/securetrans/securetrans.component";
 import {ExchangerateComponent} from "./exchangerate/exchangerate.component";
+import { ModerationComponent } from './pages/moderation/moderation.component';
+import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
 
 
 
@@ -260,11 +262,11 @@ const routes: Routes = [
       component: ProfileComponent,
       title: "Профиль"
    },
-   {
-      path: "auth",
-      component: AuthComponent,
-      title: "Регистрация"
-   },
+   // {
+   //    path: "auth",
+   //    component: AuthComponent,
+   //    title: "Регистрация"
+   // },
    {
       path: "viewphoto",
       component: ViewphotoComponent,
@@ -309,6 +311,16 @@ const routes: Routes = [
       path: "exchangerate",
       component: ExchangerateComponent,
       title: "Курс валют"
+   },
+   {
+      path: "moderation",
+      component: ModerationComponent,
+      title: "Модерация"
+   },
+   {
+      path: "moderation-confirm/:id",
+      component: ModerationConfirmComponent,
+      title: "Модерация"
    },
 ];
 

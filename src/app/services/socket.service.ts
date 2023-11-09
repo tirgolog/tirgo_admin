@@ -8,10 +8,8 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class SocketService {
-  socket: SocketIOClient.Socket | any; // SocketIOClient.Socket;
-  constructor(
-
-  ) { }
+  socket: SocketIOClient.Socket | any;
+  constructor() { }
   disconect() {
     if (this.socket) {
       this.socket.disconnect();

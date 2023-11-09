@@ -1,0 +1,8 @@
+<div class="wrapper-cards">
+    <mat-card class="card" *ngFor="let item of data">
+        <mat-card-content class="card-content">
+            {{item.companyName}}
+            <button routerLink="moderation-confirm/{{item.id}}" (click)="closeConfirmModal()" class="page-header__btn btn-green">Открыть</button>
+        </mat-card-content>
+    </mat-card>
+</div>

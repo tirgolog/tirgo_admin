@@ -4,7 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 
 const TOKEN_KEY = 'jwttirgotoken';
-const API_URL = 'https://admin.tirgo.io';
+const API_URL = 'https://tirgo.io:7790';
 
 @Injectable({
    providedIn: 'root'
@@ -22,6 +22,7 @@ export class AuthService {
    ) { }
 
    loginAdmin(name: string, password: string) {
+      AuthService.jwt = localStorage.getItem(TOKEN_KEY)
       const sUrl = API_URL + '/admin/loginAdmin';
       const body = JSON.stringify({
          name, password

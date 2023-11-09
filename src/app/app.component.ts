@@ -34,7 +34,7 @@ export class AppComponent {
       this.authService.checkToken();
       this.authService.authenticationState.subscribe(async res => {
          if (res) {
-            await this.checkSession();
+            // await this.checkSession();
             this.authService.globalLoading = false;
          } else {
             await this.router.navigate(['auth']);

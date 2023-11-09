@@ -1,0 +1,26 @@
+.page-header__top {
+    align-items: baseline;
+  .info-wrapper {
+    //   display: flex;
+    //   justify-content: space-between;
+    flex-wrap: wrap;
+    .info {
+      margin: 5px 5px;
+      .info-label {
+        font-weight: 600;
+        margin: 10px 5px;
+      }
+      img {
+        margin: auto;
+      }
+    }
+    .info-file {
+       display: flex; 
+       align-items: center;
+       .btn-green {
+        height: 0;
+        padding: 14px;
+       }
+    }
+  }
+}
