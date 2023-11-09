@@ -62,17 +62,17 @@ export class AppComponent {
             this.helper.securetrans = await this.listService.getSecureTrans().toPromise();
             this.helper.transactions_type = await this.listService.getTransactionsType().toPromise();
 
-            this.socketService.updateAllMessages().subscribe(async (res:any) => {
-               console.log(res)
-               this.helper.messages = await this.listService.getAllMessages().toPromise();
-            })
-            this.socketService.logOutUser().subscribe(async (res:number) => {
-               console.log(res)
-               if (res === this.authService.currentUser?.id){
-                  this.authService.logout()
-                  await this.router.navigate(['auth'], { replaceUrl: true })
-               }
-            })
+            // this.socketService.updateAllMessages().subscribe(async (res:any) => {
+            //    console.log(res)
+            //    this.helper.messages = await this.listService.getAllMessages().toPromise();
+            // })
+            // this.socketService.logOutUser().subscribe(async (res:number) => {
+            //    console.log(res)
+            //    if (res === this.authService.currentUser?.id){
+            //       this.authService.logout()
+            //       await this.router.navigate(['auth'], { replaceUrl: true })
+            //    }
+            // })
 
             const orders = await this.listService.getAllOrders(0,50,null,null,null,null,null,null,null,null,null,null,null).toPromise();
             if (orders.status){
