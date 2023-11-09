@@ -14,7 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion'
 
 import { AppComponent } from './app.component';
@@ -83,12 +83,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import "ag-grid-enterprise";
 import { ViewphotoComponent } from './viewphoto/viewphoto.component'
 import {NgxMaskModule} from "ngx-mask";
-import {MAT_DATE_FORMATS} from "@angular/material/core";
-import {MatSlideToggle, MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { ActivityComponent } from './activity/activity.component';
 import { ViewadminComponent } from './viewadmin/viewadmin.component';
 import { CreateorderComponent } from './pages/createorder/createorder.component';
-import {MatAutocomplete} from "@angular/material/autocomplete";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import { RoutersTruckComponent } from './routers-truck/routers-truck.component';
 import { LoadingComponent } from './loading/loading.component';
@@ -103,11 +101,16 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import { AddmoneyComponent } from './components/addmoney/addmoney.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatCardModule} from '@angular/material/card';
 import { ExchangerateComponent } from './exchangerate/exchangerate.component';
 import {NgPipesModule} from 'ngx-pipes';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatBadgeModule} from '@angular/material/badge';
+import { ModerationComponent } from './pages/moderation/moderation.component';
+import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
+import { ModerationConfirmListComponent } from './pages/moderation/moderation-confirm-list/moderation-confirm-list.component';
 
 
 registerLocaleData(ruLocale);
@@ -182,6 +185,9 @@ const mapConfig: YaConfig = {
       SecuretransComponent,
       AddmoneyComponent,
       ExchangerateComponent,
+      ModerationComponent,
+      ModerationConfirmComponent,
+      ModerationConfirmListComponent,
    ],
    imports: [
       MatSortModule,
@@ -208,6 +214,8 @@ const mapConfig: YaConfig = {
       MatCheckboxModule,
       MatRippleModule,
       MatButtonToggleModule,
+      MatBadgeModule,
+      MatCardModule,
       InfiniteScrollModule,
       AngularYandexMapsModule.forRoot(mapConfig),
       HttpClientModule,
@@ -219,6 +227,7 @@ const mapConfig: YaConfig = {
    ],
 
    providers: [
+      { provide: MatDialogRef, useValue: {}}, { provide: MAT_DIALOG_DATA, useValue: {} },
       { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },
       {
          provide: HTTP_INTERCEPTORS,

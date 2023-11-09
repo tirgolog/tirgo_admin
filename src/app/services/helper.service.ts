@@ -23,6 +23,9 @@ export class HelperService {
    public users: any[] = [];
    public users_count: number = 0;
 
+   public merchants: any[] = [];
+   public merchants_count: number = 0;
+
    public deletedusers: any[] = [];
    public deletedusers_count: number = 0;
 

@@ -8,17 +8,15 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class SocketService {
-  socket: SocketIOClient.Socket | any; // SocketIOClient.Socket;
-  constructor(
-
-  ) { }
+  socket: SocketIOClient.Socket | any;
+  constructor() { }
   disconect() {
     if (this.socket) {
       this.socket.disconnect();
     }
   }
   connect() {
-    this.socket = io('https://tirgo-server.onrender.com');
+    this.socket = io('http://192.168.1.103:3000/api/v1')
     this.socket.on('connect', () => {
       this.socket.emit('authenticate', {token: AuthService.jwt})
           .on('authenticated', (data:any) => {

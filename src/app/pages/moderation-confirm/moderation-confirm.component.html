@@ -1,0 +1,99 @@
+<main class="moderation" id="main">
+  <section class="page-header">
+    <div class="page-header__top">
+      <h2 class="page-header__title title">Модерация</h2>
+      <div class="page-header__actions">
+        <a class="page-header__btn btn-green" (click)="verifyMerchant()"> Одобрить </a>
+        <a class="page-header__btn btn-red" (click)="rejectMerchant()"> Отклонить </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-header__top">
+    <ul class="info-wrapper" *ngIf="data">
+      <li class="info">
+        <span *ngIf="data.companyName" class="info-label"
+          >Название компании: </span
+        ><span>{{ data.companyName }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.supervisorFullName" class="info-label"
+          >Ф.И.О руководителя: </span
+        ><span>{{ data.supervisorFullName }}</span>
+      </li>
+
+      <li class="info" *ngFor="let phone of data.phoneNumbers">
+        <span *ngIf="phone" class="info-label">Телефон: </span
+        ><span>+{{ phone }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.legalAddress" class="info-label"
+          >Юридический адрес: </span
+        ><span>{{ data.legalAddress }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.factAddress" class="info-label"
+          >Фактический адрес: </span
+        ><span>{{ data.factAddress }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.email" class="info-label">Электронная почта: </span
+        ><span>{{ data.email }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.bankName" class="info-label"
+          >Наименование банка: </span
+        ><span>{{ data.bankName }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.inn" class="info-label">ИНН: </span
+        ><span>{{ data.inn }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.oked" class="info-label">ОКЭД: </span
+        ><span>{{ data.oked }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.mfo" class="info-label">МФО: </span
+        ><span>{{ data.mfo }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.dunsNumber" class="info-label">DUNS номер: </span
+        ><span>{{ data.dunsNumber }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.notes" class="info-label">Заметки: </span
+        ><span>{{ data.notes }}</span>
+      </li>
+
+      
+    </ul>
+
+     <ul class="info-wrapper">
+      <li class="info info-file" >
+        <div class="info-label">Лого:</div>
+        <a class="btn-green"> Посмотреть </a>
+      </li>
+
+      <li class="info info-file">
+        <div class="info-label">Свидетельство о регистрации:</div>
+        <a class="btn-green"> Посмотреть </a>
+      </li>
+
+      <li class="info info-file">
+        <div class="info-label">Паспорт руководителя:</div>
+        <a class="btn-green"> Посмотреть </a>
+      </li>
+    </ul> 
+  </section>
+</main>
