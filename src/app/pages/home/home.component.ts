@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
             this.runcount = this.runcount + 1;
          }else if(row.status === 2){
             this.endcount = this.endcount + 1;
-         }else if(row.status === 10){
+         }else if(row.status === 3){
             this.cancelcount = this.cancelcount + 1;
          }
       }

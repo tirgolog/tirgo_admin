@@ -27,8 +27,8 @@
                      />
                      <p class="item-chat__name"><b>{{row.username}}</b></p>
                      <span class="item-chat__text">
-                        <b>{{row.messages[row.messages.length - 1].text}}</b>
-                        <small>{{row.messages[row.messages.length - 1].date | formatTime:'DD MMMM YYYY в HH:mm'}}</small>
+                        <b>{{row.messages[row.messages.length - 1]?.text}}</b>
+                        <small>{{row.messages[row.messages.length - 1]?.date | formatTime:'DD MMMM YYYY в HH:mm'}}</small>
                      </span>
                   </div>
                </ng-container>

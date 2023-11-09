@@ -41,11 +41,10 @@ export class DriverComponent {
         return newitems.length
     }
     async ngOnInit() {
-        console.log(this.data)
         const res = await this.authService.getUserInfo(+this.data).toPromise();
-        console.log(res)
         if (res.status) {
             this.user = res.data
+            console.log(this.user)
         }
 
         this.passport_series_numbers = this.user.passport_series_numbers;
