@@ -53,7 +53,7 @@ export class AppComponent {
                // @ts-ignore
                this.authService.authenticationState.next(true);
             }
-            this.socketService.connect()
+            // this.socketService.connect()
             //this.helper.partners = await this.listService.getPartners().toPromise()
             this.helper.typetruck = await this.listService.getTypeTruck().toPromise();
             this.helper.typecargo = await this.listService.getTypeCargo().toPromise();
