@@ -262,11 +262,11 @@ const routes: Routes = [
       component: ProfileComponent,
       title: "Профиль"
    },
-   // {
-   //    path: "auth",
-   //    component: AuthComponent,
-   //    title: "Регистрация"
-   // },
+   {
+      path: "auth",
+      component: AuthComponent,
+      title: "Регистрация"
+   },
    {
       path: "viewphoto",
       component: ViewphotoComponent,
