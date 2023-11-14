@@ -23,8 +23,31 @@
 
 .menu {
    padding: rem(15) 0;
+
    &__list {
       display: grid;
+      max-height: calc(100vh - 180px);
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+         width: 10px;
+         height: 0;
+       }
+       
+       /* Track */
+       &::-webkit-scrollbar-track {
+         background: #f1f1f1;
+       }
+       
+       /* Handle */
+       &::-webkit-scrollbar-thumb {
+         background: #888;
+       }
+       
+       /* Handle on hover */
+       &::-webkit-scrollbar-thumb:hover {
+         background: #555;
+       }
    }
    &__item {
       &._active {
@@ -121,17 +144,29 @@
       }
    }
 }
-.log_out{
-   cursor: pointer;
-   color: #b58e8e;
-   font-weight: 700;
+
+
+.logout-list{
+
    position: absolute;
    bottom: 0;
-}
-.refreshed{
-   cursor: pointer;
-   color: #b59e8e;
-   font-weight: 700;
-   position: absolute;
-   bottom: 30px;
+   background-color: #fff;
+
+   .log_out{
+      cursor: pointer;
+      color: #b58e8e;
+      font-weight: 700;
+      // position: absolute;
+      // bottom: 0;
+      // background-color: #fff;
+   }
+   .refreshed{
+      cursor: pointer;
+      color: #b59e8e;
+      font-weight: 700;
+      // position: absolute;
+      // bottom: 30px;
+      // background-color: #fff;
+   }
+   
 }

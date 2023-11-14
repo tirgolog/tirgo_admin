@@ -46,6 +46,7 @@ export class DriversComponent {
 
    ngOnInit(): void {
       this.spoller.initSpollers()
+      this.filterList()
       this.gridOptions = <GridOptions> {};
       this.gridOptions.localeText = this.helper.localeTextAgGrid;
       this.gridOptions.defaultExportParams = {onlySelected: true};
