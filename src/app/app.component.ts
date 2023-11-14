@@ -58,7 +58,7 @@ export class AppComponent {
             this.helper.typetruck = await this.listService.getTypeTruck().toPromise();
             this.helper.typecargo = await this.listService.getTypeCargo().toPromise();
             this.helper.admins = await this.listService.getAllAdmins().toPromise();
-            this.helper.messages = await this.listService.getAllMessages().toPromise();
+            // this.helper.messages = await this.listService.getAllMessages().toPromise();
             this.helper.securetrans = await this.listService.getSecureTrans().toPromise();
             this.helper.transactions_type = await this.listService.getTransactionsType().toPromise();
 

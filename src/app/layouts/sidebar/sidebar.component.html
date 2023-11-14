@@ -238,6 +238,21 @@
                <span>Активность</span>
             </button>
          </li>
+         
+         <!--<li class="menu__item">
+            <a
+               routerLink="/settings"
+               routerLinkActive="_active"
+               class="menu__link"
+               (click)="closeMenu()"
+            >
+               <i class="icm-setting"></i>
+               <span>Настройки</span>
+            </a>
+         </li>-->
+      </ul>
+
+      <ul class="logout-list" *ngIf="authService.myrole">
          <li class="menu__item refreshed">
             <a
                class="menu__link"
@@ -254,17 +269,6 @@
                <span>Выход</span>
             </a>
          </li>
-         <!--<li class="menu__item">
-            <a
-               routerLink="/settings"
-               routerLinkActive="_active"
-               class="menu__link"
-               (click)="closeMenu()"
-            >
-               <i class="icm-setting"></i>
-               <span>Настройки</span>
-            </a>
-         </li>-->
       </ul>
    </nav>
    <div class="version">Tirgo Admin ver 2.1.7</div>
