@@ -16,6 +16,7 @@ import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/ma
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -108,9 +109,12 @@ import {NgPipesModule} from 'ngx-pipes';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { ModerationComponent } from './pages/moderation/moderation.component';
 import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
 import { ModerationConfirmListComponent } from './pages/moderation/moderation-confirm-list/moderation-confirm-list.component';
+import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
 
 
 registerLocaleData(ruLocale);
@@ -188,6 +192,7 @@ const mapConfig: YaConfig = {
       ModerationComponent,
       ModerationConfirmComponent,
       ModerationConfirmListComponent,
+      EditModerationComponent,
    ],
    imports: [
       MatSortModule,
@@ -211,11 +216,13 @@ const mapConfig: YaConfig = {
       MatSlideToggleModule,
       MatDatepickerModule,
       MatNativeDateModule,
+      MatIconModule,
       MatCheckboxModule,
       MatRippleModule,
       MatButtonToggleModule,
       MatBadgeModule,
       MatCardModule,
+      MatToolbarModule,
       InfiniteScrollModule,
       AngularYandexMapsModule.forRoot(mapConfig),
       HttpClientModule,
