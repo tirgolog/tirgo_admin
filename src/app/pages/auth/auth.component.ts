@@ -13,12 +13,10 @@ import {Router} from "@angular/router";
 })
 
 
-
-
 export class AuthComponent {
 
-   login: string = "admin"
-   password: string = "admin"
+   login: string = "mirzobobur"
+   password: string = "iEXS0RuXHx"
    error: boolean = false
 
    constructor(
@@ -38,6 +36,7 @@ export class AuthComponent {
    async getLogin() {
       const res = await this.authService.loginAdmin(this.login, this.password).toPromise();
       if (res.status) {
+         await this.authService.brokerLogin().subscribe((res) => {})
          await this.authService.setJwt(res.token);
          this.error = false
       } else {

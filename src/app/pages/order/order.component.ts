@@ -36,7 +36,6 @@ export class OrderComponent {
    }
    async ngOnInit() {
       const res = await this.authService.getOrderInfo(this.data.id).toPromise();
-      console.log(res)
       if (res.status) {
          this.data = res.data;
          const index = this.helper.orders.findIndex(e => e.id === +this.data.id)

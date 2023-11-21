@@ -43,7 +43,8 @@ export class ShippersComponent {
    }
 
    ngOnInit(): void {
-      this.spoller.initSpollers()
+      this.spoller.initSpollers();
+      this.filterList()
    }
 
    goToColumn(ev:any): void {

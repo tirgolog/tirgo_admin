@@ -113,5 +113,4 @@ export class CreateorderComponent {
 
     }*/
   }
-  //state?id=id
 }

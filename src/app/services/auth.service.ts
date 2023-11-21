@@ -22,7 +22,7 @@ export class AuthService {
    ) { }
 
    loginAdmin(name: string, password: string) {
-      AuthService.jwt = localStorage.getItem(TOKEN_KEY)
+      // AuthService.jwt = localStorage.getItem(TOKEN_KEY)
       const sUrl = API_URL + '/admin/loginAdmin';
       const body = JSON.stringify({
          name, password
@@ -169,6 +169,19 @@ export class AuthService {
       AuthService.jwt = jwt;
       localStorage.setItem(TOKEN_KEY, jwt);
       this.authenticationState.next(true);
+   }
+
+   brokerLogin() {
+      const sUrl = 'http://192.168.1.130:3000/api/v1' + '/auth/login';
+      return this.http.post<any>(sUrl, {username: "adminuseRname", password:'user@PasSword1'})
+         .pipe(map(res => {
+            if (res.success) {
+               localStorage.setItem('merchantJWT', res.data.access_token);
+               return res
+            } else {
+               return false;
+            }
+         }));
    }
 
    checkSession(): Observable<false | User> {

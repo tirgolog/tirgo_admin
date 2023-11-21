@@ -16,17 +16,17 @@ export class SocketService {
     }
   }
   connect() {
-    this.socket = io('http://192.168.1.130:3000/api/v1')
-    this.socket.on('connect', () => {
-      this.socket.emit('authenticate', {token: AuthService.jwt})
-          .on('authenticated', (data:any) => {
-            console.warn('подключился к сокету')
-          })
-          .on('unauthorized', function(msg:any) {
-            console.log('unauthorized: ' + JSON.stringify(msg.data));
-            // throw new Error(msg.data.type);
-          });
-    });
+    // this.socket = io('https://admin.tirgo.io/api');
+    // this.socket.on('connect', () => {
+    //   this.socket.emit('authenticate', {token: AuthService.jwt})
+    //       .on('authenticated', (data:any) => {
+    //         console.warn('подключился к сокету')
+    //       })
+    //       .on('unauthorized', function(msg:any) {
+    //         console.log('unauthorized: ' + JSON.stringify(msg.data));
+    //         // throw new Error(msg.data.type);
+    //       });
+    // });
   }
   emit(event:any, ...args: any[]) {
     this.socket.emit(event, ...args);
