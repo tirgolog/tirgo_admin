@@ -5,6 +5,7 @@ import { HelperService } from 'src/app/services/helper.service';
 import { ListService } from 'src/app/services/list.service';
 import { SpollersService } from 'src/app/services/spollers.service';
 import { ModerationConfirmListComponent } from './moderation-confirm-list/moderation-confirm-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-moderation',
@@ -32,6 +33,7 @@ export class ModerationComponent implements OnInit {
     public helper: HelperService,
     public authService: AuthService,
     public listService: ListService,
+    public router: Router
   ) {
 
   }
@@ -45,20 +47,9 @@ export class ModerationComponent implements OnInit {
   }
 
   goToColumn(ev: any): void {
-    //  const dialogRef = this.dialog.open(UserComponent, {
-    //     width: '90%',
-    //     height: '80%',
-    //     panelClass: 'custom-dialog-class',
-    //     data: ev
-    //  });
+    this.router.navigate(['/moderation/'+ev])
   }
-  addUser() {
-    //  const dialogRef = this.dialog.open(AddUserComponent, {
-    //     width: '90%',
-    //     height: '80%',
-    //     panelClass: 'custom-dialog-class',
-    //  });
-  }
+
   ngAfterViewInit(): void {
     this.spoller.initSpollers()
   }
@@ -103,7 +94,6 @@ export class ModerationComponent implements OnInit {
     this.helper.users_count = newusers.count;
     this.helper.isLoading = false;
   }
-
   showConfirmModal() {
     const dialogRef = this.dialog.open(ModerationConfirmListComponent, {
       width: '50%',
@@ -111,4 +101,5 @@ export class ModerationComponent implements OnInit {
       data: this.unverified
     });
   }
+
 }

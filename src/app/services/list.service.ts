@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
 const API_URL = 'https://admin.tirgo.io/api'
-
+const MER_API = "http://192.168.1.130:3000/api/v1"
 @Injectable({
   providedIn: 'root'
 })
 
 export class ListService {
-
+  currentUser
   constructor(
     private http: HttpClient,
-  ) {
+  ) { 
+    this.currentUser = localStorage.getItem('merchantJWT')
   }
 
 
@@ -23,6 +24,19 @@ export class ListService {
     });
     return this.http.post<any>(sUrl, body);
   }
+
+  getMerchantOrders() {
+    const sUrl = MER_API + '/cargo/all';
+    return this.http.get<any>(sUrl)
+    .pipe(map(res => {
+      if (res.data) {
+        return res.data;
+      } else {
+        return [];
+      }
+    }));
+  }
+
   getAllDrivers(from: number, limit: number, id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
     const sUrl = API_URL + '/reborn/getAllDrivers';
     const body = JSON.stringify({
@@ -123,8 +137,46 @@ export class ListService {
   }
 
   getAllMerchants() {
-    const sUrl = API_URL + '/merchant/all';
+    const sUrl = MER_API + '/merchant/all';
     return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getMerchantById(id) {
+    const sUrl = MER_API + '/merchant/id?id=' + id;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZDc3OGM0ZS05YjUwLTQ1ZDMtODZmMS1iOTg5Y2M2YjM1NTQiLCJ1c2VybmFtZSI6ImVtaWFsQHRpcmdvb29vLnV6IiwibWVyY2hhbnRJZCI6IjUwYzJhYzg4LTEyYTctNDcxNS04YjBhLTljOTNhYjJhYjg1OCIsImlhdCI6MTcwMDIyMTUwMH0.SkU7fc2jpD6yrQHo_1JNM7QOaIiaQse9aF5sr0HjDd8'
+
+    return this.http.get<any>(sUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  editMerchant(data) {
+    const sUrl = MER_API + '/merchant?id=' + data.id;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YmJkODU4MS1hMDViLTQ2ZjctYjQ3MS0wYWI0NGY2M2MxMTQiLCJ1c2VybmFtZSI6ImFkbWluIiwibWVyY2hhbnRJZCI6IjUwYzJhYzg4LTEyYTctNDcxNS04YjBhLTljOTNhYjJhYjg1OCIsImlhdCI6MTcwMDA0NzMyMn0.pi5JIMZD_-fzHMPh33CpYjNDbfZnNAEDCrwYb50HoN0'
+    
+    return this.http.put<any>(sUrl, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .pipe(map(res => {
         if (res.data) {
           return res.data;
@@ -135,8 +187,15 @@ export class ListService {
   }
 
   getVerifiedMerchants() {
-    const sUrl = API_URL + '/merchant/verified';
-    return this.http.get<any>(sUrl)
+    const sUrl = MER_API + '/merchant/verified';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YmJkODU4MS1hMDViLTQ2ZjctYjQ3MS0wYWI0NGY2M2MxMTQiLCJ1c2VybmFtZSI6ImFkbWluIiwibWVyY2hhbnRJZCI6IjUwYzJhYzg4LTEyYTctNDcxNS04YjBhLTljOTNhYjJhYjg1OCIsImlhdCI6MTcwMDA0NzMyMn0.pi5JIMZD_-fzHMPh33CpYjNDbfZnNAEDCrwYb50HoN0'
+
+    return this.http.get<any>(sUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .pipe(map(res => {
         if (res.data) {
           return res.data;
@@ -147,7 +206,7 @@ export class ListService {
   }
 
   getUnverifiedMerchants() {
-    const sUrl = API_URL + '/merchant/unverified';
+    const sUrl = MER_API + '/merchant/unverified';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res.data) {
@@ -159,7 +218,7 @@ export class ListService {
   }
 
   getAllMerchantItem(id) {
-    const sUrl = API_URL + '/merchant/id?id=' + id;
+    const sUrl = MER_API + '/merchant/id?id=' + id;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res.data) {
@@ -171,7 +230,7 @@ export class ListService {
   }
 
   verifyMerchant(id) {
-    const sUrl = API_URL + '/merchant/verify?id=' + id;
+    const sUrl = MER_API + '/merchant/verify?id=' + id;
     const body = JSON.stringify({});
     return this.http.patch<any>(sUrl, body)
       .pipe(map(res => {
@@ -184,7 +243,57 @@ export class ListService {
   }
 
   rejectMerchant(id) {
-    const sUrl = API_URL + '/merchant/reject?id=' + id;
+    const sUrl = MER_API + '/merchant/reject?id=' + id;
+    const body = JSON.stringify({});
+    return this.http.patch<any>(sUrl, body)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getTransactionByMerchant(id) {
+    const sUrl = MER_API + '/transaction/merchant?id=' + id;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getMerchantBalance(id) {
+    const sUrl = MER_API + '/transaction/merchant/balance?id=' + id;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  rejectTransaction(id) {
+    const sUrl = MER_API + '/transaction/reject?id=' + id;
+    const body = JSON.stringify({});
+    return this.http.patch<any>(sUrl, body)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  verifyTransaction(id) {
+    const sUrl = MER_API + '/transaction/verify?id=' + id;
     const body = JSON.stringify({});
     return this.http.patch<any>(sUrl, body)
       .pipe(map(res => {

@@ -28,7 +28,9 @@
                   </p>
                   <p class="tw-flex tw-justify-between">
                      <span>Тип транспорта:</span>
-                     <span>{{helper.returnNameTypeTransport(data.transport_type)}}</span>
+                     <span *ngFor="let type of data.transport_types;let i=index">
+                        <span>{{i+1}}.{{helper.returnNameTypeTransport(type)}} <br> </span>
+                     </span>
                   </p>
                   <p class="tw-flex tw-justify-between">
                      <span>Размер груза:</span>

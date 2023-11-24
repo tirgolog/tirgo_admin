@@ -1,72 +1,114 @@
 <main class="moderation" id="main">
-    <section class="page-header">
-       <div class="page-header__top">
-          <h2 class="page-header__title title">Модерация</h2>
-          <div class="page-header__actions">
-             <button  (click)="showConfirmModal()" class="page-header__btn btn-green" matBadge="{{unverified.length}}" matBadgePosition="after" matBadgeColor="warn" [disabled]="unverified.length == 0">
-                Запросы
-             </button>
-          </div>
-       </div>
-    </section>
-    <section class="table">
-       <div class="filter">
-          <div class="filter-inputs">
-             <input type="text" class="page__search" placeholder="Поиск по Id" [(ngModel)]="id"/>
-             <input type="text" class="page__search" placeholder="Поиск по Юридическое лицо" [(ngModel)]="name"/>
-             <input type="date" class="page__search" placeholder="Поиск по дате Город" [(ngModel)]="city"/>
-             <span>
-                <select name="select" class="page__search" (change)="changeSort($event)">
-                  <option value="id">ID</option>
-                  <option value="legal_entity">Юридическое лицо</option>
-                  <option value="city">Город</option>
-                </select>
-              </span>
-          </div>
-          <div class="filter-buttons">
-             <button class="page__btn btn-custom" (click)="filterList()">
-                Отфильтровать
-             </button>
-             <button class="page__btn btn-custom" (click)="filterClear()">
-                Сбросить фильтр
-             </button>
-          </div>
-       </div>
-       <!-- {{helper.merchants[0]?.companyName}} -->
-       <mat-table [dataSource]="helper.merchants">
-          <ng-container matColumnDef="id">
-             <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
-             <mat-cell *matCellDef="let row;let i = index"> {{i+1}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="name">
-             <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.supervisorFullName}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="phone">
-             <mat-header-cell *matHeaderCellDef>Юр.лицо</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.companyName}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="city">
-             <mat-header-cell *matHeaderCellDef>Грузы</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.city}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="raiting">
-             <mat-header-cell *matHeaderCellDef>Баланс</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.raiting}} </mat-cell>
-          </ng-container>
-         
-          <ng-container matColumnDef="date_last_login">
-             <mat-header-cell *matHeaderCellDef>Последний вход</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.date_last_login }} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="logo">
-            <mat-header-cell *matHeaderCellDef>Лого</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.logo}} </mat-cell>
-         </ng-container>
-          <mat-header-row *matHeaderRowDef="['id', 'name', 'phone','raiting', 'city',  'date_last_login', 'logo']"></mat-header-row>
-          <mat-row (click)="goToColumn(row.id)" *matRowDef="let row; columns: ['id', 'name', 'phone','raiting', 'city',  'logo']"></mat-row>
-       </mat-table>
-       <mat-paginator [length]="helper.users_count" showFirstLastButtons [pageSizeOptions]="sizespage" (page)="handlePage($event)"></mat-paginator>
- 
-    </section>
- </main>
+  <section class="page-header">
+    <div class="page-header__top">
+      <h2 class="page-header__title title">Модерация</h2>
+      <div class="page-header__actions">
+        <button
+          (click)="showConfirmModal()"
+          class="page-header__btn btn-green"
+          matBadge="{{ unverified.length }}"
+          matBadgePosition="after"
+          matBadgeColor="warn"
+          [disabled]="unverified.length == 0"
+        >
+          Запросы
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="table">
+    <div class="filter">
+      <div class="filter-inputs">
+        <input
+          type="text"
+          class="page__search"
+          placeholder="Поиск по Id"
+          [(ngModel)]="id"
+        />
+        <input
+          type="text"
+          class="page__search"
+          placeholder="Поиск по Юридическое лицо"
+          [(ngModel)]="name"
+        />
+        <input
+          type="date"
+          class="page__search"
+          placeholder="Поиск по дате Город"
+          [(ngModel)]="city"
+        />
+        <span>
+          <select
+            name="select"
+            class="page__search"
+            (change)="changeSort($event)"
+          >
+            <option value="id">ID</option>
+            <option value="legal_entity">Юридическое лицо</option>
+            <option value="city">Город</option>
+          </select>
+        </span>
+      </div>
+      <div class="filter-buttons">
+        <button class="page__btn btn-custom" (click)="filterList()">
+          Отфильтровать
+        </button>
+        <button class="page__btn btn-custom" (click)="filterClear()">
+          Сбросить фильтр
+        </button>
+      </div>
+    </div>
+    <mat-table [dataSource]="helper.merchants">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index"> {{ i + 1 }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row.supervisorFullName }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="companyName">
+        <mat-header-cell *matHeaderCellDef>Юр.лицо</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.companyName }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cargosCount">
+        <mat-header-cell *matHeaderCellDef>Грузы</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.cargosCount }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="balance">
+        <mat-header-cell *matHeaderCellDef>Баланс</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.balance }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date_last_login">
+        <mat-header-cell *matHeaderCellDef>Последний вход</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.date_last_login }} </mat-cell>
+      </ng-container>
+      <mat-header-row
+        *matHeaderRowDef="[
+          'id',
+          'name',
+          'companyName',
+          'balance',
+          'cargosCount',
+          'date_last_login',
+        ]"
+      ></mat-header-row>
+      <mat-row
+        (click)="goToColumn(row.id)"
+        *matRowDef="
+          let row;
+          columns: ['id', 'name', 'companyName', 'balance', 'cargosCount','date_last_login']
+        "
+      ></mat-row>
+    </mat-table>
+    <mat-paginator
+      [length]="helper.users_count"
+      showFirstLastButtons
+      [pageSizeOptions]="sizespage"
+      (page)="handlePage($event)"
+    ></mat-paginator>
+  </section>
+</main>

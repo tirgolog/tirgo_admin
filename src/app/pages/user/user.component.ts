@@ -22,9 +22,7 @@ export class UserComponent {
    ) {
    }
    async ngOnInit(){
-      console.log(this.data)
       const res = await this.authService.getUserInfo(+this.data).toPromise();
-      console.log(res)
       if (res.status) {
          this.user = res.data
       }
@@ -36,7 +34,6 @@ export class UserComponent {
    }
    async generPasswordMerchant(){
       const res = await this.authService.generPasswordMerchant(+this.data,this.user.name).toPromise();
-      console.log(res)
       if (res.status) {
          this.user.merch_login = res.name;
          this.user.merch_password = res.code;

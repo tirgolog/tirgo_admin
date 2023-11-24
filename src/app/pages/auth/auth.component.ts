@@ -3,8 +3,7 @@ import { AppComponent } from 'src/app/app.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 import { ToastrService } from 'ngx-toastr';
-import { SpollersService } from 'src/app/services/spollers.service';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
    selector: 'app-auth',
@@ -13,12 +12,10 @@ import {Router} from "@angular/router";
 })
 
 
-
-
 export class AuthComponent {
 
-   login: string = "admin"
-   password: string = "admin"
+   login: string = "mirzobobur"
+   password: string = "iEXS0RuXHx"
    error: boolean = false
 
    constructor(
@@ -38,6 +35,7 @@ export class AuthComponent {
    async getLogin() {
       const res = await this.authService.loginAdmin(this.login, this.password).toPromise();
       if (res.status) {
+         await this.authService.brokerLogin().subscribe((res) => { })
          await this.authService.setJwt(res.token);
          this.error = false
       } else {

@@ -6,8 +6,8 @@ import { AuthService } from './services/auth.service';
 import { HelperService } from './services/helper.service';
 import { ListService } from './services/list.service';
 import { SpollersService } from './services/spollers.service';
-import {SocketService} from "./services/socket.service";
-import {ToastrService} from "ngx-toastr";
+import { SocketService } from "./services/socket.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
    selector: 'app-root',
@@ -26,7 +26,7 @@ export class AppComponent {
       private socketService: SocketService,
       private toastr: ToastrService,
       public listService: ListService
-   ) {}
+   ) { }
    title = 'tirgo-admin';
    logo = "/assets/img/logo.svg"
    async ngOnInit() {
@@ -74,32 +74,32 @@ export class AppComponent {
             //    }
             // })
 
-            const orders = await this.listService.getAllOrders(0,50,null,null,null,null,null,null,null,null,null,null,null).toPromise();
-            if (orders.status){
+            const orders = await this.listService.getAllOrders(0, 50, null, null, null, null, null, null, null, null, null, null, null).toPromise();
+            if (orders.status) {
                this.helper.orders = orders.data;
                this.helper.orders_count = orders.data_count;
             }
 
-            const drivers = await this.listService.getAllDrivers(0,50,null,null,null,null,null,null,null).toPromise();
-            if (drivers.status){
+            const drivers = await this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null).toPromise();
+            if (drivers.status) {
                this.helper.drivers = drivers.data;
                this.helper.drivers_count = drivers.data_count;
             }
 
-            const users = await this.listService.getAllUsers(0,50,null,null,null,null,null,null,null,true).toPromise();
-            if (users.status){
+            const users = await this.listService.getAllUsers(0, 50, null, null, null, null, null, null, null, true).toPromise();
+            if (users.status) {
                this.helper.users = users.data;
                this.helper.users_count = users.data_count;
             }
 
-            const deletedusers = await this.listService.getDeletedUsers(0,100).toPromise();
-            if (deletedusers.status){
+            const deletedusers = await this.listService.getDeletedUsers(0, 100).toPromise();
+            if (deletedusers.status) {
                this.helper.deletedusers = deletedusers.data;
                this.helper.deletedusers_count = deletedusers.data_count;
             }
 
-            const activity = await this.listService.getActivityUsers(0,100).toPromise();
-            if (activity.status){
+            const activity = await this.listService.getActivityUsers(0, 100).toPromise();
+            if (activity.status) {
                this.helper.activity = activity.data;
                this.helper.activity_count = activity.data_count;
             }
@@ -107,7 +107,6 @@ export class AppComponent {
 
             this.authService.globalLoading = false;
 
-            await this.router.navigate(['dashboard'], { replaceUrl: true })
             //this.getLocation();
          } else {
             await this.router.navigate(['auth']);
@@ -117,8 +116,6 @@ export class AppComponent {
       });
    }
 
-
-
    ngAfterViewInit() {
       documentActions()
       this.spoller.initSpollers()
@@ -126,16 +123,16 @@ export class AppComponent {
    getLocation() {
       if (navigator.geolocation) {
          navigator.geolocation.getCurrentPosition((position: any) => {
-                if (position) {
-                   console.log("Latitude: " + position.coords.latitude +
-                       "Longitude: " + position.coords.longitude);
-                   this.helper.lat = position.coords.latitude;
-                   this.helper.lng = position.coords.longitude;
-                   console.log(this.helper.lat);
-                   console.log(this.helper.lat);
-                }
-             },
-             (error: any) => console.log(error));
+            if (position) {
+               console.log("Latitude: " + position.coords.latitude +
+                  "Longitude: " + position.coords.longitude);
+               this.helper.lat = position.coords.latitude;
+               this.helper.lng = position.coords.longitude;
+               console.log(this.helper.lat);
+               console.log(this.helper.lat);
+            }
+         },
+            (error: any) => console.log(error));
       } else {
          alert("Geolocation is not supported by this browser.");
       }

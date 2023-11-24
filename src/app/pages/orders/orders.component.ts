@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {ColDef, GridOptions} from 'ag-grid-community';
+import { ColDef, GridOptions } from 'ag-grid-community';
 import { PushComponent } from 'src/app/components/push/push.component';
 import { SpollersService } from 'src/app/services/spollers.service';
-import {OrderComponent} from "../order/order.component";
-import {HelperService} from "../../services/helper.service";
-import {AuthService} from "../../services/auth.service";
-import {formatDate} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
-import {CreateorderComponent} from "../createorder/createorder.component";
-import {SocketService} from "../../services/socket.service";
-import {ListService} from "../../services/list.service";
+import { OrderComponent } from "../order/order.component";
+import { HelperService } from "../../services/helper.service";
+import { AuthService } from "../../services/auth.service";
+import { formatDate } from "@angular/common";
+import { ActivatedRoute } from "@angular/router";
+import { CreateorderComponent } from "../createorder/createorder.component";
+import { SocketService } from "../../services/socket.service";
+import { ListService } from "../../services/list.service";
 
 @Component({
    selector: 'app-orders',
@@ -20,53 +20,52 @@ import {ListService} from "../../services/list.service";
 })
 
 export class OrdersComponent {
-   id:string = '';
-   id_client:string = '';
-   from_city:string = '';
-   to_city:string = '';
-   dateCreate:string = '';
-   dateSend:string = '';
-   price:string = '';
-   status:string = 'all';
-   saveorder:string = 'all';
-   typetransport:string = '';
-   typecargo:string = '';
+   id: string = '';
+   id_client: string = '';
+   from_city: string = '';
+   to_city: string = '';
+   dateCreate: string = '';
+   dateSend: string = '';
+   price: string = '';
+   status: string = 'all';
+   saveorder: string = 'all';
+   typetransport: string = '';
+   typecargo: string = '';
 
    sizespage = [
-      50,100,200,500,1000,5000
+      50, 100, 200, 500, 1000, 5000
    ]
    gridOptions: any;
-   items:any[]=[];
+   items: any[] = [];
 
    constructor(
-       public dialog: MatDialog,
-       public spoller: SpollersService,
-       public helper: HelperService,
-       private route: ActivatedRoute,
-       private socketService: SocketService,
-       public listService: ListService,
-       public authService: AuthService
+      public dialog: MatDialog,
+      public spoller: SpollersService,
+      public helper: HelperService,
+      private route: ActivatedRoute,
+      private socketService: SocketService,
+      public listService: ListService,
+      public authService: AuthService
    ) {
 
    }
 
    ngOnInit(): void {
+      this.getMerchantOrders();
       // @ts-ignore
-      if(+this.route.snapshot.paramMap.get('status') === 100){
+      if (+this.route.snapshot.paramMap.get('status') === 100) {
          this.status = 'all';
-      }else {
+      } else {
          this.status = this.route.snapshot.paramMap.get('status')
       }
       this.spoller.initSpollers()
-      this.gridOptions = <GridOptions> {};
+      this.gridOptions = <GridOptions>{};
       this.gridOptions.localeText = this.helper.localeTextAgGrid;
       this.gridOptions.suppressScrollOnNewData = true;
       this.gridOptions.headerHeight = 75;
-      this.socketService.updateAllList().subscribe(async (res:any) => {
-         console.log('new_order')
-      })
-      console.log(this.helper.orders)
-
+      // this.socketService.updateAllList().subscribe(async (res:any) => {
+      //    console.log('new_order')
+      // })
    }
    ngAfterViewInit(): void {
       this.spoller.initSpollers()
@@ -79,7 +78,7 @@ export class OrdersComponent {
          panelClass: 'custom-dialog-class'
       });
    }
-   viewOrder(ev:any){
+   viewOrder(ev: any) {
       const dialogRef = this.dialog.open(OrderComponent, {
          width: '90%',
          height: '80%',
@@ -87,7 +86,7 @@ export class OrdersComponent {
          data: ev
       });
    }
-   statusOrderCheck(params){
+   statusOrderCheck(params) {
       switch (params) {
          case 0:
             return "Ожидающий";
@@ -101,7 +100,7 @@ export class OrdersComponent {
             return "Не определен";
       }
    }
-   returnClassStatusOrder(params){
+   returnClassStatusOrder(params) {
       switch (params) {
          case 0:
             return "status-order-blue";
@@ -116,22 +115,23 @@ export class OrdersComponent {
       }
    }
 
-   transportTypeFind(ev){
+   transportTypeFind(ev) {
       this.typetransport = ev.target.value;
    }
-   cargoTypeFind(ev){
+   cargoTypeFind(ev) {
       this.typecargo = ev.target.value;
    }
-   statusFind(ev){
+   statusFind(ev) {
       this.status = ev.target.value;
    }
-   saveOrder(ev){
+   saveOrder(ev) {
       this.saveorder = ev.target.value;
    }
    async handlePage(e: any) {
       this.helper.global_loading = true;
       let from = e.pageIndex * e.pageSize
-      let neworders = await this.listService.getAllOrders(from,e.pageSize,this.id,this.id_client,this.from_city,this.to_city,this.status !== 'all' ? this.status:null,this.typecargo !== 'all' ? this.typecargo:null,this.typetransport !== 'all' ? this.typetransport:null,this.price,this.dateCreate,this.dateSend,this.saveorder !== 'all' ? this.saveorder:null).toPromise();
+      let neworders = await this.listService.getAllOrders(from, e.pageSize, this.id, this.id_client, this.from_city, this.to_city, this.status !== 'all' ? this.status : null, this.typecargo !== 'all' ? this.typecargo : null, this.typetransport !== 'all' ? this.typetransport : null, this.price, this.dateCreate, this.dateSend, this.saveorder !== 'all' ? this.saveorder : null).toPromise();
+      this.getMerchantOrders();
       this.helper.orders = neworders.data;
       this.helper.orders_count = neworders.data_count;
       this.helper.global_loading = false;
@@ -140,24 +140,44 @@ export class OrdersComponent {
       console.log(e.pageSize)
    }
    async onScroll() {
-      let neworders = await this.listService.getAllOrders(this.helper.orders.length,50,this.id,this.id_client,this.from_city,this.to_city,this.status !== 'all' ? this.status:null,this.typecargo !== 'all' ? this.typecargo:null,this.typetransport !== 'all' ? this.typetransport:null,this.price,this.dateCreate,this.dateSend,this.saveorder !== 'all' ? this.saveorder:null).toPromise();
+      let neworders = await this.listService.getAllOrders(this.helper.orders.length, 50, this.id, this.id_client, this.from_city, this.to_city, this.status !== 'all' ? this.status : null, this.typecargo !== 'all' ? this.typecargo : null, this.typetransport !== 'all' ? this.typetransport : null, this.price, this.dateCreate, this.dateSend, this.saveorder !== 'all' ? this.saveorder : null).toPromise();
       this.helper.orders = this.helper.orders.concat(...neworders.data);
       this.helper.orders_count = neworders.data_count;
    }
 
-   async filterList(){
+   async filterList() {
       this.helper.isLoading = true;
-      let neworders = await this.listService.getAllOrders(0,50,this.id,this.id_client,this.from_city,this.to_city,this.status !== 'all' ? this.status:null,this.typecargo !== 'all' ? this.typecargo:null,this.typetransport !== 'all' ? this.typetransport:null,this.price,this.dateCreate,this.dateSend,this.saveorder !== 'all' ? this.saveorder:null).toPromise();
+      let neworders = await this.listService.getAllOrders(0, 50, this.id, this.id_client, this.from_city, this.to_city, this.status !== 'all' ? this.status : null, this.typecargo !== 'all' ? this.typecargo : null, this.typetransport !== 'all' ? this.typetransport : null, this.price, this.dateCreate, this.dateSend, this.saveorder !== 'all' ? this.saveorder : null).toPromise();
       this.helper.orders = neworders.data;
       this.helper.orders_count = neworders.data_count;
       this.helper.isLoading = false;
    }
-   async filterClear(){
+   async filterClear() {
       this.helper.isLoading = true;
-      let neworders = await this.listService.getAllOrders(0,50,null,null,null,null,null,null,null,null,null,null,null).toPromise();
+      let neworders = await this.listService.getAllOrders(0, 50, null, null, null, null, null, null, null, null, null, null, null).toPromise();
       this.helper.orders = neworders.data;
       this.helper.orders_count = neworders.data_count;
       this.helper.isLoading = false;
+   }
+
+   getMerchantOrders() {
+      this.listService.getMerchantOrders().subscribe((res) => {
+         this.helper.orders = [...this.helper.orders, ...res]
+         this.helper.orders.forEach((v) => {
+            if (!v.isMerchant) {
+               v.createdAt = v.date_create
+            }
+         })
+         this.helper.orders.sort((a: any, b: any) => {
+            if (a.createdAt < b.createdAt) {
+               return 1;
+            }
+            if (a.createdAt > b.createdAt) {
+               return -1;
+            }
+            return 0;
+         })
+      })
    }
 
 }

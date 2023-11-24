@@ -53,6 +53,7 @@ import {SecuretransComponent} from "./pages/securetrans/securetrans.component";
 import {ExchangerateComponent} from "./exchangerate/exchangerate.component";
 import { ModerationComponent } from './pages/moderation/moderation.component';
 import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
+import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
 
 
 
@@ -320,6 +321,11 @@ const routes: Routes = [
    {
       path: "moderation-confirm/:id",
       component: ModerationConfirmComponent,
+      title: "Модерация"
+   },
+   {
+      path: "moderation/:id",
+      component: EditModerationComponent,
       title: "Модерация"
    },
 ];

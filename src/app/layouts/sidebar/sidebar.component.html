@@ -85,6 +85,17 @@
                <span>Архивные пользователи</span>
             </a>
          </li>
+         <li class="menu__item">
+            <a
+                    routerLink="/moderation"
+                    routerLinkActive="_active"
+                    class="menu__link"
+                    (click)="closeMenu()"
+            >
+               <i class="icm-users"></i>
+               <span>Merchant</span>
+            </a>
+         </li>
          <li class="menu__item"  *ngIf="authService.myrole.orders">
             <a
                routerLink="/orders/100"
