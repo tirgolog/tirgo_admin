@@ -195,6 +195,7 @@ const mapConfig: YaConfig = {
       EditModerationComponent,
    ],
    imports: [
+      CommonModule,
       MatSortModule,
       MatPaginatorModule,
       NgPipesModule,

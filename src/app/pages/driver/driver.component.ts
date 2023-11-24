@@ -19,7 +19,7 @@ export class DriverComponent {
     passport_date: string = '';
     activity:any[]=[];
     editInfo:boolean = false;
-
+    file_url: string;
     namedriver:string = '';
 
     user:any;
@@ -41,20 +41,17 @@ export class DriverComponent {
         return newitems.length
     }
     async ngOnInit() {
+        this.file_url = 'https://admin.tirgo.io/api/download/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
             this.user = res.data
-            console.log(this.user)
         }
 
         this.passport_series_numbers = this.user.passport_series_numbers;
         this.driver_license = this.user.driver_license;
         this.passport_date = this.user.passport_date;
         this.activity = this.helper.activity.filter(e => e.userid === this.user.id)
-
         this.namedriver = this.user.name;
-
-        console.log(this.activity)
     }
 
     async updateUser() {

@@ -165,8 +165,10 @@
         <mat-header-cell *matHeaderCellDef>Тип транспорта</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span *ngIf="!row.isMerchant">
-            {{ helper.returnNameCargoType(row.type_cargo) }}</span
-          >
+            <span *ngFor="let type of row.transport_types;let i=index">
+              {{i+1}}.{{ helper.returnNameTypeTransport(type) }}
+            </span>
+          </span>
           <span *ngIf="row.isMerchant">{{ row.cargoType.name }}</span>
         </mat-cell>
       </ng-container>
@@ -199,21 +201,31 @@
           <span *ngIf="!row.isMerchant">{{
             row.secure_transaction ? "Да" : "Нет"
           }}</span>
-          <span *nfIf="row.isMerchant">{{row.isDangrousCargo? "Да" : "Нет"}}</span>
+          <span *ngIf="row.isMerchant">{{
+            row.isDangrousCargo ? "Да" : "Нет"
+          }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date_create">
         <mat-header-cell *matHeaderCellDef>Дата создания</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{row.date_create | formatTime : "DD.MM.YYYY" }}</span>
-          <span *ngIf="row.isMerchant">{{row.createdAt | formatTime : "DD.MM.YYYY" }}</span>
-          </mat-cell>
+          <span *ngIf="!row.isMerchant">{{
+            row.date_create | formatTime : "DD.MM.YYYY"
+          }}</span>
+          <span *ngIf="row.isMerchant">{{
+            row.createdAt | formatTime : "DD.MM.YYYY"
+          }}</span>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date_send">
         <mat-header-cell *matHeaderCellDef>Дата создания</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="row.isMerchant">{{row.sendCargoDate | formatTime : "DD.MM.YYYY" }}</span>
-          <span *ngIf="!row.isMerchant">{{row.date_send | formatTime : "DD.MM.YYYY"}}</span>
+          <span *ngIf="row.isMerchant">{{
+            row.sendCargoDate | formatTime : "DD.MM.YYYY"
+          }}</span>
+          <span *ngIf="!row.isMerchant">{{
+            row.date_send | formatTime : "DD.MM.YYYY"
+          }}</span>
         </mat-cell>
       </ng-container>
       <!-- Header and Row Declarations -->
