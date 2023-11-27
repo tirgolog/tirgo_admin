@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
 const API_URL = 'https://admin.tirgo.io/api'
+// const API_URL = 'http://localhost:7790';
 
 @Injectable({
   providedIn: 'root'
