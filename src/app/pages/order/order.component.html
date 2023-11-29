@@ -90,10 +90,22 @@
             </div>
             <span [hidden]="!selectdriver">
                <div class="sed-driver-block" >
+                  <!-- <mat-form-field class="form__input">
+                     <mat-label>Водитель</mat-label>
+                     <input  matInput type="text" name="name" placeholder="ID водителя" [(ngModel)]="driverid" (ngModelChange)="findDriver($event)" />
+                     <div style="background-color: white; padding: 10px; z-index: 1;" *ngIf="drivers.length">
+                        <div *ngFor="let driver of drivers" style="padding: 5px;">{{ driver.id }} {{ driver.username }}</div>
+                     </div>
+                  </mat-form-field> -->
                   <mat-form-field class="form__input">
                      <mat-label>Водитель</mat-label>
-                     <input  matInput type="text" name="name" placeholder="ID водителя" [(ngModel)]="driverid" />
-                  </mat-form-field>
+                     <input matInput list="drivers_list" name="drivers_list" (input)="findDriver($event)" [(ngModel)]="driverid">
+                     <datalist id="drivers_list">
+                         <ng-container *ngFor="let driver of drivers">
+                             <option [value]="driver.id">{{driver.id + ' ' + driver.phone}}</option>
+                         </ng-container>
+                     </datalist>
+                 </mat-form-field>
                   <mat-form-field class="form__input">
                      <mat-label>Предложенная сумма</mat-label>
                      <input  matInput type="text" name="name" placeholder="Предложенная сумма" [(ngModel)]="price" />

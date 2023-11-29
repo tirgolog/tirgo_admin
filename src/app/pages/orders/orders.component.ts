@@ -63,9 +63,9 @@ export class OrdersComponent {
       this.gridOptions.localeText = this.helper.localeTextAgGrid;
       this.gridOptions.suppressScrollOnNewData = true;
       this.gridOptions.headerHeight = 75;
-      // this.socketService.updateAllList().subscribe(async (res:any) => {
-      //    console.log('new_order')
-      // })
+      this.socketService.updateAllList().subscribe(async (res:any) => {
+         console.log('new_order')
+      })
    }
    ngAfterViewInit(): void {
       this.spoller.initSpollers()
