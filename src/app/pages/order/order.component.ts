@@ -37,7 +37,7 @@ export class OrderComponent {
    async ngOnInit() {
       const res = await this.authService.getOrderInfo(this.data.id).toPromise();
       if (res.status) {
-            res.data.tranport_types = JSON.parse(res.data.tranport_types)
+            res.data.transport_types = JSON.parse(res.data.transport_types)
          this.data = res.data;
          const index = this.helper.orders.findIndex(e => e.id === +this.data.id)
          if (index>=0){
@@ -75,10 +75,8 @@ export class OrderComponent {
       this.dialog.closeAll()
    }
    findDriver(ev:any){
-      console.log(ev.target.value)
-      this.drivers = this.helper.drivers.filter((row:any) => {
-         return !row.id ? row.id: row.id.toString().includes(ev.target.value) ||
-         !row.name ? row.name: row.name.toLowerCase().includes(ev.target.value.toLowerCase());
+      this.drivers = this.helper.driversList.filter((row:any) => {
+         return row.id.toString().includes(ev.target.value);
       });
    }
    goToColumn(ev:any): void {

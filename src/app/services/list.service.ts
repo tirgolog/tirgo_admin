@@ -44,6 +44,15 @@ export class ListService {
     });
     return this.http.post<any>(sUrl, body);
   }
+
+  getAllDriversList(id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
+    const sUrl = API_URL + '/reborn/getAllDriversList';
+    const body = JSON.stringify({
+      id, phone, dateReg, dateLogin, name, indentificator, typetransport
+    });
+    return this.http.post<any>(sUrl, body);
+  }
+
   getAllTrackingDrivers() {
     const sUrl = API_URL + '/reborn/getAllTrackingDrivers';
     const body = JSON.stringify({});
