@@ -63,11 +63,9 @@ export class AppComponent {
             this.helper.transactions_type = await this.listService.getTransactionsType().toPromise();
 
             this.socketService.updateAllMessages().subscribe(async (res:any) => {
-               console.log(res)
                this.helper.messages = await this.listService.getAllMessages().toPromise();
             })
             this.socketService.logOutUser().subscribe(async (res:number) => {
-               console.log(res)
                if (res === this.authService.currentUser?.id){
                   this.authService.logout()
                   await this.router.navigate(['auth'], { replaceUrl: true })
@@ -82,9 +80,15 @@ export class AppComponent {
 
             const drivers = await this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null).toPromise();
             if (drivers.status) {
-               this.helper.drivers = drivers.data;
+               this.helper.drivers = drivers.data; 
                this.helper.drivers_count = drivers.data_count;
             }
+
+            const driversList = await this.listService.getAllDriversList(null, null, null, null, null, null, null).toPromise();
+            if (driversList.status) {
+               this.helper.driversList = driversList.data;
+            }
+
 
             const users = await this.listService.getAllUsers(0, 50, null, null, null, null, null, null, null, true).toPromise();
             if (users.status) {
