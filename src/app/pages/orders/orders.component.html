@@ -120,7 +120,7 @@
       <ng-container matColumnDef="userinfo.name">
         <mat-header-cell *matHeaderCellDef>Клиент</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{ row.userinfo.name }}</span>
+          <span *ngIf="!row.isMerchant">{{ row.userinfo?.name }}</span>
           <span *ngIf="row.isMerchant">{{
             row.merchant.supervisorFullName
           }}</span>
@@ -158,7 +158,7 @@
           <span *ngIf="!row.isMerchant">
             {{ helper.returnNameCargoType(row.type_cargo) }}</span
           >
-          <span *ngIf="row.isMerchant">{{ row.cargoType.name }}</span>
+          <span *ngIf="row.isMerchant">{{ row.cargoType?.name }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="transport_type">
@@ -169,7 +169,7 @@
               {{i+1}}.{{ helper.returnNameTypeTransport(type) }}
             </span>
           </span>
-          <span *ngIf="row.isMerchant">{{ row.cargoType.name }}</span>
+          <span *ngIf="row.isMerchant">{{ row.cargoType?.name }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="orders_accepted">
