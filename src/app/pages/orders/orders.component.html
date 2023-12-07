@@ -146,10 +146,10 @@
           *matCellDef="let row"
           [class]="returnClassStatusOrder(row.status)"
         >
-          <span *ngIf="!row.isMerchant">{{
+          <span >{{
             statusOrderCheck(row.status)
           }}</span>
-          <span *ngIf="row.isMerchant">{{ row.status }}</span>
+          <!-- <span *ngIf="row.isMerchant">{{ row.status }}</span> -->
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="type_cargo">
