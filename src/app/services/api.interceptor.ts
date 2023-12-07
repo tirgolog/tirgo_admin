@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Injectable()
 
 export class ApiInterceptor implements HttpInterceptor {
-   MER_API = "http://192.168.1.130:3000/api/v1"
+   MER_API = "https://merchant.tirgo.io/"
    API_URL = 'https://admin.tirgo.io/api'
 
    constructor(private authService: AuthService, private router: Router) { }
