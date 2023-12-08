@@ -41,7 +41,7 @@ export class DriverComponent {
         return newitems.length
     }
     async ngOnInit() {
-        this.file_url = 'https://admin.tirgo.io/api/download/'
+        this.file_url = 'http://185.183.243.223:9000/tirgo/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
             this.user = res.data
