@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
 const API_URL = 'https://admin.tirgo.io/api'
-const MER_API = "http://192.168.1.130:3000/api/v1"
+const MER_API = "http://192.168.1.58:5000/api/v1"
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,7 @@ export class ListService {
   currentUser
   constructor(
     private http: HttpClient,
-  ) { 
+  ) {
     this.currentUser = localStorage.getItem('merchantJWT')
   }
 
@@ -28,13 +28,13 @@ export class ListService {
   getMerchantOrders() {
     const sUrl = MER_API + '/cargo/all';
     return this.http.get<any>(sUrl)
-    .pipe(map(res => {
-      if (res.data) {
-        return res.data;
-      } else {
-        return [];
-      }
-    }));
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
   }
 
   getAllDrivers(from: number, limit: number, id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
@@ -43,6 +43,32 @@ export class ListService {
       from, limit, id, phone, dateReg, dateLogin, name, indentificator, typetransport
     });
     return this.http.post<any>(sUrl, body);
+  }
+
+  getAllunVerifiedDrivers() {
+    const sUrl = API_URL + '/users/unverified-verifications';
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+
+  verifyDriverItem(id) {
+    const sUrl = API_URL + `/users/verify-driver/${id}`;
+    return this.http.put<any>(sUrl, {})
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
   }
 
   getAllDriversList(id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
@@ -179,7 +205,7 @@ export class ListService {
   editMerchant(data) {
     const sUrl = MER_API + '/merchant?id=' + data.id;
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YmJkODU4MS1hMDViLTQ2ZjctYjQ3MS0wYWI0NGY2M2MxMTQiLCJ1c2VybmFtZSI6ImFkbWluIiwibWVyY2hhbnRJZCI6IjUwYzJhYzg4LTEyYTctNDcxNS04YjBhLTljOTNhYjJhYjg1OCIsImlhdCI6MTcwMDA0NzMyMn0.pi5JIMZD_-fzHMPh33CpYjNDbfZnNAEDCrwYb50HoN0'
-    
+
     return this.http.put<any>(sUrl, data, {
       headers: {
         'Content-Type': 'application/json',

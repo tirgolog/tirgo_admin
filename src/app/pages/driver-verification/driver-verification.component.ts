@@ -1,28 +1,27 @@
-import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import {HelperService} from "../../services/helper.service";
-import {AuthService} from "../../services/auth.service";
-import {ToastrService} from "ngx-toastr";
-import {AddTransactionsComponent} from "../../components/add-transactions/add-transactions.component";
-import {UserComponent} from "../user/user.component";
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { HelperService } from "../../services/helper.service";
+import { AuthService } from "../../services/auth.service";
+import { ToastrService } from "ngx-toastr";
+import { AddTransactionsComponent } from "../../components/add-transactions/add-transactions.component";
+import { UserComponent } from "../user/user.component";
+import { PriviewComponent } from 'src/app/components/priview/priview.component';
 
 @Component({
-    selector: 'app-driver',
-    templateUrl: './driver.component.html',
-    styleUrls: ['./driver.component.scss'],
-    host: {"id": "main"}
+    selector: 'app-driver-verification',
+    templateUrl: './driver-verification.component.html',
+    styleUrls: ['./driver-verification.component.scss']
 })
-
-export class DriverComponent {
+export class DriverVerificationComponent {
     passport_series_numbers: string = '';
     driver_license: string = '';
     passport_date: string = '';
-    activity:any[]=[];
-    editInfo:boolean = false;
+    activity: any[] = [];
+    editInfo: boolean = false;
     file_url: string;
-    namedriver:string = '';
+    namedriver: string = '';
 
-    user:any;
+    user: any;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -32,11 +31,11 @@ export class DriverComponent {
         public helper: HelperService,
     ) {
     }
-    returnAcceptOrder(items){
+    returnAcceptOrder(items) {
         let newitems = items.filter(e => e.status === 3)
         return newitems.length
     }
-    returnRejectOrder(items){
+    returnRejectOrder(items) {
         let newitems = items.filter(e => e.status === 0)
         return newitems.length
     }
@@ -53,6 +52,7 @@ export class DriverComponent {
         this.activity = this.helper.activity.filter(e => e.userid === this.user.id)
         this.namedriver = this.user.name;
     }
+
 
     async updateUser() {
         let data = {
@@ -73,25 +73,25 @@ export class DriverComponent {
             this.toastr.error(res.error)
         }
     }
-    async delDirty(){
+    async delDirty() {
         const res = await this.authService.delDirty(this.user.id).toPromise();
         if (res.status) {
             this.user.dirty = 0;
             this.toastr.success("Временная блокировка снята");
-        }else {
+        } else {
             this.toastr.error(res.error)
         }
     }
-    async modarateUser(){
+    async modarateUser() {
         const res = await this.authService.modarateUser(this.user.id).toPromise();
         if (res.status) {
             this.user.moderation = 1;
             this.toastr.success("Водитель прошел подерацию");
-        }else {
+        } else {
             this.toastr.error(res.error)
         }
     }
-    async deletUser(){
+    async deletUser() {
         const res = await this.authService.deleteUser(this.user.id).toPromise();
         if (res.status) {
             this.toastr.success("Пользователь удален");
@@ -100,7 +100,7 @@ export class DriverComponent {
             this.toastr.error(res.error)
         }
     }
-    async returnUser(){
+    async returnUser() {
         const res = await this.authService.returnUser(this.user.id).toPromise();
         if (res.status) {
             this.toastr.success("Пользователь восстановлен");
@@ -109,24 +109,24 @@ export class DriverComponent {
             this.toastr.error(res.error)
         }
     }
-    async editInfoGo(){
-        if (this.editInfo){
+    async editInfoGo() {
+        if (this.editInfo) {
             const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите изменить данного пользователя?', 2)
-            if (confirm){
-                const res = await this.authService.saveUserInfo(this.user.name,this.user.birthday,this.user.country,this.user.city,this.user.id).toPromise();
-                if (res.status){
+            if (confirm) {
+                const res = await this.authService.saveUserInfo(this.user.name, this.user.birthday, this.user.country, this.user.city, this.user.id).toPromise();
+                if (res.status) {
                     this.editInfo = false;
                     this.toastr.success("Информация о пользователе обновлена");
                 }
             }
-        }else {
+        } else {
             this.editInfo = !this.editInfo
         }
     }
-    async savePassportUser(){
+    async savePassportUser() {
         const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите изменить данные паспорта пользователя?', 2)
-        if (confirm){
-            const res = await this.authService.savePassportUser(this.passport_series_numbers,this.passport_date,this.user.id).toPromise();
+        if (confirm) {
+            const res = await this.authService.savePassportUser(this.passport_series_numbers, this.passport_date, this.user.id).toPromise();
             if (res.status) {
                 this.toastr.success("Информация о пользователе изменена");
             } else {
@@ -134,10 +134,10 @@ export class DriverComponent {
             }
         }
     }
-    async saveDriverLicenseUser(){
+    async saveDriverLicenseUser() {
         const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите изменить данные водительского удостоверения пользователя?', 2)
-        if (confirm){
-            const res = await this.authService.saveDriverLicenseUser(this.driver_license,this.user.id).toPromise();
+        if (confirm) {
+            const res = await this.authService.saveDriverLicenseUser(this.driver_license, this.user.id).toPromise();
             if (res.status) {
                 this.toastr.success("Информация о пользователе изменена");
             } else {
@@ -145,10 +145,10 @@ export class DriverComponent {
             }
         }
     }
-    async saveNewMerchantId(){
+    async saveNewMerchantId() {
         const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить водителя вк данному мерчанту?', 2)
-        if (confirm){
-            const res = await this.authService.saveNewMerchantId(this.user.merch_id,this.user.id).toPromise();
+        if (confirm) {
+            const res = await this.authService.saveNewMerchantId(this.user.merch_id, this.user.id).toPromise();
             if (res.status) {
                 this.toastr.success("Информация о пользователе изменена");
             } else {
@@ -157,20 +157,29 @@ export class DriverComponent {
         }
     }
     goToColumn(id) {
-        if (id){
+        if (id) {
             const dialogRef = this.dialog.open(UserComponent, {
                 width: '90%',
                 height: '80%',
                 panelClass: 'custom-dialog-class',
                 data: id
             });
-        }else {
+        } else {
             this.toastr.error('Сначала нужно назначить мерчанта')
         }
     }
     addMoney() {
         this.dialog.open(AddTransactionsComponent, {
-            data:this.data
+            data: this.data
+        });
+    }
+
+    preview(image?: string): void {
+        const dialog = this.dialog.open(PriviewComponent, {
+            data: { url: image },
+            height: "600px",
+            width: "40%",
+            panelClass: 'custom-dialog-class',
         });
     }
 }

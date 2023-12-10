@@ -42,20 +42,19 @@ import { TransactionComponent } from './pages/transaction/transaction.component'
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { UserComponent } from './pages/user/user.component';
 import { UsersComponent } from './pages/users/users.component';
-import {ViewphotoComponent} from "./viewphoto/viewphoto.component";
-import {ActivityComponent} from "./activity/activity.component";
-import {ViewadminComponent} from "./viewadmin/viewadmin.component";
-import {CreateorderComponent} from "./pages/createorder/createorder.component";
-import {RoutersTruckComponent} from "./routers-truck/routers-truck.component";
-import {LoadingComponent} from "./loading/loading.component";
-import {ArchiveComponent} from "./pages/archive/archive.component";
-import {SecuretransComponent} from "./pages/securetrans/securetrans.component";
-import {ExchangerateComponent} from "./exchangerate/exchangerate.component";
+import { ViewphotoComponent } from "./viewphoto/viewphoto.component";
+import { ActivityComponent } from "./activity/activity.component";
+import { ViewadminComponent } from "./viewadmin/viewadmin.component";
+import { CreateorderComponent } from "./pages/createorder/createorder.component";
+import { RoutersTruckComponent } from "./routers-truck/routers-truck.component";
+import { LoadingComponent } from "./loading/loading.component";
+import { ArchiveComponent } from "./pages/archive/archive.component";
+import { SecuretransComponent } from "./pages/securetrans/securetrans.component";
+import { ExchangerateComponent } from "./exchangerate/exchangerate.component";
 import { ModerationComponent } from './pages/moderation/moderation.component';
 import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
 import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
-
-
+import { DriversVerificationComponent } from './pages/drivers-verification/drivers-verification.component';
 
 const routes: Routes = [
    {
@@ -327,6 +326,11 @@ const routes: Routes = [
       path: "moderation/:id",
       component: EditModerationComponent,
       title: "Модерация"
+   },
+   {
+      path: "drivers-verification",
+      component: DriversVerificationComponent,
+      title: "Водители проверка"
    },
 ];
 

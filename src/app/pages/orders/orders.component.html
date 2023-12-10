@@ -12,54 +12,15 @@
   <section class="table">
     <div class="filter">
       <div class="filter-inputs">
-        <input
-          type="text"
-          class="page__search"
-          placeholder="Поиск по id"
-          [(ngModel)]="id"
-        />
-        <input
-          type="text"
-          class="page__search"
-          placeholder="Поиск по id клиента"
-          [(ngModel)]="id_client"
-        />
-        <input
-          type="text"
-          class="page__search"
-          placeholder="Откуда"
-          [(ngModel)]="from_city"
-        />
-        <input
-          type="text"
-          class="page__search"
-          placeholder="Куда"
-          [(ngModel)]="to_city"
-        />
-        <input
-          type="date"
-          class="page__search"
-          placeholder="Дата создания"
-          [(ngModel)]="dateCreate"
-        />
-        <input
-          type="date"
-          class="page__search"
-          placeholder="Дата отправки"
-          [(ngModel)]="dateSend"
-        />
-        <input
-          type="text"
-          class="page__search"
-          placeholder="Поиск по цене"
-          [(ngModel)]="price"
-        />
+        <input type="text" class="page__search" placeholder="Поиск по id" [(ngModel)]="id" />
+        <input type="text" class="page__search" placeholder="Поиск по id клиента" [(ngModel)]="id_client" />
+        <input type="text" class="page__search" placeholder="Откуда" [(ngModel)]="from_city" />
+        <input type="text" class="page__search" placeholder="Куда" [(ngModel)]="to_city" />
+        <input type="date" class="page__search" placeholder="Дата создания" [(ngModel)]="dateCreate" />
+        <input type="date" class="page__search" placeholder="Дата отправки" [(ngModel)]="dateSend" />
+        <input type="text" class="page__search" placeholder="Поиск по цене" [(ngModel)]="price" />
         <span>
-          <select
-            name="select"
-            class="page__search"
-            (change)="statusFind($event)"
-          >
+          <select name="select" class="page__search" (change)="statusFind($event)">
             <option value="all">Все статусы</option>
             <option value="0">Ожидающие</option>
             <option value="1">Выполняются</option>
@@ -68,22 +29,14 @@
           </select>
         </span>
         <span>
-          <select
-            name="select"
-            class="page__search"
-            (change)="saveOrder($event)"
-          >
+          <select name="select" class="page__search" (change)="saveOrder($event)">
             <option value="all">Все</option>
             <option value="1">Безопасная сделка ВКЛ</option>
             <option value="0">Безопасная сделка ОТКЛ</option>
           </select>
         </span>
         <span>
-          <select
-            name="select"
-            class="page__search"
-            (change)="cargoTypeFind($event)"
-          >
+          <select name="select" class="page__search" (change)="cargoTypeFind($event)">
             <option value="all">Все типы груза</option>
             <ng-container *ngFor="let row of helper.typecargo">
               <option [value]="row.id">{{ row.name }}</option>
@@ -91,11 +44,7 @@
           </select>
         </span>
         <span>
-          <select
-            name="select"
-            class="page__search"
-            (change)="transportTypeFind($event)"
-          >
+          <select name="select" class="page__search" (change)="transportTypeFind($event)">
             <option value="all">Все типы транспорта</option>
             <ng-container *ngFor="let row of helper.typetruck">
               <option [value]="row.id">{{ row.name }}</option>
@@ -123,7 +72,7 @@
           <span *ngIf="!row.isMerchant">{{ row.userinfo.name }}</span>
           <span *ngIf="row.isMerchant">{{
             row.merchant.supervisorFullName
-          }}</span>
+            }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="route.from_city">
@@ -142,13 +91,10 @@
       </ng-container>
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
-        <mat-cell
-          *matCellDef="let row"
-          [class]="returnClassStatusOrder(row.status)"
-        >
+        <mat-cell *matCellDef="let row" [class]="returnClassStatusOrder(row.status)">
           <span *ngIf="!row.isMerchant">{{
             statusOrderCheck(row.status)
-          }}</span>
+            }}</span>
           <span *ngIf="row.isMerchant">{{ row.status }}</span>
         </mat-cell>
       </ng-container>
@@ -156,8 +102,7 @@
         <mat-header-cell *matHeaderCellDef>Тип груза</mat-header-cell>
         <mat-cell class="hoverTextOrder" *matCellDef="let row">
           <span *ngIf="!row.isMerchant">
-            {{ helper.returnNameCargoType(row.type_cargo) }}</span
-          >
+            {{ helper.returnNameCargoType(row.type_cargo) }}</span>
           <span *ngIf="row.isMerchant">{{ row.cargoType.name }}</span>
         </mat-cell>
       </ng-container>
@@ -169,7 +114,16 @@
               {{i+1}}.{{ helper.returnNameTypeTransport(type) }}
             </span>
           </span>
-          <span *ngIf="row.isMerchant">{{ row.cargoType.name }}</span>
+          <span *ngIf="row.isMerchant">
+            <span *ngFor="let type of row.transport_types;let i=index">
+              {{i+1}}.{{ helper.returnNameTypeTransport(type) }}
+            </span>
+          </span>
+          <span *ngIf="row.transport_types!=null">
+            <span *ngFor="let type of row.transport_types;let i=index">
+              {{i+1}}.{{ helper.returnNameTypeTransport(type) }}
+            </span>
+          </span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="orders_accepted">
@@ -177,22 +131,20 @@
         <mat-cell *matCellDef="let row">
           <span *ngIf="!row.isMerchant">{{
             "Предложений: " + row.orders_accepted
-              ? row.orders_accepted.length
-              : 0
-          }}</span>
+            ? row.orders_accepted.length
+            : 0
+            }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef
-          >Предлагаемая стоимость</mat-header-cell
-        >
+        <mat-header-cell *matHeaderCellDef>Предлагаемая стоимость</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span *ngIf="!row.isMerchant">{{
             row.price ? row.price + " " + row.currency : "Не указана"
-          }}</span>
+            }}</span>
           <span *ngIf="row.isMerchant">{{
             row.offeredPrice ? row.offeredPrice : "Не указана"
-          }}</span>
+            }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="secure_transaction">
@@ -200,10 +152,10 @@
         <mat-cell *matCellDef="let row">
           <span *ngIf="!row.isMerchant">{{
             row.secure_transaction ? "Да" : "Нет"
-          }}</span>
+            }}</span>
           <span *ngIf="row.isMerchant">{{
             row.isDangrousCargo ? "Да" : "Нет"
-          }}</span>
+            }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date_create">
@@ -211,10 +163,10 @@
         <mat-cell *matCellDef="let row">
           <span *ngIf="!row.isMerchant">{{
             row.date_create | formatTime : "DD.MM.YYYY"
-          }}</span>
+            }}</span>
           <span *ngIf="row.isMerchant">{{
             row.createdAt | formatTime : "DD.MM.YYYY"
-          }}</span>
+            }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date_send">
@@ -222,15 +174,14 @@
         <mat-cell *matCellDef="let row">
           <span *ngIf="row.isMerchant">{{
             row.sendCargoDate | formatTime : "DD.MM.YYYY"
-          }}</span>
+            }}</span>
           <span *ngIf="!row.isMerchant">{{
             row.date_send | formatTime : "DD.MM.YYYY"
-          }}</span>
+            }}</span>
         </mat-cell>
       </ng-container>
       <!-- Header and Row Declarations -->
-      <mat-header-row
-        *matHeaderRowDef="[
+      <mat-header-row *matHeaderRowDef="[
           'id',
           'userinfo.name',
           'route.from_city',
@@ -243,11 +194,8 @@
           'secure_transaction',
           'date_create',
           'date_send'
-        ]"
-      ></mat-header-row>
-      <mat-row
-        (click)="viewOrder(row)"
-        *matRowDef="
+        ]"></mat-header-row>
+      <mat-row (click)="viewOrder(row)" *matRowDef="
           let row;
           columns: [
             'id',
@@ -263,14 +211,9 @@
             'date_create',
             'date_send'
           ]
-        "
-      ></mat-row>
+        "></mat-row>
     </mat-table>
-    <mat-paginator
-      [length]="helper.orders_count"
-      showFirstLastButtons
-      [pageSizeOptions]="sizespage"
-      (page)="handlePage($event)"
-    ></mat-paginator>
+    <mat-paginator [length]="helper.orders_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+      (page)="handlePage($event)"></mat-paginator>
   </section>
 </main>

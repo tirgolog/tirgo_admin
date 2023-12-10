@@ -1,0 +1,94 @@
+<main class="drivers">
+   <section class="table">
+      <mat-table [dataSource]="helper.drivers">
+         <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="busy">
+            <mat-header-cell *matHeaderCellDef>Проверка</mat-header-cell>
+            <mat-cell *matCellDef="let row">  
+               <button class="view__btn btn-green" type="button" (click)="verify(row.id)">
+               
+            </button> </mat-cell>
+         </ng-container>
+
+         <!-- Header and Row Declarations -->
+         <mat-header-row *matHeaderRowDef="['id',  'name', 'busy',  ]"></mat-header-row>
+         <mat-row (click)="goToColumn(row.id)" *matRowDef="let row; columns: ['id',  'name',   'busy',  ]"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+         (page)="handlePage($event)"></mat-paginator>
+      <!--<table class="custom-table">
+          <tr>
+             <th>ID</th>
+             <th>Идентификатор</th>
+             <th>ФИО</th>
+             <th>Телефон</th>
+             <th>Транспорт</th>
+             <th>Рейтинг</th>
+             <th>Статус</th>
+             <th>Модерация</th>
+             <th>Дата регистрации</th>
+             <th>Последний вход</th>
+             <th>Заказы</th>
+             <th>Геопозиция</th>
+          </tr>
+          <ng-container *ngFor="let row of helper.drivers | orderBy: this.sort: false">
+             <tr (click)="goToColumn(row)">
+                <td>{{row.id}}</td>
+                <td>{{row.iso_code}}</td>
+                <td>{{row.name}}</td>
+                <td>{{row.phone}}</td>
+                <td>{{transportCheck(row.trucks)}}</td>
+                <td>{{row.raiting}}</td>
+                <td>{{busyCheck(row.busy)}}</td>
+                <td>{{moderCheck(row.moderation)}}</td>
+                <td>{{row.date_reg | formatTime: 'DD.MM.YYYY'}}</td>
+                <td>{{row.date_last_login | formatTime: 'DD.MM.YYYY в HH:mm'}}</td>
+                <td>{{row.orders && row.orders.length ? row.orders.length : 'Нет'}}</td>
+                <td>{{row.lat ? 'Есть разрешение':'Нет разрешения'}}</td>
+             </tr>
+          </ng-container>
+       </table>-->
+      <!--<div
+               *ngIf="helper.drivers.length >= 100"
+               class="loading-scroll"
+               infinite-scroll
+               [infiniteScrollDistance]="1"
+               [infiniteScrollThrottle]="2"
+               (scrolled)="onScroll()"
+       >
+          Загружаем...
+       </div>-->
+   </section>
+   <!--<section class="pagging">
+       <ul class="pagging__list">
+          <li class="pagging__item">
+             <button class="pagging__button pagging__prev">
+                <i class="icm-chevron"></i>
+             </button>
+          </li>
+          <li class="pagging__item">
+             <button class="pagging__button">1</button>
+          </li>
+          <li class="pagging__item">
+             <button class="pagging__button">2</button>
+          </li>
+          <li class="pagging__item">
+             <button class="pagging__button">3</button>
+          </li>
+          <li class="pagging__item">
+             <button class="pagging__button pagging__next">
+                <i class="icm-chevron"></i>
+             </button>
+          </li>
+       </ul>
+    </section>-->
+</main>
