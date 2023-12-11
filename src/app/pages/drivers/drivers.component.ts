@@ -196,4 +196,8 @@ export class DriversComponent {
       this.reverse = !this.reverse
       this.sort = ev.target.value;
    }
+
+   showRequests() {
+      
+   }
 }
