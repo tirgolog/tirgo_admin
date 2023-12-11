@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-priview',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class PriviewComponent {
   image: string = '';
+file_url = 'http://localhost:9000/tirgo/'
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog){
+      this.image=this.data
+    }
 }

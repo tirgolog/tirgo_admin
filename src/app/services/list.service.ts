@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
-const API_URL = 'https://admin.tirgo.io/api'
+const API_URL = 'http://localhost:7790'
 const MER_API = "http://192.168.1.58:5000/api/v1"
 @Injectable({
   providedIn: 'root'
@@ -49,9 +49,8 @@ export class ListService {
     const sUrl = API_URL + '/users/unverified-verifications';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
-
         if (res.data) {
-          return res.data;
+          return res;
         } else {
           return [];
         }

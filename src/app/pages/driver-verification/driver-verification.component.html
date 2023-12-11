@@ -3,27 +3,45 @@
     <div class="view__top">
       <div class="view__right">
         <div class="tw-grid tw-gap-5 tw-content-start">
+
+          <!-- {
+            "id": 1,
+            "full_name": "full_name",
+            "selfies_with_passport": "jamshid.jpg",
+            "bank_card": "bank_card",
+            "bank_cardname": "bank_cardname",
+            "transport_front_photo": "jamshid.jpg",
+            "transport_back_photo": "jamshid.jpg",
+            "transport_side_photo": "jamshid.jpg",
+            "adr_photo": "jamshid.jpg",
+            "transport_registration_country": "transport_registration_country",
+            "driver_license": "driver_license",
+            "transportation_license_photo": "jamshid.jpg",
+            "techpassport_photo": "jamshid.jpg",
+            "state_registration_truckNumber": "11222" -->
+        <!-- } -->
+        {{this.user?.full_name}}
           <div class="view__informate view__block">
             <div class="view__list">
               <mat-form-field class="form__input">
                 <mat-label>ФИО</mat-label>
-                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
+                <input matInput type="text" [(ngModel)]="this.driver.full_name" />
               </mat-form-field>
               <mat-form-field class="form__input">
                 <mat-label>Фото паспорта с лицом селфи
                 </mat-label>
-                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
-                <button class="passport-button" (click)="preview()"> open</button>
+                <input matInput type="text"  [(ngModel)]="this.driver.selfies_with_passport" />
+                <button class="passport-button" (click)="preview(this.driver.selfies_with_passport)"> open</button>
               </mat-form-field>
               <mat-form-field class="form__input">
                 <mat-label>Банковская карта
                 </mat-label>
-                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
+                <input matInput type="text" [(ngModel)]="this.driver.bank_card" />
               </mat-form-field>
               <div class="tw-flex tw-justify-between tw-items-center images-passport">
-                <button class="image-box" (click)="preview()">Фото тех паспорта</button>
-                <button class="image-box" (click)="preview()">Фото лицензия на грузоперевозку</button>
-                <button class="image-box" (click)="preview()">Водительское удостоверение </button>
+                <button class="image-box" (click)="preview(this.driver.techpassport_photo)">Фото тех паспорта</button>
+                <button class="image-box" (click)="preview(this.driver.transportation_license_photo)">Фото лицензия на грузоперевозку</button>
+                <button class="image-box" (click)="preview(this.driver.adr_photo)">Водительское удостоверение </button>
               </div>
             </div>
           </div>
@@ -33,7 +51,7 @@
             <div class="view__list">
               <mat-form-field class="form__input">
                 <mat-label>Номер телефона</mat-label>
-                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
+                <input matInput type="text" [(ngModel)]="this.driver.full_name" />
               </mat-form-field>
             </div>
           </div>
@@ -43,22 +61,22 @@
             <div class="view__list">
               <mat-form-field class="form__input">
                 <mat-label>Гос. номер Тягача </mat-label>
-                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
+                <input matInput type="text" [(ngModel)]="this.driver.state_registration_truckNumber" />
               </mat-form-field>
               <mat-form-field class="form__input">
                 <mat-label>Тип транспорта
                 </mat-label>
-                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
+                <input matInput type="text" [(ngModel)]="this.driver.state_registration_truckNumber" />
               </mat-form-field>
 
               <div class="tw-flex tw-justify-between tw-items-center images-passport">
-                <button class="image-box" (click)="preview()">
+                <button class="image-box" (click)="preview(this.driver.transport_front_photo)">
                   <img src="../../../assets/img/trucks//opposite.png" alt="Track opposite">
                 </button>
-                <button class="image-box" (click)="preview()">
+                <button class="image-box" (click)="preview(this.driver.transport_back_photo)">
                   <img src="../../../assets/img/trucks//back.png" alt="Track back">
                 </button>
-                <button class="image-box" (click)="preview()">
+                <button class="image-box" (click)="preview(this.driver.transport_side_photo)">
                   <img src="../../../assets/img/trucks//right.png" alt="Track right">
                 </button>
               </div>
@@ -70,7 +88,7 @@
             <div class="view__list">
               <mat-form-field class="form__input">
                 <mat-label>Марка транспорта</mat-label>
-                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
+                <input matInput type="text" [(ngModel)]="this.driver.state_registration_truckNumber" />
               </mat-form-field>
             </div>
           </div>
@@ -78,7 +96,7 @@
       </div>
     </div>
     <div class="view__buttons">
-      <button class="view__btn btn-green">
+      <button class="view__btn btn-green" (click)="verify(this.driver.id)" >
         Верифицировать
       </button>
     </div>

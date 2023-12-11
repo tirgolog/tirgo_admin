@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PushComponent } from 'src/app/components/push/push.component';
 import { SpollersService } from 'src/app/services/spollers.service';
 import { AuthService } from "../../services/auth.service";
 import { HelperService } from "../../services/helper.service";
@@ -48,7 +47,6 @@ export class DriversVerificationComponent {
     this.gridOptions.suppressRowClickSelection = true;
     this.gridOptions.suppressScrollOnNewData = true;
     this.gridOptions.resizable = true;
-    this.updateListDrivers();
   }
 
   downloadFile(filename) {
@@ -58,28 +56,7 @@ export class DriversVerificationComponent {
     })
   }
 
-  getContextMenuItems(params: any) {
-    return [
-      'autoSizeAll',
-      'separator',
-      'copy',
-      'separator',
-      {
-        name: 'Экспорт',
-        subMenu: [
-          'csvExport',
-          'excelExport',
-          {
-            name: 'Экспорт в Excel только выбранные (.xlsx)',
-            action: () => {
-              params.api.exportDataAsExcel({ onlySelected: true });
-            },
-          },
-        ]
-      },
 
-    ];
-  }
   goToColumn(ev: any): void {
     const dialogRef = this.dialog.open(DriverVerificationComponent, {
       width: '60%',
@@ -89,21 +66,13 @@ export class DriversVerificationComponent {
     });
   }
 
-  verify(id) {
-
-  }
 
 
   ngAfterViewInit(): void {
     this.spoller.initSpollers()
   }
 
-  openPush(): void {
-    this.dialog.open(PushComponent, {});
-  }
-  updateListDrivers() {
-    this.drivers = this.helper.drivers.filter(e => e.deleted === 0)
-  }
+
   async handlePage(e: any) {
     this.helper.global_loading = true;
     let from = e.pageIndex * e.pageSize
@@ -115,11 +84,7 @@ export class DriversVerificationComponent {
     console.log(e.pageIndex)
     console.log(e.pageSize)
   }
-  async onScroll() {
-    let newusers = await this.listService.getAllunVerifiedDrivers().toPromise();
-    this.helper.drivers = this.helper.drivers.concat(...newusers.data);
-    this.helper.drivers_count = newusers.data_count;
-  }
+
   async filterList() {
     this.helper.global_loading = true;
     let newusers = await this.listService.getAllunVerifiedDrivers().toPromise();
@@ -136,42 +101,9 @@ export class DriversVerificationComponent {
     this.indentificator = '';
     this.typetransport = '';
     this.helper.isLoading = true;
-    let newusers = await this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null).toPromise();
+    let newusers = await this.listService.getAllunVerifiedDrivers().toPromise();
     this.helper.drivers = newusers.data;
     this.helper.drivers_count = newusers.count;
     this.helper.isLoading = false;
   }
-  moderCheck(params) {
-    switch (params) {
-      case 0:
-        return "Не пройдена";
-      case 1:
-        return "Пройдена";
-      default:
-        return "Не определен";
-    }
-  }
-  busyCheck(params) {
-    switch (params) {
-      case 0:
-        return "Свободен";
-      case 1:
-        return "Занят";
-      default:
-        return "Не определен";
-    }
-  }
-  transportCheck(params) {
-    let data = '';
-    if (params && params.length) {
-      for (let row of params) {
-        data = data + '' + this.helper.returnNameTypeTransport(row.type) + ', '
-      }
-      return data.slice(0, -2);
-    } else {
-      return '';
-    }
-  }
-
-
 }

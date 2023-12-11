@@ -8,20 +8,12 @@
 
          <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-         </ng-container>
-
-         <ng-container matColumnDef="busy">
-            <mat-header-cell *matHeaderCellDef>Проверка</mat-header-cell>
-            <mat-cell *matCellDef="let row">  
-               <button class="view__btn btn-green" type="button" (click)="verify(row.id)">
-               
-            </button> </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.full_name}} </mat-cell>
          </ng-container>
 
          <!-- Header and Row Declarations -->
-         <mat-header-row *matHeaderRowDef="['id',  'name', 'busy',  ]"></mat-header-row>
-         <mat-row (click)="goToColumn(row.id)" *matRowDef="let row; columns: ['id',  'name',   'busy',  ]"></mat-row>
+         <mat-header-row *matHeaderRowDef="['id',  'name' ]"></mat-header-row>
+         <mat-row (click)="goToColumn(row)" *matRowDef="let row; columns: ['id',  'name' ]"></mat-row>
       </mat-table>
       <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
          (page)="handlePage($event)"></mat-paginator>
