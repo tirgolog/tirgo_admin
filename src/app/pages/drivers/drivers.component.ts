@@ -169,9 +169,9 @@ export class DriversComponent {
    }
    busyCheck(params) {
       switch (params) {
-         case 0:
-            return "Свободен";
          case 1:
+            return "Свободен";
+         case 0:
             return "Занят";
          default:
             return "Не определен";
