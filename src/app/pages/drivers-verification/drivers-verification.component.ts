@@ -38,7 +38,6 @@ export class DriversVerificationComponent {
   }
 
   ngOnInit(): void {
-    this.spoller.initSpollers()
     this.filterList()
     this.gridOptions = <GridOptions>{};
     this.gridOptions.localeText = this.helper.localeTextAgGrid;
@@ -49,14 +48,6 @@ export class DriversVerificationComponent {
     this.gridOptions.resizable = true;
   }
 
-  downloadFile(filename) {
-    this.authService.downloadFile(filename).subscribe((res: any) => {
-      const url = window.URL.createObjectURL(res);
-      window.open(url, '_blank');
-    })
-  }
-
-
   goToColumn(ev: any): void {
     const dialogRef = this.dialog.open(DriverVerificationComponent, {
       width: '60%',
@@ -66,13 +57,6 @@ export class DriversVerificationComponent {
     });
   }
 
-
-
-  ngAfterViewInit(): void {
-    this.spoller.initSpollers()
-  }
-
-
   async handlePage(e: any) {
     this.helper.global_loading = true;
     let from = e.pageIndex * e.pageSize
@@ -80,9 +64,6 @@ export class DriversVerificationComponent {
     this.helper.drivers = newusers.data;
     this.helper.drivers_count = newusers.data_count;
     this.helper.global_loading = false;
-    console.log(e)
-    console.log(e.pageIndex)
-    console.log(e.pageSize)
   }
 
   async filterList() {
