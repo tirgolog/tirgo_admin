@@ -172,7 +172,7 @@ export class AuthService {
    }
 
    brokerLogin() {
-      const sUrl = 'http://192.168.1.130:3000/api/v1' + '/auth/login';
+      const sUrl = 'https://merchant.tirgo.io/api/v1' + '/auth/login';
       return this.http.post<any>(sUrl, { username: "adminuseRname", password: 'user@PasSword1' })
          .pipe(map(res => {
             if (res.success) {

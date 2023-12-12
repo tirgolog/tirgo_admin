@@ -352,8 +352,8 @@
             </p>
             <h3><b>Тех паспорт</b></h3>
             <div class="imgs-trucks">
-              <ng-container *ngFor="let img of user.files">
-                <div *ngIf="img.type_file === 'passport'">
+              <ng-container *ngFor="let img of row.docks">
+                <div *ngIf="img.type_file === 'tech_passport_files'">
                   <img
                     (click)="helper.viewPhoto(file_url+img.name)"
                     src="{{file_url}}{{img.name}}"
@@ -364,10 +364,10 @@
             </div>
             <h3><b>Лицензия</b></h3>
             <div class="imgs-trucks">
-              <ng-container *ngFor="let img of user.files">
+              <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'license_files'">
                   <img
-                    (click)="helper.viewPhoto(img.preview)"
+                    (click)="helper.viewPhoto(file_url+img.name)"
                     src="{{file_url}}{{img.name}}"
                     alt=""
                   />
@@ -375,11 +375,11 @@
               </ng-container>
             </div>
             <h3><b>Фото транспорт</b></h3>
-            <div class="imgs-trucks">
-              <ng-container *ngFor="let img of user.files">
+            <div class="imgs-trucks" *ngIf="row.docks">
+              <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'car_photos'">
                   <img
-                    (click)="helper.viewPhoto(img.preview)"
+                    (click)="helper.viewPhoto(file_url+img.name)"
                     src="{{file_url}}{{img.name}}"
                     alt=""
                   />
@@ -389,8 +389,8 @@
           </div>
         </ng-container>
       </div>
-      <!-- <h4 class="view__title title-sec">Удаленный транспорт</h4> -->
-      <!-- <div class="view__transport view__block transport-blocks">
+      <h4 class="view__title title-sec">Удаленный транспорт</h4>
+       <div class="view__transport view__block transport-blocks">
         <ng-container *ngFor="let row of user.trucks">
           <div class="view__list" *ngIf="!row.active">
             <p class="tw-flex tw-justify-between">
@@ -455,7 +455,7 @@
             </div>
           </div>
         </ng-container>
-      </div> -->
+      </div>
     </ng-container>
     <div class="view__buttons">
       <button
