@@ -1,0 +1,47 @@
+<main class="drivers">
+    <section class="table">
+        <mat-table [dataSource]="helper.drivers">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.full_name}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+                <mat-header-cell *matHeaderCellDef>phone</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.phone}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="bank_card">
+                <mat-header-cell *matHeaderCellDef>Банковская карта</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.bank_card}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="bank_cardname">
+                <mat-header-cell *matHeaderCellDef>Имя банковской карты</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.bank_cardname}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="transport_registration_country">
+                <mat-header-cell *matHeaderCellDef>Страна регистрации транспорта</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.transport_registration_country}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="state_registration_truckNumber">
+                <mat-header-cell *matHeaderCellDef>Номер ТС государственной регистрации</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.state_registration_truckNumber}} </mat-cell>
+            </ng-container>
+
+            <!-- Header and Row Declarations -->
+            <mat-header-row
+                *matHeaderRowDef="['id',  'name', 'phone','bank_card','bank_cardname', 'transport_registration_country' , 'state_registration_truckNumber']"></mat-header-row>
+            <mat-row
+                *matRowDef="let row; columns: ['id',  'name' , 'phone','bank_card','bank_cardname', 'transport_registration_country', 'state_registration_truckNumber']"></mat-row>
+        </mat-table>
+        <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+            (page)="handlePage($event)"></mat-paginator>
+    </section>
+</main>

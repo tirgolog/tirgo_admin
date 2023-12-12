@@ -55,6 +55,7 @@ import { ModerationComponent } from './pages/moderation/moderation.component';
 import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
 import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
 import { DriversVerificationComponent } from './pages/drivers-verification/drivers-verification.component';
+import { DriverVerifedComponent } from './pages/driver-verifed/driver-verifed.component';
 
 const routes: Routes = [
    {
@@ -331,6 +332,11 @@ const routes: Routes = [
       path: "drivers-verification",
       component: DriversVerificationComponent,
       title: "Водители проверка"
+   },
+   {
+      path: "drivers-verified",
+      component: DriverVerifedComponent,
+      title: "Проверенный водитель"
    },
 ];
 

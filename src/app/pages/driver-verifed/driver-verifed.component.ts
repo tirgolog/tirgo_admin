@@ -4,15 +4,14 @@ import { SpollersService } from 'src/app/services/spollers.service';
 import { AuthService } from "../../services/auth.service";
 import { HelperService } from "../../services/helper.service";
 import { ListService } from "../../services/list.service";
-import { DriverVerificationComponent } from '../driver-verification/driver-verification.component';
-
 @Component({
-  selector: 'app-drivers-verification',
-  templateUrl: './drivers-verification.component.html',
-  styleUrls: ['./drivers-verification.component.scss'],
+  selector: 'app-driver-verifed',
+  templateUrl: './driver-verifed.component.html',
+  styleUrls: ['./driver-verifed.component.scss'],
   host: { "id": "main" }
 })
-export class DriversVerificationComponent {
+export class DriverVerifedComponent {
+
   drivers: any[] = [];
   sizespage = [
     50, 100, 200, 500, 1000, 5000
@@ -28,18 +27,11 @@ export class DriversVerificationComponent {
     this.filterList()
   }
 
-  goToColumn(ev: any): void {
-    const dialogRef = this.dialog.open(DriverVerificationComponent, {
-      width: '60%',
-      height: '70%',
-      panelClass: 'custom-dialog-class',
-      data: ev
-    });
-  }
+
 
   async handlePage(e: any) {
     this.helper.global_loading = true;
-    let drivers = await this.listService.getAllunVerifiedDrivers().toPromise();
+    let drivers = await this.listService.getAllVerifiedDrivers().toPromise();
     this.helper.drivers = drivers.data;
     this.helper.drivers_count = drivers.data_count;
     this.helper.global_loading = false;
@@ -47,10 +39,9 @@ export class DriversVerificationComponent {
 
   async filterList() {
     this.helper.global_loading = true;
-    let newusers = await this.listService.getAllunVerifiedDrivers().toPromise();
+    let newusers = await this.listService.getAllVerifiedDrivers().toPromise();
     this.helper.drivers = newusers.data;
     this.helper.drivers_count = newusers.data_count;
     this.helper.global_loading = false;
   }
-
 }

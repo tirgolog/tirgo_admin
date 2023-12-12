@@ -1,0 +1,58 @@
+<main class=" ">
+    <section class="view__main">
+      <div class="view__top">
+        <div class="view__right">
+          <div class="tw-grid tw-gap-5 tw-content-start">
+            <div class="view__informate view__block">
+              <div class="view__list">
+                <mat-form-field class="form__input">
+                  <mat-label>ФИО</mat-label>
+                  <input matInput type="text" [(ngModel)]="this.driver.full_name" />
+                </mat-form-field>
+                <mat-form-field class="form__input">
+                  <mat-label>Фото паспорта с лицом селфи
+                  </mat-label>
+                  <input matInput type="text" [(ngModel)]="this.driver.selfies_with_passport" />
+                  <button class="passport-button" (click)="preview(this.driver.selfies_with_passport)"> open</button>
+                </mat-form-field>
+                <mat-form-field class="form__input">
+                  <mat-label>Банковская карта
+                  </mat-label>
+                  <input matInput type="text" [(ngModel)]="this.driver.bank_card" />
+                </mat-form-field>
+                <div class="tw-flex tw-justify-between tw-items-center images-passport">
+                  <button class="image-box" (click)="preview(this.driver.techpassport_photo1)">Фото тех паспорта
+                    1</button>
+                  <button class="image-box" (click)="preview(this.driver.techpassport_photo2)">Фото тех паспорта
+                    2</button>
+                  <button class="image-box" (click)="preview(this.driver.transportation_license_photo)">Фото лицензия на
+                    грузоперевозку</button>
+                  <button class="image-box" (click)="preview(this.driver.adr_photo)">Водительское удостоверение </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tw-grid tw-gap-5 tw-content-start">
+            <div class="view__docs">
+              <div class="view__list">
+                <mat-form-field class="form__input">
+                  <mat-label>Номер телефона</mat-label>
+                  <input matInput type="text" [(ngModel)]="this.driver.full_name" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="tw-grid tw-gap-5 tw-content-start">
+            <div class="view__docs">
+              <div class="view__list">
+                <mat-form-field class="form__input">
+                  <mat-label>Марка транспорта</mat-label>
+                  <input matInput type="text" [(ngModel)]="this.driver.state_registration_truckNumber" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>

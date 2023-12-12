@@ -11,76 +11,37 @@
             <mat-cell *matCellDef="let row"> {{row.full_name}} </mat-cell>
          </ng-container>
 
+         <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef>phone</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.phone}} </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="bank_card">
+            <mat-header-cell *matHeaderCellDef>Банковская карта</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.bank_card}} </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="bank_cardname">
+            <mat-header-cell *matHeaderCellDef>Имя банковской карты</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.bank_cardname}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="transport_registration_country">
+            <mat-header-cell *matHeaderCellDef>Страна регистрации транспорта</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.transport_registration_country}} </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="state_registration_truckNumber">
+            <mat-header-cell *matHeaderCellDef>Номер ТС государственной регистрации</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.state_registration_truckNumber}} </mat-cell>
+         </ng-container>
+
          <!-- Header and Row Declarations -->
-         <mat-header-row *matHeaderRowDef="['id',  'name' ]"></mat-header-row>
-         <mat-row (click)="goToColumn(row)" *matRowDef="let row; columns: ['id',  'name' ]"></mat-row>
+         <mat-header-row
+            *matHeaderRowDef="['id',  'name', 'phone','bank_card','bank_cardname', 'transport_registration_country' , 'state_registration_truckNumber']"></mat-header-row>
+         <mat-row (click)="goToColumn(row)"
+            *matRowDef="let row; columns: ['id',  'name' , 'phone','bank_card','bank_cardname', 'transport_registration_country', 'state_registration_truckNumber']"></mat-row>
       </mat-table>
       <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
          (page)="handlePage($event)"></mat-paginator>
-      <!--<table class="custom-table">
-          <tr>
-             <th>ID</th>
-             <th>Идентификатор</th>
-             <th>ФИО</th>
-             <th>Телефон</th>
-             <th>Транспорт</th>
-             <th>Рейтинг</th>
-             <th>Статус</th>
-             <th>Модерация</th>
-             <th>Дата регистрации</th>
-             <th>Последний вход</th>
-             <th>Заказы</th>
-             <th>Геопозиция</th>
-          </tr>
-          <ng-container *ngFor="let row of helper.drivers | orderBy: this.sort: false">
-             <tr (click)="goToColumn(row)">
-                <td>{{row.id}}</td>
-                <td>{{row.iso_code}}</td>
-                <td>{{row.name}}</td>
-                <td>{{row.phone}}</td>
-                <td>{{transportCheck(row.trucks)}}</td>
-                <td>{{row.raiting}}</td>
-                <td>{{busyCheck(row.busy)}}</td>
-                <td>{{moderCheck(row.moderation)}}</td>
-                <td>{{row.date_reg | formatTime: 'DD.MM.YYYY'}}</td>
-                <td>{{row.date_last_login | formatTime: 'DD.MM.YYYY в HH:mm'}}</td>
-                <td>{{row.orders && row.orders.length ? row.orders.length : 'Нет'}}</td>
-                <td>{{row.lat ? 'Есть разрешение':'Нет разрешения'}}</td>
-             </tr>
-          </ng-container>
-       </table>-->
-      <!--<div
-               *ngIf="helper.drivers.length >= 100"
-               class="loading-scroll"
-               infinite-scroll
-               [infiniteScrollDistance]="1"
-               [infiniteScrollThrottle]="2"
-               (scrolled)="onScroll()"
-       >
-          Загружаем...
-       </div>-->
    </section>
-   <!--<section class="pagging">
-       <ul class="pagging__list">
-          <li class="pagging__item">
-             <button class="pagging__button pagging__prev">
-                <i class="icm-chevron"></i>
-             </button>
-          </li>
-          <li class="pagging__item">
-             <button class="pagging__button">1</button>
-          </li>
-          <li class="pagging__item">
-             <button class="pagging__button">2</button>
-          </li>
-          <li class="pagging__item">
-             <button class="pagging__button">3</button>
-          </li>
-          <li class="pagging__item">
-             <button class="pagging__button pagging__next">
-                <i class="icm-chevron"></i>
-             </button>
-          </li>
-       </ul>
-    </section>-->
 </main>

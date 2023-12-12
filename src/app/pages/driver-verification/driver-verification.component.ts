@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { HelperService } from "../../services/helper.service";
 import { AuthService } from "../../services/auth.service";
 import { ToastrService } from "ngx-toastr";
-import { AddTransactionsComponent } from "../../components/add-transactions/add-transactions.component";
 import { UserComponent } from "../user/user.component";
 import { PriviewComponent } from 'src/app/components/priview/priview.component';
 import { ListService } from 'src/app/services/list.service';
@@ -49,21 +48,6 @@ export class DriverVerificationComponent {
         this.activity = this.helper.activity.filter(e => e.userid === this.user.id)
         this.namedriver = this.user.name;
     }
-
-
-    goToColumn(id) {
-        if (id) {
-            const dialogRef = this.dialog.open(UserComponent, {
-                width: '90%',
-                height: '80%',
-                panelClass: 'custom-dialog-class',
-                data: id
-            });
-        } else {
-            this.toastr.error('Сначала нужно назначить мерчанта')
-        }
-    }
-
 
     preview(image?: string): void {
         const dialog = this.dialog.open(PriviewComponent, {

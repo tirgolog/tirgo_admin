@@ -56,11 +56,22 @@ export class ListService {
         }
       }));
   }
+  getAllVerifiedDrivers() {
+    const sUrl = API_URL + '/users/verified-verifications';
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
 
 
   verifyDriverItem(id) {
-    const sUrl = API_URL + `/users/verify-driver/${id}`;
-    return this.http.put<any>(sUrl, {})
+    const sUrl = API_URL + `/users/verify-driver`;
+    return this.http.patch<any>(sUrl, {id})
       .pipe(map(res => {
         if (res.data) {
           return res.data;

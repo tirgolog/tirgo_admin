@@ -262,7 +262,7 @@
             </a>
          </li>-->
 
-         <li class="menu__item"  *ngIf="authService.myrole.drivers">
+         <li class="menu__item" *ngIf="authService.myrole.drivers">
             <button
                routerLink="/drivers-verification"
                routerLinkActive="_active"
@@ -271,6 +271,18 @@
             >
                <i class="icm-pilot"></i>
                <span>Водители проверка</span>
+            </button>
+         </li>
+
+         <li class="menu__item" *ngIf="authService.myrole.drivers">
+            <button
+               routerLink="/drivers-verified"
+               routerLinkActive="_active"
+               class="menu__link"
+               (click)="closeMenu()"
+            >
+               <i class="icm-pilot"></i>
+               <span>Проверенный водитель</span>
             </button>
          </li>
       </ul>
