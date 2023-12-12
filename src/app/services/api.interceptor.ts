@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class ApiInterceptor implements HttpInterceptor {
    MER_API = "http://192.168.1.58:5000/api/v1"
-   API_URL = 'http://localhost:7790'
+   API_URL = 'https://admin.tirgo.io/api'
 
    constructor(private authService: AuthService, private router: Router) { }
    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
