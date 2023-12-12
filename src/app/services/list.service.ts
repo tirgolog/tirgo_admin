@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
-const API_URL = 'https://admin.tirgo.io/api'
+const API_URL = 'http://https://admin.tirgo.io/api'
 const MER_API = "http://192.168.1.58:5000/api/v1"
 @Injectable({
   providedIn: 'root'
