@@ -38,7 +38,7 @@
             <!-- Header and Row Declarations -->
             <mat-header-row
                 *matHeaderRowDef="['id',  'name', 'phone','bank_card','bank_cardname', 'transport_registration_country' , 'state_registration_truckNumber']"></mat-header-row>
-            <mat-row
+            <mat-row  (click)="goToColumn(row)"
                 *matRowDef="let row; columns: ['id',  'name' , 'phone','bank_card','bank_cardname', 'transport_registration_country', 'state_registration_truckNumber']"></mat-row>
         </mat-table>
         <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"

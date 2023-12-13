@@ -4,6 +4,7 @@ import { SpollersService } from 'src/app/services/spollers.service';
 import { AuthService } from "../../services/auth.service";
 import { HelperService } from "../../services/helper.service";
 import { ListService } from "../../services/list.service";
+import { DriverVerifyComponent } from '../driver-verify/driver-verify.component';
 @Component({
   selector: 'app-driver-verifed',
   templateUrl: './driver-verifed.component.html',
@@ -44,4 +45,14 @@ export class DriverVerifedComponent {
     this.helper.drivers_count = newusers.data_count;
     this.helper.global_loading = false;
   }
+
+  goToColumn(ev: any): void {
+    const dialogRef = this.dialog.open(DriverVerifyComponent, {
+      width: '60%',
+      height: '70%',
+      panelClass: 'custom-dialog-class',
+      data: ev
+    });
+  }
+
 }
