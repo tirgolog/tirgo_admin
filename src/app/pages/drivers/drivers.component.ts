@@ -55,6 +55,7 @@ export class DriversComponent {
       this.gridOptions.suppressScrollOnNewData = true;
       this.gridOptions.resizable = true;
       this.updateListDrivers();
+      this.getReqFinance();
    }
 
    downloadFile(filename) {
@@ -197,7 +198,12 @@ export class DriversComponent {
       this.sort = ev.target.value;
    }
 
-   showRequests() {
-      
+   getReqFinance() {
+      this.listService.getReqFinanceDrivers().subscribe((res:any) => {
+         if(res) {
+            
+         }
+      })
    }
+
 }

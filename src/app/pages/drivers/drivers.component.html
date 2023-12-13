@@ -4,7 +4,7 @@
       <div class="page-header__top">
          <h2 class="page-header__title title">Водители</h2>
          <div class="page-header__actions">
-            <button class="page-header__btn btn-green" (click)="showRequests()">
+            <button class="page-header__btn btn-green" routerLink="/fin-request">
                Фин.Запросы
             </button>
             <button class="page-header__btn btn-green" (click)="openPush()" *ngIf="authService.myrole.send_push">

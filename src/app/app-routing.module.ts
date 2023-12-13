@@ -54,6 +54,7 @@ import {ExchangerateComponent} from "./exchangerate/exchangerate.component";
 import { ModerationComponent } from './pages/moderation/moderation.component';
 import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
 import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
+import { FinRequestsComponent } from './pages/fin-requests/fin-requests.component';
 
 
 
@@ -107,6 +108,11 @@ const routes: Routes = [
       path: "drivers",
       component: DriversComponent,
       title: "Водители"
+   },
+   {
+      path: "fin-request",
+      component: FinRequestsComponent,
+      title: "Запрос на финансирование"
    },
    {
       path: "driver",
