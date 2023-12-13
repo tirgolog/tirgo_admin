@@ -3,7 +3,7 @@
     <div class="page-header__top">
       <h2 class="page-header__title title">Подробнее о водителе</h2>
       <button class="view__tirs badge" (click)="addMoney()">
-        Баланс <span> {{ user.balance ? user.balance : "0" }} tir</span>
+        Баланс <span> {{ user?.balance ? user?.balance : "0" }} tir</span>
       </button>
     </div>
   </section>
@@ -13,14 +13,14 @@
         <div class="view__data data-view view__block">
           <div class="data-view__header">
             <img
-              [src]="user.avatar ? user.avatar : 'assets/img/user-empty.png'"
+              [src]="user?.avatar ? user?.avatar : 'assets/img/user-empty.png'"
               (click)="helper.viewPhoto(user.avatar)"
               class="data-view__img"
               alt="Картинка"
             />
-            <p class="data-view__name">#{{ user.id }} {{ user.name }}</p>
+            <p class="data-view__name">#{{ user?.id }} {{ user?.name }}</p>
             <div class="data-view__rating">
-              <i class="icm-star"></i> {{ user.raiting }}
+              <i class="icm-star"></i> {{ user?.raiting }}
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
             <div class="tw-flex tw-justify-between tw-items-center">
               <span>Всего</span>
               <p class="tw-flex tw-items-center">
-                <span class="text-wine tw-pr-1">{{ user.orders.length }}</span>
+                <span class="text-wine tw-pr-1">{{ user?.orders?.length }}</span>
               </p>
             </div>
 
@@ -38,7 +38,7 @@
               <span>Завершенные</span>
               <p class="tw-flex tw-items-center">
                 <span class="text-green tw-pr-1">{{
-                  returnAcceptOrder(user.orders)
+                  returnAcceptOrder(user?.orders)
                 }}</span>
               </p>
             </div>
@@ -46,7 +46,7 @@
               <span>Отмененные</span>
               <p class="tw-flex tw-items-center">
                 <span class="text-red tw-pr-1">{{
-                  returnRejectOrder(user.orders)
+                  returnRejectOrder(user?.orders)
                 }}</span>
               </p>
             </div>
@@ -60,7 +60,7 @@
             <div class="view__list">
               <p class="tw-flex tw-justify-between">
                 <span>ФИО</span>
-                <span *ngIf="!editInfo">{{ user.name }}</span>
+                <span *ngIf="!editInfo">{{ user?.name }}</span>
                 <input
                   *ngIf="editInfo"
                   class="input-edit-view"
@@ -71,8 +71,8 @@
               <p class="tw-flex tw-justify-between">
                 <span>Дата рождения</span>
                 <span *ngIf="!editInfo">{{
-                  user.birthday
-                    ? (user.birthday | formatTime : "DD MMMM YYYY")
+                  user?.birthday
+                    ? (user?.birthday | formatTime : "DD MMMM YYYY")
                     : "Не указана"
                 }}</span>
                 <input
@@ -319,6 +319,7 @@
     <ng-container *ngIf="user.trucks && user.trucks.length">
       <h4 class="view__title title-sec">Транспорт</h4>
       <div class="view__transport view__block transport-blocks">
+        asdad
         <ng-container *ngFor="let row of user.trucks">
           <div class="view__list" *ngIf="row.active">
             <p class="tw-flex tw-justify-between">
