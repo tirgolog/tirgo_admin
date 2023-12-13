@@ -49,7 +49,7 @@ export class ListService {
     const sUrl = API_URL + '/users/unverified-verifications';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
-        if (res.data) {
+        if (res && res.data) {
           return res;
         } else {
           return [];
@@ -60,7 +60,7 @@ export class ListService {
     const sUrl = API_URL + '/users/verified-verifications';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
-        if (res.data) {
+        if (res && res.data) {
           return res;
         } else {
           return [];
