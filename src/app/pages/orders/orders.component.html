@@ -205,7 +205,7 @@
             row.secure_transaction ? "Да" : "Нет"
           }}</span>
           <span *ngIf="row.isMerchant">{{
-            row.isDangrousCargo ? "Да" : "Нет"
+            row.isSafe ? "Да" : "Нет"
           }}</span>
         </mat-cell>
       </ng-container>

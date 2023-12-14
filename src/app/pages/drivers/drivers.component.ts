@@ -4,8 +4,7 @@ import { PushComponent } from 'src/app/components/push/push.component';
 import { SpollersService } from 'src/app/services/spollers.service';
 import { AuthService } from "../../services/auth.service";
 import { HelperService } from "../../services/helper.service";
-import { ColDef, GridOptions, RowNode } from 'ag-grid-community';
-import { formatDate } from "@angular/common";
+import { GridOptions } from 'ag-grid-community';
 import { DriverComponent } from "../driver/driver.component";
 import { AddDriverComponent } from "../add-driver/add-driver.component";
 import { ListService } from "../../services/list.service";
@@ -25,7 +24,7 @@ export class DriversComponent {
    dateReg: string = '';
    dateLogin: string = '';
    name: string = '';
-
+   fin_requests = 0
    sort: string = 'id';
    reverse: boolean = true;
 
@@ -200,6 +199,7 @@ export class DriversComponent {
 
    getReqFinance() {
       this.listService.getReqFinanceDrivers().subscribe((res:any) => {
+         console.log(res);
          if(res) {
             
          }

@@ -37,9 +37,7 @@ export class OrderComponent {
     if (this.data.id.includes('M')) {
       const res = await this.listService.getOrdersByMerchant(this.data.merchant.id).toPromise();
       if (res.success) {
-        this.data = res.data.filter(item => item.id === this.data.id)[0];
-        console.log(this.data);
-        
+        this.data = res.data.filter(item => item.id === this.data.id)[0];        
       }
     } else {
       const res = await this.authService.getOrderInfo(this.data.id).toPromise();

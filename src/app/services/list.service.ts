@@ -61,7 +61,7 @@ export class ListService {
   }
 
   getReqFinanceDrivers() {
-    const sUrl = API_URL + '/driver/withdrawals';
+    const sUrl = API_URL + '/users/driver/withdrawals';
     return this.http.get<any>(sUrl);
   }
 

@@ -13,7 +13,7 @@
         <div class="view__data data-view view__block">
           <div class="data-view__header">
             <img
-              [src]="user.avatar ? user.avatar : 'assets/img/user-empty.png'"
+              [src]="user.avatar ? user?.avatar : 'assets/img/user-empty.png'"
               (click)="helper.viewPhoto(user.avatar)"
               class="data-view__img"
               alt="Картинка"

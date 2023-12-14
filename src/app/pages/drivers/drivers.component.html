@@ -1,10 +1,10 @@
-
 <main class="drivers">
    <section class="page-header">
       <div class="page-header__top">
          <h2 class="page-header__title title">Водители</h2>
          <div class="page-header__actions">
-            <button class="page-header__btn btn-green" routerLink="/fin-request">
+            <button routerLink="/fin-request" class="page-header__btn btn-green" matBadge="{{ fin_requests }}"
+               matBadgePosition="after" matBadgeColor="warn" [disabled]="fin_requests == 0">
                Фин.Запросы
             </button>
             <button class="page-header__btn btn-green" (click)="openPush()" *ngIf="authService.myrole.send_push">
@@ -19,30 +19,31 @@
    <section class="table">
       <div class="filter">
          <div class="filter-inputs">
-            <input type="text" class="page__search" placeholder="Поиск по id" [(ngModel)]="id"/>
-            <input type="text" class="page__search" placeholder="Поиск по имени" [(ngModel)]="name"/>
-            <input type="text" class="page__search" placeholder="Поиск по номеру телефона" [(ngModel)]="phone"/>
-            <input type="text" class="page__search" placeholder="Поиск по идентификатору" [(ngModel)]="indentificator"/>
-            <input type="date" class="page__search" placeholder="Поиск по дате регистрации" [(ngModel)]="dateReg"/>
-            <input type="date" class="page__search" placeholder="Поиск по дате входа" [(ngModel)]="dateLogin"/>
+            <input type="text" class="page__search" placeholder="Поиск по id" [(ngModel)]="id" />
+            <input type="text" class="page__search" placeholder="Поиск по имени" [(ngModel)]="name" />
+            <input type="text" class="page__search" placeholder="Поиск по номеру телефона" [(ngModel)]="phone" />
+            <input type="text" class="page__search" placeholder="Поиск по идентификатору"
+               [(ngModel)]="indentificator" />
+            <input type="date" class="page__search" placeholder="Поиск по дате регистрации" [(ngModel)]="dateReg" />
+            <input type="date" class="page__search" placeholder="Поиск по дате входа" [(ngModel)]="dateLogin" />
             <span>
                <select name="select" class="page__search" (change)="changeSort($event)">
-                 <option value="id">ID</option>
-                 <option value="phone">Телефону</option>
-                 <option value="date_reg">Дата регистрации</option>
-                 <option value="date_last_login">Последний вход</option>
-                 <option value="name">Имя</option>
-                 <option value="indentificator">Идентификатору</option>
+                  <option value="id">ID</option>
+                  <option value="phone">Телефону</option>
+                  <option value="date_reg">Дата регистрации</option>
+                  <option value="date_last_login">Последний вход</option>
+                  <option value="name">Имя</option>
+                  <option value="indentificator">Идентификатору</option>
                </select>
-             </span>
+            </span>
             <span>
                <select name="select" class="page__search" (change)="categoryFind($event)">
-                 <option value="all">Все типы транспорта</option>
-                 <ng-container *ngFor="let row of helper.typetruck">
-                   <option [value]="row.id">{{row.name}}</option>
-                 </ng-container>
+                  <option value="all">Все типы транспорта</option>
+                  <ng-container *ngFor="let row of helper.typetruck">
+                     <option [value]="row.id">{{row.name}}</option>
+                  </ng-container>
                </select>
-             </span>
+            </span>
          </div>
          <div class="filter-buttons">
             <button class="page__btn btn-custom" (click)="filterList()">
@@ -103,10 +104,13 @@
             <mat-cell *matCellDef="let row"> {{row.lat ? 'Есть разрешение':'Нет разрешения'}} </mat-cell>
          </ng-container>
          <!-- Header and Row Declarations -->
-         <mat-header-row *matHeaderRowDef="['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-header-row>
-         <mat-row (click)="goToColumn(row.id)" *matRowDef="let row; columns: ['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-row>
+         <mat-header-row
+            *matHeaderRowDef="['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-header-row>
+         <mat-row (click)="goToColumn(row.id)"
+            *matRowDef="let row; columns: ['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-row>
       </mat-table>
-      <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage" (page)="handlePage($event)"></mat-paginator>
+      <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+         (page)="handlePage($event)"></mat-paginator>
       <!--<table class="custom-table">
          <tr>
             <th>ID</th>

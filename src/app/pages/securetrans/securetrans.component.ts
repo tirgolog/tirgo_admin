@@ -24,7 +24,7 @@ export class SecuretransComponent {
   dateSend:string = '';
   price:string = '';
   status:string = 'all';
-  saveorder:string = 'all';
+  // saveorder:string = 'all';
   typetransport:string = '';
   typecargo:string = '';
 
