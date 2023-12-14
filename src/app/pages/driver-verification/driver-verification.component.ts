@@ -6,6 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { UserComponent } from "../user/user.component";
 import { PriviewComponent } from 'src/app/components/priview/priview.component';
 import { ListService } from 'src/app/services/list.service';
+import { map } from 'rxjs';
 
 @Component({
     selector: 'app-driver-verification',
@@ -20,24 +21,23 @@ export class DriverVerificationComponent {
     editInfo: boolean = false;
     file_url: string;
     namedriver: string = '';
- 
     user: any;
     driver: any;
+    mytruck: any
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialog: MatDialog,
         private authService: AuthService,
-        private toastr: ToastrService,
         public helper: HelperService,
         public listService: ListService,
     ) {
-        console.log(data)
-        this.driver=data
+        this.driver = data
     }
 
     async ngOnInit() {
-        this.file_url = 'http://localhost:9000/tirgo/'
+        this.authService.typetruck = await this.authService.getTypeTruck().toPromise();
+        this.file_url = 'https://admin.tirgo.io/file/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
             this.user = res.data
@@ -49,9 +49,18 @@ export class DriverVerificationComponent {
         this.namedriver = this.user.name;
     }
 
+    returnNameTypeTransport(type: number) {
+        const index = this.authService.typetruck.findIndex(e => +e.id === +type)
+        if (index >= 0) {
+            return this.authService.typetruck[index].name
+        } else {
+            return 'Не выбрано'
+        }
+    }
+
     preview(image?: string): void {
         const dialog = this.dialog.open(PriviewComponent, {
-            data:image,
+            data: image,
             height: "600px",
             width: "800px",
             panelClass: 'custom-dialog-class',
@@ -62,5 +71,5 @@ export class DriverVerificationComponent {
         this.listService.verifyDriverItem(id).subscribe(res => {
             this.dialog.closeAll()
         })
-      }
+    }
 }

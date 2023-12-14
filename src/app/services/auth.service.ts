@@ -4,7 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 
 const TOKEN_KEY = 'jwttirgotoken';
-const API_URL = 'http://localhost:7790';
+const API_URL = 'https://admin.tirgo.io/api';
 
 @Injectable({
    providedIn: 'root'
@@ -14,6 +14,7 @@ export class AuthService {
    globalLoading: boolean = true;
    authenticationState = new BehaviorSubject(false);
    public currentUser: User | undefined;
+   public typetruck: any[] = [];
    public myrole: any;
    static jwt: any;
 
@@ -192,6 +193,18 @@ export class AuthService {
                return new User(res.user);
             } else {
                return false;
+            }
+         }));
+   }
+
+   getTypeTruck() {
+      const sUrl = API_URL + '/users/getTypeTruck';
+      return this.http.get<any>(sUrl)
+         .pipe(map(res => {
+            if (res.status) {
+               return res.data;
+            } else {
+               return [];
             }
          }));
    }
