@@ -14,8 +14,8 @@ import { Router } from "@angular/router";
 
 export class AuthComponent {
 
-   login: string = "mirzobobur"
-   password: string = "iEXS0RuXHx"
+   login: string = ""
+   password: string = ""
    error: boolean = false
 
    constructor(

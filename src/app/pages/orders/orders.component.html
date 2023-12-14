@@ -148,8 +148,8 @@
             row.secure_transaction ? "Да" : "Нет"
             }}</span>
           <span *ngIf="row.isMerchant">{{
-            row.isDangrousCargo ? "Да" : "Нет"
-            }}</span>
+            row.isSafe ? "Да" : "Нет"
+          }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date_create">

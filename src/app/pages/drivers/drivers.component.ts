@@ -24,7 +24,7 @@ export class DriversComponent {
    dateReg: string = '';
    dateLogin: string = '';
    name: string = '';
-
+   fin_requests = 0
    sort: string = 'id';
    reverse: boolean = true;
 
@@ -54,6 +54,7 @@ export class DriversComponent {
       this.gridOptions.suppressScrollOnNewData = true;
       this.gridOptions.resizable = true;
       this.updateListDrivers();
+      this.getReqFinance();
    }
 
    downloadFile(filename) {
@@ -195,4 +196,14 @@ export class DriversComponent {
       this.reverse = !this.reverse
       this.sort = ev.target.value;
    }
+
+   getReqFinance() {
+      this.listService.getReqFinanceDrivers().subscribe((res:any) => {
+         console.log(res);
+         if(res) {
+            
+         }
+      })
+   }
+
 }

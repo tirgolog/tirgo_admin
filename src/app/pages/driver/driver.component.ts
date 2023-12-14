@@ -31,6 +31,7 @@ export class DriverComponent {
         private toastr: ToastrService,
         public helper: HelperService,
     ) {
+        
     }
     returnAcceptOrder(items){
         let newitems = items.filter(e => e.status === 3)
@@ -44,7 +45,11 @@ export class DriverComponent {
         this.file_url = 'http://localhost:9000/tirgo/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
-            this.user = res.data
+            this.user = res.data            
+        }else {
+            this.user = this.data
+            console.log(this.user);
+            
         }
 
         this.passport_series_numbers = this.user.passport_series_numbers;

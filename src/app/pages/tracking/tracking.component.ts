@@ -43,6 +43,8 @@ export class TrackingComponent {
    }
 
    viewDriver(item:any){
+      console.log(item);
+      
       this.dialog.open(DriverComponent, {
          width: '90%',
          height: '80%',
@@ -150,9 +152,9 @@ export class TrackingComponent {
          }
       }*/
       let circleLayout;
-      if (busy === 1){
+      if (busy === 0){
          circleLayout = ymaps.templateLayoutFactory.createClass('<div class="placemark-map-busy"><span>'+item.id+'</span></div>')
-      }else if (busy === 0) {
+      }else if (busy === 1) {
          circleLayout = ymaps.templateLayoutFactory.createClass('<div class="placemark-map"><span>'+item.id+'</span></div>')
       }else if (busy === 2) {
          circleLayout = ymaps.templateLayoutFactory.createClass('<div class="placemark-map-wait"><span>'+item.id+'</span></div>')
