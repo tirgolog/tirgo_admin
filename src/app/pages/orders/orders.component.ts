@@ -89,16 +89,16 @@ export class OrdersComponent {
    statusOrderCheck(params) {
       switch (params) {
          case 0:
-            return "Ожидающий";
+           return "Ожидающий";
          case 1:
-            return "Выполняется";
+           return "Выполняется";
          case 2:
-            return "Выполнен";
+           return "Выполнен"; 
          case 3:
-            return "Отменен";
+           return "Отменен";
          default:
-            return "Не определен";
-      }
+           return "Не определен";
+       }
    }
    returnClassStatusOrder(params) {
       switch (params) {

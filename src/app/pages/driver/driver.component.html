@@ -24,7 +24,7 @@
             </div>
           </div>
         </div>
-        <div class="view__orders view__block">
+        <div class="view__orders view__block" *ngIf="user?.orders">
           <h4 class="view__title title-sec">Заказы</h4>
           <div class="view__list">
             <div class="tw-flex tw-justify-between tw-items-center">
@@ -80,13 +80,13 @@
                   class="input-edit-view"
                   type="date"
                   value="{{
-                    user.birthday ? user.birthday.split('T')[0] : '1970-01-01'
+                    user?.birthday ? user?.birthday.split('T')[0] : '1970-01-01'
                   }}"
                 />
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Гражданство</span>
-                <span *ngIf="!editInfo">{{ user.country }}</span>
+                <span *ngIf="!editInfo">{{ user?.country }}</span>
                 <input
                   *ngIf="editInfo"
                   class="input-edit-view"
@@ -96,7 +96,7 @@
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Город</span>
-                <span *ngIf="!editInfo">{{ user.city }}</span>
+                <span *ngIf="!editInfo">{{ user?.city }}</span>
                 <input
                   *ngIf="editInfo"
                   class="input-edit-view"
@@ -107,24 +107,24 @@
               <p class="tw-flex tw-justify-between">
                 <span>Дата регистрации</span>
                 <span>{{
-                  user.date_reg | formatTime : "DD MMMM YYYY в HH:mm"
+                  user?.date_reg | formatTime : "DD MMMM YYYY в HH:mm"
                 }}</span>
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Последний вход</span>
                 <span>{{
-                  user.date_last_login
-                    ? (user.date_last_login
+                  user?.date_last_login
+                    ? (user?.date_last_login
                       | formatTime : "DD MMMM YYYY в HH:mm")
                     : "Не указан"
                 }}</span>
               </p>
-              <p class="tw-flex tw-justify-between" *ngIf="user.dirty > 0">
+              <p class="tw-flex tw-justify-between" *ngIf="user?.dirty > 0">
                 <ng-container *ngIf="user.dirty < 3">
                   <span>Временная блокировка</span>
-                  <span>через {{ 3 - user.dirty }}</span>
+                  <span>через {{ 3 - user?.dirty }}</span>
                 </ng-container>
-                <ng-container *ngIf="user.dirty === 3">
+                <ng-container *ngIf="user?.dirty === 3">
                   <button
                     class="view__btn btn-green"
                     style="margin-left: 0"
@@ -136,13 +136,13 @@
               </p>
               <p class="tw-flex tw-justify-between">
                 <ng-container>
-                  <span [ngClass]="{ colorred: !user.moderation }">{{
-                    user.moderation
+                  <span [ngClass]="{ colorred: !user?.moderation }">{{
+                    user?.moderation
                       ? "Модерация пройдена"
                       : "Модерация НЕ пройдена"
                   }}</span>
                 </ng-container>
-                <ng-container *ngIf="!user.moderation">
+                <ng-container *ngIf="!user?.moderation">
                   <button
                     class="view__btn btn-green"
                     style="margin-left: 0"
@@ -183,9 +183,9 @@
               </mat-form-field>
               <p
                 class="tw-flex tw-justify-between tw-items-center images-passport"
-                *ngIf="user.files"
+                *ngIf="user?.files"
               >
-                <ng-container *ngFor="let row of user.files">
+                <ng-container *ngFor="let row of user?.files">
                   <img
                     (click)="helper.viewPhoto(row.preview)"
                     *ngIf="row.type_file === 'passport'"
@@ -196,7 +196,7 @@
               </p>
               <button
                 [disabled]="
-                  user.passport_series_numbers === passport_series_numbers
+                  user?.passport_series_numbers === passport_series_numbers
                 "
                 class="view__btn btn-green"
                 style="margin-left: 0"
@@ -217,9 +217,9 @@
               </mat-form-field>
               <p
                 class="tw-flex tw-justify-between tw-items-center images-passport"
-                *ngIf="user.files"
+                *ngIf="user?.files"
               >
-                <ng-container *ngFor="let row of user.files">
+                <ng-container *ngFor="let row of user?.files">
                   <img
                     (click)="helper.viewPhoto(row.preview)"
                     *ngIf="row.type_file === 'driver-license'"
@@ -229,7 +229,7 @@
                 </ng-container>
               </p>
               <button
-                [disabled]="user.driver_license === driver_license"
+                [disabled]="user?.driver_license === driver_license"
                 class="view__btn btn-green"
                 style="margin-left: 0"
                 (click)="saveDriverLicenseUser()"
@@ -246,15 +246,15 @@
                 <input matInput type="number" [(ngModel)]="user.merch_id" />
               </mat-form-field>
               <button
-                *ngIf="user.merch_id"
+                *ngIf="user?.merch_id"
                 class="view__btn btn-green"
                 style="margin-left: 0"
-                (click)="goToColumn(user.merch_id)"
+                (click)="goToColumn(user?.merch_id)"
               >
                 Просмотр Марчанта
               </button>
               <button
-                [disabled]="!user.merch_id"
+                [disabled]="!user?.merch_id"
                 class="view__btn btn-green"
                 style="margin-left: 0"
                 (click)="saveNewMerchantId()"
