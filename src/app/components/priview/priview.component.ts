@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 })
 export class PriviewComponent {
   image: string = '';
-file_url = 'http://localhost:9000/tirgo/'
+file_url = 'https://admin.tirgo.io/file/'
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog){
