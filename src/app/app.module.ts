@@ -199,7 +199,7 @@ const mapConfig: YaConfig = {
       ModerationConfirmListComponent,
       EditModerationComponent,
       FinRequestsComponent,
-      DriversComponent
+      DriversComponent,
       DriversVerificationComponent,
       DriverVerificationComponent,
       PriviewComponent,

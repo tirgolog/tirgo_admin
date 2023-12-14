@@ -37,7 +37,7 @@ export class DriverVerificationComponent {
     }
 
     async ngOnInit() {
-        this.file_url = 'https://admin.tirgo.io/file/'
+        this.file_url = 'http://localhost:9000/tirgo/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
             this.user = res.data
@@ -53,7 +53,7 @@ export class DriverVerificationComponent {
         const dialog = this.dialog.open(PriviewComponent, {
             data:image,
             height: "600px",
-            width: "40%",
+            width: "800px",
             panelClass: 'custom-dialog-class',
         });
     }
