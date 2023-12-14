@@ -1,6 +1,6 @@
 <main class="drivers">
    <section class="table">
-      <mat-table [dataSource]="helper.drivers">
+      <mat-table [dataSource]="drivers">
          <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
@@ -45,7 +45,7 @@
          <mat-row (click)="goToColumn(row)"
             *matRowDef="let row; columns: ['id',  'name' ,'user_id', 'phone','bank_card','bank_cardname', 'transport_registration_country', 'state_registration_truckNumber']"></mat-row>
       </mat-table>
-      <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+      <mat-paginator [length]="count" showFirstLastButtons [pageSizeOptions]="sizespage"
          (page)="handlePage($event)"></mat-paginator>
    </section>
 </main>

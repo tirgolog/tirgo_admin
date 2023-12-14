@@ -14,6 +14,8 @@ import { DriverVerificationComponent } from '../driver-verification/driver-verif
 })
 export class DriversVerificationComponent {
   drivers: any[] = [];
+  count: any;
+  loading: boolean = false;
   sizespage = [
     50, 100, 200, 500, 1000, 5000
   ]
@@ -38,19 +40,19 @@ export class DriversVerificationComponent {
   }
 
   async handlePage(e: any) {
-    this.helper.global_loading = true;
+    this.loading = true;
     let drivers = await this.listService.getAllunVerifiedDrivers().toPromise();
-    this.helper.drivers = drivers.data;
-    this.helper.drivers_count = drivers.data_count;
-    this.helper.global_loading = false;
+    this.drivers = drivers.data;
+    this.count = drivers.data_count;
+    this.loading = false;
   }
 
   async filterList() {
-    this.helper.global_loading = true;
-    let newusers = await this.listService.getAllunVerifiedDrivers().toPromise();
-    this.helper.drivers = newusers.data;
-    this.helper.drivers_count = newusers.data_count;
-    this.helper.global_loading = false;
+    this.loading  = true;
+    let drivers = await this.listService.getAllunVerifiedDrivers().toPromise();
+    this.drivers = drivers.data;
+    this.count = drivers.data_count;
+    this.loading = false;
   }
 
 }

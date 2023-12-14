@@ -1,5 +1,7 @@
-img {
-    object-fit: cover;
-    height: calc(100% - 0px);
-    width: 100%;
+.image-priview {
+    padding: 20px;
+    img {
+        object-fit: inherit;
+        width: 100%;
+    }
 }
