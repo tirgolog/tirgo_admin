@@ -198,10 +198,15 @@ export class DriversComponent {
    }
 
    getReqFinance() {
+      let finRequests = []
       this.listService.getReqFinanceDrivers().subscribe((res:any) => {
-         console.log(res);
          if(res) {
-            
+            res.data.forEach(item => {
+               if(item.status == 0) {
+                  finRequests.push(item);
+                  this.fin_requests = finRequests.length;
+               }
+            });
          }
       })
    }
