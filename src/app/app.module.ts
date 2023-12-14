@@ -116,6 +116,11 @@ import { ModerationConfirmComponent } from './pages/moderation-confirm/moderatio
 import { ModerationConfirmListComponent } from './pages/moderation/moderation-confirm-list/moderation-confirm-list.component';
 import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
 import { FinRequestsComponent } from './pages/fin-requests/fin-requests.component';
+import { DriversVerificationComponent } from './pages/drivers-verification/drivers-verification.component';
+import { DriverVerificationComponent } from './pages/driver-verification/driver-verification.component';
+import { PriviewComponent } from './components/priview/priview.component';
+import { DriverVerifedComponent } from './pages/driver-verifed/driver-verifed.component';
+import { DriverVerifyComponent } from './pages/driver-verify/driver-verify.component';
 
 
 registerLocaleData(ruLocale);
@@ -195,6 +200,11 @@ const mapConfig: YaConfig = {
       EditModerationComponent,
       FinRequestsComponent,
       DriversComponent
+      DriversVerificationComponent,
+      DriverVerificationComponent,
+      PriviewComponent,
+      DriverVerifedComponent,
+      DriverVerifyComponent,
    ],
    imports: [
       CommonModule,

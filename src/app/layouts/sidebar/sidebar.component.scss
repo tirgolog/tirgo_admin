@@ -60,11 +60,11 @@
    &__link {
       display: flex;
       align-items: center;
-
+      justify-content: start;
       height: rem(50);
       width: 100%;
 
-      padding: 0 rem(25);
+      padding: 0 rem(10);
       font-size: rem(18);
 
       transition: all 0.1s ease 0s;

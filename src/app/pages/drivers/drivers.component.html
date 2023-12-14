@@ -7,10 +7,11 @@
                matBadgePosition="after" matBadgeColor="warn" [disabled]="fin_requests == 0">
                Фин.Запросы
             </button>
-            <button class="page-header__btn btn-green" (click)="openPush()" *ngIf="authService.myrole.send_push">
+
+            <button class="page-header__btn btn-green" (click)="openPush()" *ngIf="authService?.myrole?.send_push">
                Отправить пуш всем
             </button>
-            <a (click)="goToAddDriver()" class="page-header__btn btn-green" *ngIf="authService.myrole.add_driver">
+            <a (click)="goToAddDriver()" class="page-header__btn btn-green" *ngIf="authService?.myrole?.add_driver">
                Добавить
             </a>
          </div>
