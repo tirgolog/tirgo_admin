@@ -78,6 +78,7 @@ export class CreateorderComponent {
     this.data.add_two_days = ev.checked
   }
   async addOrder(){
+    
     const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите создать заказ?', 2)
     if (confirm){
       await this.helper.loadingCreate();
@@ -94,6 +95,7 @@ export class CreateorderComponent {
       this.data.start_lng = this.citystart.split(':')[3];
       this.data.finish_lat = this.cityfinish.split(':')[2];
       this.data.finish_lng = this.cityfinish.split(':')[3];
+      
       try {
         const res = await this.authService.createOrder(this.data).toPromise()
         if (res.status){

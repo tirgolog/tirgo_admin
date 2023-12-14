@@ -1,0 +1,84 @@
+<main class="fin-request" id="main">
+  <section class="page-header">
+    <div class="page-header__top">
+      <h2 class="page-header__title title">Запрос на финансирование</h2>
+    </div>
+  </section>
+
+  <section class="table">
+
+    <mat-table [dataSource]="data">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index"> {{ row.id }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row.full_name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Тип</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.type }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.status }} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="[
+          'id',
+          'name',
+          'type',
+          'status'
+        ]"></mat-header-row>
+      <mat-row (click)="goToColumn(row.id)" *matRowDef="
+          let row;
+          columns: ['id', 'name', 'type', 'status']
+        "></mat-row>
+    </mat-table>
+  </section>
+
+</main>
+
+
+
+<ng-template #dialogRef>
+  <form #form="ngForm">
+    <mat-card>
+      <mat-card-header><span class="title"></span>
+      </mat-card-header>
+
+      <mat-card-content style="margin-top: 20px">
+        <div style="display: flex;">
+          <ul style="margin-right: 15px;">
+            <li><b>Дата:</b></li>
+            <li><b>ID водителя:</b></li>
+            <li><b>Имя:</b> </li>
+            <li><b>Тип:</b></li>
+            <li><b>Номер телефона:</b></li>
+            <li><b>Активный баланс:</b></li>
+            <li><b>Банковская карта:</b></li>
+          </ul>
+          <ul>
+            <li>23.03.2023</li>
+            <li>1</li>
+            <li>Name Nameov</li>
+            <li>Вывод средств</li>
+            <li>+998 90 999 90 90</li>
+            <li>1000$</li>
+            <li>8888 8888 8888 8888</li>
+          </ul>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [disabled]="!form.valid" style="margin-left: auto" class="btn-red" [mat-dialog-close]>
+          Закрыть
+        </button>
+        <button [disabled]="!form.valid" style="margin-left: auto" class="btn-green">
+          Завершить
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-template>

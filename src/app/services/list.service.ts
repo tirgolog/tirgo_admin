@@ -37,6 +37,7 @@ export class ListService {
       }));
   }
 
+
   getAllDrivers(from: number, limit: number, id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
     const sUrl = API_URL + '/reborn/getAllDrivers';
     const body = JSON.stringify({
@@ -94,6 +95,12 @@ export class ListService {
     const body = JSON.stringify({});
     return this.http.post<any>(sUrl, body);
   }
+
+  getReqFinanceDrivers() {
+    const sUrl = API_URL + '/users/driver/withdrawals';
+    return this.http.get<any>(sUrl);
+  }
+
   getAllUsers(from: number, limit: number, id, phone, dateReg, dateLogin, name, city, sort, revers) {
     const sUrl = API_URL + '/reborn/getAllUsers';
     const body = JSON.stringify({
@@ -310,6 +317,11 @@ export class ListService {
           return [];
         }
       }));
+  }
+
+  getOrdersByMerchant(id) {
+    const sUrl = MER_API + '/cargo/merchant?id=' + id;
+    return this.http.get<any>(sUrl);
   }
 
   getMerchantBalance(id) {

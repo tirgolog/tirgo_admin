@@ -43,6 +43,8 @@ export class TrackingComponent {
    }
 
    viewDriver(item:any){
+      console.log(item);
+      
       this.dialog.open(DriverComponent, {
          width: '90%',
          height: '80%',

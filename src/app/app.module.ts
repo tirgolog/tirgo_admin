@@ -25,7 +25,6 @@ import { PartnersComponent } from './pages/partners/partners.component'
 import { AddPartnerComponent } from './pages/add-partner/add-partner.component';
 import { AddDriverComponent } from './pages/add-driver/add-driver.component';
 import { ShippersComponent } from './pages/shippers/shippers.component';
-import { DriversComponent } from './pages/drivers/drivers.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
@@ -41,6 +40,7 @@ import { RolesComponent } from './pages/roles/roles.component';
 import { AddRoleComponent } from './pages/add-role/add-role.component';
 import { AddAdminComponent } from './pages/add-admin/add-admin.component';
 import { UserComponent } from './pages/user/user.component';
+import { DriversComponent } from './pages/drivers/drivers.component';
 import { PartnerComponent } from './pages/partner/partner.component';
 import { DriverComponent } from './pages/driver/driver.component';
 import { OrderComponent } from './pages/order/order.component';
@@ -115,6 +115,7 @@ import { ModerationComponent } from './pages/moderation/moderation.component';
 import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
 import { ModerationConfirmListComponent } from './pages/moderation/moderation-confirm-list/moderation-confirm-list.component';
 import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
+import { FinRequestsComponent } from './pages/fin-requests/fin-requests.component';
 import { DriversVerificationComponent } from './pages/drivers-verification/drivers-verification.component';
 import { DriverVerificationComponent } from './pages/driver-verification/driver-verification.component';
 import { PriviewComponent } from './components/priview/priview.component';
@@ -137,7 +138,6 @@ const mapConfig: YaConfig = {
       HomeComponent,
       UsersComponent,
       ShippersComponent,
-      DriversComponent,
       OrdersComponent,
       PushComponent,
       TransactionsComponent,
@@ -198,6 +198,8 @@ const mapConfig: YaConfig = {
       ModerationConfirmComponent,
       ModerationConfirmListComponent,
       EditModerationComponent,
+      FinRequestsComponent,
+      DriversComponent
       DriversVerificationComponent,
       DriverVerificationComponent,
       PriviewComponent,

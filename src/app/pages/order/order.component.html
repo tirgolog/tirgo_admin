@@ -1,156 +1,182 @@
 <main class="order view">
-   <section class="page-header">
-      <div class="page-header__top">
-         <h2 class="page-header__title title">Подробнее о заказе</h2>
-      </div>
-   </section>
-   <section class="view__main">
-      <div class="tw-grid tw-gap-5 tw-content-start">
-         <div class="view__informate view__block">
-            <h4 class="view__title title-sec">Информация</h4>
-            <div class="tw-grid tw-gap-5 xl:tw-grid-cols-2">
-               <div class="view__list">
-                  <p class="tw-flex tw-justify-between">
-                     <span>ID заказа:</span>
-                     <span>#{{data.id}}</span>
-                  </p>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Точка отправки заказа:</span>
-                     <span>{{data.route.from_city}}</span>
-                  </p>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Точка доставки заказа: </span>
-                     <span>{{data.route.to_city}}</span>
-                  </p>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Тип груза:</span>
-                     <span>{{helper.returnNameCargoType(data.type_cargo)}}</span>
-                  </p>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Тип транспорта:</span>
-                     <span *ngFor="let type of data.transport_types;let i=index">
-                        <span>{{i+1}}.{{helper.returnNameTypeTransport(type)}} <br> </span>
-                     </span>
-                  </p>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Размер груза:</span>
-                     <span>Д:{{data.length_box}} см. Ш: {{data.width_box}} см. В: {{data.height_box}} см.</span>
-                  </p>
-               </div>
-               <div class="view__list">
-                  <p class="tw-flex tw-justify-between">
-                     <span>Пользователь:</span>
-                     <span class="cursor-pointer" (click)="viewUser(data.userinfo.id)">{{data.userinfo.name}}</span>
-                  </p>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Вес груза: </span>
-                     <span>{{data.weight}} кг.</span>
-                  </p>
-                  <!--<p class="tw-flex tw-justify-between">
-                     <span>Безопасная сделка: </span>
-                     <span>Нет</span>
-                  </p>-->
-                  <p class="tw-flex tw-justify-between">
-                     <span>Стоимость: </span>
-                     <span class="tw-uppercase">{{data.price}} $</span>
-                  </p>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Дата оформления заказа: </span>
-                     <span>{{data.date_create | formatTime: 'DD MMMM YYYY в HH:mm'}}</span>
-                  </p>
-                  <div class="tw-flex tw-justify-between">
-                     <p>Заказ назначен на:</p>
-                     <span>{{data.date_send | formatTime: 'DD MMMM YYYY в HH:mm'}}</span>
-                  </div>
-                  <p class="tw-flex tw-justify-between">
-                     <span>Статус</span>
-                     <button>{{returnStatus(data.status)}}</button>
-                  </p>
-               </div>
+  <section class="page-header">
+    <div class="page-header__top">
+      <h2 class="page-header__title title">Подробнее о заказе</h2>
+    </div>
+  </section>
+  <section class="view__main">
+    <div class="tw-grid tw-gap-5 tw-content-start">
+      <div class="view__informate view__block">
+        <h4 class="view__title title-sec">Информация</h4>
+        <div class="tw-grid tw-gap-5 xl:tw-grid-cols-2">
+          <div class="view__list">
+            <p class="tw-flex tw-justify-between">
+              <span>ID заказа:</span>
+              <span>#{{data.id}}</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Точка отправки заказа:</span>
+              <span *ngIf="!data.isMerchant">{{data.route.from_city}}</span>
+              <span *ngIf="data.isMerchant">{{data.sendLocation}}</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Точка доставки заказа: </span>
+              <span *ngIf="!data.isMerchant">{{data.route.to_city}}</span>
+              <span *ngIf="data.isMerchant">{{data.cargoDeliveryLocation}}</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Тип груза:</span>
+              <span *ngIf="!data.isMerchant">{{helper.returnNameCargoType(data.type_cargo)}}</span>
+              <span *ngIf="data.isMerchant">{{ data.cargoType?.name }}</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Тип транспорта:</span>
+              <span *ngIf="!data.isMerchant && data.transport_types">
+                <span *ngFor="let type of data.transport_types;let i=index">
+                  <span>{{i+1}}.{{helper.returnNameTypeTransport(type)}} <br> </span>
+                </span>
+              </span>
+
+              <span *ngIf="!data.isMerchant && !data.transport_types">
+                {{ helper.returnNameTypeTransport(data.transport_type) }}
+              </span>
+              <span *ngIf="data.isMerchant">{{ data.transportType?.name }}</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Размер груза:</span>
+              <span *ngIf="!data.isMerchant">Д:{{data.length_box}} см. Ш: {{data.width_box}} см. В: {{data.height_box}}
+                см.</span>
+              <span *ngIf="data.isMerchant">Д:{{data.cargoLength}} см. Ш: {{data.cargoWidth}} см. В:
+                {{data.cargoHeight}} см.</span>
+            </p>
+          </div>
+          <div class="view__list">
+            <p class="tw-flex tw-justify-between">
+              <span>Пользователь:</span>
+              <span *ngIf="!data.isMerchant" class="cursor-pointer"
+                (click)="viewUser(data.userinfo.id)">{{data.userinfo.name}}</span>
+              <span *ngIf="data.isMerchant">{{data.merchant.companyName}}</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Вес груза: </span>
+              <span *ngIf="!data.isMerchant">{{data.weight}} кг.</span>
+              <span *ngIf="data.isMerchant">{{data.cargoWeight}} кг.</span>
+
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Безопасная сделка: </span>
+              <span *ngIf="!data.isMerchant && data.secure_transaction == 0">Нет</span>
+              <span *ngIf="!data.isMerchant && data.secure_transaction == 1">Да</span>
+              <span *ngIf="data.isMerchant && !data.isSafe">Нет</span>
+              <span *ngIf="data.isMerchant && data.isSafe">Да</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Стоимость: </span>
+              <span class="tw-uppercase" *ngIf="!data.isMerchant">{{data.price}} $</span>
+              <span class="tw-uppercase" *ngIf="data.isMerchant">{{data.offeredPrice}} $</span>
+            </p>
+            <p class="tw-flex tw-justify-between">
+              <span>Дата оформления заказа: </span>
+              <span *ngIf="!data.isMerchant">{{data.date_create | formatTime: 'DD MMMM YYYY в HH:mm'}}</span>
+              <span *ngIf="data.isMerchant">{{data.createdAt | formatTime: 'DD MMMM YYYY в HH:mm'}}</span>
+            </p>
+            <div class="tw-flex tw-justify-between">
+              <p>Заказ назначен на:</p>
+              <span *ngIf="!data.isMerchant">{{data.date_send | formatTime: 'DD MMMM YYYY в HH:mm'}}</span>
+              <span *ngIf="data.isMerchant">{{data.sendCargoDate | formatTime: 'DD MMMM YYYY'}} в
+                {{data.sendCargoTime}}</span>
             </div>
-            <div class="view__buttons">
-               <ng-container *ngIf="data.status === 1">
-                  <button class="view__btn btn-red" type="button" (click)="endOrder()">
-                     Завершить заказ
-                  </button>
-               </ng-container>
-               <ng-container *ngIf="data.status === 0">
-                  <button class="view__btn btn-red" type="button" (click)="closeOrder()">
-                     Отменить заказ
-                  </button>
-               </ng-container>
-               <ng-container *ngIf="data.status === 0">
-                  <button class="view__btn btn-green" type="button" (click)="selectdriver = !selectdriver">
-                     Назначить водителя
-                  </button>
-               </ng-container>
-               <button class="view__btn btn-yellow" type="button" (click)="close()">
-                  Закрыть
-               </button>
-            </div>
-            <span [hidden]="!selectdriver">
-               <div class="sed-driver-block" >
-                  <!-- <mat-form-field class="form__input">
-                     <mat-label>Водитель</mat-label>
-                     <input  matInput type="text" name="name" placeholder="ID водителя" [(ngModel)]="driverid" (ngModelChange)="findDriver($event)" />
-                     <div style="background-color: white; padding: 10px; z-index: 1;" *ngIf="drivers.length">
-                        <div *ngFor="let driver of drivers" style="padding: 5px;">{{ driver.id }} {{ driver.username }}</div>
-                     </div>
-                  </mat-form-field> -->
-                  <mat-form-field class="form__input">
-                     <mat-label>Водитель</mat-label>
-                     <input matInput list="drivers_list" name="drivers_list" (input)="findDriver($event)" [(ngModel)]="driverid">
-                     <datalist id="drivers_list">
-                         <ng-container *ngFor="let driver of drivers">
-                             <option [value]="driver.id">{{driver.id + ' ' + driver.phone}}</option>
-                         </ng-container>
-                     </datalist>
-                 </mat-form-field>
-                  <mat-form-field class="form__input">
-                     <mat-label>Предложенная сумма</mat-label>
-                     <input  matInput type="text" name="name" placeholder="Предложенная сумма" [(ngModel)]="price" />
-                  </mat-form-field>
-                  <button class="view__btn btn-yellow ion-ni-margin ion-no-padding" type="button" (click)="saveNewDriver()">
-                     Сохранить
-                  </button>
-               </div>
-            </span>
-            <ng-container *ngIf="data.orders_accepted.length">
-               <h4 class="view__title title-sec">Предложения</h4>
-               <mat-table [dataSource]="data.orders_accepted">
-                  <ng-container matColumnDef="id">
-                     <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
-                     <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="name">
-                     <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
-                     <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="priceorder">
-                     <mat-header-cell *matHeaderCellDef>Предлагаемая цена</mat-header-cell>
-                     <mat-cell *matCellDef="let row"> {{row.priceorder}} $ </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="status_order">
-                     <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
-                     <mat-cell *matCellDef="let row"> {{returnStatusDriver(row.status_order)}} </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="date_create_accepted">
-                     <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
-                     <mat-cell *matCellDef="let row"> {{row.date_create_accepted | formatTime: 'DD.MM.YYYY'}} </mat-cell>
-                  </ng-container>
-                  <!-- Header and Row Declarations -->
-                  <mat-header-row *matHeaderRowDef="['id', 'name', 'priceorder', 'status_order', 'date_create_accepted']"></mat-header-row>
-                  <mat-row (click)="viewUser(row.id)" *matRowDef="let row; columns: ['id', 'name', 'priceorder', 'status_order', 'date_create_accepted']"></mat-row>
-               </mat-table>
+            <p class="tw-flex tw-justify-between">
+              <span>Статус</span>
+              <button>{{returnStatus(data.status)}}</button>
+            </p>
+          </div>
+        </div>
+        <div class="view__buttons">
+          <ng-container *ngIf="data.status === 1">
+            <button class="view__btn btn-red" type="button" (click)="endOrder()">
+              Завершить заказ
+            </button>
+          </ng-container>
+          <ng-container *ngIf="data.status === 0">
+            <button class="view__btn btn-red" type="button" (click)="closeOrder()">
+              Отменить заказ
+            </button>
+          </ng-container>
+          <ng-container *ngIf="data.status === 0">
+            <button class="view__btn btn-green" type="button" (click)="selectdriver = !selectdriver">
+              Назначить водителя
+            </button>
+          </ng-container>
+          <button class="view__btn btn-yellow" type="button" (click)="close()">
+            Закрыть
+          </button>
+        </div>
+        <span [hidden]="!selectdriver">
+          <div class="sed-driver-block">
+
+            <mat-form-field class="form__input">
+              <mat-label>Водитель</mat-label>
+              <input matInput list="drivers_list" name="drivers_list" (input)="findDriver($event)"
+                [(ngModel)]="driverid">
+              <datalist id="drivers_list">
+                <ng-container *ngFor="let driver of drivers">
+                  <option [value]="driver.id">{{driver.id + ' ' + driver.phone}}</option>
+                </ng-container>
+              </datalist>
+            </mat-form-field>
+            <mat-form-field class="form__input">
+              <mat-label>Предложенная сумма</mat-label>
+              <input matInput type="text" name="name" placeholder="Предложенная сумма" [(ngModel)]="price" />
+            </mat-form-field>
+            <button class="view__btn btn-yellow ion-ni-margin ion-no-padding" type="button" (click)="saveNewDriver()">
+              Сохранить
+            </button>
+          </div>
+        </span>
+        <ng-container *ngIf="data.orders_accepted && data.orders_accepted.length">
+          <h4 class="view__title title-sec">Предложения</h4>
+          <mat-table [dataSource]="data.orders_accepted">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
             </ng-container>
-         </div>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="priceorder">
+              <mat-header-cell *matHeaderCellDef>Предлагаемая цена</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.priceorder}} $ </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status_order">
+              <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{returnStatusDriver(row.status_order)}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="date_create_accepted">
+              <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.date_create_accepted | formatTime: 'DD.MM.YYYY'}} </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="['id', 'name', 'priceorder', 'status_order', 'date_create_accepted']"></mat-header-row>
+            <mat-row (click)="viewUser(row.id)"
+              *matRowDef="let row; columns: ['id', 'name', 'priceorder', 'status_order', 'date_create_accepted']"></mat-row>
+          </mat-table>
+        </ng-container>
       </div>
-      <div class="order__map">
-         <ya-map [center]="[data.route.from_lat, data.route.from_lng]" [zoom]="12">
-            <ya-multiroute
-                    [referencePoints]="[[data.route.from_lat, data.route.from_lng], [data.route.to_lat, data.route.to_lng]]">
-            </ya-multiroute>
-         </ya-map>
-      </div>
-   </section>
+    </div>
+    <div class="order__map">
+      <ya-map *ngIf="!data.isMerchant" [center]="[data.route.from_lat, data.route.from_lng]" [zoom]="12">
+        <ya-multiroute
+          [referencePoints]="[[data.route.from_lat, data.route.from_lng], [data.route.to_lat, data.route.to_lng]]">
+        </ya-multiroute>
+      </ya-map>
+
+      <ya-map *ngIf="data.isMerchant" [center]="[data.start_lat, data.start_lng]" [zoom]="12">
+        <ya-multiroute
+                [referencePoints]="[[data.start_lat, data.start_lng], [data.finish_lat, data.finish_lng]]">
+        </ya-multiroute>
+     </ya-map>
+    </div>
+  </section>
 </main>
