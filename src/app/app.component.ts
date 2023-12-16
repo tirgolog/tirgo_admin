@@ -107,8 +107,6 @@ export class AppComponent {
                this.helper.activity = activity.data;
                this.helper.activity_count = activity.data_count;
             }
-
-
             this.authService.globalLoading = false;
 
             //this.getLocation();

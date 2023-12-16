@@ -6,7 +6,8 @@ import { ListService } from 'src/app/services/list.service';
 @Component({
   selector: 'app-fin-requests',
   templateUrl: './fin-requests.component.html',
-  styleUrls: ['./fin-requests.component.scss']
+  styleUrls: ['./fin-requests.component.scss'],
+  host: { "id": "main" }
 })
 export class FinRequestsComponent implements OnInit{
   @ViewChild("dialogRef") dialogRef: TemplateRef<any>;
@@ -33,7 +34,6 @@ export class FinRequestsComponent implements OnInit{
  }
 
   goToColumn(item) {
-    if(item.status == 0) {
       this.selectedData = item;
       const dialogRef = this.dialog.open(this.dialogRef, {
         data: '',
@@ -41,7 +41,6 @@ export class FinRequestsComponent implements OnInit{
       dialogRef.afterClosed().subscribe(() => {
         // this.getAllFinance();
       });    
-    }
   }
 
   closeRequest() {

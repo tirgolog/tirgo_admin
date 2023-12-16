@@ -1,4 +1,4 @@
-<main class="fin-request" id="main">
+<main class="fin-request">
   <section class="page-header">
     <div class="page-header__top">
       <h2 class="page-header__title title">Запрос на финансирование</h2>
@@ -9,8 +9,8 @@
 
     <mat-table [dataSource]="data">
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
-        <mat-cell *matCellDef="let row; let i = index"> {{ row.id }} </mat-cell>
+        <mat-header-cell *matHeaderCellDef>Водитель ID </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index"> {{ row.driver_id }} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
@@ -47,7 +47,7 @@
 
 
 <ng-template #dialogRef>
-  <form #form="ngForm"  *ngIf="selectedData.status == 0">
+  <form #form="ngForm">
     <mat-card>
       <mat-card-header><span class="title"></span>
       </mat-card-header>
@@ -61,7 +61,7 @@
             <li><b>Тип:</b></li>
             <li><b>Номер телефона:</b></li>
             <li><b>Активный баланс:</b></li>
-            <li><b>amount:</b></li>
+            <li><b>Запрос на снятие:</b></li>
             <li><b>Банковская карта:</b></li>
           </ul>
           <ul>
@@ -80,7 +80,7 @@
         <button [disabled]="!form.valid" style="margin-left: auto" class="btn-red" [mat-dialog-close]>
           Закрыть
         </button>
-        <button [disabled]="!form.valid" style="margin-left: auto" class="btn-green" (click)="closeRequest()">
+        <button   *ngIf="selectedData.status == 0" [disabled]="!form.valid" style="margin-left: auto" class="btn-green" (click)="closeRequest()">
           Завершить
         </button>
       </mat-card-actions>
