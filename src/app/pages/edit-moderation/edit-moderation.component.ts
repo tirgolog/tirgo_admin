@@ -80,7 +80,7 @@ export class EditModerationComponent implements OnInit {
   getBalance() {
     this.list.getMerchantBalance(this.data.id).subscribe((res) => {
       if(res.success) {
-        this.balance  = res.data.topup - res.data.withdrow
+        this.balance  = res.data.activeBalance
       }
     })
   }
