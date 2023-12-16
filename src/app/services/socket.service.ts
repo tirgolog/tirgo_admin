@@ -70,6 +70,13 @@ export class SocketService {
       });
     });
   }
+  updateFinRequests() {
+    return new Observable<any>(observer => {
+      this.socket.on('update-driver-withdraw-request', (data:any) => {
+        observer.next(data);
+      });
+    });
+  }
   logOutUser() {
     return new Observable<any>(observer => {
       this.socket.on('log-out-user', (data:any) => {

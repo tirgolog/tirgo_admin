@@ -18,6 +18,7 @@ export class TrackingComponent {
    status:number = 0;
    typecar:number = 0;
    drivers:any[]=[];
+   allDrivers: any[] = [];
    public citiesSelected: FormControl = new FormControl();
    public selectTechnicalRoomFilterCtrl: FormControl = new FormControl();
    constructor(
@@ -30,12 +31,13 @@ export class TrackingComponent {
    async ngOnInit() {
       const res = await this.listService.getAllTrackingDrivers().toPromise();
       if (res.status){
-         this.drivers = res.data
+         this.drivers = res.data;
+         this.allDrivers = res.data;
          this.isLoading = false;
       }
    }
    async findDriver(ev:any){
-      this.drivers = this.helper.drivers.filter((row:any) => {
+      this.drivers = this.allDrivers.filter((row:any) => {
          return !row.id ? row.id: row.id.toString().includes(ev.target.value) ||
          !row.name ? row.name: row.name.toLowerCase().includes(ev.target.value.toLowerCase());
       });
@@ -54,38 +56,38 @@ export class TrackingComponent {
    async selectStatus(status:number){
       this.status = status;
       if (status === 1){
-         this.drivers = this.helper.drivers.filter(item=>{
+         this.drivers = this.allDrivers.filter(item=>{
             if (item.orders) {
                return item.orders.find((e: {status: number;status_order: number;}) => e.status_order === 1 && e.status === 1)
             }
          })
       }else if (status === 2){
-         this.drivers = this.helper.drivers.filter(item=>{
+         this.drivers = this.allDrivers.filter(item=>{
             if (item.orders) {
                return item.orders.find((e: {status: number;status_order: number;}) => e.status_order === 0 && e.status === 1)
             }
          })
       }else if (status === 3){
-         this.drivers = this.helper.drivers.filter(item=>{
+         this.drivers = this.allDrivers.filter(item=>{
             if (!item.orders){
                return item
             }
          })
       }else {
-         this.drivers = this.helper.drivers
+         this.drivers = this.allDrivers
       }
       await this.onReady(this.map);
    }
    async selectTypeCar(id:number){
       this.typecar = id;
       if (id > 0){
-         this.drivers = this.helper.drivers.filter(item=>{
-            if (item.trucks && item.trucks.length){
-               return item.trucks.find((e: { type: number; }) => +e.type === +this.typecar)
+         this.drivers = this.allDrivers.filter(item=>{
+            if (item.truck_types && item.truck_types.length){
+               return item.truck_types.find((e: { type: number; }) => +e.type === +this.typecar)
             }
          })
       }else {
-         this.drivers = this.helper.drivers
+         this.drivers = this.allDrivers
       }
       await this.onReady(this.map);
    }
