@@ -34,7 +34,7 @@ export class OrderComponent {
   ) {
   }
   async ngOnInit() {
-    if (this.data.id.includes('M')) {
+    if (typeof this.data.id == 'string' && this.data.id.includes('M')) {
       const res = await this.listService.getOrdersByMerchant(this.data.merchant.id).toPromise();
       if (res.success) {
         this.data = res.data.filter(item => item.id === this.data.id)[0];        

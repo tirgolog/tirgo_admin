@@ -117,6 +117,13 @@ export class ListService {
     return this.http.get<any>(sUrl);
   }
 
+  closeReqFinanceDrivers(data) {
+    const sUrl = API_URL + '/users/verify-withdrawal/verify/'+data.id;
+    const body = JSON.stringify({
+    });
+    return this.http.patch<any>(sUrl, body);
+  }
+
   getAllUsers(from: number, limit: number, id, phone, dateReg, dateLogin, name, city, sort, revers) {
     const sUrl = API_URL + '/reborn/getAllUsers';
     const body = JSON.stringify({

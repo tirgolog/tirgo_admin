@@ -3,8 +3,8 @@
       <div class="page-header__top">
          <h2 class="page-header__title title">Водители</h2>
          <div class="page-header__actions">
-            <button routerLink="/fin-request" class="page-header__btn btn-green" matBadge="{{ fin_requests }}"
-               matBadgePosition="after" matBadgeColor="warn" [disabled]="fin_requests == 0">
+            <button routerLink="/fin-request" class="page-header__btn btn-green" [matBadgeHidden]="!fin_requests || fin_requests == 0" matBadge="{{ fin_requests }}"
+               matBadgePosition="after" matBadgeColor="warn">
                Фин.Запросы
             </button>
 

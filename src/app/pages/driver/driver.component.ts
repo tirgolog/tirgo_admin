@@ -31,7 +31,7 @@ export class DriverComponent {
         private toastr: ToastrService,
         public helper: HelperService,
     ) {
-        
+        this.user = {merch_id:''}
     }
     returnAcceptOrder(items){
         let newitems = items.filter(e => e.status === 3)
@@ -48,8 +48,6 @@ export class DriverComponent {
             this.user = res.data            
         }else {
             this.user = this.data
-            console.log(this.user);
-            
         }
 
         this.passport_series_numbers = this.user.passport_series_numbers;
