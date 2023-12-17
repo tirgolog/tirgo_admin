@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
@@ -69,10 +69,26 @@ export class ListService {
       }));
   }
 
+  editVerifyDriver(data) {
+    const sUrl = API_URL + '/users/update-verification';
+    return this.http.put<any>(sUrl, data)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  postImage(body) {
+    const sUrl = API_URL + '/users/uploadImage';
+    return this.http.post<any>(sUrl, body);
+  }
 
   verifyDriverItem(id) {
     const sUrl = API_URL + `/users/verify-driver`;
-    return this.http.patch<any>(sUrl, {id})
+    return this.http.patch<any>(sUrl, { id })
       .pipe(map(res => {
         if (res.data) {
           return res.data;
@@ -148,7 +164,6 @@ export class ListService {
     const body = JSON.stringify({});
     return this.http.post<any>(sUrl, body)
       .pipe(map(res => {
-
         if (res.data) {
           return res.data;
         } else {
