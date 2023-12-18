@@ -48,6 +48,7 @@ export class AppComponent {
             this.authService.currentUser = res;
             this.helper.roles = await this.listService.getAllRoles().toPromise()
             const index = this.helper.roles.findIndex(e => e.id === this.authService.currentUser?.role)
+            console.log(this.authService.currentUser?.role)
             this.authService.myrole = this.helper.roles[index]
             if (!this.authService.isAuthenticated()) {
                // @ts-ignore

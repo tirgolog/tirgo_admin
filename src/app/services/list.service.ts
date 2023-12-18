@@ -86,6 +86,14 @@ export class ListService {
     return this.http.post<any>(sUrl, body);
   }
 
+  delPhotoUser(file: string) {
+    const sUrl = API_URL + '/users/delPhotoUser';
+    const body = JSON.stringify({
+      filename: file
+    });
+    return this.http.post<any>(sUrl, body);
+  }
+
   verifyDriverItem(id) {
     const sUrl = API_URL + `/users/verify-driver`;
     return this.http.patch<any>(sUrl, { id })
@@ -118,7 +126,7 @@ export class ListService {
   }
 
   closeReqFinanceDrivers(data) {
-    const sUrl = API_URL + '/users/verify-withdrawal/verify/'+data.id;
+    const sUrl = API_URL + '/users/verify-withdrawal/verify/' + data.id;
     const body = JSON.stringify({
     });
     return this.http.patch<any>(sUrl, body);

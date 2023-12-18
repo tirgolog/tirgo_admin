@@ -8,12 +8,11 @@
               <div class="view__list">
                 <mat-form-field class="form__input">
                   <mat-label>ФИО</mat-label>
-                  <input matInput type="text" [(ngModel)]="this.driver.full_name" />
+                  <input matInput type="text" [(ngModel)]="this.driver.full_name"  [ngModelOptions]="{standalone: true}"/>
                 </mat-form-field>
-                <mat-form-field class="form__input">Тип транспорта
-                  <mat-label>Фото паспорта с лицом селфи
-                  </mat-label>
-                  <input matInput type="text" [(ngModel)]="this.driver.selfies_with_passport" />
+                <mat-form-field class="form__input">
+                  <mat-label>Фото паспорта с лицом селфи </mat-label>
+                  <input matInput type="text" [(ngModel)]="this.driver.selfies_with_passport"  [ngModelOptions]="{standalone: true}"/>
                   <button class="passport-button" (click)="preview(this.driver.selfies_with_passport)"> open</button>
                   <button class="file-upload-button-passport">
                     <input type="file" name="image"
@@ -23,7 +22,7 @@
                 <mat-form-field class="form__input">
                   <mat-label>Банковская карта
                   </mat-label>
-                  <input matInput type="text" [(ngModel)]="this.driver.bank_card" />
+                  <input matInput type="text" [(ngModel)]="this.driver.bank_card"  [ngModelOptions]="{standalone: true}"/>
                 </mat-form-field>
                 <div class="tw-flex tw-justify-between tw-items-center images-passport">
                   <button class="image-box">
@@ -31,8 +30,8 @@
                       Фото тех паспорта 1
                     </p>
                     <button class="file-upload-button">
-                      <input type="file" name="image"
-                        (change)="processFile($event, this.driver.techpassport_photo1, 'techpassport_photo1')" />
+                      <input type="file" name="image" 
+                        (change)="processFile($event, this.driver.techpassport_photo1, 'techpassport_photo1')"  />
                     </button>
                   </button>
                   <button class="image-box">
@@ -40,7 +39,7 @@
                       Фото тех паспорта 2
                     </p>
                     <button class="file-upload-button">
-                      <input type="file" name="image"
+                      <input type="file" name="image" 
                         (change)="processFile($event, this.driver.techpassport_photo2, 'techpassport_photo2')" />
                     </button>
                   </button>
@@ -69,7 +68,7 @@
               <div class="view__list">
                 <mat-form-field class="form__input">
                   <mat-label>Номер телефона</mat-label>
-                  <input matInput type="text" [(ngModel)]="this.driver.phone" />
+                  <input matInput type="text" [(ngModel)]="this.driver.phone"  [ngModelOptions]="{standalone: true}"/>
                 </mat-form-field>
               </div>
             </div>
@@ -79,7 +78,7 @@
               <div class="view__list">
                 <mat-form-field class="form__input">
                   <mat-label>Гос. номер Тягача </mat-label>
-                  <input matInput type="text" [(ngModel)]="this.driver.state_registration_truckNumber" />
+                  <input matInput type="text" [(ngModel)]="this.driver.state_registration_truckNumber" [ngModelOptions]="{standalone: true}" />
                 </mat-form-field>
                 <mat-form-field class="form__input">
                   <mat-label>Тип транспорта </mat-label>
@@ -120,7 +119,7 @@
               <div class="view__list">
                 <mat-form-field class="form__input">
                   <mat-label>Марка транспорта </mat-label>
-                  <input matInput type="text" [(ngModel)]="this.driver.brand_name" />
+                  <input matInput type="text" [(ngModel)]="this.driver.brand_name" [ngModelOptions]="{standalone: true}" />
                 </mat-form-field>
               </div>
             </div>
