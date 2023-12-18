@@ -2,12 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
 import { HelperService } from "../../services/helper.service";
 import { AuthService } from "../../services/auth.service";
-import { ToastrService } from "ngx-toastr";
-import { UserComponent } from "../user/user.component";
 import { PriviewComponent } from 'src/app/components/priview/priview.component';
 import { ListService } from 'src/app/services/list.service';
-import { Observable, map } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-driver-verification',
@@ -34,7 +31,7 @@ export class DriverVerificationComponent {
         public helper: HelperService,
         public listService: ListService,
     ) {
-        this.driver = data
+        this.driver = data;
     }
 
     async ngOnInit() {
@@ -80,12 +77,7 @@ export class DriverVerificationComponent {
         })
     }
 
-
-    processFile(event: any, name, field) {
-        this.selectedFile = event.target.files[0];
-        const formData = new FormData();
-        formData.append('file', this.selectedFile, this.selectedFile.name);
-        formData.append('typeImage', 'verification');
+    postImage(formData, field) {
         this.listService.postImage(formData).subscribe(res => {
             switch (field) {
                 case 'transport_front_photo':
@@ -114,5 +106,46 @@ export class DriverVerificationComponent {
                     break;
             }
         })
+    }
+
+    processFile(event: any, name, field) {
+        this.selectedFile = event.target.files[0];
+        const formData = new FormData();
+        formData.append('file', this.selectedFile, this.selectedFile.name);
+        formData.append('typeImage', 'verification');
+        this.listService.delPhotoUser(name).subscribe((responce) => {
+            if (responce.status) {
+                this.postImage(formData, field)
+                switch (field) {
+                    case 'transport_front_photo':
+                        this.driver.transport_front_photo = '';
+                        break;
+                    case 'transport_back_photo':
+                        this.driver.transport_back_photo = '';
+                        break;
+                    case 'transport_side_photo':
+                        this.driver.transport_side_photo = '';
+                        break;
+                    case 'techpassport_photo1':
+                        this.driver.techpassport_photo1 = '';
+                        break;
+                    case 'techpassport_photo2':
+                        this.driver.techpassport_photo2 = '';
+                        break;
+                    case 'transportation_license_photo':
+                        this.driver.transportation_license_photo = '';
+                        break;
+                    case 'adr_photo':
+                        this.driver.adr_photo = '';
+                        break;
+                    case 'selfies_with_passport':
+                        this.driver.selfies_with_passport = '';
+                        break;
+                }
+            } else {
+                console.log(responce)
+            }
+        })
+
     }
 }       
