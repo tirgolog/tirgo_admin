@@ -26,6 +26,8 @@ export class EditModerationComponent implements OnInit {
   transactionRequest: any[] = [];
   transaction: any;
   balance:any;
+  frozenBalance:any;
+
   sizespage = [
     50, 100, 200, 500, 1000, 5000
   ]
@@ -80,7 +82,8 @@ export class EditModerationComponent implements OnInit {
   getBalance() {
     this.list.getMerchantBalance(this.data.id).subscribe((res) => {
       if(res.success) {
-        this.balance  = res.data.activeBalance
+        this.balance  = res.data.activeBalance;
+        this.frozenBalance  = res.data.frozenBalance
       }
     })
   }
