@@ -333,12 +333,12 @@
     <div class="page-header__actions">
       <div style="text-align: center">
         <div style="font-weight: 600">Активный баланс</div>
-        <div>{{balance}}</div>
+        <div>{{balance}}$</div>
       </div>
-      <!-- <div style="text-align: center">
+      <div style="text-align: center">
         <div style="font-weight: 600">Заморожено</div>
-        <div>450$</div>
-      </div> -->
+        <div>{{frozenBalance}}$</div>
+      </div>
     </div>
   </div>
 
@@ -376,7 +376,7 @@
         <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span class="btn-red" *ngIf="row.rejected">Отклоненный</span>
-          <span class="btn-green" *ngIf="row.verified">Одобрень</span>
+          <span class="btn-green" *ngIf="row.verified">Одобрено</span>
           <span class="btn-yellow" *ngIf="!row.verified && !row.rejected">Запрос</span>
         </mat-cell>
       </ng-container>
