@@ -141,7 +141,8 @@ export class OrderComponent {
   }
   async saveNewDriver() {
     if (this.driverid !== 0 && this.price !== '') {
-      const res = await this.authService.acceptOrderDriver(this.driverid, this.price, this.data.id).toPromise();
+      const orderId = this.data.id.toString().split('M')[1] ? +this.data.id.toString().split('M')[1] : this.data.id;
+      const res = await this.authService.acceptOrderDriver(this.driverid, this.price, orderId, this.data.isMerchant).toPromise();
       console.log(res);
 
       if (res.status) {
