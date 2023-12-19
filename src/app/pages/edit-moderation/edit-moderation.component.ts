@@ -12,7 +12,7 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class EditModerationComponent implements OnInit {
   @ViewChild("dialogRef") dialogRef: TemplateRef<any>;
-
+  fileApi = 'https://merchant.tirgo.io/api/v1/file/download/'
   passportFile: FileList;
   passportNames: string[] = [];
 
@@ -82,8 +82,8 @@ export class EditModerationComponent implements OnInit {
   getBalance() {
     this.list.getMerchantBalance(this.data.id).subscribe((res) => {
       if(res.success) {
-        this.balance  = res.data.activeBalance;
-        this.frozenBalance  = res.data.frozenBalance
+        this.balance = res.data.activeBalance;
+        this.frozenBalance = res.data.frozenBalance;
       }
     })
   }
