@@ -62,6 +62,11 @@ import { DriverVerifedComponent } from './pages/driver-verifed/driver-verifed.co
 const routes: Routes = [
    {
       path: "",
+      pathMatch:'full',
+      redirectTo: 'dashboard',
+   },
+   {
+      path: "loading",
       component: LoadingComponent,
       title: "Загрузка"
    },
