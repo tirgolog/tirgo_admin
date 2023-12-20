@@ -181,37 +181,39 @@ export class EditModerationComponent implements OnInit {
   }
 
   preview(image?: string): void {
-    this.image = image;
-    const dialog = this.dialog.open(this.dialogPreview, {
-        data: image,
-        height: "600px",
-        width: "800px",
-        panelClass: 'custom-dialog-class',
-    });
-}
+    if(image) {
+      this.image = image;
+      const dialog = this.dialog.open(this.dialogPreview, {
+          data: image,
+          height: "600px",
+          width: "800px",
+          panelClass: 'custom-dialog-class',
+      });
+    }    
+    
+  }
 
-selectFile(event: any, name: string) {
-  if (name == "logo") this.selectedFileNames = event.target.files[0].name;
-  if (name == "certificate_registration")
+  selectFile(event: any, name: string) {
+  if (name == "logoFilePath") this.selectedFileNames = event.target.files[0].name;
+  if (name == "registrationCertificateFilePath")
     this.certificateNames = event.target.files[0].name;
-  if (name == "supervisor_passport")
+  if (name == "passportFilePath")
     this.passportNames = event.target.files[0].name;
   
   const file = event.target.files[0];
   const formData = new FormData();
   formData.append("file", file, file.name);
-  
-  // this.authService.fileUpload(formData).subscribe(
-  //   (response) => {
-  //     if (response) {
-  //       this.toastr.success('Файл успешно загружен')
-  //       this.data[name] = response.filename;
-  //     }
-  //   },
-  //   (error) => {
-  //       this.toastr.error(error.message)
-  //   }
-  // );
-}
+  this.authService.fileUpload(formData).subscribe(
+    (response) => {
+      if (response) {
+        this.toastr.success('Файл успешно загружен')
+        this.data[name] = response.filename;
+      }
+    },
+    (error) => {
+        this.toastr.error(error.message)
+    }
+  );
+  }
 
 }

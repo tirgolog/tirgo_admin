@@ -109,25 +109,8 @@
                 <mat-label>Телефон</mat-label>
                 <input matInput type="text" name="phoneNumbers_[i]" mask="+999999999999"
                   [(ngModel)]="data.phoneNumbers[i]" required />
-                <!-- <mat-icon matSuffix
-                  (click)="addPhone()">add</mat-icon
-                > -->
               </mat-form-field>
             </div>
-
-            <!-- <div class="dynamic-inputs" *ngIf="phone2">
-              <mat-form-field class="form__input example-full-width">
-                <mat-label>Телефон</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="phone2"
-                  mask="+999999999999"
-                  [(ngModel)]="data.phone2"
-                />
-                <mat-icon matSuffix (click)="phone2 = false">delete</mat-icon>
-              </mat-form-field>
-            </div> -->
           </div>
 
           <div class="dynamic-inputs-wrapper">
@@ -163,72 +146,43 @@
         </li>
       </ul>
       <div style="display: flex;">
-        <!-- <mat-card class="example-card" style="margin: 20px">
-          <div style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
-            <b>Логотип</b>
-            <button class="btn-green" style="height: 30px;">Изменить</button>
-          </div>
-          <button class="image-box" (click)="preview(data.logoFilePath)">
-            <img *ngIf="data.logoFilePath" mat-card-image [src]="fileApi+data.logoFilePath" alt="Photo of logo"
-              width="300">
-          </button>
-          <p *ngIf="!data.logoFilePath" style="color: red;padding: 10px"><b>Не введен</b></p>
-        </mat-card> -->
         <div class="tw-grid tw-gap-5 tw-content-start" style="display: flex;">
           <div class="view__informate view__block">
 
             <div class="view__list" style="display: flex; margin: 5px 0;">
-              <button class="image-box" (click)="preview(data.logoFilePath)" style="width: 100%;">Логотип</button>
+              <button class="image-box" (click)="preview(data.logoFilePath)" style="width: 100%;">
+                <span *ngIf="!data.logoFilePath" style="color: red;">Логотип</span> 
+                <span *ngIf="data.logoFilePath">Логотип</span> 
+              </button>
               <label for="fileInput2" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
-              <input name="logo" [(ngModel)]="data.logo" accept="image/*" type="file" id="fileInput2" class="file-input"
-                (change)="selectFile($event, 'logo')">
+              <input name="logoFilePath" accept="image/*" type="file" id="fileInput2" class="file-input"
+                (change)="selectFile($event, 'logoFilePath')">
             </div>
 
             <div class="view__list" style="display: flex; margin: 5px 0;">
-              <button class="image-box" (click)="preview(data.passportFilePath)" style="width: 100%;">Паспорт</button>
+              <button class="image-box" (click)="preview(data.passportFilePath)" style="width: 100%;"> 
+                <span *ngIf="!data.passportFilePath" style="color: red;">Паспорт</span> 
+                <span *ngIf="data.passportFilePath">Паспорт</span> 
+              </button>
               <label for="fileInput1" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
-              <input name="supervisor_passport" [(ngModel)]="data.supervisor_passport" accept="image/*" type="file"
-                id="fileInput1" class="file-input" (change)="selectFile($event, 'supervisor_passport')">
+              <input name="passportFilePath" accept="image/*" type="file"
+                id="fileInput1" class="file-input" (change)="selectFile($event, 'passportFilePath')">
             </div>
 
             <div class="view__list" style="display: flex; margin: 5px 0;">
               <button class="image-box" style="width: 100%;"
-                (click)="preview(data.registrationCertificateFilePath)">Регистрационное
-                свидетельство
+                (click)="preview(data.registrationCertificateFilePath)">
+                <span *ngIf="!data.registrationCertificateFilePath" style="color: red;">Регистрационное свидетельство</span> 
+                <span *ngIf="data.registrationCertificateFilePath">Регистрационное свидетельство</span> 
               </button>
               <label for="fileInput" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
-              <input name="certificate_registration" [(ngModel)]="data.certificate_registration" accept="image/*"
-                type="file" id="fileInput" class="file-input" (change)="selectFile($event, 'certificate_registration')">
+              <input name="registrationCertificateFilePath"  accept="image/*"
+                type="file" id="fileInput" class="file-input" (change)="selectFile($event, 'registrationCertificateFilePath')">
             </div>
 
           </div>
         </div>
-        <!-- <mat-card class="example-card" style="margin: 20px">
-          <div style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
-            <b>Паспорт</b>
-            <button class="btn-green" style="height: 30px;">Изменить</button>
-          </div>
-          <button class="image-box" (click)="preview(data.passportFilePath)">
-            <img *ngIf="data.passportFilePath" mat-card-image [src]="fileApi+data.passportFilePath"
-              alt="Photo of passport" width="300">
-          </button>
-          <p *ngIf="!data.passportFilePath" style="color: red;padding: 10px"><b>Не введен</b></p>
-        </mat-card> -->
-        <!-- <mat-card class="example-card" style="margin: 20px">
-          <div style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
-            <b>Регистрационное свидетельство</b>
-            <div class="custom-file-upload">
-              <label for="fileInput" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
-              <input name="certificate_registration" [(ngModel)]="data.certificate_registration" accept="image/*"
-                type="file" id="fileInput" class="file-input" (change)="selectFile($event, 'certificate_registration')">
-            </div>
-          </div>
-          <button class="image-box" (click)="preview(data.registrationCertificateFilePath)">
-            <img *ngIf="data.registrationCertificateFilePath" mat-card-image
-              [src]="fileApi+data.registrationCertificateFilePath" alt="Photo of `registration certificate" width="300">
-          </button>
-          <p *ngIf="!data.registrationCertificateFilePath && !certificateNames" style="color: red;padding: 10px"><b>Не введен</b></p>
-        </mat-card> -->
+     
       </div>
 
     </form>
@@ -322,6 +276,6 @@
 
 <ng-template #dialogPreview>
   <div class="image-priview">
-    <img [src]="image?fileApi+image:'https://fireflysemantics.github.io/images/macro-1452987_1920.jpg'" alt="" />
+    <img [src]="fileApi+image" alt="" />
   </div>
 </ng-template>
