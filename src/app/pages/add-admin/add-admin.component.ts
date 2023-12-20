@@ -48,7 +48,7 @@ export class AddAdminComponent {
       this.password = new Array(10).fill("0123456789ABCDEFGHKLMNPQRSTUVWXYZabcdefghikmnpqrstuvwxyz").map(x => (function(chars) { let umax = Math.pow(2, 32), r = new Uint32Array(1), max = umax - (umax % chars.length); do { crypto.getRandomValues(r); } while(r[0] > max); return chars[r[0] % chars.length]; })(x)).join('');
    }
    async addUser(){
-      if (!this.name.length || !this.username.length || !this.password.length || !this.phone.length){
+      if (!this.name || !this.username || !this.password || !this.phone){
          await this.helper.openDialogConfirm('Ошибка', 'Не все поля заполнены корректно', 1)
       }else {
          const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите сохранить данного пользователя?', 2)

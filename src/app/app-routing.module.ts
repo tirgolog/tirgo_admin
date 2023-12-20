@@ -21,7 +21,6 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { CitysComponent } from './pages/citys/citys.component';
 import { CountriesComponent } from './pages/countries/countries.component';
 import { DriverComponent } from './pages/driver/driver.component';
-
 import { DriversComponent } from './pages/drivers/drivers.component';
 import { HomeComponent } from './pages/home/home.component';
 import { OrderComponent } from './pages/order/order.component';
