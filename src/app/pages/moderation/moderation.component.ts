@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { HelperService } from 'src/app/services/helper.service';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./moderation.component.scss']
 })
 export class ModerationComponent implements OnInit {
+
   id: string = '';
   phone: string = '';
   dateReg: string = '';

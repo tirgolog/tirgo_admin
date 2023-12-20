@@ -31,3 +31,41 @@
   // .mat-form-field {
   //   width: 100%;
   // }
+
+  .image-priview {
+    padding: 20px;
+    img {
+        object-fit: inherit;
+        width: 100%;
+    }
+}
+
+.custom-file-upload {
+  display: inline-block;
+  position: relative;
+}
+
+.custom-file-label {
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: #fff;
+  border: 1px solid #4CAF50;
+  border-radius: 5px;
+}
+
+/* Add some styles when the label is hovered over */
+.custom-file-label:hover {
+  background-color: #45a049;
+}
+
+/* Add some styles when the label is active (clicked) */
+.custom-file-label:active {
+  background-color: #3d8b40;
+}
+
+/* Hide the original file input button */
+.file-input {
+  display: none;
+}

@@ -79,21 +79,31 @@
       
     </ul>
 
-     <ul class="info-wrapper">
-      <li class="info info-file" >
-        <div class="info-label">Лого:</div>
-        <a class="btn-green"> Посмотреть </a>
-      </li>
+    <div class="tw-grid tw-gap-5 tw-content-start" style="display: flex;">
+      <div class="view__informate view__block">
 
-      <li class="info info-file">
-        <div class="info-label">Свидетельство о регистрации:</div>
-        <a class="btn-green"> Посмотреть </a>
-      </li>
+        <div class="view__list" style="display: flex; margin: 5px 0;">
+          <button class="image-box" (click)="preview(data.logoFilePath)" style="width: 100%;">Логотип</button>
+        </div>
 
-      <li class="info info-file">
-        <div class="info-label">Паспорт руководителя:</div>
-        <a class="btn-green"> Посмотреть </a>
-      </li>
-    </ul> 
+        <div class="view__list" style="display: flex; margin: 5px 0;">
+          <button class="image-box" (click)="preview(data.passportFilePath)" style="width: 100%;">Паспорт</button>
+        </div>
+
+        <div class="view__list" style="display: flex; margin: 5px 0;">
+          <button class="image-box" style="width: 100%;"
+            (click)="preview(data.registrationCertificateFilePath)">Регистрационное
+            свидетельство
+          </button>
+        </div>
+
+      </div>
+    </div>
   </section>
 </main>
+
+<ng-template #dialogPreview>
+  <div class="image-priview">
+    <img [src]="image?fileApi+image:'https://fireflysemantics.github.io/images/macro-1452987_1920.jpg'" alt="" />
+  </div>
+</ng-template>

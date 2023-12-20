@@ -118,7 +118,7 @@ export class OrdersComponent {
       case 2:
         return "Выполнен";
       case 3:
-        return "Завершень";
+        return "Завершен";
       case 4:
         return "Отменен";
       default:
