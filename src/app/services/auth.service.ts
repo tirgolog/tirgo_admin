@@ -22,6 +22,11 @@ export class AuthService {
       private http: HttpClient,
    ) { }
 
+   fileUpload(data: any) {
+      const sUrl = 'https://merchant.tirgo.io/api/v1/file/upload';
+      return this.http.post<any>(sUrl, data);
+   }
+
    loginAdmin(name: string, password: string) {
       // AuthService.jwt = localStorage.getItem(TOKEN_KEY)
       const sUrl = API_URL + '/admin/loginAdmin';

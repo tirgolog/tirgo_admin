@@ -2,6 +2,8 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { PriviewComponent } from 'src/app/components/priview/priview.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { ListService } from 'src/app/services/list.service';
 
@@ -12,7 +14,10 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class EditModerationComponent implements OnInit {
   @ViewChild("dialogRef") dialogRef: TemplateRef<any>;
-  fileApi = 'https://merchant.tirgo.io/api/v1/file/download/'
+  @ViewChild("dialogPreview") dialogPreview: TemplateRef<any>;
+
+  fileApi = 'https://merchant.tirgo.io/api/v1/file/download/';
+  selectedFileNames:any;
   passportFile: FileList;
   passportNames: string[] = [];
 
@@ -27,6 +32,7 @@ export class EditModerationComponent implements OnInit {
   transaction: any;
   balance:any;
   frozenBalance:any;
+  image:any;
 
   sizespage = [
     50, 100, 200, 500, 1000, 5000
@@ -37,7 +43,8 @@ export class EditModerationComponent implements OnInit {
     private list: ListService,
     public helper: HelperService,
     private dialog: MatDialog,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) { }
   ngOnInit(): void {
     this.data = { supervisor_passport: '', certificate_registration: '' }
@@ -127,6 +134,8 @@ export class EditModerationComponent implements OnInit {
   goToColumn(item) {
     if (!item.verified && !item.rejected) {
       this.transaction = item;
+      console.log(this.transaction);
+      
       const dialogRef = this.dialog.open(this.dialogRef, {
         data: item,
       });
@@ -170,4 +179,39 @@ export class EditModerationComponent implements OnInit {
   removeItem(i) {
     this.data.bankAccounts.splice(1,i);
   }
+
+  preview(image?: string): void {
+    this.image = image;
+    const dialog = this.dialog.open(this.dialogPreview, {
+        data: image,
+        height: "600px",
+        width: "800px",
+        panelClass: 'custom-dialog-class',
+    });
+}
+
+selectFile(event: any, name: string) {
+  if (name == "logo") this.selectedFileNames = event.target.files[0].name;
+  if (name == "certificate_registration")
+    this.certificateNames = event.target.files[0].name;
+  if (name == "supervisor_passport")
+    this.passportNames = event.target.files[0].name;
+  
+  const file = event.target.files[0];
+  const formData = new FormData();
+  formData.append("file", file, file.name);
+  
+  // this.authService.fileUpload(formData).subscribe(
+  //   (response) => {
+  //     if (response) {
+  //       this.toastr.success('Файл успешно загружен')
+  //       this.data[name] = response.filename;
+  //     }
+  //   },
+  //   (error) => {
+  //       this.toastr.error(error.message)
+  //   }
+  // );
+}
+
 }

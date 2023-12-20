@@ -163,28 +163,72 @@
         </li>
       </ul>
       <div style="display: flex;">
-        <mat-card class="example-card" style="margin: 20px; margin-left: 0;">
-          <div style="padding: 10px;"> <b>Логотип</b> </div>
-          <img *ngIf="data.logoFilePath" mat-card-image [src]="fileApi+data.logoFilePath" alt="Photo of logo"
-            width="300">
+        <!-- <mat-card class="example-card" style="margin: 20px">
+          <div style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
+            <b>Логотип</b>
+            <button class="btn-green" style="height: 30px;">Изменить</button>
+          </div>
+          <button class="image-box" (click)="preview(data.logoFilePath)">
+            <img *ngIf="data.logoFilePath" mat-card-image [src]="fileApi+data.logoFilePath" alt="Photo of logo"
+              width="300">
+          </button>
           <p *ngIf="!data.logoFilePath" style="color: red;padding: 10px"><b>Не введен</b></p>
-        </mat-card>
+        </mat-card> -->
+        <div class="tw-grid tw-gap-5 tw-content-start" style="display: flex;">
+          <div class="view__informate view__block">
 
-        <mat-card class="example-card" style="margin: 20px">
-          <div style="padding: 10px;"> <b>Паспорт</b> </div>
-          <img *ngIf="data.passportFilePath" mat-card-image [src]="fileApi+data.passportFilePath"
-            alt="Photo of passport" width="300">
+            <div class="view__list" style="display: flex; margin: 5px 0;">
+              <button class="image-box" (click)="preview(data.logoFilePath)" style="width: 100%;">Логотип</button>
+              <label for="fileInput2" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
+              <input name="logo" [(ngModel)]="data.logo" accept="image/*" type="file" id="fileInput2" class="file-input"
+                (change)="selectFile($event, 'logo')">
+            </div>
+
+            <div class="view__list" style="display: flex; margin: 5px 0;">
+              <button class="image-box" (click)="preview(data.passportFilePath)" style="width: 100%;">Паспорт</button>
+              <label for="fileInput1" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
+              <input name="supervisor_passport" [(ngModel)]="data.supervisor_passport" accept="image/*" type="file"
+                id="fileInput1" class="file-input" (change)="selectFile($event, 'supervisor_passport')">
+            </div>
+
+            <div class="view__list" style="display: flex; margin: 5px 0;">
+              <button class="image-box" style="width: 100%;"
+                (click)="preview(data.registrationCertificateFilePath)">Регистрационное
+                свидетельство
+              </button>
+              <label for="fileInput" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
+              <input name="certificate_registration" [(ngModel)]="data.certificate_registration" accept="image/*"
+                type="file" id="fileInput" class="file-input" (change)="selectFile($event, 'certificate_registration')">
+            </div>
+
+          </div>
+        </div>
+        <!-- <mat-card class="example-card" style="margin: 20px">
+          <div style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
+            <b>Паспорт</b>
+            <button class="btn-green" style="height: 30px;">Изменить</button>
+          </div>
+          <button class="image-box" (click)="preview(data.passportFilePath)">
+            <img *ngIf="data.passportFilePath" mat-card-image [src]="fileApi+data.passportFilePath"
+              alt="Photo of passport" width="300">
+          </button>
           <p *ngIf="!data.passportFilePath" style="color: red;padding: 10px"><b>Не введен</b></p>
-
-        </mat-card>
-
-        <mat-card class="example-card" style="margin: 20px">
-          <div style="padding: 10px;"> <b>Регистрационное свидетельство</b> </div>
-          <img *ngIf="data.registrationCertificateFilePath" mat-card-image
-            [src]="fileApi+data.registrationCertificateFilePath" alt="Photo of `registration Certificate" width="300">
-          <p *ngIf="!data.registrationCertificateFilePath" style="color: red;padding: 10px"><b>Не введен</b></p>
-
-        </mat-card>
+        </mat-card> -->
+        <!-- <mat-card class="example-card" style="margin: 20px">
+          <div style="padding: 10px; display: flex; align-items: center; justify-content: space-between;">
+            <b>Регистрационное свидетельство</b>
+            <div class="custom-file-upload">
+              <label for="fileInput" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
+              <input name="certificate_registration" [(ngModel)]="data.certificate_registration" accept="image/*"
+                type="file" id="fileInput" class="file-input" (change)="selectFile($event, 'certificate_registration')">
+            </div>
+          </div>
+          <button class="image-box" (click)="preview(data.registrationCertificateFilePath)">
+            <img *ngIf="data.registrationCertificateFilePath" mat-card-image
+              [src]="fileApi+data.registrationCertificateFilePath" alt="Photo of `registration certificate" width="300">
+          </button>
+          <p *ngIf="!data.registrationCertificateFilePath && !certificateNames" style="color: red;padding: 10px"><b>Не введен</b></p>
+        </mat-card> -->
       </div>
 
     </form>
@@ -257,10 +301,15 @@
   </section>
 </main>
 
+
 <ng-template #dialogRef>
   <form #form="ngForm">
     <mat-card style="padding: 10px">
-      <mat-card-header style="padding-bottom: 20px"><span class="title">Пополнить баланс</span>
+      <mat-card-header style="padding-bottom: 20px">
+        <span class="title">
+          <span *ngIf="transaction.transactionType == 'topup'">Пополнить баланс</span>
+          <span *ngIf="transaction.transactionType == 'withdrow'">Вывод стредств</span>
+        </span>
       </mat-card-header>
       <mat-card-actions>
         <button (click)="verifyTransaction(transaction.id)" style="margin-left: auto"
@@ -269,4 +318,10 @@
       </mat-card-actions>
     </mat-card>
   </form>
+</ng-template>
+
+<ng-template #dialogPreview>
+  <div class="image-priview">
+    <img [src]="image?fileApi+image:'https://fireflysemantics.github.io/images/macro-1452987_1920.jpg'" alt="" />
+  </div>
 </ng-template>
