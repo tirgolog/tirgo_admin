@@ -140,10 +140,10 @@ export class AuthService {
       });
       return this.http.post<any>(sUrl, body);
    }
-   acceptOrderDriver(userid: number, price: string, orderid: number) {
+   acceptOrderDriver(userid: number, price: string, orderid: number, isMerchant: boolean) {
       const sUrl = API_URL + '/admin/acceptOrderDriver';
       const body = JSON.stringify({
-         userid, price, orderid
+         userid, price, orderid, isMerchant
       });
       return this.http.post<any>(sUrl, body);
    }
