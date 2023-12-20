@@ -36,7 +36,7 @@ export class AppComponent {
          if (res) {
             await this.checkSession();
             this.authService.globalLoading = false;
-            this.router.navigate(['moderation/14']);
+            this.router.navigate(['dashboard']);
 
          } else {
            this.router.navigate(['auth']);
