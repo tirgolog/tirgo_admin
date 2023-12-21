@@ -22,7 +22,7 @@ FROM nginx:alpine
 ARG PROJECT_NAME=admin-ui
 
 # Set the project-specific Nginx configuration directory
-ARG NGINX_CONF_DIR=/etc/nginx/conf.d/${PROJECT_NAME}
+ARG NGINX_CONF_DIR=/etc/nginx/conf.d/admin-ui
 
 # Remove default Nginx configuration
 RUN rm -rf /etc/nginx/conf.d/default.conf
@@ -34,7 +34,7 @@ RUN mkdir -p ${NGINX_CONF_DIR}
 COPY nginx/nginx.conf ${NGINX_CONF_DIR}/
 
 # Copy the built app from the build image
-COPY --from=build /usr/share/nginx/html/${PROJECT_NAME} /usr/share/nginx/html/${PROJECT_NAME}
+COPY --from=build /usr/share/nginx/html/admin-ui /usr/share/nginx/html/admin-ui
 
 # Expose port 80
 EXPOSE 80
