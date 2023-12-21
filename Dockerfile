@@ -5,6 +5,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
+# Debug: List the files in the current directory
+RUN ls -al
+
 RUN npm install
 
 COPY . .
