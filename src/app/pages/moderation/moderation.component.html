@@ -61,7 +61,7 @@
     <mat-table [dataSource]="helper.merchants">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
-        <mat-cell *matCellDef="let row; let i = index"> {{ i + 1 }} </mat-cell>
+        <mat-cell *matCellDef="let row; let i = index"> {{ row.id }} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>

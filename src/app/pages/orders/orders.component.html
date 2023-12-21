@@ -88,7 +88,8 @@
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
         <mat-cell *matCellDef="let row" [class]="!row.isMerchant ? returnClassStatusOrder(row.status) : returnClassStatusMerchantOrder(row.status)">
-          <span>{{statusOrderCheck(row.status)}}</span>
+          <span *ngIf="!row.isMerchant">{{statusOrderCheck(row.status)}}</span>
+          <span *ngIf="row.isMerchant">{{statusMerchantOrderCheck(row.status)}}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="type_cargo">
