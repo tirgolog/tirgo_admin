@@ -36,6 +36,6 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ SERVER_IP }} "cd ../../ && docker-compose down"
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ SERVER_IP }} "cd ../../ && docker-compose pull"
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ SERVER_IP }} "cd ../../ && docker-compose up -d"
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.SERVER_IP }} "cd ../../ && docker-compose down"
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.SERVER_IP }} "cd ../../ && docker-compose pull"
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.SERVER_IP }} "cd ../../ && docker-compose up -d"
