@@ -28,7 +28,7 @@ RUN rm -rf /etc/nginx/conf.d/default.conf
 RUN mkdir -p ${NGINX_CONF_DIR}
 
 # Copy the custom Nginx configuration for the specific project
-COPY nginx/${PROJECT_NAME}.conf ${NGINX_CONF_DIR}/
+COPY nginx/nginx.conf ${NGINX_CONF_DIR}/
 
 # Copy the built app from the build image
 COPY --from=build /usr/share/nginx/html/${PROJECT_NAME} /usr/share/nginx/html/${PROJECT_NAME}
