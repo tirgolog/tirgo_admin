@@ -157,6 +157,7 @@ export class EditModerationComponent implements OnInit {
   verifyTransaction(id) {
     this.list.verifyTransaction(id).subscribe((res) => {
       if (res) {
+        this.getBalance();
         this.dialog.closeAll();
         this.toastr.success('Успешно завершено')
       }
