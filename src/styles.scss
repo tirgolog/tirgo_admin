@@ -2,22 +2,22 @@
 
 @include mat.core();
 
-$admin-ui-primary: mat.define-palette(mat.$indigo-palette);
-$admin-ui-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$tirgo-admin-primary: mat.define-palette(mat.$indigo-palette);
+$tirgo-admin-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
-$admin-ui-warn: mat.define-palette(mat.$red-palette);
+$tirgo-admin-warn: mat.define-palette(mat.$red-palette);
 
-$admin-ui-theme: mat.define-light-theme(
+$tirgo-admin-theme: mat.define-light-theme(
    (
       color: (
-         primary: $admin-ui-primary,
-         accent: $admin-ui-accent,
-         warn: $admin-ui-warn,
+         primary: $tirgo-admin-primary,
+         accent: $tirgo-admin-accent,
+         warn: $tirgo-admin-warn,
       ),
    )
 );
 
-@include mat.all-component-themes($admin-ui-theme);
+@include mat.all-component-themes($tirgo-admin-theme);
 
 @tailwind base;
 @tailwind components;
