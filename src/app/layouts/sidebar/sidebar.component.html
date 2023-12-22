@@ -6,7 +6,7 @@
    </div>
    <nav class="sidebar__menu menu" data-spollers>
       <ul class="menu__list" *ngIf="authService.myrole">
-         <li class="menu__item">
+         <li class="menu__item" *ngIf="authService.user_type==3">
             <a
                routerLink="/dashboard"
                routerLinkActive="_active"
@@ -41,7 +41,7 @@
                <span>Администраторы</span>
             </a>
          </li>
-         <li class="menu__item">
+         <li class="menu__item" *ngIf="authService.user_type==3">
             <a
                     routerLink="/securetrans"
                     routerLinkActive="_active"
@@ -63,7 +63,7 @@
                <span>Клиенты</span>
             </button>
          </li>
-         <li class="menu__item"  *ngIf="authService.myrole.drivers">
+         <li class="menu__item" *ngIf="authService.myrole.drivers&&authService.user_type==3">
             <button
                routerLink="/drivers"
                routerLinkActive="_active"
@@ -74,7 +74,18 @@
                <span>Водители</span>
             </button>
          </li>
-         <li class="menu__item" *ngIf="authService.myrole.drivers">
+         <li class="menu__item"  *ngIf="authService.myrole.drivers &&authService.user_type==4">
+            <button
+               routerLink="/agent-drivers"
+               routerLinkActive="_active"
+               class="menu__link"
+               (click)="closeMenu()"
+            >
+               <i class="icm-pilot"></i>
+               <span>Водители</span>
+            </button>
+         </li>
+         <li class="menu__item" *ngIf="authService.myrole.drivers&&authService.user_type==3">
             <a
                     routerLink="/archive"
                     routerLinkActive="_active"
@@ -85,7 +96,7 @@
                <span>Архивные пользователи</span>
             </a>
          </li>
-         <li class="menu__item">
+         <li class="menu__item" *ngIf="authService.user_type==3">
             <a
                     routerLink="/moderation"
                     routerLinkActive="_active"
@@ -129,7 +140,7 @@
                <span>Трекинг</span>
             </a>
          </li>
-         <li class="menu__item" *ngIf="authService.myrole.exchangerate">
+         <li class="menu__item" *ngIf="authService.myrole.exchangerate&&authService.user_type==3">
             <a
                routerLink="/exchangerate"
                routerLinkActive="_active"
@@ -165,6 +176,14 @@
                      Промо-коды
                   </a>
                </li>-->
+               <li class="sub-menu__item">
+                  <a
+                     routerLink="/subcription-types"
+                     class="sub-menu__link"
+                     (click)="closeMenu()"
+                     > Типы подписки </a
+                  >
+               </li>
                <li class="sub-menu__item">
                   <a
                      routerLink="/car-types"
@@ -226,7 +245,7 @@
                <span>Отзывы</span>
             </a>
          </li>-->
-         <li class="menu__item">
+         <li class="menu__item" *ngIf="authService.user_type==3">
             <button
                [disabled]="authService.globalLoading"
                routerLink="/chat"
@@ -262,7 +281,7 @@
             </a>
          </li>-->
 
-         <li class="menu__item" *ngIf="authService.myrole.drivers">
+         <li class="menu__item" *ngIf="authService.myrole.drivers&&authService.user_type==3">
             <button
                routerLink="/drivers-verification"
                routerLinkActive="_active"
@@ -274,7 +293,7 @@
             </button>
          </li>
 
-         <li class="menu__item" *ngIf="authService.myrole.drivers">
+         <li class="menu__item" *ngIf="authService.myrole.drivers&&authService.user_type==3">
             <button
                routerLink="/drivers-verified"
                routerLinkActive="_active"

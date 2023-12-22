@@ -33,6 +33,7 @@ export class AppComponent {
       this.spoller.initSpollers()
       this.authService.checkToken();
       this.authService.authenticationState.subscribe(async res => {
+         console.log(res)
          if (res) {
             await this.checkSession();
             this.authService.globalLoading = false;
@@ -46,12 +47,10 @@ export class AppComponent {
       await this.authService.checkSession().toPromise().then(async (res) => {
          if (res) {
             this.authService.currentUser = res;
+            this.authService.user_type = res.user_type;
             this.helper.roles = await this.listService.getAllRoles().toPromise()
             const index = this.helper.roles.findIndex(e => e.id === this.authService.currentUser?.role)
-            console.log(this.authService.currentUser?.role, 'myrole')
             this.authService.myrole = this.helper.roles[index]
-            console.log(this.authService.myrole, 'myrole2')
-
             if (!this.authService.isAuthenticated()) {
                // @ts-ignore
                this.authService.authenticationState.next(true);
@@ -85,6 +84,12 @@ export class AppComponent {
             if (drivers.status) {
                this.helper.drivers = drivers.data; 
                this.helper.drivers_count = drivers.data_count;
+            }
+
+            const agent_drivers = await this.listService.getAllDriversAgent(0, 50, this.authService.currentUser.id).toPromise();
+            if (agent_drivers.status) {
+               this.helper.agent_drivers = agent_drivers.data; 
+               this.helper.agent_drivers_count = agent_drivers.data_count;
             }
 
             const driversList = await this.listService.getAllDriversList(null, null, null, null, null, null, null).toPromise();

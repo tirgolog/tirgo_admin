@@ -21,6 +21,10 @@ export class HelperService {
    public driversList: any[] = [];
    public drivers_count: number = 0;
 
+   public agent_drivers: any[] = [];
+   public agent_driversList: any[] = [];
+   public agent_drivers_count: number = 0;
+
    public users: any[] = [];
    public users_count: number = 0;
 

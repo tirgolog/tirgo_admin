@@ -1,0 +1,78 @@
+<main class="add-driver">
+    <section class="page-header">
+       <div class="page-header__top">
+          <h2 class="page-header__title title">Водители: Добавление</h2>
+       </div>
+    </section>
+    <section class="page-form">
+       <div class="add-driver__main">
+          <ng-container>
+             <h3>Добавьте информацию о водителе</h3>
+             <article class="add-driver__steps">
+                <mat-form-field class="form__input">
+                   <mat-label>ФИО</mat-label>
+                   <input matInput required [(ngModel)]="dataUser.name"/>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="form__input">
+                   <mat-label>Гражданство</mat-label>
+                   <!--<input matInput name="cities_start" (input)="findCity($event)" [(ngModel)]="city" (change)="saveCity($event)">-->
+                   <mat-select [formControl]="citiesSelected" placeholder="Гражданство"  #singleSelect  >
+                      <mat-option>
+                         <ngx-mat-select-search (input)="findCity($event)" [placeholderLabel]="'Поиск города/страны'"  [formControl]="selectTechnicalRoomFilterCtrl"></ngx-mat-select-search>
+                      </mat-option>
+                      <ng-container *ngFor="let city of findList">
+                         <mat-option *ngIf="city.data.city || city.data.region" [value]="city.data">
+                            {{(city.data.city ? city.data.city: city.data.region) + ', ' + city.data.country}}
+                         </mat-option>
+                      </ng-container>
+                   </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="form__input">
+                   <mat-label>Дата рождения</mat-label>
+                   <input matInput placeholder="Выберите дату рождения" [(ngModel)]="dataUser.birthday" [matDatepicker]="basicDatepicker" />
+                   <mat-datepicker-toggle matIconSuffix [for]="basicDatepicker">
+                      <i class="icm-calendar" matDatepickerToggleIcon></i>
+                   </mat-datepicker-toggle>
+                   <mat-datepicker
+                           #basicDatepicker
+                           [(ngModel)]="dataUser.birthday"
+                   ></mat-datepicker>
+                </mat-form-field>
+                <br>
+                <ng-container *ngIf="citiesSelected.value">
+                   <mat-form-field class="form__input">
+                      <mat-label>Телефон</mat-label>
+                      <input matInput required type="text" inputmode="tel" name="phone" [prefix]="getActualPrefix()" [mask]="getActualMask()" [(ngModel)]="dataUser.phone" />
+                   </mat-form-field>
+                   <br>
+                   <mat-form-field class="form__input">
+                      <mat-label>E-mail</mat-label>
+                      <input matInput required type="text" name="email" [(ngModel)]="dataUser.email" />
+                   </mat-form-field>
+                   <mat-form-field class="form__input form__select">
+                    <mat-label>Тип транспорта</mat-label>
+                    <mat-select disableRipple required [(ngModel)]="dataUser.type">
+                       <mat-option>Выберите тип транспорта</mat-option>
+                       <mat-option *ngFor="let row of helper.typetruck" [value]="row.id">{{row.name}}</mat-option>
+                    </mat-select>
+                 </mat-form-field>
+
+                 <mat-form-field class="form__input form__select">
+                  <mat-label>Тип подписки</mat-label>
+                  <mat-select disableRipple required [(ngModel)]="dataUser.subscription_id">
+                     <mat-option>Выберите тип транспорта</mat-option>
+                     <mat-option *ngFor="let row of subscription" [value]="row.id">{{row.name}}</mat-option>
+                  </mat-select>
+               </mat-form-field>
+                </ng-container>
+                <button  class="btn-red" type="button" (click)="addUser()" [disabled]="dataUser.name === '' || dataUser.phone.length < +count_number" >
+                   Проверить водителя
+                </button>
+             </article>
+          </ng-container>
+       </div>
+    </section>
+ </main>
+ 

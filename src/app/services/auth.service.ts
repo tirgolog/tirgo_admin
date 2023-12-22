@@ -14,6 +14,7 @@ export class AuthService {
    globalLoading: boolean = true;
    authenticationState = new BehaviorSubject(false);
    public currentUser: User | undefined;
+   public user_type:  any;
    public typetruck: any[] = [];
    public myrole: any;
    static jwt: any;
@@ -100,10 +101,10 @@ export class AuthService {
       });
       return this.http.post<any>(sUrl, body);
    }
-   addAdmin(name: string, role: number, username: string, password: string, phone: string, editaid: number) {
+   addAdmin(name: string, role: number, username: string, password: string, phone: string, editaid: number, agent_balance?:string) {
       const sUrl = API_URL + '/admin/addAdmin';
       const body = JSON.stringify({
-         name, role, username, password, phone, editaid
+         name, role, username, password, phone, editaid, agent_balance
       });
       return this.http.post<any>(sUrl, body);
    }
@@ -253,6 +254,11 @@ export class AuthService {
          data
       });
       return this.http.post<any>(sUrl, body);
+   }
+
+   addTypeSubscription(data: any) {
+      const sUrl = API_URL + '/admin/subscription';
+      return this.http.post<any>(sUrl, data);
    }
    getUserInfo(id: any) {
       const sUrl = API_URL + '/reborn/getUserInfo';

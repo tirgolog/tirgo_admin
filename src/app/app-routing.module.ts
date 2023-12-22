@@ -57,6 +57,8 @@ import { FinRequestsComponent } from './pages/fin-requests/fin-requests.componen
 
 import { DriversVerificationComponent } from './pages/drivers-verification/drivers-verification.component';
 import { DriverVerifedComponent } from './pages/driver-verifed/driver-verifed.component';
+import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
+import { AgentDriverComponent } from './pages/agent-driver/agent-driver.component';
 
 const routes: Routes = [
    {
@@ -107,6 +109,11 @@ const routes: Routes = [
    {
       path: "drivers",
       component: DriversComponent,
+      title: "Водители"
+   },
+   {
+      path: "agent-drivers",
+      component: AgentDriverComponent,
       title: "Водители"
    },
    {
@@ -343,6 +350,11 @@ const routes: Routes = [
       path: "drivers-verified",
       component: DriverVerifedComponent,
       title: "Проверенный водитель"
+   },
+   {
+      path: "subcription-types",
+      component: SubscriptionsComponent,
+      title: "Типы грузов"
    },
 ];
 
