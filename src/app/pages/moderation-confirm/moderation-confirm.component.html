@@ -51,6 +51,12 @@
         ><span>{{ data.bankName }}</span>
       </li>
 
+      <li class="info" *ngFor="let item of data.bankAccounts">
+        <span class="info-label"
+          >Расчётный счет: </span
+        ><span>{{ item.account }} ({{item.currencyName}})</span>
+      </li>
+
       <li class="info">
         <span *ngIf="data.inn" class="info-label">ИНН: </span
         ><span>{{ data.inn }}</span>

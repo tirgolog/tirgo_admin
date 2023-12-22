@@ -96,6 +96,12 @@ export class CreateorderComponent {
       this.data.finish_lat = this.cityfinish.split(':')[2];
       this.data.finish_lng = this.cityfinish.split(':')[3];
       
+    }
+
+    if (new Date(this.data.date_start).getTime() < new Date().getTime()){
+      await this.helper.loadingClose();
+      this.toastr.error('Выбранная дата не может быть меньше текущей даты.')
+    }else {
       try {
         const res = await this.authService.createOrder(this.data).toPromise()
         if (res.status){
@@ -108,11 +114,25 @@ export class CreateorderComponent {
         this.toastr.error('Что то пошло не так')
       }
     }
-
-    /*if (new Date(this.data.date_start).getTime() < new Date().getTime()){
-      this.toastr.error('Невозможно создать заказ на старую дату')
-    }else {
-
-    }*/
   }
+
+  isInvalidDate(): boolean {
+    const selectedDate = new Date(this.data.date_start);
+    const currentDate = new Date();
+  
+    // Set time part to midnight for both dates
+    selectedDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+  
+    console.log('Selected Date:', selectedDate.toISOString());
+    console.log('Current Date:', currentDate.toISOString());
+  
+    // Compare the timestamps
+    if (selectedDate.getTime() <= currentDate.getTime()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
