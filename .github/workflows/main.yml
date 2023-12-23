@@ -24,19 +24,18 @@ jobs:
       - name: Build Angular app
         run: npm run build
 
+      - name: List directory contents after build
+        run: ls -la
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: List directory contents
-        run: ls -la
-
       - name: Copy artifacts
         run: |
           mkdir -p deploy
-          cp -r dist/* deploy/
+          cp -r dist/admin-ui/* deploy/
 
       - name: Set up Node.js (if not already set up)
         uses: actions/setup-node@v2
