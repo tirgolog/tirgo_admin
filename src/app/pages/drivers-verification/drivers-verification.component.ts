@@ -37,6 +37,11 @@ export class DriversVerificationComponent {
       panelClass: 'custom-dialog-class',
       data: ev
     });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      let drivers = await this.listService.getAllunVerifiedDrivers().toPromise();
+      this.drivers = drivers.data;
+      this.count = drivers.data_count;
+    });
   }
 
   async handlePage(e: any) {

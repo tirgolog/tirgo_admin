@@ -28,7 +28,6 @@ export class DriverVerifyComponent {
         public helper: HelperService,
         public listService: ListService,
     ) {
-        console.log(data)
         this.driver = data
     }
 
@@ -39,11 +38,11 @@ export class DriverVerifyComponent {
         if (res.status) {
             this.user = res.data
         }
-        this.passport_series_numbers = this.user.passport_series_numbers;
-        this.driver_license = this.user.driver_license;
-        this.passport_date = this.user.passport_date;
+        this.passport_series_numbers = this.user?.passport_series_numbers;
+        this.driver_license = this.user?.driver_license;
+        this.passport_date = this.user?.passport_date;
         this.activity = this.helper.activity.filter(e => e.userid === this.user.id)
-        this.namedriver = this.user.name;
+        this.namedriver = this.user?.name;
     }
 
     returnNameTypeTransport(type: number) {
@@ -64,5 +63,12 @@ export class DriverVerifyComponent {
         });
     }
 
-
+    unverify(id) {
+        this.listService.unVerifyDriverItem(id).subscribe(res => {
+            console.log(res)
+            if (res.status) {
+                this.dialog.closeAll()
+            }
+        })
+    }
 }

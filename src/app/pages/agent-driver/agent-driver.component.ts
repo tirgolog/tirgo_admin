@@ -55,7 +55,6 @@ export class AgentDriverComponent {
       if (res) {
         this.authService.currentUser = res;
         this.agent_id = this.authService.currentUser?.id;
-        console.log(this.agent_id)
         this.getsumOfDriversSubcription(this.agent_id)
         this.getAgent(this.agent_id)
       }
@@ -74,7 +73,6 @@ export class AgentDriverComponent {
 
   async getAgent(id) {
     this.listService.getAgent(id).toPromise().then((res) => {
-      console.log(res)
       if (res.status) {
         this.agent_balance = res.data.agent_balance;
       }

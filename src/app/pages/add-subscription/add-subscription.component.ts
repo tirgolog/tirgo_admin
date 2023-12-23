@@ -17,6 +17,7 @@ export class AddSubscriptionComponent {
  data = {
     name:'',
     value:'',
+    duration:'',
  }
  constructor(
      public dialog: MatDialog,
@@ -31,6 +32,7 @@ export class AddSubscriptionComponent {
     const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данный тип подписка?', 2)
     if (confirm){
        const res = await this.authService.addTypeSubscription(this.data).toPromise();
+       console.log(res)
        if (res.status) {
           this.toastr.success('Тип подписка успешно добавлен')
           this.dialog.closeAll();

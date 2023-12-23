@@ -131,13 +131,26 @@ export class ListService {
     const sUrl = API_URL + `/users/verify-driver`;
     return this.http.patch<any>(sUrl, { id })
       .pipe(map(res => {
-        if (res.data) {
-          return res.data;
+        if (res) {
+          return res;
         } else {
           return [];
         }
       }));
   }
+
+  unVerifyDriverItem(id) {
+    const sUrl = API_URL + `/users/unverify-driver`;
+    return this.http.patch<any>(sUrl, { id })
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
 
   getAllDriversList(id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
     const sUrl = API_URL + '/reborn/getAllDriversList';

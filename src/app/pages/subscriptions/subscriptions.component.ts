@@ -47,10 +47,6 @@ export class SubscriptionsComponent implements OnInit {
     this.helper.global_loading = false;
   }
 
-  goToColumn(ev: any): void {
-    this.router.navigate(['/moderation/' + ev])
-  }
-
   ngAfterViewInit(): void {
     this.spoller.initSpollers()
   }
