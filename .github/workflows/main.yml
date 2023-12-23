@@ -1,46 +1,52 @@
-name: CI
+name: Angular CI/CD
+
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches: [github-actions]
+
 jobs:
   build:
-    # using Ubuntu
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: "14.x"
-      - uses: actions/cache@v3 # this allows for re-using node_modules caching, making builds a bit faster.
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-- name: NPM Install
-  run: npm install
-- name: NPM Install Angular
-  run: npm install -g @angular/cli > /dev/null
-- name: Lint
-  run: npm run lint
-- name: Format
-  run: npm run format
-- name: NPM build Angular Production
-  run: npm run build:prod
-- name: Test
-  run: npm run test:ci
-- name: Test coverage
-  run: npm run test:ci:cov
-- name: Deploy to my EC2 instance
-  uses: easingthemes/ssh-deploy@v2.1.5
-  with:
-    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY}}
-    SOURCE: "dist/angular-demo/"
-    REMOTE_HOST: "ec2-remote-host"
-    REMOTE_USER: "ubuntu"
-    TARGET: "/var/www/html/angular-demo/"
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular app
+        run: npm run build -- --prod
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copy artifacts
+        run: |
+          mkdir -p deploy
+          cp -r dist/* deploy/
+
+      - name: Install Docker
+        uses: actions/setup-docker@v2
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/admin-ui deploy/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-agent -a $SSH_AUTH_SOCK
+          ssh-add ~/.ssh/deploy_key
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker tag ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest
+
+      - name: Deploy to EC2
+        run: |
+          ssh -i ~/.ssh/deploy_key ubuntu@ ${{secrets.SERVER_IP}} 'docker pull ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest && docker run -d -p 4200:80 ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest'
