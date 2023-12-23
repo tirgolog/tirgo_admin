@@ -34,7 +34,7 @@ jobs:
           cp -r dist/* deploy/
 
       - name: Install Docker
-        uses: actions/setup-docker@v2
+        uses: docker/setup-docker@v2
 
       - name: Build Docker image
         run: |
