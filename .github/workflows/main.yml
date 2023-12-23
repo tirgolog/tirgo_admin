@@ -2,7 +2,8 @@ name: Angular CI/CD
 
 on:
   push:
-    branches: [github-actions]
+    branches:
+      - github-actions
 
 jobs:
   build:
@@ -33,20 +34,16 @@ jobs:
           mkdir -p deploy
           cp -r dist/* deploy/
 
-      - name: Set up Docker
-        uses: actions/setup-docker@v2
+      - name: Set up Node.js (if not already set up)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/admin-ui deploy/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-agent -a $SSH_AUTH_SOCK
-          ssh-add ~/.ssh/deploy_key
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker tag ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest
+      - name: Install Angular CLI (if not already installed)
+        run: npm install -g @angular/cli
 
-      - name: Deploy to EC2
-        run: |
-          ssh -i ~/.ssh/deploy_key ubuntu@ ${{secrets.SERVER_IP}} 'docker pull ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest && docker run -d -p 4200:80 ${{ secrets.DOCKER_USERNAME }}/admin-ui:latest'
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Angular app
+        run: npm start
