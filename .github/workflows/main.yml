@@ -44,7 +44,8 @@ jobs:
       - name: Copy artifacts
         run: |
           mkdir -p deploy
-          cp -r dist/admin-ui/* deploy/
+          cp -r dist/* deploy/
+
 
       - name: Set up Node.js (if not already set up)
         uses: actions/setup-node@v2
