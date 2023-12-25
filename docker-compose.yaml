@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  admin-ui-ui:
-    container_name: admin-ui-ui
+  admin-ui:
+    container_name: admin-ui
     image: nginx:1.17-alpine
     restart: unless-stopped
     ports:
