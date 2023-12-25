@@ -41,6 +41,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: List directory contents in deploy
+        run: ls -la
+
       - name: Copy artifacts
         run: |
           mkdir -p deploy
