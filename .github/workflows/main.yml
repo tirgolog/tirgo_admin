@@ -23,6 +23,7 @@ jobs:
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
+        
       - name: List directory contents before build
         run: ls -la
 
