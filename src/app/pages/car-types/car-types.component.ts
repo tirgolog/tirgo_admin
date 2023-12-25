@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {ColDef, GridOptions} from 'ag-grid-community';
 import { SpollersService } from 'src/app/services/spollers.service';
 import {HelperService} from "../../services/helper.service";
-import {AddCargoTypeComponent} from "../add-cargo-type/add-cargo-type.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AddCarTypeComponent} from "../add-car-type/add-car-type.component";
 

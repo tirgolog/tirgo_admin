@@ -20,16 +20,17 @@ export class AuthComponent {
 
    ngOnInit() {
       if (this.authService.isAuthenticated()) {
-         this.router.navigate(['dashboard']);
+         // this.router.navigate(['dashboard']);
       }
    }
    
    async getLogin() {
       const res = await this.authService.loginAdmin(this.login, this.password).toPromise();
       if (res.status) {
+         console.log(res.token)
          await this.authService.brokerLogin().subscribe((res) => { })
          await this.authService.setJwt(res.token);
-         this.router.navigate(['/dashboard'])
+         // this.router.navigate(['/dashboard'])
          this.error = false
       } else {
          this.error = true

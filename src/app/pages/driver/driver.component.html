@@ -12,12 +12,8 @@
       <div class="view__left">
         <div class="view__data data-view view__block">
           <div class="data-view__header">
-            <img
-              [src]="user?.avatar ? user?.avatar : 'assets/img/user-empty.png'"
-              (click)="helper.viewPhoto(user.avatar)"
-              class="data-view__img"
-              alt="Картинка"
-            />
+            <img [src]="user?.avatar ? user?.avatar : 'assets/img/user-empty.png'"
+              (click)="helper.viewPhoto(user.avatar)" class="data-view__img" alt="Картинка" />
             <p class="data-view__name">#{{ user?.id }} {{ user?.name }}</p>
             <div class="data-view__rating">
               <i class="icm-star"></i> {{ user?.raiting }}
@@ -39,7 +35,7 @@
               <p class="tw-flex tw-items-center">
                 <span class="text-green tw-pr-1">{{
                   returnAcceptOrder(user?.orders)
-                }}</span>
+                  }}</span>
               </p>
             </div>
             <div class="tw-flex tw-justify-between tw-items-center">
@@ -47,7 +43,7 @@
               <p class="tw-flex tw-items-center">
                 <span class="text-red tw-pr-1">{{
                   returnRejectOrder(user?.orders)
-                }}</span>
+                  }}</span>
               </p>
             </div>
           </div>
@@ -61,63 +57,43 @@
               <p class="tw-flex tw-justify-between">
                 <span>ФИО</span>
                 <span *ngIf="!editInfo">{{ user?.name }}</span>
-                <input
-                  *ngIf="editInfo"
-                  class="input-edit-view"
-                  type="text"
-                  [(ngModel)]="user.name"
-                />
+                <input *ngIf="editInfo" class="input-edit-view" type="text" [(ngModel)]="user.name" />
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Дата рождения</span>
                 <span *ngIf="!editInfo">{{
                   user?.birthday
-                    ? (user?.birthday | formatTime : "DD MMMM YYYY")
-                    : "Не указана"
-                }}</span>
-                <input
-                  *ngIf="editInfo"
-                  class="input-edit-view"
-                  type="date"
-                  value="{{
+                  ? (user?.birthday | formatTime : "DD MMMM YYYY")
+                  : "Не указана"
+                  }}</span>
+                <input *ngIf="editInfo" class="input-edit-view" type="date" value="{{
                     user?.birthday ? user?.birthday.split('T')[0] : '1970-01-01'
-                  }}"
-                />
+                  }}" />
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Гражданство</span>
                 <span *ngIf="!editInfo">{{ user?.country }}</span>
-                <input
-                  *ngIf="editInfo"
-                  class="input-edit-view"
-                  type="text"
-                  [(ngModel)]="user.country"
-                />
+                <input *ngIf="editInfo" class="input-edit-view" type="text" [(ngModel)]="user.country" />
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Город</span>
                 <span *ngIf="!editInfo">{{ user?.city }}</span>
-                <input
-                  *ngIf="editInfo"
-                  class="input-edit-view"
-                  type="text"
-                  [(ngModel)]="user.city"
-                />
+                <input *ngIf="editInfo" class="input-edit-view" type="text" [(ngModel)]="user.city" />
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Дата регистрации</span>
                 <span>{{
                   user?.date_reg | formatTime : "DD MMMM YYYY в HH:mm"
-                }}</span>
+                  }}</span>
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Последний вход</span>
                 <span>{{
                   user?.date_last_login
-                    ? (user?.date_last_login
-                      | formatTime : "DD MMMM YYYY в HH:mm")
-                    : "Не указан"
-                }}</span>
+                  ? (user?.date_last_login
+                  | formatTime : "DD MMMM YYYY в HH:mm")
+                  : "Не указан"
+                  }}</span>
               </p>
               <p class="tw-flex tw-justify-between" *ngIf="user?.dirty > 0">
                 <ng-container *ngIf="user.dirty < 3">
@@ -125,11 +101,7 @@
                   <span>через {{ 3 - user?.dirty }}</span>
                 </ng-container>
                 <ng-container *ngIf="user?.dirty === 3">
-                  <button
-                    class="view__btn btn-green"
-                    style="margin-left: 0"
-                    (click)="delDirty()"
-                  >
+                  <button class="view__btn btn-green" style="margin-left: 0" (click)="delDirty()">
                     Удалить временную блокировку
                   </button>
                 </ng-container>
@@ -138,28 +110,52 @@
                 <ng-container>
                   <span [ngClass]="{ colorred: !user?.moderation }">{{
                     user?.moderation
-                      ? "Модерация пройдена"
-                      : "Модерация НЕ пройдена"
-                  }}</span>
+                    ? "Модерация пройдена"
+                    : "Модерация НЕ пройдена"
+                    }}</span>
                 </ng-container>
                 <ng-container *ngIf="!user?.moderation">
-                  <button
-                    class="view__btn btn-green"
-                    style="margin-left: 0"
-                    (click)="modarateUser()"
-                  >
+                  <button class="view__btn btn-green" style="margin-left: 0" (click)="modarateUser()">
                     Активировать
                   </button>
                 </ng-container>
               </p>
-              <button
-                class="view__btn"
-                [className]="editInfo ? 'btn-green' : 'btn-warning'"
-                style="margin-left: 0"
-                (click)="editInfoGo()"
-              >
+              <button class="view__btn" [className]="editInfo ? 'btn-green' : 'btn-warning'" style="margin-left: 0"
+                (click)="editInfoGo()">
                 {{ editInfo ? "Сохранить" : "Редактировать" }}
               </button>
+            </div>
+          </div>
+          <div class="view__informate view__block" *ngIf="agent&&authService.currentUser.user_type==3">
+            <h4 class="view__title title-sec">Информация agent</h4>
+            <div class="view__list">
+              <p class="tw-flex tw-justify-between">
+                <span>ФИО</span>
+                <span>{{ agent?.name }}</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Телифон</span>
+                <span>{{ agent?.phone }}</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Баланс агента</span>
+                <span>{{ agent?.agent_balance }}</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Дата регистрации</span>
+                <span>{{
+                  agent?.date_reg | formatTime : "DD MMMM YYYY в HH:mm"
+                  }}</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Последний вход</span>
+                <span>{{
+                  agent?.date_last_login
+                  ? (agent?.date_last_login
+                  | formatTime : "DD MMMM YYYY в HH:mm")
+                  : "Не указан"
+                  }}</span>
+              </p>
             </div>
           </div>
           <div class="view__passport view__block">
@@ -167,41 +163,21 @@
             <div class="view__list">
               <mat-form-field class="form__input">
                 <mat-label>Серия и номер</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [(ngModel)]="passport_series_numbers"
-                />
+                <input matInput type="text" [(ngModel)]="passport_series_numbers" />
               </mat-form-field>
               <mat-form-field class="form__input">
                 <mat-label>Дата выдачи</mat-label>
-                <input
-                  matInput
-                  type="date"
-                  [value]="passport_date | formatTime : 'YYYY-MM-DD'"
-                />
+                <input matInput type="date" [value]="passport_date | formatTime : 'YYYY-MM-DD'" />
               </mat-form-field>
-              <p
-                class="tw-flex tw-justify-between tw-items-center images-passport"
-                *ngIf="user?.files"
-              >
+              <p class="tw-flex tw-justify-between tw-items-center images-passport" *ngIf="user?.files">
                 <ng-container *ngFor="let row of user?.files">
-                  <img
-                    (click)="helper.viewPhoto(row.preview)"
-                    *ngIf="row.type_file === 'passport'"
-                    [src]="row.preview"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(row.preview)" *ngIf="row.type_file === 'passport'" [src]="row.preview"
+                    alt="" />
                 </ng-container>
               </p>
-              <button
-                [disabled]="
+              <button [disabled]="
                   user?.passport_series_numbers === passport_series_numbers
-                "
-                class="view__btn btn-green"
-                style="margin-left: 0"
-                (click)="savePassportUser()"
-              >
+                " class="view__btn btn-green" style="margin-left: 0" (click)="savePassportUser()">
                 Сохранить
               </button>
             </div>
@@ -215,25 +191,14 @@
                 <mat-label>Водительское удостоверение</mat-label>
                 <input matInput type="text" [(ngModel)]="driver_license" />
               </mat-form-field>
-              <p
-                class="tw-flex tw-justify-between tw-items-center images-passport"
-                *ngIf="user?.files"
-              >
+              <p class="tw-flex tw-justify-between tw-items-center images-passport" *ngIf="user?.files">
                 <ng-container *ngFor="let row of user?.files">
-                  <img
-                    (click)="helper.viewPhoto(row.preview)"
-                    *ngIf="row.type_file === 'driver-license'"
-                    [src]="row.preview"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(row.preview)" *ngIf="row.type_file === 'driver-license'"
+                    [src]="row.preview" alt="" />
                 </ng-container>
               </p>
-              <button
-                [disabled]="user?.driver_license === driver_license"
-                class="view__btn btn-green"
-                style="margin-left: 0"
-                (click)="saveDriverLicenseUser()"
-              >
+              <button [disabled]="user?.driver_license === driver_license" class="view__btn btn-green"
+                style="margin-left: 0" (click)="saveDriverLicenseUser()">
                 Сохранить
               </button>
             </div>
@@ -245,20 +210,12 @@
                 <mat-label>Введите Merchant ID</mat-label>
                 <input matInput type="number" [(ngModel)]="user.merch_id" />
               </mat-form-field>
-              <button
-                *ngIf="user?.merch_id"
-                class="view__btn btn-green"
-                style="margin-left: 0"
-                (click)="goToColumn(user?.merch_id)"
-              >
+              <button *ngIf="user?.merch_id" class="view__btn btn-green" style="margin-left: 0"
+                (click)="goToColumn(user?.merch_id)">
                 Просмотр Марчанта
               </button>
-              <button
-                [disabled]="!user?.merch_id"
-                class="view__btn btn-green"
-                style="margin-left: 0"
-                (click)="saveNewMerchantId()"
-              >
+              <button [disabled]="!user?.merch_id" class="view__btn btn-green" style="margin-left: 0"
+                (click)="saveNewMerchantId()">
                 Назначить Merchant ID
               </button>
             </div>
@@ -266,29 +223,16 @@
           <div class="view__contacts view__block">
             <h4 class="view__title title-sec">Контакты Водителя</h4>
             <div class="view__list">
-              <div
-                class="tw-flex tw-justify-between"
-                *ngFor="let contact of user.contacts"
-              >
-                <span
-                  >+{{ contact.text }} <br />
+              <div class="tw-flex tw-justify-between" *ngFor="let contact of user.contacts">
+                <span>+{{ contact.text }} <br />
                   <small>{{
                     contact.verify ? "Подтвержден" : "Не подтвержден"
-                  }}</small></span
-                >
+                    }}</small></span>
                 <div class="tw-flex tw-gap-2">
-                  <a
-                    target="_blank"
-                    href="https://t.me/+{{ contact.text }}"
-                    class="tw-p-2"
-                  >
+                  <a target="_blank" href="https://t.me/+{{ contact.text }}" class="tw-p-2">
                     <i class="icm-telegram"></i>
                   </a>
-                  <a
-                    target="_blank"
-                    href="https://wa.me/{{ contact.text }}"
-                    class="tw-p-2"
-                  >
+                  <a target="_blank" href="https://wa.me/{{ contact.text }}" class="tw-p-2">
                     <i class="icm-whatsup"></i>
                   </a>
                 </div>
@@ -299,7 +243,7 @@
               </p>
             </div>
           </div>
-         
+
         </div>
       </div>
     </div>
@@ -354,11 +298,7 @@
             <div class="imgs-trucks">
               <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'tech_passport_files'">
-                  <img
-                    (click)="helper.viewPhoto(file_url+img.name)"
-                    src="{{file_url}}{{img.name}}"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(file_url+img.name)" src="{{file_url}}{{img.name}}" alt="" />
                 </div>
               </ng-container>
             </div>
@@ -366,11 +306,7 @@
             <div class="imgs-trucks">
               <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'license_files'">
-                  <img
-                    (click)="helper.viewPhoto(file_url+img.name)"
-                    src="{{file_url}}{{img.name}}"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(file_url+img.name)" src="{{file_url}}{{img.name}}" alt="" />
                 </div>
               </ng-container>
             </div>
@@ -378,11 +314,7 @@
             <div class="imgs-trucks" *ngIf="row.docks">
               <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'car_photos'">
-                  <img
-                    (click)="helper.viewPhoto(file_url+img.name)"
-                    src="{{file_url}}{{img.name}}"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(file_url+img.name)" src="{{file_url}}{{img.name}}" alt="" />
                 </div>
               </ng-container>
             </div>
@@ -390,7 +322,7 @@
         </ng-container>
       </div>
       <h4 class="view__title title-sec">Удаленный транспорт</h4>
-       <div class="view__transport view__block transport-blocks">
+      <div class="view__transport view__block transport-blocks">
         <ng-container *ngFor="let row of user.trucks">
           <div class="view__list" *ngIf="!row.active">
             <p class="tw-flex tw-justify-between">
@@ -421,11 +353,7 @@
             <div class="imgs-trucks">
               <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'tech_passport_files'">
-                  <img
-                    (click)="helper.viewPhoto(file_url+img.name)"
-                    src="{{file_url}}{{img.name}}"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(file_url+img.name)" src="{{file_url}}{{img.name}}" alt="" />
                 </div>
               </ng-container>
             </div>
@@ -433,11 +361,7 @@
             <div class="imgs-trucks">
               <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'license_files'">
-                  <img
-                    (click)="helper.viewPhoto(file_url+img.name)"
-                    src="{{file_url}}{{img.name}}"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(file_url+img.name)" src="{{file_url}}{{img.name}}" alt="" />
                 </div>
               </ng-container>
             </div>
@@ -445,11 +369,7 @@
             <div class="imgs-trucks">
               <ng-container *ngFor="let img of row.docks">
                 <div *ngIf="img.type_file === 'car_photos'">
-                  <img
-                    (click)="helper.viewPhoto(file_url+img.name)"
-                    src="{{file_url}}{{img.name}}"
-                    alt=""
-                  />
+                  <img (click)="helper.viewPhoto(file_url+img.name)" src="{{file_url}}{{img.name}}" alt="" />
                 </div>
               </ng-container>
             </div>
@@ -458,18 +378,10 @@
       </div>
     </ng-container>
     <div class="view__buttons">
-      <button
-        class="view__btn btn-red"
-        *ngIf="user.deleted === 0"
-        (click)="deletUser()"
-      >
+      <button class="view__btn btn-red" *ngIf="user.deleted === 0" (click)="deletUser()">
         Удалить
       </button>
-      <button
-        class="view__btn btn-warning"
-        *ngIf="user.deleted === 1"
-        (click)="returnUser()"
-      >
+      <button class="view__btn btn-warning" *ngIf="user.deleted === 1" (click)="returnUser()">
         Восстановить
       </button>
       <!--<button class="view__btn btn-green" (click)="updateUser()">Сохранить</button>-->

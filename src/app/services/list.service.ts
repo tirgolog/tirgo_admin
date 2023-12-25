@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
-const API_URL = 'https://admin.tirgo.io/api'
+const API_URL = 'http://localhost:7790'
 const MER_API = "https://merchant.tirgo.io/api/v1"
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,14 @@ export class ListService {
     return this.http.post<any>(sUrl, body);
   }
 
+  getAllDriversAgent(from: number, limit: number,  agent_id) {
+    const sUrl = API_URL + '/reborn/getAllDriversByAgent';
+    const body = JSON.stringify({
+      from, limit, agent_id,
+    });
+    return this.http.post<any>(sUrl, body);
+  }
+
   getAllunVerifiedDrivers() {
     const sUrl = API_URL + '/users/unverified-verifications';
     return this.http.get<any>(sUrl)
@@ -57,6 +65,31 @@ export class ListService {
         }
       }));
   }
+
+  getsumOfDriversSubcription(id) {
+    const sUrl = API_URL + `/admin/sumOfDriversSubcription/${id}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res && res.data) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getAgent(id) {
+    const sUrl = API_URL + `/admin/getAgent/${id}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res && res.data) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
   getAllVerifiedDrivers() {
     const sUrl = API_URL + '/users/verified-verifications';
     return this.http.get<any>(sUrl)
@@ -98,13 +131,26 @@ export class ListService {
     const sUrl = API_URL + `/users/verify-driver`;
     return this.http.patch<any>(sUrl, { id })
       .pipe(map(res => {
-        if (res.data) {
-          return res.data;
+        if (res) {
+          return res;
         } else {
           return [];
         }
       }));
   }
+
+  unVerifyDriverItem(id) {
+    const sUrl = API_URL + `/users/unverify-driver`;
+    return this.http.patch<any>(sUrl, { id })
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
 
   getAllDriversList(id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
     const sUrl = API_URL + '/reborn/getAllDriversList';
@@ -179,6 +225,20 @@ export class ListService {
         }
       }));
   }
+
+
+  getAllSubscription() {
+    const sUrl = API_URL + '/admin/subscription';
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+  
   getSecureTrans() {
     const sUrl = API_URL + '/admin/getSecureTrans';
     const body = JSON.stringify({});
@@ -392,6 +452,18 @@ export class ListService {
       }));
   }
 
+
+  getSubscription() {
+    const sUrl = API_URL + '/admin/subscription';
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.status) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
   getTypeCargo() {
     const sUrl = API_URL + '/admin/getTypeCargo';
     return this.http.get<any>(sUrl)

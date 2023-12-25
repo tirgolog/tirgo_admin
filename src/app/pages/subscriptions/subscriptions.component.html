@@ -1,0 +1,40 @@
+<main class="moderation" id="main">
+    <section class="page-header">
+        <div class="page-header__top">
+            <h2 class="page-header__title title">Тип подписки</h2>
+            <div class="page-header__actions">
+                <a class="page-header__btn btn-green" (click)="createSubscription()">
+                    Добавить
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="table">
+        <mat-table [dataSource]="subscriptions">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+                <mat-cell *matCellDef="let row; let i = index"> {{ i + 1 }} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef>Имя</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="value">
+                <mat-header-cell *matHeaderCellDef>Ценить</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.value }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef>Продолжительность</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.duration }} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="['id', 'name', 'value', 'duration']"></mat-header-row>
+            <mat-row *matRowDef="let row;columns: ['id', 'name', 'value', 'duration']"></mat-row>
+        </mat-table>
+        <mat-paginator [length]="helper.users_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+            (page)="handlePage($event)"></mat-paginator>
+    </section>
+</main>

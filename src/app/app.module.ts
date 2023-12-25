@@ -121,7 +121,11 @@ import { DriverVerificationComponent } from './pages/driver-verification/driver-
 import { PriviewComponent } from './components/priview/priview.component';
 import { DriverVerifedComponent } from './pages/driver-verifed/driver-verifed.component';
 import { DriverVerifyComponent } from './pages/driver-verify/driver-verify.component';
-
+import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
+import { AddSubscriptionComponent } from './pages/add-subscription/add-subscription.component';
+import { AgentDriverComponent } from './pages/agent-driver/agent-driver.component';
+import { AddAgentDriverComponent } from './pages/add-agent-driver/add-agent-driver.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 registerLocaleData(ruLocale);
 
@@ -205,6 +209,10 @@ const mapConfig: YaConfig = {
       PriviewComponent,
       DriverVerifedComponent,
       DriverVerifyComponent,
+      SubscriptionsComponent,
+      AddSubscriptionComponent,
+      AgentDriverComponent,
+      AddAgentDriverComponent,
    ],
    imports: [
       CommonModule,
@@ -223,6 +231,7 @@ const mapConfig: YaConfig = {
       AppRoutingModule,
       BrowserAnimationsModule,
       MatSelectModule,
+      MatRadioModule,
       MatInputModule,
       MatTableModule,
       MatDialogModule,

@@ -125,7 +125,6 @@ export class ArchiveComponent  {
       panelClass: 'custom-dialog-class',
     });
     dialogRef.afterClosed().subscribe(data=>{
-      console.log('iamclosed')
       this.gridOptions.api.setRowData(this.drivers)
     })
   }

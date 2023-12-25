@@ -6,9 +6,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddAdminComponent} from "../add-admin/add-admin.component";
 import {HelperService} from "../../services/helper.service";
 import {AuthService} from "../../services/auth.service";
-import {DriverComponent} from "../driver/driver.component";
 import {formatDate} from "@angular/common";
-import {ViewadminComponent} from "../../viewadmin/viewadmin.component";
+import { ListService } from 'src/app/services/list.service';
 
 @Component({
 	selector: 'app-admins',
@@ -63,7 +62,8 @@ export class AdminsComponent implements OnInit {
 		public spoller: SpollersService,
 		public dialog: MatDialog,
 		public helper: HelperService,
-		public authService: AuthService
+		public authService: AuthService,
+		private listService:ListService,
 	) {
 
 	}
@@ -113,6 +113,10 @@ export class AdminsComponent implements OnInit {
 			height: '80%',
 			panelClass: 'custom-dialog-class',
 		});
+		dialogRef.afterClosed().subscribe(async (data) => {
+			this.helper.admins = await this.listService.getAllAdmins().toPromise();
+		})
+		
 	}
 	goToColumn(ev:any): void {
 		const dialogRef = this.dialog.open(AddAdminComponent, {
