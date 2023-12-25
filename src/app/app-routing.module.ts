@@ -63,6 +63,11 @@ import { AgentDriverComponent } from './pages/agent-driver/agent-driver.componen
 const routes: Routes = [
    {
       path: "",
+      pathMatch:'full',
+      redirectTo: 'dashboard',
+   },
+   {
+      path: "loading",
       component: LoadingComponent,
       title: "Загрузка"
    },

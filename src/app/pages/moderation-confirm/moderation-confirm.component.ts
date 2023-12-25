@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Route, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HelperService } from 'src/app/services/helper.service';
@@ -10,13 +11,18 @@ import { ListService } from 'src/app/services/list.service';
   styleUrls: ['./moderation-confirm.component.scss']
 })
 export class ModerationConfirmComponent implements OnInit {
+  @ViewChild("dialogPreview") dialogPreview: TemplateRef<any>;
+
+  fileApi = 'https://merchant.tirgo.io/api/v1/file/download/';
+  image
   data: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private listService: ListService,
     private toastr: ToastrService,
-    private helper: HelperService
+    private helper: HelperService,
+    private dialog: MatDialog,
   ) { }
   ngOnInit() {
     this.getMerchantItem()
@@ -57,5 +63,15 @@ export class ModerationConfirmComponent implements OnInit {
      }
     }
   }
+
+  preview(image?: string): void {
+    this.image = image;
+    const dialog = this.dialog.open(this.dialogPreview, {
+        data: image,
+        height: "600px",
+        width: "800px",
+        panelClass: 'custom-dialog-class',
+    });
+}
 }
 

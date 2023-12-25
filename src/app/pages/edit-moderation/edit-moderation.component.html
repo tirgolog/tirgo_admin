@@ -3,96 +3,21 @@
     <div class="page-header__top">
       <h2 class="page-header__title title">Редактировать</h2>
       <div class="page-header__actions">
-          <button
-            (click)="editMerchant()"
-            style="margin-left: 10px"
-            class="auth__btn btn-green"
-            [disabled]="!form.valid"
-          >
+        <button (click)="editMerchant()" style="margin-left: 10px" class="auth__btn btn-green" [disabled]="!form.valid">
           Сохранить
-          </button>
+        </button>
       </div>
     </div>
   </section>
 
   <section>
     <form #form="ngForm">
-      <ul
-        style="
+      <ul style="
           display: grid;
           gap: 20px;
           grid-template-columns: auto auto auto;
           width: 100%;
-        "
-      >
-        <li>
-          <div style="width: 100%">
-            <mat-form-field style="display: block">
-              <mat-toolbar>
-                <input
-                  disabled
-                  matInput
-                  [value]="
-                    passportNames.length
-                      ? passportNames
-                      : 'Паспорт руководителя'
-                  "
-                />
-              </mat-toolbar>
-
-              <input
-                type="file"
-                class="fileInput"
-                name="supervisor_passport"
-                [(ngModel)]="data.supervisor_passport"
-                accept="image/*"
-                (change)="selectPassport($event)"
-              />
-              <mat-icon matSuffix>file_download</mat-icon>
-            </mat-form-field>
-          </div>
-
-          <div style="width: 100%">
-            <mat-form-field style="display: block">
-              <mat-toolbar>
-                <input
-                  disabled
-                  matInput
-                  [value]="
-                    certificateNames.length
-                      ? certificateNames
-                      : 'Свидетельст
-                      
-                      во о регистрации'
-                  "
-                />
-              </mat-toolbar>
-
-              <input
-                disabled
-                type="file"
-                class="fileInput"
-                name="certificate_registration"
-                [(ngModel)]="data.certificate_registration"
-                accept="image/*"
-                (change)="selectCertificate($event)"
-              />
-              <mat-icon matSuffix>file_download</mat-icon>
-            </mat-form-field>
-          </div>
-
-          <!-- <div class="title" style="margin-top: 10px;margin-bottom: 10px">Заказы</div>
-          <mat-card>
-            <mat-card-content>
-              <ul>
-                <li style="margin-top:10px"><span style="font-weight: 600;">Всего</span>: 2</li>
-                <li style="margin-top:10px"><span style="font-weight: 600;">Завершенних</span>: 2</li>
-                <li style="margin-top:10px"><span style="font-weight: 600;">Отменённые</span>: 2</li>
-              </ul>
-            </mat-card-content>
-          </mat-card> -->
-        </li>
-
+        ">
         <li>
           <div class="dynamic-inputs-wrapper">
             <div class="dynamic-inputs">
@@ -107,12 +32,7 @@
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>Название компании</mat-label>
-                <input
-                  required
-                  matInput
-                  name="companyName"
-                  [(ngModel)]="data.companyName"
-                />
+                <input required matInput name="companyName" [(ngModel)]="data.companyName" />
               </mat-form-field>
             </div>
           </div>
@@ -121,12 +41,7 @@
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>Ф.И.О руководителя</mat-label>
-                <input
-                  required
-                  matInput
-                  name="supervisorFullName"
-                  [(ngModel)]="data.supervisorFullName"
-                />
+                <input required matInput name="supervisorFullName" [(ngModel)]="data.supervisorFullName" />
               </mat-form-field>
             </div>
           </div>
@@ -144,15 +59,7 @@
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>ИНН</mat-label>
-                <input
-                  type="text"
-                  mask="999999999"
-                  matInput
-                  name="inn"
-                  [(ngModel)]="data.inn"
-                  maxlength="9"
-                  required
-                />
+                <input type="text" mask="999999999" matInput name="inn" [(ngModel)]="data.inn" maxlength="9" required />
               </mat-form-field>
             </div>
           </div>
@@ -161,15 +68,7 @@
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>ОКЭД</mat-label>
-                <input
-                  type="text"
-                  mask="99999"
-                  matInput
-                  name="oked"
-                  [(ngModel)]="data.oked"
-                  maxlength="5"
-                  required
-                />
+                <input type="text" mask="99999" matInput name="oked" [(ngModel)]="data.oked" maxlength="5" required />
               </mat-form-field>
             </div>
           </div>
@@ -178,15 +77,7 @@
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>МФО</mat-label>
-                <input
-                  type="text"
-                  matInput
-                  name="mfo"
-                  [(ngModel)]="data.mfo"
-                  mask="99999"
-                  maxlength="5"
-                  required
-                />
+                <input type="text" matInput name="mfo" [(ngModel)]="data.mfo" mask="99999" maxlength="5" required />
               </mat-form-field>
             </div>
           </div>
@@ -197,14 +88,8 @@
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>DUNS номер</mat-label>
-                <input
-                  type="text"
-                  matInput
-                  name="dunsNumber"
-                  [(ngModel)]="data.dunsNumber"
-                  mask="999999999"
-                  maxlength="9"
-                />
+                <input type="text" matInput name="dunsNumber" [(ngModel)]="data.dunsNumber" mask="999999999"
+                  maxlength="9" />
               </mat-form-field>
             </div>
           </div>
@@ -219,73 +104,29 @@
           </div>
 
           <div class="dynamic-inputs-wrapper">
-            <div
-              class="dynamic-inputs"
-              *ngFor="let phone of data.phoneNumbers; let i = index"
-            >
+            <div class="dynamic-inputs" *ngFor="let phone of data.phoneNumbers; let i = index">
               <mat-form-field class="form__input">
                 <mat-label>Телефон</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="phoneNumbers_[i]"
-                  mask="+999999999999"
-                  [(ngModel)]="data.phoneNumbers[i]"
-                  required
-                />
-                <!-- <mat-icon matSuffix
-                  (click)="addPhone()">add</mat-icon
-                > -->
+                <input matInput type="text" name="phoneNumbers_[i]" mask="+999999999999"
+                  [(ngModel)]="data.phoneNumbers[i]" required />
               </mat-form-field>
             </div>
-
-            <!-- <div class="dynamic-inputs" *ngIf="phone2">
-              <mat-form-field class="form__input example-full-width">
-                <mat-label>Телефон</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="phone2"
-                  mask="+999999999999"
-                  [(ngModel)]="data.phone2"
-                />
-                <mat-icon matSuffix (click)="phone2 = false">delete</mat-icon>
-              </mat-form-field>
-            </div> -->
           </div>
 
           <div class="dynamic-inputs-wrapper">
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>Юридический адрес</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="legalAddress"
-                  [(ngModel)]="data.legalAddress"
-                  required
-                />
-                <mat-icon
-                  matSuffix
-                  *ngIf="!factAddressShow"
-                  (click)="factAddressShow = true"
-                  >add</mat-icon
-                >
+                <input matInput type="text" name="legalAddress" [(ngModel)]="data.legalAddress" required />
+                <mat-icon matSuffix *ngIf="!factAddressShow" (click)="factAddressShow = true">add</mat-icon>
               </mat-form-field>
             </div>
 
             <div class="dynamic-inputs" *ngIf="factAddressShow">
               <mat-form-field class="form__input">
                 <mat-label>Фактический адрес</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="factAddress"
-                  [(ngModel)]="data.factAddress"
-                />
-                <mat-icon matSuffix (click)="factAddressShow = false"
-                  >delete</mat-icon
-                >
+                <input matInput type="text" name="factAddress" [(ngModel)]="data.factAddress" />
+                <mat-icon matSuffix (click)="factAddressShow = false">delete</mat-icon>
               </mat-form-field>
             </div>
           </div>
@@ -294,53 +135,77 @@
             <div class="dynamic-inputs" *ngFor="let account of data.bankAccounts;let i = index;let last = last">
               <mat-form-field class="form__input">
                 <mat-label>Расчетный счет</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  name="bankAccounts_{{i}}"
-                  [(ngModel)]="data.bankAccounts[i].account"
-                  [required]="data.bankAccounts[0]"
-                />
-                <mat-icon
-                  matSuffix
-                  *ngIf="data.bankAccounts.length < 2"
-                  (click)="addItem()"
-                  >add</mat-icon
-                >
-                <mat-icon
-                  matSuffix
-                  *ngIf="data.bankAccounts.length > 1 && last"
-                  (click)="removeItem(i)"
-                  >delete</mat-icon
-                >
+                <input matInput type="text" name="bankAccounts_{{i}}" [(ngModel)]="data.bankAccounts[i].account"
+                  [required]="data.bankAccounts[0]" />
+                <mat-icon matSuffix *ngIf="data.bankAccounts.length < 2" (click)="addItem()">add</mat-icon>
+                <mat-icon matSuffix *ngIf="data.bankAccounts.length > 1 && last"
+                  (click)="removeItem(i)">delete</mat-icon>
               </mat-form-field>
             </div>
           </div>
         </li>
       </ul>
+      <div style="display: flex;">
+        <div class="tw-grid tw-gap-5 tw-content-start" style="display: flex;">
+          <div class="view__informate view__block">
 
-      
+            <div class="view__list" style="display: flex; margin: 5px 0;">
+              <button class="image-box" (click)="preview(data.logoFilePath)" style="width: 100%;">
+                <span *ngIf="!data.logoFilePath" style="color: red;">Логотип</span> 
+                <span *ngIf="data.logoFilePath">Логотип</span> 
+              </button>
+              <label for="fileInput2" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
+              <input name="logoFilePath" accept="image/*" type="file" id="fileInput2" class="file-input"
+                (change)="selectFile($event, 'logoFilePath')">
+            </div>
+
+            <div class="view__list" style="display: flex; margin: 5px 0;">
+              <button class="image-box" (click)="preview(data.passportFilePath)" style="width: 100%;"> 
+                <span *ngIf="!data.passportFilePath" style="color: red;">Паспорт</span> 
+                <span *ngIf="data.passportFilePath">Паспорт</span> 
+              </button>
+              <label for="fileInput1" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
+              <input name="passportFilePath" accept="image/*" type="file"
+                id="fileInput1" class="file-input" (change)="selectFile($event, 'passportFilePath')">
+            </div>
+
+            <div class="view__list" style="display: flex; margin: 5px 0;">
+              <button class="image-box" style="width: 100%;"
+                (click)="preview(data.registrationCertificateFilePath)">
+                <span *ngIf="!data.registrationCertificateFilePath" style="color: red;">Регистрационное свидетельство</span> 
+                <span *ngIf="data.registrationCertificateFilePath">Регистрационное свидетельство</span> 
+              </button>
+              <label for="fileInput" class="btn-green" style="height: 30px; cursor: pointer;">Изменить</label>
+              <input name="registrationCertificateFilePath"  accept="image/*"
+                type="file" id="fileInput" class="file-input" (change)="selectFile($event, 'registrationCertificateFilePath')">
+            </div>
+
+          </div>
+        </div>
+     
+      </div>
+
     </form>
   </section>
 
- 
-  
-  <section class="table">
-      
-  <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-    <div class="title">История платежей</div>
 
-    <div class="page-header__actions">
-      <div style="text-align: center">
-        <div style="font-weight: 600">Активный баланс</div>
-        <div>{{balance}}</div>
+
+  <section class="table">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+      <div class="title">История платежей</div>
+
+      <div class="page-header__actions">
+        <div style="text-align: center">
+          <div style="font-weight: 600">Активный баланс</div>
+          <div>{{balance}}</div>
+        </div>
+        <div style="text-align: center">
+          <div style="font-weight: 600">Замороженный баланс</div>
+          <div>{{frozenBalance}}</div>
+        </div>
       </div>
-      <!-- <div style="text-align: center">
-        <div style="font-weight: 600">Заморожено</div>
-        <div>450$</div>
-      </div> -->
     </div>
-  </div>
 
     <mat-table [dataSource]="transactionRequest">
       <ng-container matColumnDef="id">
@@ -363,7 +228,7 @@
           {{ row.createdAt | formatTime : "DD.MM.YYYY HH:mm" }}
         </mat-cell>
       </ng-container>
-      
+
       <ng-container matColumnDef="type">
         <mat-header-cell *matHeaderCellDef>Тип</mat-header-cell>
         <mat-cell *matCellDef="let row">
@@ -376,38 +241,41 @@
         <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span class="btn-red" *ngIf="row.rejected">Отклоненный</span>
-          <span class="btn-green" *ngIf="row.verified">Одобрень</span>
+          <span class="btn-green" *ngIf="row.verified">Одобрено</span>
           <span class="btn-yellow" *ngIf="!row.verified && !row.rejected">Запрос</span>
         </mat-cell>
       </ng-container>
 
-      <mat-header-row
-        *matHeaderRowDef="['id', 'name', 'summa', 'date', 'type','status']"
-      ></mat-header-row>
-      <mat-row
-        (click)="goToColumn(row)"
-        *matRowDef="let row; columns: ['id', 'name', 'summa', 'date', 'type','status']"
-      ></mat-row>
+      <mat-header-row *matHeaderRowDef="['id', 'name', 'summa', 'date', 'type','status']"></mat-header-row>
+      <mat-row (click)="goToColumn(row)"
+        *matRowDef="let row; columns: ['id', 'name', 'summa', 'date', 'type','status']"></mat-row>
     </mat-table>
-    <mat-paginator
-      [length]="transactionRequest.length"
-      showFirstLastButtons
-      [pageSizeOptions]="sizespage"
-      (page)="handlePage($event)"
-    ></mat-paginator>
+    <mat-paginator [length]="transactionRequest.length" showFirstLastButtons [pageSizeOptions]="sizespage"
+      (page)="handlePage($event)"></mat-paginator>
   </section>
 </main>
 
-<ng-template #dialogRef >
+
+<ng-template #dialogRef>
   <form #form="ngForm">
-    <mat-card style="padding: 10px" >
-      <mat-card-header style="padding-bottom: 20px"
-        ><span class="title">Пополнить баланс</span>
+    <mat-card style="padding: 10px">
+      <mat-card-header style="padding-bottom: 20px">
+        <span class="title">
+          <span *ngIf="transaction.transactionType == 'topup'">Пополнить баланс</span>
+          <span *ngIf="transaction.transactionType == 'withdrow'">Вывод стредств</span>
+        </span>
       </mat-card-header>
-      <mat-card-actions >
-        <button (click)="verifyTransaction(transaction.id)" style="margin-left: auto" class="btn-green">Одобрить</button>
+      <mat-card-actions>
+        <button (click)="verifyTransaction(transaction.id)" style="margin-left: auto"
+          class="btn-green">Одобрить</button>
         <button (click)="rejectTransaction(transaction.id)" style="margin-left: auto" class="btn-red">Отклонить</button>
       </mat-card-actions>
     </mat-card>
   </form>
+</ng-template>
+
+<ng-template #dialogPreview>
+  <div class="image-priview">
+    <img [src]="fileApi+image" alt="" />
+  </div>
 </ng-template>

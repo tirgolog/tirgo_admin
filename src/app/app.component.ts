@@ -38,7 +38,7 @@ export class AppComponent {
             await this.checkSession();
             this.authService.globalLoading = false;
          } else {
-            await this.router.navigate(['auth']);
+           this.router.navigate(['auth']);
          }
       })
    }

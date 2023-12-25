@@ -70,23 +70,19 @@
         <mat-header-cell *matHeaderCellDef>Клиент</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span *ngIf="!row.isMerchant">{{ row.userinfo?.name }}</span>
-          <span *ngIf="row.isMerchant">{{
-            row.merchant.supervisorFullName
-            }}</span>
+          <span *ngIf="row.isMerchant">{{ row.merchant?.supervisorFullName }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="route.from_city">
         <mat-header-cell *matHeaderCellDef>Маршрут Откуда</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{ row.route.from_city }}</span>
-          <span *ngIf="row.isMerchant">{{ row.sendLocation }}</span>
+          <span>{{ row.route.from_city }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="route.to_city">
         <mat-header-cell *matHeaderCellDef>Маршрут Куда</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{ row.route.to_city }}</span>
-          <span *ngIf="row.isMerchant">{{ row.cargoDeliveryLocation }}</span>
+          <span>{{ row.route.to_city }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="status">
@@ -99,29 +95,27 @@
       <ng-container matColumnDef="type_cargo">
         <mat-header-cell *matHeaderCellDef>Тип груза</mat-header-cell>
         <mat-cell class="hoverTextOrder" *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">
+          <span>
             {{ helper.returnNameCargoType(row.type_cargo) }}</span>
-          <span *ngIf="row.isMerchant">{{ row.cargoType.name }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="transport_type">
         <mat-header-cell *matHeaderCellDef>Тип транспорта</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant && row.transport_types">
+          <span *ngIf="row.transport_types">
             <span *ngFor="let type of row.transport_types;let i=index">
               {{i+1}}.{{ helper.returnNameTypeTransport(type) }}
             </span>
           </span>
-          <span *ngIf="!row.isMerchant && !row.transport_types">
+          <span *ngIf="!row.transport_types">
               {{ helper.returnNameTypeTransport(row.transport_type) }}
           </span>
-          <span *ngIf="row.isMerchant">{{ row.transportType?.name }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="orders_accepted">
         <mat-header-cell *matHeaderCellDef>Статус обработки</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{
+          <span>{{
             "Предложений: " + row.orders_accepted
             ? row.orders_accepted.length
             : 0
@@ -131,43 +125,31 @@
       <ng-container matColumnDef="price">
         <mat-header-cell *matHeaderCellDef>Предлагаемая стоимость</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{
+          <span>{{
             row.price ? row.price + " " + row.currency : "Не указана"
-            }}</span>
-          <span *ngIf="row.isMerchant">{{
-            row.offeredPrice ? row.offeredPrice : "Не указана"
             }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="secure_transaction">
         <mat-header-cell *matHeaderCellDef>Безопасная сделка</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{
+          <span>{{
             row.secure_transaction ? "Да" : "Нет"
             }}</span>
-          <span *ngIf="row.isMerchant">{{
-            row.isSafe ? "Да" : "Нет"
-          }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date_create">
         <mat-header-cell *matHeaderCellDef>Дата создания</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="!row.isMerchant">{{
+          <span>{{
             row.date_create | formatTime : "DD.MM.YYYY"
-            }}</span>
-          <span *ngIf="row.isMerchant">{{
-            row.createdAt | formatTime : "DD.MM.YYYY"
             }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="date_send">
         <mat-header-cell *matHeaderCellDef>Дата создания</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <span *ngIf="row.isMerchant">{{
-            row.sendCargoDate | formatTime : "DD.MM.YYYY"
-            }}</span>
-          <span *ngIf="!row.isMerchant">{{
+          <span>{{
             row.date_send | formatTime : "DD.MM.YYYY"
             }}</span>
         </mat-cell>

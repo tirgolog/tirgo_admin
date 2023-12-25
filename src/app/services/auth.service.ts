@@ -23,6 +23,11 @@ export class AuthService {
       private http: HttpClient,
    ) { }
 
+   fileUpload(data: any) {
+      const sUrl = 'https://merchant.tirgo.io/api/v1/file/upload';
+      return this.http.post<any>(sUrl, data);
+   }
+
    loginAdmin(name: string, password: string) {
       // AuthService.jwt = localStorage.getItem(TOKEN_KEY)
       const sUrl = API_URL + '/admin/loginAdmin';
@@ -136,10 +141,10 @@ export class AuthService {
       });
       return this.http.post<any>(sUrl, body);
    }
-   acceptOrderDriver(userid: number, price: string, orderid: number) {
+   acceptOrderDriver(userid: number, price: string, orderid: number, isMerchant: boolean) {
       const sUrl = API_URL + '/admin/acceptOrderDriver';
       const body = JSON.stringify({
-         userid, price, orderid
+         userid, price, orderid, isMerchant
       });
       return this.http.post<any>(sUrl, body);
    }

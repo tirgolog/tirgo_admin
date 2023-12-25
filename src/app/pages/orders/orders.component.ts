@@ -46,7 +46,6 @@ export class OrdersComponent {
   ) {}
 
   ngOnInit(): void {
-    this.getMerchantOrders();
     // @ts-ignore
     if (+this.route.snapshot.paramMap.get("status") === 100) {
       this.status = "all";
@@ -119,7 +118,7 @@ export class OrdersComponent {
       case 2:
         return "Выполнен";
       case 3:
-        return "Завершень";
+        return "Завершен";
       case 4:
         return "Отменен";
       default:
@@ -175,7 +174,6 @@ export class OrdersComponent {
         this.saveorder !== "all" ? this.saveorder : null
       )
       .toPromise();
-    this.getMerchantOrders();
     this.helper.orders = neworders.data;
     this.helper.orders_count = neworders.data_count;
     this.helper.global_loading = false;
@@ -252,23 +250,4 @@ export class OrdersComponent {
     this.helper.isLoading = false;
   }
 
-  getMerchantOrders() {
-    this.listService.getMerchantOrders().subscribe((res) => {
-      this.helper.orders = [...this.helper.orders, ...res];
-      this.helper.orders.forEach((v) => {
-        if (!v.isMerchant) {
-          v.createdAt = v.date_create;
-        }
-      });
-      this.helper.orders.sort((a: any, b: any) => {
-        if (a.createdAt < b.createdAt) {
-          return 1;
-        }
-        if (a.createdAt > b.createdAt) {
-          return -1;
-        }
-        return 0;
-      });
-    });
-  }
 }

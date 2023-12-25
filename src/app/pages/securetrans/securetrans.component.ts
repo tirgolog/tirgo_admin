@@ -55,20 +55,6 @@ export class SecuretransComponent {
 
   }
 
-  returnClassStatusOrder(params){
-    switch (params) {
-      case 0:
-        return "status-order-blue";
-      case 1:
-        return "status-order-yellow";
-      case 2:
-        return "status-order-green";
-      case 3:
-        return "status-order-red";
-      default:
-        return "status-order";
-    }
-  }
   async ngOnInit() {
     this.helper.global_loading = true;
     this.spoller.initSpollers()
@@ -78,20 +64,6 @@ export class SecuretransComponent {
     this.helper.global_loading = false;
   }
 
-  statusOrderCheck(params){
-    switch (params) {
-      case 0:
-        return "Ожидающий";
-      case 1:
-        return "Выполняется";
-      case 2:
-        return "Выполнен";
-      case 3:
-        return "Отменен";
-      default:
-        return "Не определен";
-    }
-  }
   getContextMenuItems(params:any) {
     return [
       'autoSizeAll',
@@ -144,5 +116,67 @@ export class SecuretransComponent {
       panelClass: 'custom-dialog-class',
       data: ev.data
     });*/
+  }
+
+  statusOrderCheck(params) {
+    switch (params) {
+      case 0:
+        return "Ожидающий";
+      case 1:
+        return "Выполняется";
+      case 2:
+        return "Выполнен";
+      case 3:
+        return "Отменен";
+      default:
+        return "Не определен";
+    }
+  }
+  returnClassStatusOrder(params) {
+    switch (params) {
+      case 0:
+        return "status-order-blue";
+      case 1:
+        return "status-order-yellow";
+      case 2:
+        return "status-order-green";
+      case 3:
+        return "status-order-red";
+      default:
+        return "status-order";
+    }
+  }
+
+  statusMerchantOrderCheck(params) {
+    switch (params) {
+      case 0:
+        return "Ожидающий";
+      case 1:
+        return "Выполняется";
+      case 2:
+        return "Выполнен";
+      case 3:
+        return "Завершен";
+      case 4:
+        return "Отменен";
+      default:
+        return "Не определен";
+    }
+  }
+  returnClassStatusMerchantOrder(params) {
+    switch (params) {
+      case 0:
+        return "status-order-blue";
+      case 1:
+        return "status-order-yellow";
+      case 2:
+        return "status-order-green";
+      case 3:
+        return "status-order-info";
+      case 4:
+        return "status-order-red";
+      default:
+        return "status-order";
+    }
   }
 }
