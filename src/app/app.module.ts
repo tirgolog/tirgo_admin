@@ -125,7 +125,7 @@ import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.comp
 import { AddSubscriptionComponent } from './pages/add-subscription/add-subscription.component';
 import { AgentDriverComponent } from './pages/agent-driver/agent-driver.component';
 import { AddAgentDriverComponent } from './pages/add-agent-driver/add-agent-driver.component';
-
+import { MatRadioModule } from '@angular/material/radio';
 
 registerLocaleData(ruLocale);
 
@@ -231,6 +231,7 @@ const mapConfig: YaConfig = {
       AppRoutingModule,
       BrowserAnimationsModule,
       MatSelectModule,
+      MatRadioModule,
       MatInputModule,
       MatTableModule,
       MatDialogModule,
