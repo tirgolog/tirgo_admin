@@ -16,45 +16,34 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.13'  # Specify the minimum required Node.js version
+          node-version: '18'  # Ensure Node.js version is at least 18
 
       - name: Install dependencies
         run: npm install
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
-        
-      - name: List directory contents before build
-        run: ls -la
 
       - name: Build Angular app
-        run: ng build
+        run: npm run build
 
       - name: List directory contents after build
-        run: ls -la
-
-      - name: List directory contents after build
-        run: ls -la
+        run: ls -la dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: List directory contents in deploy
-        run: ls -la
-
       - name: Copy artifacts
         run: |
           mkdir -p deploy
           cp -r dist/* deploy/
 
-
       - name: Set up Node.js (if not already set up)
         uses: actions/setup-node@v2
         with:
-          node-version: '18.13'  # Specify the minimum required Node.js version
+          node-version: '18'  # Ensure Node.js version is at least 18
 
       - name: Install Angular CLI (if not already installed)
         run: npm install -g @angular/cli
