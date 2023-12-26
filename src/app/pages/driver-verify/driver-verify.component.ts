@@ -4,6 +4,7 @@ import { HelperService } from "../../services/helper.service";
 import { AuthService } from "../../services/auth.service";
 import { PriviewComponent } from 'src/app/components/priview/priview.component';
 import { ListService } from 'src/app/services/list.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-driver-verify',
@@ -27,7 +28,7 @@ export class DriverVerifyComponent {
         private authService: AuthService,
         public helper: HelperService,
         public listService: ListService,
-    ) {
+        private toastr: ToastrService) {
         this.driver = data
     }
 
@@ -65,10 +66,13 @@ export class DriverVerifyComponent {
 
     unverify(id) {
         this.listService.unVerifyDriverItem(id).subscribe(res => {
-            console.log(res)
             if (res.status) {
+                this.toastr.success('Драйвер проверен успешно')
                 this.dialog.closeAll()
+            } else {
+                this.toastr.error(res.error)
             }
-        })
+        }
+        )
     }
 }

@@ -5,8 +5,8 @@ import { HelperService } from 'src/app/services/helper.service';
 import { ListService } from 'src/app/services/list.service';
 import { SpollersService } from 'src/app/services/spollers.service';
 import { Router } from '@angular/router';
-import { ModerationConfirmListComponent } from '../moderation/moderation-confirm-list/moderation-confirm-list.component';
 import { AddSubscriptionComponent } from '../add-subscription/add-subscription.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-subscriptions',
@@ -34,16 +34,14 @@ export class SubscriptionsComponent implements OnInit {
     public helper: HelperService,
     public authService: AuthService,
     public listService: ListService,
-    public router: Router
-  ) {
-
+    public router: Router,
+    private toastr: ToastrService) {
   }
 
   async ngOnInit() {
     this.subscriptions = []
     this.spoller.initSpollers();
     this.subscriptions = await this.listService.getSubscription().toPromise();
-    console.log(this.subscriptions)
     this.helper.global_loading = false;
   }
 
@@ -67,13 +65,43 @@ export class SubscriptionsComponent implements OnInit {
 
   createSubscription(): void {
     const dialogRef = this.dialog.open(AddSubscriptionComponent, {
-       width: '150',
-       height: '150',
-       panelClass: 'custom-dialog-class',
+      width: '150',
+      height: '150',
+      panelClass: 'custom-dialog-class',
     });
-    dialogRef.afterClosed().subscribe(data=>{
-       console.log('iamclosed')
+    dialogRef.afterClosed().subscribe(async (data) => {
+      this.getAll()
     })
- }
+  }
+
+  goToColumn(row): void {
+    const dialogRef = this.dialog.open(AddSubscriptionComponent, {
+      width: '150',
+      height: '150',
+      panelClass: 'custom-dialog-class',
+      data: row
+    });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      this.getAll()
+    })
+  }
+
+  async getAll() {
+    this.subscriptions = []
+    this.spoller.initSpollers();
+    this.subscriptions = await this.listService.getSubscription().toPromise();
+    this.helper.global_loading = false;
+  }
+
+
+  async delete(id: number) {
+    const res = await this.authService.DeleteTypeSubscription(id).toPromise();
+    if (res.status) {
+      this.toastr.success('Тип подписка успешно удалить')
+      this.getAll()
+    } else {
+      this.toastr.error(res.error)
+    }
+  }
 
 }

@@ -54,7 +54,6 @@ import { ModerationComponent } from './pages/moderation/moderation.component';
 import { ModerationConfirmComponent } from './pages/moderation-confirm/moderation-confirm.component';
 import { EditModerationComponent } from './pages/edit-moderation/edit-moderation.component';
 import { FinRequestsComponent } from './pages/fin-requests/fin-requests.component';
-
 import { DriversVerificationComponent } from './pages/drivers-verification/drivers-verification.component';
 import { DriverVerifedComponent } from './pages/driver-verifed/driver-verifed.component';
 import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
@@ -119,7 +118,7 @@ const routes: Routes = [
    {
       path: "agent-drivers",
       component: AgentDriverComponent,
-      title: "Водители"
+      title: "Водитель агента"
    },
    {
       path: "fin-request",

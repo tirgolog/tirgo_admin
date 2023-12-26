@@ -4,7 +4,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 
 const TOKEN_KEY = 'jwttirgotoken';
-const API_URL = 'https://admin.tirgo.io/api';
+const API_URL = 'http://localhost:7790';
 
 @Injectable({
    providedIn: 'root'
@@ -265,6 +265,17 @@ export class AuthService {
       const sUrl = API_URL + '/admin/subscription';
       return this.http.post<any>(sUrl, data);
    }
+
+   EditTypeSubscription(data: any, id) {
+      const sUrl = API_URL + `/admin/subscription/${id}`;
+      return this.http.put<any>(sUrl, data);
+   }
+
+   DeleteTypeSubscription(id) {
+      const sUrl = API_URL + `/admin/subscription/${id}`;
+      return this.http.delete<any>(sUrl);
+   }
+   
    getUserInfo(id: any) {
       const sUrl = API_URL + '/reborn/getUserInfo';
       const body = JSON.stringify({

@@ -5,6 +5,7 @@ import { AuthService } from "../../services/auth.service";
 import { PriviewComponent } from 'src/app/components/priview/priview.component';
 import { ListService } from 'src/app/services/list.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-driver-verification',
@@ -30,7 +31,7 @@ export class DriverVerificationComponent {
         private authService: AuthService,
         public helper: HelperService,
         public listService: ListService,
-    ) {
+        private toastr: ToastrService) {
         this.driver = data;
     }
 
@@ -41,9 +42,9 @@ export class DriverVerificationComponent {
         if (res.status) {
             this.user = res.data
         }
-        this.passport_series_numbers = this.user.passport_series_numbers;
-        this.driver_license = this.user.driver_license;
-        this.passport_date = this.user.passport_date;
+        this.passport_series_numbers = this.user?.passport_series_numbers;
+        this.driver_license = this.user?.driver_license;
+        this.passport_date = this.user?.passport_date;
         this.activity = this.helper.activity.filter(e => e.userid === this.user.id)
         this.namedriver = this.user.name;
     }
@@ -68,12 +69,23 @@ export class DriverVerificationComponent {
 
     verify(id) {
         this.listService.verifyDriverItem(id).subscribe(res => {
-            this.dialog.closeAll()
+            if (res.status) {
+                this.toastr.success('Драйвер проверен успешно')
+                this.dialog.closeAll()
+            } else {
+                this.toastr.error(res.error)
+            }
         })
     }
+
     update(driver) {
         this.listService.editVerifyDriver(driver).subscribe(res => {
-            this.dialog.closeAll()
+            if (res.status) {
+                this.dialog.closeAll()
+                this.toastr.success('Проверьте успешность обновления драйвера')
+            } else {
+                this.toastr.error(res.error)
+            }
         })
     }
 
