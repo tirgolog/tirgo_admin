@@ -54,6 +54,8 @@ export class DriverVerifedComponent {
       panelClass: 'custom-dialog-class',
       data: ev
     });
+  
+    
   }
 
 }

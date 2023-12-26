@@ -126,7 +126,9 @@ import { AddSubscriptionComponent } from './pages/add-subscription/add-subscript
 import { AgentDriverComponent } from './pages/agent-driver/agent-driver.component';
 import { AddAgentDriverComponent } from './pages/add-agent-driver/add-agent-driver.component';
 import { MatRadioModule } from '@angular/material/radio';
-
+import {MatMenuModule} from '@angular/material/menu';
+import { AgentDriverDetailComponent } from './pages/agent-driver-detail/agent-driver-detail.component';
+import { ErrorInterceptorService } from './services/error-interceptor';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -213,6 +215,7 @@ const mapConfig: YaConfig = {
       AddSubscriptionComponent,
       AgentDriverComponent,
       AddAgentDriverComponent,
+      AgentDriverDetailComponent,
    ],
    imports: [
       CommonModule,
@@ -233,6 +236,7 @@ const mapConfig: YaConfig = {
       MatSelectModule,
       MatRadioModule,
       MatInputModule,
+      MatMenuModule,
       MatTableModule,
       MatDialogModule,
       MatSlideToggleModule,
@@ -261,6 +265,11 @@ const mapConfig: YaConfig = {
       {
          provide: HTTP_INTERCEPTORS,
          useClass: ApiInterceptor,
+         multi: true,
+      },
+      {
+         provide: HTTP_INTERCEPTORS,
+         useClass: ErrorInterceptorService,
          multi: true,
       },
       {provide: LocationStrategy, useClass: HashLocationStrategy}

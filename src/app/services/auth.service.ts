@@ -265,6 +265,17 @@ export class AuthService {
       const sUrl = API_URL + '/admin/subscription';
       return this.http.post<any>(sUrl, data);
    }
+
+   EditTypeSubscription(data: any, id) {
+      const sUrl = API_URL + `/admin/subscription/${id}`;
+      return this.http.put<any>(sUrl, data);
+   }
+
+   DeleteTypeSubscription(id) {
+      const sUrl = API_URL + `/admin/subscription/${id}`;
+      return this.http.delete<any>(sUrl);
+   }
+   
    getUserInfo(id: any) {
       const sUrl = API_URL + '/reborn/getUserInfo';
       const body = JSON.stringify({

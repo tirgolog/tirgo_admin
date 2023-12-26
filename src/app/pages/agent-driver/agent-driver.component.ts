@@ -4,11 +4,10 @@ import { PushComponent } from "src/app/components/push/push.component";
 import { SpollersService } from "src/app/services/spollers.service";
 import { AuthService } from "../../services/auth.service";
 import { HelperService } from "../../services/helper.service";
-import { DriverComponent } from "../driver/driver.component";
 import { ListService } from "../../services/list.service";
 import { SocketService } from "src/app/services/socket.service";
 import { AddAgentDriverComponent } from "../add-agent-driver/add-agent-driver.component";
-import { GridOptions } from "ag-grid-community";
+import { AgentDriverDetailComponent } from "../agent-driver-detail/agent-driver-detail.component";
 
 @Component({
   selector: 'app-agent-driver',
@@ -81,7 +80,7 @@ export class AgentDriverComponent {
 
 
   goToColumn(ev: any): void {
-    const dialogRef = this.dialog.open(DriverComponent, {
+    const dialogRef = this.dialog.open(AgentDriverDetailComponent, {
       width: "90%",
       height: "80%",
       panelClass: "custom-dialog-class",
@@ -90,8 +89,7 @@ export class AgentDriverComponent {
   }
   goToAddDriver(): void {
     const dialogRef = this.dialog.open(AddAgentDriverComponent, {
-      width: "90%",
-      height: "80%",
+      width: "40%",
       panelClass: "custom-dialog-class",
     });
     dialogRef.afterClosed().subscribe(async (data) => {

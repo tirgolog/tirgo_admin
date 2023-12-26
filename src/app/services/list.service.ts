@@ -106,8 +106,8 @@ export class ListService {
     const sUrl = API_URL + '/users/update-verification';
     return this.http.put<any>(sUrl, data)
       .pipe(map(res => {
-        if (res.data) {
-          return res.data;
+        if (res) {
+          return res;
         } else {
           return [];
         }

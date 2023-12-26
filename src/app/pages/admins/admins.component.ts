@@ -125,5 +125,8 @@ export class AdminsComponent implements OnInit {
 			panelClass: 'custom-dialog-class',
 			data: ev
 		});
+		dialogRef.afterClosed().subscribe(async (data) => {
+			this.helper.admins = await this.listService.getAllAdmins().toPromise();
+		})
 	}
 }

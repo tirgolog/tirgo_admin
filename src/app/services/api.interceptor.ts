@@ -11,7 +11,7 @@ export class ApiInterceptor implements HttpInterceptor {
    MER_API = "https://merchant.tirgo.io/"
    API_URL = 'https://admin.tirgo.io/api'
 
-   constructor(private authService: AuthService, private router: Router) { }
+   constructor() { }
    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       let token = '';
       if (req.url.startsWith(this.MER_API)) {

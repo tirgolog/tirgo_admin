@@ -68,18 +68,25 @@ export class AddAgentDriverComponent implements OnInit {
       this.dataUser.birthday = event;
    }
    async addUser() {
-      const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
-      if (confirm) {
-         this.cityInfo = this.citiesSelected.value;
-         this.dataUser.phone = this.dial_code + '' + this.dataUser.phone
-         const res = await this.authService.addUser(this.dataUser, this.cityInfo).toPromise();
-         if (res.status) {
-            this.toastr.success('Пользователь успешно добавлен')
-            this.dialog.closeAll();
-            this.loading = false;
-         } else {
-            this.toastr.error(res.error)
-            this.loading = false;
+      if (!this.dataUser.name || !this.dataUser.phone || !this.dataUser.email || !this.dataUser.country || !this.dataUser.city || !this.dataUser.birthday || !this.dataUser.type || !this.dataUser.agent_id || !this.dataUser.subscription_id) {
+         await this.helper.openDialogConfirm('Ошибка', 'Не все поля заполнены корректно', 1)
+      } else {
+         const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
+         if (confirm) {
+            this.cityInfo = this.citiesSelected.value;
+            this.dataUser.phone = this.dial_code + '' + this.dataUser.phone
+            await this.authService.addUser(this.dataUser, this.cityInfo).subscribe(res => {
+               console.log(res)
+               if (res.status) {
+                  this.toastr.success('Пользователь успешно добавлен')
+                  this.dialog.closeAll();
+                  this.loading = false;
+               } else {
+                  this.toastr.error(res.error)
+                  this.loading = false;
+               }
+            });
+
          }
       }
    }

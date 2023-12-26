@@ -58,12 +58,16 @@
                         <mat-option *ngFor="let row of helper.typetruck" [value]="row.id">{{row.name}}</mat-option>
                      </mat-select>
                   </mat-form-field>
-                  <mat-radio-group [(ngModel)]="dataUser.subscription_id" required>
-                     <mat-radio-button *ngFor="let row of subscription" [value]="row.id">
-                        <div>Имя: <span> {{ row.name }}</span></div>
-                        <div> Цена: <span> $ {{ row.value }} </span></div>
-                     </mat-radio-button>
-                  </mat-radio-group>
+                  <div style="margin-top:20px ; margin-bottom:20px;">
+                     <mat-radio-group [(ngModel)]="dataUser.subscription_id" required>
+                        <mat-radio-button *ngFor="let row of subscription" [value]="row.id">
+                           <div style="margin: 5px;">имя: <span style="font-weight: bold;"> {{ row.name |uppercase
+                                 }}</span></div>
+                           <div style="margin: 5px;"> цена: <span> ${{ row.value }} </span></div>
+                        </mat-radio-button>
+                     </mat-radio-group>
+                  </div>
+
                </ng-container>
                <button class="btn-red" type="button" (click)="addUser()"
                   [disabled]="dataUser.name === '' || dataUser.phone.length < +count_number">
