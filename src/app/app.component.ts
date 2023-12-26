@@ -27,7 +27,7 @@ export class AppComponent {
       private toastr: ToastrService,
       public listService: ListService
    ) { }
-   title = 'tirgo-admin';
+   title = 'admin-ui';
    logo = "/assets/img/logo.svg"
    async ngOnInit() {
       this.spoller.initSpollers()

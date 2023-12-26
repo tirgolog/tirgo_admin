@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-  tirgo-admin-ui:
-    container_name: tirgo-admin-ui
+  admin-ui:
+    container_name: admin-ui
     image: nginx:1.17-alpine
     restart: unless-stopped
     ports:
@@ -10,4 +10,4 @@ services:
       - NGINX_PORT=4200
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:rw
-      - ./dist/tirgo-admin:/var/www/admin.tirgo.io
+      - ./dist/admin-ui:/var/www/admin.tirgo.io
