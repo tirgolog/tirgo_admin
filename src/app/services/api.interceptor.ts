@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class ApiInterceptor implements HttpInterceptor {
    MER_API = "https://merchant.tirgo.io/"
-   API_URL = 'http://localhost:7790'
+   API_URL = 'https://admin.tirgo.io/api'
 
    constructor() { }
    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,7 +20,7 @@ export class ApiInterceptor implements HttpInterceptor {
         token = AuthService.jwt;
       }
       let authReq: any;
-      if(req.url == 'https://merchant.tirgo.io/api/v1/file/upload'||req.url=='http://localhost:7790/users/uploadImage') {
+      if(req.url == 'https://merchant.tirgo.io/api/v1/file/upload'||req.url=='https://admin.tirgo.io/api/users/uploadImage') {
         authReq = req.clone({
           setHeaders: {
             'Authorization': `Bearer ${token}`,
