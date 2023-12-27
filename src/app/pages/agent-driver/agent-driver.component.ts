@@ -54,6 +54,7 @@ export class AgentDriverComponent {
       if (res) {
         this.authService.currentUser = res;
         this.agent_id = this.authService.currentUser?.id;
+        console.log(this.authService.currentUser)
         this.getsumOfDriversSubcription(this.agent_id)
         this.getAgent(this.agent_id)
       }

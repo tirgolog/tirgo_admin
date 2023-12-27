@@ -28,7 +28,7 @@ export class AuthComponent {
       const res = await this.authService.loginAdmin(this.login, this.password).toPromise();
       if (res.status) {
          this.decoded = jwtDecode(res.token);
-         console.log(this.decoded?.user_type)
+         console.log(this.decoded)
          if (this.decoded?.user_type == 4) {
             this.router.navigate(['agent-drivers']);
          } else {

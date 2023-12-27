@@ -74,9 +74,8 @@ export class AddAgentDriverComponent implements OnInit {
          const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
          if (confirm) {
             this.cityInfo = this.citiesSelected.value;
-            this.dataUser.phone = this.dial_code + '' + this.dataUser.phone
+            this.dataUser.phone = this.dataUser.phone.includes(this.dial_code) ? this.dataUser.phone : this.dial_code + '' + this.dataUser.phone
             await this.authService.addUser(this.dataUser, this.cityInfo).subscribe(res => {
-               console.log(res)
                if (res.status) {
                   this.toastr.success('Пользователь успешно добавлен')
                   this.dialog.closeAll();
