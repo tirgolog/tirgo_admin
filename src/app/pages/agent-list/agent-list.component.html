@@ -1,0 +1,31 @@
+<main class="drivers">
+    <section class="table">
+       <mat-table [dataSource]="agents">
+          <ng-container matColumnDef="id">
+             <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+          </ng-container>
+ 
+          <ng-container matColumnDef="name">
+             <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+             <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+          </ng-container>
+ 
+          <ng-container matColumnDef="user_id">
+             <mat-header-cell *matHeaderCellDef>Balance</mat-header-cell>
+             <mat-cell *matCellDef="let row"> {{row.agent_balance}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="phone">
+             <mat-header-cell *matHeaderCellDef>phone</mat-header-cell>
+             <mat-cell *matCellDef="let row"> {{row.phone}} </mat-cell>
+          </ng-container>
+          <!-- Header and Row Declarations -->
+          <mat-header-row
+             *matHeaderRowDef="['id',  'name', 'user_id','phone']"></mat-header-row>
+          <mat-row  [routerLink]="['/agent-list', row.id]"
+             *matRowDef="let row; columns: ['id',  'name' ,'user_id', 'phone']"></mat-row>
+       </mat-table>
+       <mat-paginator [length]="count" showFirstLastButtons [pageSizeOptions]="sizespage"
+          (page)="handlePage($event)"></mat-paginator>
+    </section>
+ </main>

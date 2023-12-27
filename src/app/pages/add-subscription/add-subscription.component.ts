@@ -31,7 +31,6 @@ export class AddSubscriptionComponent {
          this.data.name = this.dataDialog.name;
          this.data.value = this.dataDialog.value;
          this.data.duration = this.dataDialog.duration;
-         console.log(this.data)
       }
    }
    close() {

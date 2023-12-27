@@ -90,6 +90,18 @@ export class ListService {
       }));
   }
 
+  getAllAgent() {
+    const sUrl = API_URL + '/admin/getAllAgent';
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res && res.data) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
   getAllVerifiedDrivers() {
     const sUrl = API_URL + '/users/verified-verifications';
     return this.http.get<any>(sUrl)

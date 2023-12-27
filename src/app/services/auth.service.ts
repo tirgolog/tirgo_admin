@@ -271,6 +271,11 @@ export class AuthService {
       return this.http.put<any>(sUrl, data);
    }
 
+   EditAgentBalance(data: any) {
+      const sUrl = API_URL + `/admin/changeAgentBalance`;
+      return this.http.put<any>(sUrl, data);
+   }
+
    DeleteTypeSubscription(id) {
       const sUrl = API_URL + `/admin/subscription/${id}`;
       return this.http.delete<any>(sUrl);

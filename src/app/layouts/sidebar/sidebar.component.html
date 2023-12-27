@@ -43,6 +43,17 @@
          </li>
          <li class="menu__item" *ngIf="authService.user_type==3">
             <a
+                    routerLink="/agent-list"
+                    routerLinkActive="_active"
+                    class="menu__link"
+                    (click)="closeMenu()"
+            >
+               <i class="icm-user-protect"></i>
+               <span>Список агентов</span>
+            </a>
+         </li>
+         <li class="menu__item" *ngIf="authService.user_type==3">
+            <a
                     routerLink="/securetrans"
                     routerLinkActive="_active"
                     class="menu__link"
