@@ -58,6 +58,8 @@ import { DriversVerificationComponent } from './pages/drivers-verification/drive
 import { DriverVerifedComponent } from './pages/driver-verifed/driver-verifed.component';
 import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
 import { AgentDriverComponent } from './pages/agent-driver/agent-driver.component';
+import { AgentListComponent } from './pages/agent-list/agent-list.component';
+import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-driver.component';
 
 const routes: Routes = [
    {
@@ -79,6 +81,16 @@ const routes: Routes = [
       path: "users",
       component: UsersComponent,
       title: "Все пользователи"
+   },
+   {
+      path: "agent-list",
+      component: AgentListComponent,
+      title: "Список агентов"
+   },
+   {
+      path: "agent-list/:id",
+      component: AgentListDriverComponent,
+      title: "Список агентов"
    },
    {
       path: "user",

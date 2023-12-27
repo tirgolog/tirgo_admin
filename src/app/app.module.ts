@@ -129,6 +129,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import { AgentDriverDetailComponent } from './pages/agent-driver-detail/agent-driver-detail.component';
 import { ErrorInterceptorService } from './services/error-interceptor';
+import { AgentListComponent } from './pages/agent-list/agent-list.component';
+import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-driver.component';
+import { AgentBalanceComponent } from './pages/agent-balance/agent-balance.component';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -216,6 +219,9 @@ const mapConfig: YaConfig = {
       AgentDriverComponent,
       AddAgentDriverComponent,
       AgentDriverDetailComponent,
+      AgentListComponent,
+      AgentListDriverComponent,
+      AgentBalanceComponent,
    ],
    imports: [
       CommonModule,
