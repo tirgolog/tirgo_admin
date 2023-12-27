@@ -72,8 +72,7 @@ export class AgentListDriverComponent {
 
   AgentBalance(): void {
     const dialogRef = this.dialog.open(AgentBalanceComponent, {
-      width: "90%",
-      height: "80%",
+      width: "550px",
       panelClass: "custom-dialog-class",
       data: { agent_id: this.agent_id, agent_balance: this.agent_balance },
     });
