@@ -164,4 +164,32 @@ export class OrderComponent {
       this.toastr.error('Невозможно назначить водителя. Не все поля заполнены')
     }
   }
+
+  async acceptOffer(driverid: any, price: any) {
+    if (driverid !== 0 && price !== '') {
+      const orderId = this.data.id.toString().split('M')[1] ? +this.data.id.toString().split('M')[1] : this.data.id;
+      const res = await this.authService.acceptOrderDriver(driverid, price, orderId, this.data.isMerchant).toPromise();
+
+      if (res.status) {
+        this.toastr.success('Водитель успешно принят')
+        const res = await this.authService.getOrderInfo(this.data.id).toPromise();
+        if (res.status) {
+          this.data = res.data;
+          const index = this.helper.orders.findIndex(e => e.id === +this.data.id)
+          if (index >= 0) {
+            this.helper.orders[index] = res.data;
+          }
+        }
+        this.selectdriver = !this.selectdriver
+      } else {
+        this.toastr.error(res.error)
+      }
+    } else {
+      this.toastr.error('Невозможно принят водителя. Не все поля заполнены')
+    }
+  }
+
+  rejectOffer() {
+
+  }
 }
