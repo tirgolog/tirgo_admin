@@ -45,6 +45,13 @@
                   </ng-container>
                </select>
             </span>
+
+            <span>
+               <select name="select" class="page__search" (change)="selectSubscription($event)">
+                  <option value="all">Без подписки </option>
+                  <option value="subscription">Подписка</option>
+               </select>
+            </span>
          </div>
          <div class="filter-buttons">
             <button class="page__btn btn-custom" (click)="filterList()">

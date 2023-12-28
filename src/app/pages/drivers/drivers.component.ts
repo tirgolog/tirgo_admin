@@ -21,6 +21,7 @@ export class DriversComponent {
   phone: string = "";
   indentificator: string = "";
   typetransport: string = "";
+  subscription: string = "";
   dateReg: string = "";
   dateLogin: string = "";
   name: string = "";
@@ -130,7 +131,8 @@ export class DriversComponent {
         this.dateLogin,
         this.name,
         this.indentificator,
-        this.typetransport !== "all" ? this.typetransport : null
+        this.typetransport !== "all" ? this.typetransport : null,
+        this.subscription !== "all" ? this.subscription : null,
       )
       .toPromise();
     this.helper.drivers = newusers.data;
@@ -151,7 +153,8 @@ export class DriversComponent {
         this.dateLogin,
         this.name,
         this.indentificator,
-        this.typetransport !== "all" ? this.typetransport : null
+        this.typetransport !== "all" ? this.typetransport : null,
+        this.subscription !== "all" ? this.subscription : null,
       )
       .toPromise();
     this.helper.drivers = this.helper.drivers.concat(...newusers.data);
@@ -169,7 +172,8 @@ export class DriversComponent {
         this.dateLogin,
         this.name,
         this.indentificator,
-        this.typetransport !== "all" ? this.typetransport : null
+        this.typetransport !== "all" ? this.typetransport : null,
+        this.subscription !== "all" ? this.subscription : null,
       )
       .toPromise();
     this.helper.drivers = newusers.data;
@@ -184,9 +188,10 @@ export class DriversComponent {
     this.name = "";
     this.indentificator = "";
     this.typetransport = "";
+    this.subscription = "";
     this.helper.isLoading = true;
     let newusers = await this.listService
-      .getAllDrivers(0, 50, null, null, null, null, null, null, null)
+      .getAllDrivers(0, 50, null, null, null, null, null, null, null, null)
       .toPromise();
     this.helper.drivers = newusers.data;
     this.helper.drivers_count = newusers.count;
@@ -226,6 +231,11 @@ export class DriversComponent {
   categoryFind(ev) {
     this.typetransport = ev.target.value;
   }
+
+  selectSubscription(ev) {
+    this.subscription = ev.target.value;
+  }
+
   changeSort(ev) {
     this.reverse = !this.reverse;
     this.sort = ev.target.value;

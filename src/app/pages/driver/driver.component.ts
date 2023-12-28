@@ -25,6 +25,7 @@ export class DriverComponent {
 
     user: any;
     agent: any;
+    subscription: any;
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialog: MatDialog,
@@ -47,7 +48,6 @@ export class DriverComponent {
         this.file_url = 'https://admin.tirgo.io/file/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
-            console.log(this.data)
             this.user = res.data
         } else {
             this.user = this.data
@@ -55,7 +55,9 @@ export class DriverComponent {
         if (this.user.agent_id) {
             this.getAgent(this.user.agent_id)
         }
-        console.log(this.authService.currentUser.user_type)
+        if (this.user.subscription_id) {
+            this.getSubscription(this.user.subscription_id)
+        }
         this.passport_series_numbers = this.user.passport_series_numbers;
         this.driver_license = this.user.driver_license;
         this.passport_date = this.user.passport_date;
@@ -68,6 +70,15 @@ export class DriverComponent {
             if (res.status) {
                 this.agent = res.data;
                 console.log(this.agent)
+            }
+        })
+    }
+
+    async getSubscription(id) {
+        this.listService.getSubscriptionById(id).toPromise().then((res) => {
+            if (res.status) {
+                this.subscription = res.data[0];
+                console.log(this.subscription)
             }
         })
     }

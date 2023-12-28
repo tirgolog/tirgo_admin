@@ -243,7 +243,19 @@
               </p>
             </div>
           </div>
-
+          <div class="view__informate view__block" *ngIf="subscription">
+            <h4 class="view__title title-sec">Информационная подписка</h4>
+            <div class="view__list">
+              <p class="tw-flex tw-justify-between">
+                <span>Тип:</span>
+                <span>{{ subscription?.name }}</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Цена:</span>
+                <span>{{ subscription?.value }}</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
