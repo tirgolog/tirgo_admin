@@ -16,7 +16,6 @@
                <br>
                <mat-form-field class="form__input">
                   <mat-label>Гражданство</mat-label>
-                  <!--<input matInput name="cities_start" (input)="findCity($event)" [(ngModel)]="city" (change)="saveCity($event)">-->
                   <mat-select [formControl]="citiesSelected" placeholder="Гражданство" #singleSelect>
                      <mat-option>
                         <ngx-mat-select-search (input)="findCity($event)" [placeholderLabel]="'Поиск города/страны'"
@@ -61,17 +60,15 @@
                   <div style="margin-top:20px ; margin-bottom:20px;">
                      <mat-radio-group [(ngModel)]="dataUser.subscription_id" required>
                         <mat-radio-button *ngFor="let row of subscription" [value]="row.id">
-                           <div style="margin: 5px;">имя: <span style="font-weight: bold;"> {{ row.name |uppercase
-                                 }}</span></div>
-                           <div style="margin: 5px;"> цена: <span> ${{ row.value }} </span></div>
+                           <div class="subscription">Тип: <span> {{ row.name | uppercase }}</span></div>
+                           <div class="subscription"> Цена: <span> {{ row.value }} </span></div>
                         </mat-radio-button>
                      </mat-radio-group>
                   </div>
-
                </ng-container>
                <button class="btn-red" type="button" (click)="addUser()"
                   [disabled]="dataUser.name === '' || dataUser.phone.length < +count_number">
-                  Проверить водителя
+                  Добавить водителя
                </button>
             </article>
          </ng-container>

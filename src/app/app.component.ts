@@ -80,11 +80,11 @@ export class AppComponent {
                this.helper.orders_count = orders.data_count;
             }
 
-            const drivers = await this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null).toPromise();
-            if (drivers.status) {
-               this.helper.drivers = drivers.data; 
-               this.helper.drivers_count = drivers.data_count;
-            }
+            // const drivers = await this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null, null).toPromise();
+            // if (drivers.status) {
+            //    this.helper.drivers = drivers.data; 
+            //    this.helper.drivers_count = drivers.data_count;
+            // }
 
             const agent_drivers = await this.listService.getAllDriversAgent(0, 50, this.authService.currentUser.id).toPromise();
             if (agent_drivers.status) {
