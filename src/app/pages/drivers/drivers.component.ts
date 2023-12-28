@@ -20,8 +20,8 @@ export class DriversComponent {
   id: string = "";
   phone: string = "";
   indentificator: string = "";
-  typetransport: string = "";
-  subscription: string = "";
+  typetransport: string = "all";
+  subscription: string = "all";
   dateReg: string = "";
   dateLogin: string = "";
   name: string = "";
@@ -187,8 +187,8 @@ export class DriversComponent {
     this.dateLogin = "";
     this.name = "";
     this.indentificator = "";
-    this.typetransport = "";
-    this.subscription = "";
+    this.typetransport = "all";
+    this.subscription = "all";
     this.helper.isLoading = true;
     let newusers = await this.listService
       .getAllDrivers(0, 50, null, null, null, null, null, null, null, null)
