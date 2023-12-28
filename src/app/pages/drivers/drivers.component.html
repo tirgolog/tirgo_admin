@@ -38,11 +38,18 @@
                </select>
             </span>
             <span>
-               <select name="select" class="page__search" (change)="categoryFind($event)">
+               <select name="select" class="page__search" [(ngModel)]="typetransport"  (change)="categoryFind($event)">
                   <option value="all">Все типы транспорта</option>
                   <ng-container *ngFor="let row of helper.typetruck">
                      <option [value]="row.id">{{row.name}}</option>
                   </ng-container>
+               </select>
+            </span>
+
+            <span>
+               <select name="select" class="page__search" [(ngModel)]="subscription" (change)="selectSubscription($event)">
+                  <option value="all">Без подписки </option>
+                  <option value="subscription">Подписка</option>
                </select>
             </span>
          </div>

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { map } from "rxjs/operators";
-import { Router } from '@angular/router';
 
 @Injectable()
 
@@ -20,7 +19,7 @@ export class ApiInterceptor implements HttpInterceptor {
         token = AuthService.jwt;
       }
       let authReq: any;
-      if(req.url == 'https://merchant.tirgo.io/api/v1/file/upload'||req.url=='https://admin.tirgo.io/api/users/uploadImage') {
+      if(req.url == 'https://merchant.tirgo.io/api/v1/file/upload' || req.url=='https://admin.tirgo.io/apiusers/uploadImage') {
         authReq = req.clone({
           setHeaders: {
             'Authorization': `Bearer ${token}`,

@@ -38,10 +38,10 @@ export class ListService {
   }
 
 
-  getAllDrivers(from: number, limit: number, id, phone, dateReg, dateLogin, name, indentificator, typetransport) {
+  getAllDrivers(from: number, limit: number, id, phone, dateReg, dateLogin, name, indentificator, typetransport, subscription) {
     const sUrl = API_URL + '/reborn/getAllDrivers';
     const body = JSON.stringify({
-      from, limit, id, phone, dateReg, dateLogin, name, indentificator, typetransport
+      from, limit, id, phone, dateReg, dateLogin, name, indentificator, typetransport, subscription
     });
     return this.http.post<any>(sUrl, body);
   }
@@ -83,6 +83,18 @@ export class ListService {
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res && res.data) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getSubscriptionById(id) {
+    const sUrl = API_URL + `/admin/subscription/${id}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
           return res;
         } else {
           return [];

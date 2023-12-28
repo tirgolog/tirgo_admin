@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private listService: ListService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.listService
@@ -55,6 +55,12 @@ export class HomeComponent implements OnInit {
           }
         }
       });
+    this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null, null).subscribe(res => {
+      if (res.status) {
+        this.helper.drivers = res.data;
+        this.helper.drivers_count = res.data_count;
+      }
+    })
   }
   gotoOrders(status: number) {
     this.router.navigate(["orders/" + status]);
