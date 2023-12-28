@@ -158,10 +158,19 @@
               <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
               <mat-cell *matCellDef="let row"> {{row.date_create_accepted | formatTime: 'DD.MM.YYYY'}} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="operations">
+              <mat-header-cell *matHeaderCellDef>Операции</mat-header-cell>
+              <mat-cell *matCellDef="let row"> 
+                <button class="view__btn btn-green" type="button" (click)="acceptOffer(row.id, row.priceorder)">
+                  Принять
+                </button>
+               </mat-cell>
+            </ng-container>
+
             <mat-header-row
-              *matHeaderRowDef="['id', 'name', 'priceorder', 'status_order', 'date_create_accepted']"></mat-header-row>
+              *matHeaderRowDef="['id', 'name', 'priceorder', 'status_order', 'date_create_accepted', 'operations']"></mat-header-row>
             <mat-row (click)="viewUser(row.id)"
-              *matRowDef="let row; columns: ['id', 'name', 'priceorder', 'status_order', 'date_create_accepted']"></mat-row>
+              *matRowDef="let row; columns: ['id', 'name', 'priceorder', 'status_order', 'date_create_accepted', 'operations']"></mat-row>
           </mat-table>
         </ng-container>
       </div>
