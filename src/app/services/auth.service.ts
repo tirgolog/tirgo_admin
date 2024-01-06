@@ -142,7 +142,7 @@ export class AuthService {
       return this.http.post<any>(sUrl, body);
    }
    appendOrderDriver(userid: number, price: string, orderid: number, isMerchant: boolean) {
-      const sUrl = 'http://localhost:7790' + '/admin/appendOrderDriver';
+      const sUrl = API_URL + '/admin/appendOrderDriver';
       const body = JSON.stringify({
          userid, price, orderid, isMerchant
       });
@@ -150,7 +150,7 @@ export class AuthService {
    }  
 
    acceptOrderDriver(userid: number, price: string, orderid: number, isMerchant: boolean) {
-      const sUrl = 'http://localhost:7790' + '/admin/acceptOrderDriver';
+      const sUrl = API_URL + '/admin/acceptOrderDriver';
       const body = JSON.stringify({
          userid, price, orderid, isMerchant
       });
