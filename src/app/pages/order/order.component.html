@@ -161,7 +161,7 @@
             <ng-container matColumnDef="operations">
               <mat-header-cell *matHeaderCellDef>Операции</mat-header-cell>
               <mat-cell *matCellDef="let row"> 
-                <button class="view__btn btn-green" type="button" (click)="acceptOffer(row.id, row.priceorder)" [disabled]="row.status_order > 0 || data.status > 0">
+                <button class="view__btn btn-green" style="z-index: 10;" type="button" (click)="acceptOffer(row.id, row.priceorder)" [disabled]="row.status_order > 0 || data.status > 0">
                   Принять
                 </button>
                </mat-cell>
