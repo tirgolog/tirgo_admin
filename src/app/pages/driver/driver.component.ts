@@ -64,25 +64,20 @@ export class DriverComponent {
         this.activity = this.helper.activity.filter(e => e.userid === this.user.id)
         this.namedriver = this.user.name;
     }
-
     async getAgent(id) {
         this.listService.getAgent(id).toPromise().then((res) => {
             if (res.status) {
                 this.agent = res.data;
-                console.log(this.agent)
             }
         })
     }
-
     async getSubscription(id) {
         this.listService.getSubscriptionById(id).toPromise().then((res) => {
             if (res.status) {
                 this.subscription = res.data[0];
-                console.log(this.subscription)
             }
         })
     }
-
     async updateUser() {
         let data = {
             passport_series_numbers: this.passport_series_numbers,
