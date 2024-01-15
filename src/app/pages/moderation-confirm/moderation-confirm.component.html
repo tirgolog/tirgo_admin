@@ -21,8 +21,8 @@
       </li>
 
       <li class="info">
-        <span *ngIf="data.responsiblePersonFirstName" class="info-label">Ф.И.О ответственного лица: </span><span>
-          {{ data.responsiblePersonLastName }} {{ data.responsiblePersonFirstName }}
+        <span *ngIf="data.responsiblePersonFistName && data.responsiblePersonLastName" class="info-label">Ф.И.О ответственного лица: </span><span>
+          {{ data.responsiblePersonLastName }} {{ data.responsiblePersonFistName }}
         </span>
       </li>
 
