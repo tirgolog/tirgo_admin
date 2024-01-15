@@ -252,7 +252,35 @@
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Цена:</span>
-                <span>{{ subscription?.value }}</span>
+                <span *ngIf="subscription.duration==1"> 80000 </span>
+                <span *ngIf="subscription.duration==6"> 180000 </span>
+                <span *ngIf="subscription.duration==12"> 570000 </span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>С даты:</span>
+                <span>{{ subscription?.from_subscription | date: 'dd/MM/yyyy' }}</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>На даты:</span>
+                <span>{{ subscription?.to_subscription | date: 'dd/MM/yyyy' }}</span>
+              </p>
+            </div>
+          </div>
+          <div class="view__informate view__block" *ngIf="payment&&payment?.subscription_amount">
+            <h4 class="view__title title-sec">Оплата</h4>
+            <div class="view__list">
+              <p class="tw-flex tw-justify-between">
+                <span>Баланс:</span>
+                <span>{{ payment?.subscription_amount }}</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Способ оплаты:</span>
+                <span *ngIf="payment?.pay_method=='pay_click'">Click</span>
+                <span *ngIf="payment?.pay_method=='payme_merchant'">Payme</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Дата платежа:</span>
+                <span>{{ payment?.date | date: 'dd/MM/yyyy' }}</span>
               </p>
             </div>
           </div>

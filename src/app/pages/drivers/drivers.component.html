@@ -11,6 +11,11 @@
             <button class="page-header__btn btn-green" (click)="openPush()" *ngIf="authService?.myrole?.send_push">
                Отправить пуш всем
             </button>
+
+            <button class="page-header__btn btn-green" (click)="goToAddDriverSubscription()" *ngIf="authService?.myrole?.send_push">
+               Добавить существующий драйвер подписки
+            </button>
+            
             <a (click)="goToAddDriver()" class="page-header__btn btn-green" *ngIf="authService?.myrole?.add_driver">
                Добавить
             </a>

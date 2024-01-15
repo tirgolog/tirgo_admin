@@ -132,6 +132,7 @@ import { ErrorInterceptorService } from './services/error-interceptor';
 import { AgentListComponent } from './pages/agent-list/agent-list.component';
 import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-driver.component';
 import { AgentBalanceComponent } from './pages/agent-balance/agent-balance.component';
+import { AddDriverSubscriptionComponent } from './pages/add-driver-subscription/add-driver-subscription.component';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -222,6 +223,7 @@ const mapConfig: YaConfig = {
       AgentListComponent,
       AgentListDriverComponent,
       AgentBalanceComponent,
+      AddDriverSubscriptionComponent,
    ],
    imports: [
       CommonModule,

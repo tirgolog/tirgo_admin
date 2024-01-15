@@ -101,6 +101,29 @@ export class ListService {
         }
       }));
   }
+  getSubscriptionUserById(id) {
+    const sUrl = API_URL + `/admin/user/subscription/${id}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getPaymentById(id) {
+    const sUrl = API_URL + `/admin/payment/${id}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
 
   getAllAgent() {
     const sUrl = API_URL + '/admin/getAllAgent';
@@ -250,6 +273,30 @@ export class ListService {
       }));
   }
 
+addDriverSubscription(data) {
+    const sUrl = API_URL + '/admin/addDriverSubscription';
+    const body = JSON.stringify(data);
+    return this.http.post<any>(sUrl, body)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getSearchDriverSubscription(userid) {
+    const sUrl = API_URL + `/admin/searchDriver/${userid}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data[0];
+        } else {
+          return [];
+        }
+      }));
+  }
 
   getAllSubscription() {
     const sUrl = API_URL + '/admin/subscription';
