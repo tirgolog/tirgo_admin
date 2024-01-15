@@ -13,7 +13,7 @@
             </button>
 
             <button class="page-header__btn btn-green" (click)="goToAddDriverSubscription()" *ngIf="authService?.myrole?.send_push">
-               Добавить существующий драйвер подписки
+               Оформить подписку
             </button>
             
             <a (click)="goToAddDriver()" class="page-header__btn btn-green" *ngIf="authService?.myrole?.add_driver">

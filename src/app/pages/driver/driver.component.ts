@@ -73,8 +73,7 @@ export class DriverComponent {
     async getpayment(id) {
         this.listService.getPaymentById(id).toPromise().then((res) => {
             if (res.status) {
-                this.payment = res.data[0];
-                console.log(this.payment, 'payment')
+                this.payment = res.data;
             }
         })
     }
@@ -87,9 +86,10 @@ export class DriverComponent {
     }
 
     async getSubscription(id) {
-        this.listService.getSubscriptionUserById(id).toPromise().then((res) => {
+        this.listService.getSubscriptionUserById(id, this.user.id).toPromise().then((res) => {
             if (res.status) {
                 this.subscription = res.data[0];
+                console.log(this.subscription)
             }
         })
     }

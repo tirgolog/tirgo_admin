@@ -10,7 +10,7 @@
                 <ng-container>
                     <div class="tw-flex">
                         <mat-form-field class="form__input tw-w-9/12 tw-mr-4">
-                            <mat-label>USERID</mat-label>
+                            <mat-label>ID Водителя </mat-label>
                             <input matInput [(ngModel)]="dataUser.user_id" type="number" name="user_id"  [ngModelOptions]="{standalone: true}"/>
                         </mat-form-field>
                         <button class="page-form__btn btn-green tw-w-2/12"
@@ -18,29 +18,29 @@
                     </div>
                     <br>
                     <mat-form-field class="form__input tw-w-full">
-                        <mat-label>ФИО</mat-label>
+                        <mat-label>ФИО </mat-label>
                         <input matInput type="text" name="name" readonly [(ngModel)]="dataUser.name"  [ngModelOptions]="{standalone: true}"/>
                     </mat-form-field>
                     <br>
                     <mat-form-field class="form__input tw-w-full">
-                        <mat-label>Телефон</mat-label>
+                        <mat-label>Телефон </mat-label>
                         <input matInput type="text" inputmode="tel" name="phone" readonly
                             [(ngModel)]="dataUser.phone"  [ngModelOptions]="{standalone: true}"/>
                     </mat-form-field> 
                     <br>
                     <mat-form-field class="form__input tw-w-full">
-                        <mat-label>Телефон</mat-label>
+                        <mat-label>Баланс </mat-label>
                         <input matInput type="text" name="amount" readonly [(ngModel)]="dataUser.amount"  [ngModelOptions]="{standalone: true}"/>
                     </mat-form-field>
                     <br>
                     <div class="tw-flex tw-mt-5">
                         <mat-radio-group [(ngModel)]="dataUser.subscription_id" required (change)="onChange($event)"> 
                             <mat-radio-button *ngFor="let row of subscription" [value]="row.id" class="radio-group">
-                                <div class="subscription">Тип: <span> {{ row.name | uppercase }}</span></div>
+                                <div class="subscription">Тип: <span class="tw-ml-2"> {{ row.name | uppercase }}</span></div>
                                 <div class="subscription"> Цена: 
-                                    <span *ngIf="row.duration==1"> 80000 </span>
-                                    <span *ngIf="row.duration==6"> 180000 </span>
-                                    <span *ngIf="row.duration==12"> 570000 </span>
+                                    <span class="tw-ml-2" *ngIf="row.duration==1"> 80 000  Сум</span>
+                                    <span class="tw-ml-2"  *ngIf="row.duration==3"> 180 000  Сум</span>
+                                    <span class="tw-ml-2" *ngIf="row.duration==12"> 570 000  Сум</span>
                                 </div>
                             </mat-radio-button>
                         </mat-radio-group>

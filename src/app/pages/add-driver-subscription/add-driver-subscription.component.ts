@@ -56,9 +56,8 @@ export class AddDriverSubscriptionComponent implements OnInit {
       const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
       if (confirm) {
         await this.listService.addDriverSubscription(this.dataUser).subscribe(res => {
-          console.log(res.status)
           if (res.status) {
-            this.toastr.success('Пользователь успешно добавлен')
+            this.toastr.success('Подписка успешно добавлена')
             this.dialog.closeAll();
             this.loading = false;
           } else {

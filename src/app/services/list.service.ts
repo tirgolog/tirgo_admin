@@ -101,8 +101,8 @@ export class ListService {
         }
       }));
   }
-  getSubscriptionUserById(id) {
-    const sUrl = API_URL + `/admin/user/subscription/${id}`;
+  getSubscriptionUserById(id, userid) {
+    const sUrl = API_URL + `/admin/user/subscription/${id}/${userid}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res) {
