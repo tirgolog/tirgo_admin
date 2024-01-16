@@ -127,10 +127,11 @@ export class AuthService {
       });
       return this.http.post<any>(sUrl, body);
    }
-   closeOrder(orderid: any) {
+   closeOrder(orderid: any, isMerchant: boolean) {
       const sUrl = API_URL + '/admin/closeOrder';
       const body = JSON.stringify({
-         orderid
+         orderid,
+         isMerchant
       });
       return this.http.post<any>(sUrl, body);
    }
