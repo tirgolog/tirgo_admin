@@ -37,7 +37,7 @@ export class OrderComponent {
     if (typeof this.data.id == 'string' && this.data.id.includes('M')) {
       const res = await this.listService.getOrdersByMerchant(this.data.merchant.id).toPromise();
       if (res.success) {
-        this.data = res.data.filter(item => item.id === this.data.id)[0];        
+        this.data = res.data.find(item => item.id === this.data.id) || null;
       }
     } else {
       const res = await this.authService.getOrderInfo(this.data.id).toPromise();
@@ -50,9 +50,6 @@ export class OrderComponent {
         }
       }
     }
-
-
-
   }
   returnStatus(status: number) {
     switch (status) {
@@ -142,7 +139,7 @@ export class OrderComponent {
   async saveNewDriver() {
     if (this.driverid !== 0 && this.price !== '') {
       const orderId = this.data.id.toString().split('M')[1] ? +this.data.id.toString().split('M')[1] : this.data.id;
-      const res = await this.authService.acceptOrderDriver(this.driverid, this.price, orderId, this.data.isMerchant).toPromise();
+      const res = await this.authService.appendOrderDriver(this.driverid, this.price, orderId, this.data.isMerchant).toPromise();
       console.log(res);
 
       if (res.status) {
@@ -163,5 +160,33 @@ export class OrderComponent {
     } else {
       this.toastr.error('Невозможно назначить водителя. Не все поля заполнены')
     }
+  }
+
+  async acceptOffer(driverid: any, price: any) {
+    if (driverid !== 0 && price !== '') {
+      const orderId = this.data.id.toString().split('M')[1] ? +this.data.id.toString().split('M')[1] : this.data.id;
+      const res = await this.authService.acceptOrderDriver(driverid, price, orderId, this.data.isMerchant).toPromise();
+
+      if (res.status) {
+        this.toastr.success('Водитель успешно принят')
+        const res = await this.authService.getOrderInfo(this.data.id).toPromise();
+        if (res.status) {
+          this.data = res.data;
+          const index = this.helper.orders.findIndex(e => e.id === +this.data.id)
+          if (index >= 0) {
+            this.helper.orders[index] = res.data;
+          }
+        }
+        this.selectdriver = !this.selectdriver
+      } else {
+        this.toastr.error(res.error)
+      }
+    } else {
+      this.toastr.error('Невозможно принят водителя. Не все поля заполнены')
+    }
+  }
+
+  rejectOffer() {
+
   }
 }

@@ -12,77 +12,66 @@
   <section class="page-header__top">
     <ul class="info-wrapper" *ngIf="data">
       <li class="info">
-        <span *ngIf="data.companyName" class="info-label"
-          >Название компании: </span
-        ><span>{{ data.companyName }}</span>
+        <span *ngIf="data.companyName" class="info-label">Название компании: </span><span>{{ data.companyName }}</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.supervisorFullName" class="info-label"
-          >Ф.И.О руководителя: </span
-        ><span>{{ data.supervisorFullName }}</span>
-      </li>
-
-      <li class="info" *ngFor="let phone of data.phoneNumbers">
-        <span *ngIf="phone" class="info-label">Телефон: </span
-        ><span>+{{ phone }}</span>
+        <span *ngIf="data.supervisorFirstName" class="info-label">Ф.И.О руководителя: </span><span>
+          {{ data.supervisorLastName }} {{ data.supervisorFirstName }} </span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.legalAddress" class="info-label"
-          >Юридический адрес: </span
-        ><span>{{ data.legalAddress }}</span>
+        <span *ngIf="data.responsiblePersonFistName && data.responsiblePersonLastName" class="info-label">Ф.И.О ответственного лица: </span><span>
+          {{ data.responsiblePersonLastName }} {{ data.responsiblePersonFistName }}
+        </span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.factAddress" class="info-label"
-          >Фактический адрес: </span
-        ><span>{{ data.factAddress }}</span>
+        <span *ngIf="data.phoneNumber" class="info-label">Телефон: </span><span>+998 {{ data.phoneNumber }}</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.email" class="info-label">Электронная почта: </span
-        ><span>{{ data.email }}</span>
+        <span *ngIf="data.legalAddress" class="info-label">Юридический адрес: </span><span>{{ data.legalAddress
+          }}</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.bankName" class="info-label"
-          >Наименование банка: </span
-        ><span>{{ data.bankName }}</span>
+        <span *ngIf="data.factAddress" class="info-label">Фактический адрес: </span><span>{{ data.factAddress }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.email" class="info-label">Электронная почта: </span><span>{{ data.email }}</span>
+      </li>
+
+      <li class="info">
+        <span *ngIf="data.bankName" class="info-label">Наименование банка: </span><span>{{ data.bankName }}</span>
       </li>
 
       <li class="info" *ngFor="let item of data.bankAccounts">
-        <span class="info-label"
-          >Расчётный счет: </span
-        ><span>{{ item.account }} ({{item.currencyName}})</span>
+        <span class="info-label">Расчётный счет: </span><span>{{ item.account }} ({{item.currencyName}})</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.inn" class="info-label">ИНН: </span
-        ><span>{{ data.inn }}</span>
+        <span *ngIf="data.inn" class="info-label">ИНН: </span><span>{{ data.inn }}</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.oked" class="info-label">ОКЭД: </span
-        ><span>{{ data.oked }}</span>
+        <span *ngIf="data.oked" class="info-label">ОКЭД: </span><span>{{ data.oked }}</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.mfo" class="info-label">МФО: </span
-        ><span>{{ data.mfo }}</span>
+        <span *ngIf="data.mfo" class="info-label">МФО: </span><span>{{ data.mfo }}</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.dunsNumber" class="info-label">DUNS номер: </span
-        ><span>{{ data.dunsNumber }}</span>
+        <span *ngIf="data.dunsNumber" class="info-label">DUNS номер: </span><span>{{ data.dunsNumber }}</span>
       </li>
 
       <li class="info">
-        <span *ngIf="data.notes" class="info-label">Заметки: </span
-        ><span>{{ data.notes }}</span>
+        <span *ngIf="data.notes" class="info-label">Заметки: </span><span>{{ data.notes }}</span>
       </li>
 
-      
+
     </ul>
 
     <div class="tw-grid tw-gap-5 tw-content-start" style="display: flex;">

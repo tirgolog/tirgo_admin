@@ -84,16 +84,13 @@ export class DriverComponent {
             }
         })
     }
-
     async getSubscription(id) {
         this.listService.getSubscriptionUserById(id, this.user.id).toPromise().then((res) => {
             if (res.status) {
                 this.subscription = res.data[0];
-                console.log(this.subscription)
             }
         })
     }
-
     async updateUser() {
         let data = {
             passport_series_numbers: this.passport_series_numbers,

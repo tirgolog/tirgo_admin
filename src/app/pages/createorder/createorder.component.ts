@@ -13,7 +13,7 @@ import {ToastrService} from "ngx-toastr";
 export class CreateorderComponent {
   findList: any[] | undefined = [];
   viewText = false;
-  time:string = '';
+  time:any;
   citystart: string = '';
   cityfinish: string = '';
   data = {
@@ -37,7 +37,7 @@ export class CreateorderComponent {
     city_finish: '',
     finish_lat:'',
     finish_lng:'',
-    date_start: new Date()
+    date_start: new Date() || undefined
   }
   constructor(
       public helper: HelperService,
@@ -46,6 +46,9 @@ export class CreateorderComponent {
       private authService: AuthService,
       public listService: ListService
   ) {
+    const currentTime = new Date();
+    currentTime.setTime(currentTime.getTime() + 240 * 1000);
+    this.time = currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
   returnCity(city:string){
     if (city){
@@ -56,7 +59,6 @@ export class CreateorderComponent {
   }
   async findCity(ev:any) {
     const findText = ev.target.value.toString().trim().toLowerCase();
-    console.log(findText)
     if (findText.length >= 2) {
       this.viewText = true;
       this.findList = await this.authService.findCity(findText).toPromise();
@@ -81,7 +83,7 @@ export class CreateorderComponent {
     
     const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите создать заказ?', 2)
     if (confirm){
-      await this.helper.loadingCreate();
+      await this.helper.loadingCreate();  
       const time = this.time.split(":");
       this.data.date_start = new Date(new Date(this.data.date_start).setHours(+time[0],+time[1],0,0));
       this.data.userid = this.data.userid.split(' - ')[0];
@@ -97,11 +99,16 @@ export class CreateorderComponent {
       this.data.finish_lng = this.cityfinish.split(':')[3];
       
     }
-
+    
     if (new Date(this.data.date_start).getTime() < new Date().getTime()){
       await this.helper.loadingClose();
       this.toastr.error('Выбранная дата не может быть меньше текущей даты.')
-    }else {
+    }
+    else if(this.time == '') {
+      await this.helper.loadingClose();
+      this.toastr.error('Виберите время отправки груза.')
+    }
+    else {
       try {
         const res = await this.authService.createOrder(this.data).toPromise()
         if (res.status){
@@ -119,15 +126,8 @@ export class CreateorderComponent {
   isInvalidDate(): boolean {
     const selectedDate = new Date(this.data.date_start);
     const currentDate = new Date();
-  
-    // Set time part to midnight for both dates
     selectedDate.setHours(0, 0, 0, 0);
     currentDate.setHours(0, 0, 0, 0);
-  
-    console.log('Selected Date:', selectedDate.toISOString());
-    console.log('Current Date:', currentDate.toISOString());
-  
-    // Compare the timestamps
     if (selectedDate.getTime() <= currentDate.getTime()) {
       return true;
     } else {
