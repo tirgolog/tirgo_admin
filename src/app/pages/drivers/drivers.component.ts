@@ -9,6 +9,7 @@ import { DriverComponent } from "../driver/driver.component";
 import { AddDriverComponent } from "../add-driver/add-driver.component";
 import { ListService } from "../../services/list.service";
 import { SocketService } from "src/app/services/socket.service";
+import { AddDriverSubscriptionComponent } from "../add-driver-subscription/add-driver-subscription.component";
 
 @Component({
   selector: "app-drivers",
@@ -96,6 +97,20 @@ export class DriversComponent {
          this.gridOptions.api.setRowData(this.drivers)
       })*/
   }
+
+  goToAddDriverSubscription(): void {
+    const dialogRef = this.dialog.open(AddDriverSubscriptionComponent, {
+      width: "30%",
+      minHeight: "400px",
+      panelClass: "custom-dialog-class",
+    });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      await this.updateListDrivers();
+      this.gridOptions.api.setRowData(this.drivers);
+    });
+  }
+
+
   goToAddDriver(): void {
     const dialogRef = this.dialog.open(AddDriverComponent, {
       width: "90%",

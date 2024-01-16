@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 const API_URL = 'https://admin.tirgo.io/api'
 const MER_API = "https://merchant.tirgo.io/api/v1"
@@ -46,7 +46,7 @@ export class ListService {
     return this.http.post<any>(sUrl, body);
   }
 
-  getAllDriversAgent(from: number, limit: number,  agent_id) {
+  getAllDriversAgent(from: number, limit: number, agent_id) {
     const sUrl = API_URL + '/reborn/getAllDriversByAgent';
     const body = JSON.stringify({
       from, limit, agent_id,
@@ -92,6 +92,29 @@ export class ListService {
 
   getSubscriptionById(id) {
     const sUrl = API_URL + `/admin/subscription/${id}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+  getSubscriptionUserById(id, userid) {
+    const sUrl = API_URL + `/admin/user/subscription/${id}/${userid}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getPaymentById(id) {
+    const sUrl = API_URL + `/admin/payment/${id}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res) {
@@ -250,6 +273,30 @@ export class ListService {
       }));
   }
 
+  addDriverSubscription(data) {
+    const sUrl = API_URL + '/admin/addDriverSubscription';
+    const body = JSON.stringify(data);
+    return this.http.post<any>(sUrl, body)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getSearchDriverSubscription(userid) {
+    const sUrl = API_URL + `/admin/searchDriver/${userid}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data[0];
+        } else {
+          return [];
+        }
+      }));
+  }
 
   getAllSubscription() {
     const sUrl = API_URL + '/admin/subscription';
@@ -262,7 +309,7 @@ export class ListService {
         }
       }));
   }
-  
+
   getSecureTrans() {
     const sUrl = API_URL + '/admin/getSecureTrans';
     const body = JSON.stringify({});
