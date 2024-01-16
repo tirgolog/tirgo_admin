@@ -26,6 +26,7 @@ export class DriverComponent {
     user: any;
     agent: any;
     subscription: any;
+    payment: any;
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialog: MatDialog,
@@ -55,6 +56,9 @@ export class DriverComponent {
         if (this.user.agent_id) {
             this.getAgent(this.user.agent_id)
         }
+        if (this.user.id) {
+            this.getpayment(this.user.id)
+        }
         if (this.user.subscription_id) {
             this.getSubscription(this.user.subscription_id)
         }
@@ -64,6 +68,15 @@ export class DriverComponent {
         this.activity = this.helper.activity.filter(e => e.userid === this.user.id)
         this.namedriver = this.user.name;
     }
+
+
+    async getpayment(id) {
+        this.listService.getPaymentById(id).toPromise().then((res) => {
+            if (res.status) {
+                this.payment = res.data;
+            }
+        })
+    }
     async getAgent(id) {
         this.listService.getAgent(id).toPromise().then((res) => {
             if (res.status) {
@@ -72,7 +85,7 @@ export class DriverComponent {
         })
     }
     async getSubscription(id) {
-        this.listService.getSubscriptionById(id).toPromise().then((res) => {
+        this.listService.getSubscriptionUserById(id, this.user.id).toPromise().then((res) => {
             if (res.status) {
                 this.subscription = res.data[0];
             }
