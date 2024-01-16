@@ -38,9 +38,9 @@
                             <mat-radio-button *ngFor="let row of subscription" [value]="row.id" class="radio-group">
                                 <div class="subscription">Тип: <span class="tw-ml-2"> {{ row.name | uppercase }}</span></div>
                                 <div class="subscription"> Цена: 
-                                    <span class="tw-ml-2" *ngIf="row.duration==1"> 80 000  Сум</span>
-                                    <span class="tw-ml-2"  *ngIf="row.duration==3"> 180 000  Сум</span>
-                                    <span class="tw-ml-2" *ngIf="row.duration==12"> 570 000  Сум</span>
+                                    <span class="tw-ml-2" *ngIf="row?.duration==1"> 80 000  сум</span>
+                                    <span class="tw-ml-2"  *ngIf="row?.duration==3"> 180 000  сум</span>
+                                    <span class="tw-ml-2" *ngIf="row?.duration==12"> 570 000  сум</span>
                                 </div>
                             </mat-radio-button>
                         </mat-radio-group>

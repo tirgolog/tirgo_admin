@@ -252,26 +252,30 @@
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Цена:</span>
-                <span *ngIf="subscription.duration==1"> 80 000  Сум</span>
-                <span *ngIf="subscription.duration==3"> 180 000  Сум</span>
-                <span *ngIf="subscription.duration==12"> 570 000  Сум</span>
+                <span *ngIf="subscription?.duration==1"> 80 000 сум</span>
+                <span *ngIf="subscription?.duration==3"> 180 000 сум</span>
+                <span *ngIf="subscription?.duration==12"> 570 000 сум</span>
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>С даты:</span>
                 <span>{{ subscription?.from_subscription | formatTime : "DD MMMM YYYY в HH:mm" }}</span>
               </p>
               <p class="tw-flex tw-justify-between">
-                <span>На даты:</span>
+                <span>Действие до:</span>
                 <span>{{ subscription?.to_subscription | formatTime : "DD MMMM YYYY в HH:mm" }}</span>
               </p>
             </div>
           </div>
           <div class="view__informate view__block" *ngFor="let row of payment">
-            <h4 class="view__title title-sec">Оплата</h4>
+            <h4 class="view__title title-sec">Платежи</h4>
             <div class="view__list">
               <p class="tw-flex tw-justify-between">
-                <span>Баланс:</span>
-                <span>{{ row?.amount }}</span>  
+                <span>Всего оплачено:</span>
+                <span>{{ row?.amount | thousandSeparator }} сум</span>
+              </p>
+              <p class="tw-flex tw-justify-between">
+                <span>Текущий баланс:</span>
+                <span>{{ row?.current_amount | thousandSeparator }} сум</span>
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Способ оплаты:</span>

@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 const API_URL = 'https://admin.tirgo.io/api'
 const MER_API = "https://merchant.tirgo.io/api/v1"
@@ -46,7 +46,7 @@ export class ListService {
     return this.http.post<any>(sUrl, body);
   }
 
-  getAllDriversAgent(from: number, limit: number,  agent_id) {
+  getAllDriversAgent(from: number, limit: number, agent_id) {
     const sUrl = API_URL + '/reborn/getAllDriversByAgent';
     const body = JSON.stringify({
       from, limit, agent_id,
@@ -273,7 +273,7 @@ export class ListService {
       }));
   }
 
-addDriverSubscription(data) {
+  addDriverSubscription(data) {
     const sUrl = API_URL + '/admin/addDriverSubscription';
     const body = JSON.stringify(data);
     return this.http.post<any>(sUrl, body)
@@ -309,7 +309,7 @@ addDriverSubscription(data) {
         }
       }));
   }
-  
+
   getSecureTrans() {
     const sUrl = API_URL + '/admin/getSecureTrans';
     const body = JSON.stringify({});
