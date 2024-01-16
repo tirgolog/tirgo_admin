@@ -40,8 +40,35 @@
           <div class="dynamic-inputs-wrapper">
             <div class="dynamic-inputs">
               <mat-form-field class="form__input">
-                <mat-label>Ф.И.О руководителя</mat-label>
-                <input required matInput name="supervisorFullName" [(ngModel)]="data.supervisorFullName" />
+                <mat-label>Имя руководителя</mat-label>
+                <input required matInput name="supervisorFirstName" [(ngModel)]="data.supervisorFirstName" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="dynamic-inputs-wrapper">
+            <div class="dynamic-inputs">
+              <mat-form-field class="form__input">
+                <mat-label>Фамилия руководителя</mat-label>
+                <input required matInput name="supervisorLastName" [(ngModel)]="data.supervisorLastName" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="dynamic-inputs-wrapper">
+            <div class="dynamic-inputs">
+              <mat-form-field class="form__input">
+                <mat-label>Имя Ответственного лица</mat-label>
+                <input required matInput name="responsiblePersonFistName" [(ngModel)]="data.responsiblePersonFistName" />
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="dynamic-inputs-wrapper">
+            <div class="dynamic-inputs">
+              <mat-form-field class="form__input">
+                <mat-label>Фамилия Ответственного лица</mat-label>
+                <input matInput name="responsiblePersonLastName" [(ngModel)]="data.responsiblePersonLastName" required />
               </mat-form-field>
             </div>
           </div>
@@ -104,11 +131,11 @@
           </div>
 
           <div class="dynamic-inputs-wrapper">
-            <div class="dynamic-inputs" *ngFor="let phone of data.phoneNumbers; let i = index">
+            <div class="dynamic-inputs">
               <mat-form-field class="form__input">
                 <mat-label>Телефон</mat-label>
-                <input matInput type="text" name="phoneNumbers_[i]" mask="+999999999999"
-                  [(ngModel)]="data.phoneNumbers[i]" required />
+                <input matInput type="text" name="phoneNumber" mask="+999999999999"
+                  [(ngModel)]="data.phoneNumber" required />
               </mat-form-field>
             </div>
           </div>
@@ -215,7 +242,7 @@
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          {{ row.merchant.supervisorFullName }}
+          {{ row.merchant.supervisorFirstName }} {{ row.merchant.supervisorLastName }} 
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="summa">
