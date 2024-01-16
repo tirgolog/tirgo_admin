@@ -40,7 +40,7 @@ export class SidebarComponent {
    }
    async refreshAll(){
       this.authService.globalLoading = true;
-      // await this.app.checkSession();
+      await this.app.checkSession();
       this.authService.globalLoading = false;
    }
 }

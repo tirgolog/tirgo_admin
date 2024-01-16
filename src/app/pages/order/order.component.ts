@@ -94,6 +94,7 @@ export class OrderComponent {
     });
   }
   async closeOrder() {
+
     const orderId = this.data.id.toString().split('M')[1] ? +this.data.id.toString().split('M')[1] : this.data.id;
     const res = await this.authService.closeOrder(orderId, this.data.isMerchant).toPromise();
     if (res.status) {
