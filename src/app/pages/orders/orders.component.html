@@ -70,7 +70,7 @@
         <mat-header-cell *matHeaderCellDef>Клиент</mat-header-cell>
         <mat-cell *matCellDef="let row">
           <span *ngIf="!row.isMerchant">{{ row.userinfo?.name }}</span>
-          <span *ngIf="row.isMerchant">{{ row.merchant?.supervisorFullName }}</span>
+          <span *ngIf="row.isMerchant">{{ row.merchant?.companyName }}</span>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="route.from_city">
