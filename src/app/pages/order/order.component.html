@@ -4,8 +4,8 @@
       <h2 class="page-header__title title">Подробнее о заказе</h2>
     </div>
   </section>
-  <section class="view__main">  
-    
+  <section class="view__main">
+
     <div class="tw-grid tw-gap-5 tw-content-start">
       <div class="view__informate view__block">
         <h4 class="view__title title-sec">Информация</h4>
@@ -41,7 +41,9 @@
               <span *ngIf="!data.isMerchant && !data.transport_types">
                 {{ helper.returnNameTypeTransport(data.transport_type) }}
               </span>
-              <span *ngIf="data.isMerchant">{{ data.transportType?.name }}</span>
+              <span *ngIf="data.isMerchant">
+                <span *ngFor="let item of data.transportTypes">{{helper.returnNameTypeTransport(item.code)}} <br></span>
+              </span>
             </p>
             <p class="tw-flex tw-justify-between">
               <span>Размер груза:</span>
@@ -140,9 +142,9 @@
           <mat-table [dataSource]="data.acceptedOrders">
             <ng-container matColumnDef="id">
               <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
-              <mat-cell *matCellDef="let row"> 
-                <span *ngIf="data.isMerchant">{{row.user_id}}</span> 
-                <span *ngIf="!data.isMerchant">{{row.id}} </span>  
+              <mat-cell *matCellDef="let row">
+                <span *ngIf="data.isMerchant">{{row.user_id}}</span>
+                <span *ngIf="!data.isMerchant">{{row.id}} </span>
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="name">
@@ -160,16 +162,17 @@
             <ng-container matColumnDef="date_create_accepted">
               <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
               <mat-cell *matCellDef="let row">
-                <span *ngIf="!data.isMerchant">{{row.date_create_accepted | formatTime: 'DD.MM.YYYY'}} </span> 
-                </mat-cell>
+                <span *ngIf="!data.isMerchant">{{row.date_create_accepted | formatTime: 'DD.MM.YYYY'}} </span>
+              </mat-cell>
             </ng-container>
             <ng-container matColumnDef="operations">
               <mat-header-cell *matHeaderCellDef>Операции</mat-header-cell>
-              <mat-cell *matCellDef="let row"> 
-                <button class="view__btn btn-green" style="z-index: 10;" type="button" (click)="acceptOffer(row.id, row.priceorder)" [disabled]="row.status_order > 0 || data.status > 0">
+              <mat-cell *matCellDef="let row">
+                <button class="view__btn btn-green" style="z-index: 10;" type="button"
+                  (click)="acceptOffer(row.id, row.priceorder)" [disabled]="row.status_order > 0 || data.status > 0">
                   Принять
                 </button>
-               </mat-cell>
+              </mat-cell>
             </ng-container>
 
             <mat-header-row
@@ -188,10 +191,9 @@
       </ya-map>
 
       <ya-map *ngIf="data.isMerchant" [center]="[data.start_lat, data.start_lng]" [zoom]="12">
-        <ya-multiroute
-                [referencePoints]="[[data.start_lat, data.start_lng], [data.finish_lat, data.finish_lng]]">
+        <ya-multiroute [referencePoints]="[[data.start_lat, data.start_lng], [data.finish_lat, data.finish_lng]]">
         </ya-multiroute>
-     </ya-map>
+      </ya-map>
     </div>
   </section>
 </main>
