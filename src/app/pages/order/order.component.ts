@@ -94,10 +94,9 @@ export class OrderComponent {
     });
   }
   async closeOrder() {
-    console.log(+this.data.id.toString().split('M')[1]);
-    
+
     const orderId = this.data.id.toString().split('M')[1] ? +this.data.id.toString().split('M')[1] : this.data.id;
-    const res = await this.authService.closeOrder(orderId).toPromise();
+    const res = await this.authService.closeOrder(orderId, this.data.isMerchant).toPromise();
     if (res.status) {
       this.toastr.success('Заказ успешно отменен')
       const res = await this.authService.getOrderInfo(this.data.id).toPromise();
