@@ -70,8 +70,8 @@ export class DriverComponent {
     }
 
 
-    async getpayment(id) {
-        this.listService.getPaymentById(id).toPromise().then((res) => {
+    async getpayment(userid) {
+        this.listService.getPaymentByUserId(userid).toPromise().then((res) => {
             if (res.status) {
                 this.payment = res.data;
             }

@@ -113,7 +113,7 @@ export class ListService {
       }));
   }
 
-  getPaymentById(id) {
+  getPaymentByUserId(id) {
     const sUrl = API_URL + `/admin/payment/${id}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {

@@ -274,10 +274,6 @@
                 <span>{{ row?.amount | thousandSeparator }} сум</span>
               </p>
               <p class="tw-flex tw-justify-between">
-                <span>Текущий баланс:</span>
-                <span>{{ row?.current_amount | thousandSeparator }} сум</span>
-              </p>
-              <p class="tw-flex tw-justify-between">
                 <span>Способ оплаты:</span>
                 <span *ngIf="row?.pay_method=='pay_click'">Click</span>
                 <span *ngIf="row?.pay_method=='payme_merchant'">Payme</span>
