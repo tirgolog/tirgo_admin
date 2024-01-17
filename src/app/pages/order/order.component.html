@@ -137,9 +137,9 @@
             </button>
           </div>
         </span>
-        <ng-container *ngIf="data.acceptedOrders && data.acceptedOrders.length">
+        <ng-container *ngIf="data.orders_accepted && data.orders_accepted.length">
           <h4 class="view__title title-sec">Предложения</h4>
-          <mat-table [dataSource]="data.acceptedOrders">
+          <mat-table [dataSource]="data.orders_accepted">
             <ng-container matColumnDef="id">
               <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
               <mat-cell *matCellDef="let row">
@@ -176,9 +176,11 @@
             </ng-container>
 
             <mat-header-row
-              *matHeaderRowDef="['id', 'name', 'priceorder', 'status_order', 'date_create_accepted', 'operations']"></mat-header-row>
+              *matHeaderRowDef="['id', 'name', 'priceorder', 'status_order', 'date_create_accepted', 'operations']">
+            </mat-header-row>
             <mat-row (click)="viewUser(row.id)"
-              *matRowDef="let row; columns: ['id', 'name', 'priceorder', 'status_order', 'date_create_accepted', 'operations']"></mat-row>
+              *matRowDef="let row; columns: ['id', 'name', 'priceorder', 'status_order', 'date_create_accepted', 'operations']">
+            </mat-row>
           </mat-table>
         </ng-container>
       </div>
