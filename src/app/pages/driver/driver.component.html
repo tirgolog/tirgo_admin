@@ -266,16 +266,12 @@
               </p>
             </div>
           </div>
-          <div class="view__informate view__block" *ngFor="let row of payment">
+          <div class="view__informate view__block" *ngIf="payment.length>0">
             <h4 class="view__title title-sec">Платежи</h4>
-            <div class="view__list">
+            <div class="view__list tw-mb-4" *ngFor="let row of payment">
               <p class="tw-flex tw-justify-between">
                 <span>Всего оплачено:</span>
                 <span>{{ row?.amount | thousandSeparator }} сум</span>
-              </p>
-              <p class="tw-flex tw-justify-between">
-                <span>Текущий баланс:</span>
-                <span>{{ row?.current_amount | thousandSeparator }} сум</span>
               </p>
               <p class="tw-flex tw-justify-between">
                 <span>Способ оплаты:</span>
