@@ -38,18 +38,20 @@ export class OrderComponent {
       const res = await this.listService.getOrdersByMerchant(this.data.merchant.id).toPromise();
       if (res.success) {
         this.data = res.data.find(item => item.id === this.data.id) || null;
-      }
-    } else {
-      const res = await this.authService.getOrderInfo(this.data.id).toPromise();
-      if (res.status) {
-        res.data.transport_types = JSON.parse(res.data.transport_types)
-        this.data = res.data;
-        const index = this.helper.orders.findIndex(e => e.id === +this.data.id)
-        if (index >= 0) {
-          this.helper.orders[index] = res.data;
-        }
+        this.data.orders_accepted = this.data.acceptedOrders
       }
     }
+    // else {
+    //   const res = await this.authService.getOrderInfo(this.data.id).toPromise();
+    //   if (res.status) {
+    //     res.data.transport_types = JSON.parse(res.data.transport_types)
+    //     this.data = res.data;
+    //     const index = this.helper.orders.findIndex(e => e.id === +this.data.id)
+    //     if (index >= 0) {
+    //       this.helper.orders[index] = res.data;
+    //     }
+    //   }
+    // }
   }
   returnStatus(status: number) {
     switch (status) {
