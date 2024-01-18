@@ -33,23 +33,18 @@ export class AddDriverSubscriptionComponent implements OnInit {
   }
 
   onChange(event: any) {
-    console.log(event)
     this.dataUser.subscription_id = event.value;
-    console.log('Selected Subscription ID:', this.dataUser.subscription_id);
   }
 
-
   async searchUser(user_id) {
-    console.log(user_id)
     this.listService.getSearchDriverSubscription(user_id).subscribe(res => {
-      console.log(res)
-      this.dataUser.amount = res.amount;
+      this.dataUser.amount = res.balance;
       this.dataUser.phone = res.phone;
       this.dataUser.name = res.name;
     })
   }
+
   async addUser() {
-    console.log(this.dataUser.subscription_id)
     if (!this.dataUser.name || !this.dataUser.phone || !this.dataUser.user_id || !this.dataUser.subscription_id) {
       await this.helper.openDialogConfirm('Ошибка', 'Не все поля заполнены корректно', 1)
     } else {

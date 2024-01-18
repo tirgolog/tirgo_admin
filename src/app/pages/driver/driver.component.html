@@ -266,22 +266,24 @@
               </p>
             </div>
           </div>
-          <div class="view__informate view__block" *ngIf="payment.length>0">
-            <h4 class="view__title title-sec">Платежи</h4>
-            <div class="view__list tw-mb-4" *ngFor="let row of payment">
+          <div class="view__informate view__block" *ngIf="payment">
+            <h4 class="view__title title-sec">Баланс</h4>
+            <div class="view__list tw-mb-4"  >
               <p class="tw-flex tw-justify-between">
-                <span>Всего оплачено:</span>
-                <span>{{ row?.amount | thousandSeparator }} сум</span>
+                <span>Активные средства: </span>
+                <span>{{ payment?.balance | thousandSeparator }} сум</span>
               </p>
               <p class="tw-flex tw-justify-between">
-                <span>Способ оплаты:</span>
-                <span *ngIf="row?.pay_method=='pay_click'">Click</span>
-                <span *ngIf="row?.pay_method=='payme_merchant'">Payme</span>
+                <span>Средства на запросе: </span>
+                <span>{{ payment?.balance_in_proccess | thousandSeparator }} сум</span>
               </p>
               <p class="tw-flex tw-justify-between">
-                <span>Дата платежа:</span>
-                <span>{{ row?.date | formatTime : "DD MMMM YYYY в HH:mm" }}</span>
+                <span>Замороженные средства: </span>
+                <span>{{ payment?.balance_off | thousandSeparator }} сум</span>
               </p>
+              <button class="view__btn btn-green"  routerLink="drivers-payment-list/{{ user?.id }}" (click)="dialog.closeAll()">
+                История платежей
+              </button>
             </div>
           </div>
         </div>

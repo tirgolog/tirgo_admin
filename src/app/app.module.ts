@@ -134,6 +134,8 @@ import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-d
 import { AgentBalanceComponent } from './pages/agent-balance/agent-balance.component';
 import { AddDriverSubscriptionComponent } from './pages/add-driver-subscription/add-driver-subscription.component';
 import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
+import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-payment-list.component';
+import {MatTabsModule} from '@angular/material/tabs';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -226,6 +228,7 @@ const mapConfig: YaConfig = {
       AgentListDriverComponent,
       AgentBalanceComponent,
       AddDriverSubscriptionComponent,
+      DriverPaymentListComponent,
    ],
    imports: [
       CommonModule,
@@ -266,7 +269,8 @@ const mapConfig: YaConfig = {
       ReactiveFormsModule,
       ToastrModule.forRoot(),
       MatExpansionModule,
-      AgGridModule,
+      MatTabsModule,
+      AgGridModule
    ],
 
    providers: [

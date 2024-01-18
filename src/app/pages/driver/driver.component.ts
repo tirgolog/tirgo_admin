@@ -73,6 +73,7 @@ export class DriverComponent {
     async getpayment(userid) {
         this.listService.getPaymentByUserId(userid).toPromise().then((res) => {
             if (res.status) {
+                console.log(res.data);
                 this.payment = res.data;
             }
         })
