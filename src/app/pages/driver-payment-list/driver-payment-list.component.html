@@ -1,0 +1,69 @@
+<main class="drivers">
+   <section class="page-header">
+      <div class="page-header__top">
+         <h2 class="page-header__title title">Список платежей</h2>
+      </div>
+   </section>
+   <section class="table">
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="500ms">
+         <mat-tab label="Переводы">
+            <mat-table [dataSource]="payments">
+               <ng-container matColumnDef="amount">
+                  <mat-header-cell *matHeaderCellDef>Сумма </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.amount | thousandSeparator}} сум </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="type">
+                  <mat-header-cell *matHeaderCellDef>Способ </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                     <span *ngIf="row?.pay_method=='pay_click'">Click</span>
+                     <span *ngIf="row?.pay_method=='payme_merchant'">Payme</span>
+                  </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="date">
+                  <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.date | formatTime : "DD MMMM YYYY в HH:mm" }} </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="overallSum">
+                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                  <mat-cell *matCellDef="let row"></mat-cell>
+                  <mat-footer-cell *matFooterCellDef>Общий: {{ getOverallSum('amount') | thousandSeparator }} сум</mat-footer-cell>
+                </ng-container>
+               <mat-header-row *matHeaderRowDef="['amount', 'type', 'date']"></mat-header-row>
+               <mat-row *matRowDef="let row; columns: ['amount', 'type', 'date']"></mat-row>
+               <mat-footer-row *matFooterRowDef="['overallSum']"></mat-footer-row>
+            </mat-table>
+            <mat-paginator [length]="payments_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+               (page)="handlePage($event)"></mat-paginator>
+         </mat-tab>
+         <mat-tab label="Дебет">
+            <mat-table [dataSource]="withdraw_payments">
+               <ng-container matColumnDef="amount">
+                  <mat-header-cell *matHeaderCellDef>Сумма </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.amount | thousandSeparator}} сум </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="type">
+                  <mat-header-cell *matHeaderCellDef>Способ </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                     {{row?.withdraw_type}}
+                  </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="date">
+                  <mat-header-cell *matHeaderCellDef>Дата</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row?.created_at | formatTime : "DD MMMM YYYY в HH:mm" }}
+                  </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="overallSum">
+                  <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                  <mat-cell *matCellDef="let row"></mat-cell>
+                  <mat-footer-cell *matFooterCellDef>Общий: {{ getOverallWithdrawSum('amount') | thousandSeparator }} сум</mat-footer-cell>
+                </ng-container>
+               <mat-header-row *matHeaderRowDef="['amount', 'type', 'date']"></mat-header-row>
+               <mat-row *matRowDef="let row; columns: ['amount', 'type', 'date']"></mat-row>
+               <mat-footer-row *matFooterRowDef="['overallSum']"></mat-footer-row>
+            </mat-table>
+            <mat-paginator [length]="withdraw_payments_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+               (page)="handlePagewithdraw($event)"></mat-paginator></mat-tab>
+      </mat-tab-group>
+
+   </section>
+</main>

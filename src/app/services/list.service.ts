@@ -46,6 +46,22 @@ export class ListService {
     return this.http.post<any>(sUrl, body);
   }
 
+  getAllPaymentDrivers(from: number, limit: number, userid: number) {
+    const sUrl = API_URL + '/admin/payment/history';
+    const body = JSON.stringify({
+      from, limit, userid
+    });
+    return this.http.post<any>(sUrl, body);
+  }
+
+  getAllwithdrawalDrivers(from: number, limit: number, driver_id: number) {
+    const sUrl = API_URL + '/admin/driver_withdrawal/history';
+    const body = JSON.stringify({
+      from, limit, driver_id
+    });
+    return this.http.post<any>(sUrl, body);
+  }
+
   getAllDriversAgent(from: number, limit: number, agent_id) {
     const sUrl = API_URL + '/reborn/getAllDriversByAgent';
     const body = JSON.stringify({
@@ -114,7 +130,7 @@ export class ListService {
   }
 
   getPaymentByUserId(id) {
-    const sUrl = API_URL + `/admin/payment/${id}`;
+    const sUrl = API_URL + `/admin/paymentFullBalance/${id}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res) {
@@ -291,7 +307,7 @@ export class ListService {
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res.data) {
-          return res.data[0];
+          return res.data;
         } else {
           return [];
         }

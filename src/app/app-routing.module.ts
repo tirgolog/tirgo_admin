@@ -60,6 +60,7 @@ import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.comp
 import { AgentDriverComponent } from './pages/agent-driver/agent-driver.component';
 import { AgentListComponent } from './pages/agent-list/agent-list.component';
 import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-driver.component';
+import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-payment-list.component';
 
 const routes: Routes = [
    {
@@ -126,6 +127,11 @@ const routes: Routes = [
       path: "drivers",
       component: DriversComponent,
       title: "Водители"
+   },
+   {
+      path: "drivers-payment-list/:id",
+      component: DriverPaymentListComponent,
+      title: "Список платежей"
    },
    {
       path: "agent-drivers",
