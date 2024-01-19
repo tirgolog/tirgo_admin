@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {ColDef, GridOptions} from 'ag-grid-community';
 import { PushComponent } from 'src/app/components/push/push.component';
 import { SpollersService } from 'src/app/services/spollers.service';
 import {HelperService} from "../../services/helper.service";
 import {AuthService} from "../../services/auth.service";
-import {DriverComponent} from "../driver/driver.component";
-import {formatDate} from "@angular/common";
 import {UserComponent} from "../user/user.component";
 import {AddUserComponent} from "../add-user/add-user.component";
 import {ListService} from "../../services/list.service";
@@ -43,7 +40,6 @@ export class ShippersComponent {
    }
 
    ngOnInit(): void {
-      this.spoller.initSpollers();
       this.filterList()
    }
 
@@ -62,9 +58,7 @@ export class ShippersComponent {
          panelClass: 'custom-dialog-class',
       });
    }
-   ngAfterViewInit(): void {
-      this.spoller.initSpollers()
-   }
+
    async handlePage(e: any) {
       this.helper.global_loading = true;
       let from = e.pageIndex * e.pageSize
@@ -72,14 +66,6 @@ export class ShippersComponent {
       this.helper.users = newusers.data;
       this.helper.users_count = newusers.data_count;
       this.helper.global_loading = false;
-      console.log(e)
-      console.log(e.pageIndex)
-      console.log(e.pageSize)
-   }
-   async onScroll() {
-      let newusers = await this.listService.getAllUsers(this.helper.users.length,50,this.id,this.phone,this.dateReg,this.dateLogin,this.name,this.city,this.sort,this.reverse).toPromise();
-      this.helper.users = this.helper.users.concat(...newusers.data);
-      this.helper.users_count = newusers.data_count;
    }
    openPush(): void {
       this.dialog.open(PushComponent, {});
@@ -92,7 +78,7 @@ export class ShippersComponent {
       this.helper.isLoading = true;
       let newusers = await this.listService.getAllUsers(0,50,this.id,this.phone,this.dateReg,this.dateLogin,this.name,this.city,this.sort,this.reverse).toPromise();
       this.helper.users = newusers.data;
-      this.helper.users_count = newusers.count;
+      this.helper.users_count = newusers.data_count;
       this.helper.isLoading = false;
    }
    async filterClear(){

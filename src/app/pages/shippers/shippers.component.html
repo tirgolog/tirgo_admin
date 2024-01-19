@@ -6,7 +6,7 @@
             <!--<button class="page-header__btn btn-green" (click)="openPush()">
                Отправить пуш всем
             </button>-->
-            <a (click)="addUser()" class="page-header__btn btn-green"  *ngIf="authService.myrole.add_client">
+            <a (click)="addUser()" class="page-header__btn btn-green"  *ngIf="authService?.myrole?.add_client">
                Добавить
             </a>
          </div>
@@ -42,6 +42,10 @@
          </div>
       </div>
       <mat-table [dataSource]="helper.users">
+         <ng-container matColumnDef="index">
+            <mat-header-cell *matHeaderCellDef>No. </mat-header-cell>
+            <mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </mat-cell>
+          </ng-container>
          <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
@@ -70,44 +74,9 @@
             <mat-header-cell *matHeaderCellDef>Последний вход</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.date_last_login | formatTime: 'DD.MM.YYYY в HH:mm'}} </mat-cell>
          </ng-container>
-         <!-- Header and Row Declarations -->
-         <mat-header-row *matHeaderRowDef="['id', 'name', 'phone', 'city', 'date_reg', 'date_last_login', 'raiting']"></mat-header-row>
-         <mat-row (click)="goToColumn(row.id)" *matRowDef="let row; columns: ['id', 'name', 'phone', 'city', 'date_reg', 'date_last_login', 'raiting']"></mat-row>
+         <mat-header-row *matHeaderRowDef="['index','id', 'name', 'phone', 'city', 'date_reg', 'date_last_login', 'raiting']"></mat-header-row>
+         <mat-row (click)="goToColumn(row.id)" *matRowDef="let row; columns: ['index','id', 'name', 'phone', 'city', 'date_reg', 'date_last_login', 'raiting']"></mat-row>
       </mat-table>
       <mat-paginator [length]="helper.users_count" showFirstLastButtons [pageSizeOptions]="sizespage" (page)="handlePage($event)"></mat-paginator>
-
-
-      <!--<table class="custom-table">
-         <tr>
-            <th>ID</th>
-            <th>ФИО</th>
-            <th>Телефон</th>
-            <th>Город</th>
-            <th>Рейтинг</th>
-            <th>Дата регистрации</th>
-            <th>Последний вход</th>
-         </tr>
-         <ng-container *ngFor="let row of helper.users | orderBy: this.sort: false">
-            <tr (click)="goToColumn(row)">
-               <td>{{row.id}}</td>
-               <td>{{row.name}}</td>
-               <td>{{row.phone}}</td>
-               <td>{{row.city}}</td>
-               <td>{{row.raiting}}</td>
-               <td>{{row.date_reg | formatTime: 'DD.MM.YYYY в HH:mm'}}</td>
-               <td>{{row.date_last_login | formatTime: 'DD.MM.YYYY в HH:mm'}}</td>
-            </tr>
-         </ng-container>
-      </table>
-      <div
-              *ngIf="helper.users && helper.users.length >= 50"
-              class="loading-scroll"
-              infinite-scroll
-              [infiniteScrollDistance]="1"
-              [infiniteScrollThrottle]="2"
-              (scrolled)="onScroll()"
-      >
-         Загружаем...
-      </div>-->
    </section>
 </main>

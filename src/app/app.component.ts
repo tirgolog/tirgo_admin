@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { documentActions } from 'src/assets/scripts/document.actions';
-import { spollers } from 'src/assets/scripts/functions';
 import { AuthService } from './services/auth.service';
 import { HelperService } from './services/helper.service';
 import { ListService } from './services/list.service';
 import { SpollersService } from './services/spollers.service';
 import { SocketService } from "./services/socket.service";
-import { ToastrService } from "ngx-toastr";
 
 @Component({
    selector: 'app-root',
@@ -24,7 +22,6 @@ export class AppComponent {
       public spoller: SpollersService,
       public helper: HelperService,
       private socketService: SocketService,
-      private toastr: ToastrService,
       public listService: ListService
    ) { }
    title = 'admin-ui';
@@ -97,12 +94,12 @@ export class AppComponent {
                this.helper.driversList = driversList.data;
             }
 
-
-            const users = await this.listService.getAllUsers(0, 50, null, null, null, null, null, null, null, true).toPromise();
-            if (users.status) {
-               this.helper.users = users.data;
-               this.helper.users_count = users.data_count;
-            }
+            // const users = await this.listService.getAllUsers(0, 50, null, null, null, null, null, null, null, true).toPromise();
+            // if (users.status) {
+            //    console.log(users.data)
+            //    this.helper.users = users.data;
+            //    this.helper.users_count = users.data_count;
+            // }
 
             const deletedusers = await this.listService.getDeletedUsers(0, 100).toPromise();
             if (deletedusers.status) {
