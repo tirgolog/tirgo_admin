@@ -2,7 +2,7 @@
    <section class="page-header">
       <div class="page-header__top">
          <h2 class="page-header__title title">Подробнее о пользователе</h2>
-         <button class="view__tirs badge" (click)="addMoney()">Баланс <span> {{user.balance ? user.balance:'0'}} tir</span></button>
+         <button class="view__tirs badge" (click)="addMoney()">Баланс <span> {{user?.balance ? user?.balance:'0'}} tir</span></button>
       </div>
    </section>
    <section class="view__main">
