@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.authService.user_type == 4 && state.url !== '/agent-drivers') {
+    if(this.authService.user_type == 4 && state.url !== '/agent-drivers' && state.url !== '/auth') {
         return false
     } else {
         return true
