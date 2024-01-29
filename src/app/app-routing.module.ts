@@ -136,7 +136,7 @@ const routes: Routes = [
    {
       path: "agent-drivers",
       component: AgentDriverComponent,
-      title: "Водитель агента"
+      title: "Водители"
    },
    {
       path: "fin-request",

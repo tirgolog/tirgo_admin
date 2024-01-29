@@ -89,6 +89,10 @@ export class AddAgentDriverComponent implements OnInit {
          }
       }
    }
+
+   onChange(event: any) {
+      this.dataUser.subscription_id = event.value;
+    }
    getActualPrefix() {
       const phoneInfo = this.authService.phones.filter(e => e.code === this.citiesSelected.value.country_iso_code)
       this.dial_code = phoneInfo[0]?.dial_code

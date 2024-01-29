@@ -136,6 +136,8 @@ import { AddDriverSubscriptionComponent } from './pages/add-driver-subscription/
 import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-payment-list.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { ConnectToAgentComponent } from './pages/connect-to-agent/connect-to-agent.component';
+import { AddSubsciptionExitingComponent } from './pages/add-subsciption-exiting/add-subsciption-exiting.component';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -229,6 +231,8 @@ const mapConfig: YaConfig = {
       AgentBalanceComponent,
       AddDriverSubscriptionComponent,
       DriverPaymentListComponent,
+      ConnectToAgentComponent,
+      AddSubsciptionExitingComponent,
    ],
    imports: [
       CommonModule,

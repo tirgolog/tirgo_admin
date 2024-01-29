@@ -34,7 +34,7 @@
                     </mat-form-field>
                     <br>
                     <div class="tw-flex tw-mt-5">
-                        <mat-radio-group [(ngModel)]="dataUser.subscription_id" required (change)="onChange($event)"> 
+                        <mat-radio-group [(ngModel)]="dataUser.subscription_id" required (change)="onChange($event)" > 
                             <mat-radio-button *ngFor="let row of subscription" [value]="row.id" class="radio-group">
                                 <div class="subscription">Тип: <span class="tw-ml-2"> {{ row.name | uppercase }}</span></div>
                                 <div class="subscription"> Цена: 

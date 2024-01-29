@@ -8,6 +8,7 @@ import { ListService } from "../../services/list.service";
 import { SocketService } from "src/app/services/socket.service";
 import { AddAgentDriverComponent } from "../add-agent-driver/add-agent-driver.component";
 import { AgentDriverDetailComponent } from "../agent-driver-detail/agent-driver-detail.component";
+import { AddSubsciptionExitingComponent } from "../add-subsciption-exiting/add-subsciption-exiting.component";
 
 @Component({
   selector: 'app-agent-driver',
@@ -86,6 +87,33 @@ export class AgentDriverComponent {
       height: "80%",
       panelClass: "custom-dialog-class",
       data: ev,
+    });
+  }
+
+  goToAddDriverExisting(): void {
+    const dialogRef = this.dialog.open(AddSubsciptionExitingComponent, {
+      width: "40%",
+      panelClass: "custom-dialog-class",
+    });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      await this.authService.checkSession().toPromise().then(async (res) => {
+        if (res) {
+          this.authService.currentUser = res;
+          this.agent_id = this.authService.currentUser?.id
+          let newusers = await this.listService
+            .getAllDriversAgent(
+              0,
+              50,
+              this.agent_id,
+            )
+            .toPromise();
+          this.helper.agent_drivers = newusers.data;
+          this.helper.agent_drivers_count = newusers.data_count;
+
+        }
+      }).catch(async (err) => {
+        console.log(err)
+      });
     });
   }
   goToAddDriver(): void {
