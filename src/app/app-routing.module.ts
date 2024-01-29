@@ -151,7 +151,7 @@ const routes: Routes = [
       path: "agent-drivers",
       canActivate: [AuthGuard],
       component: AgentDriverComponent,
-      title: "Водитель агента"
+      title: "Водители"
    },
    {
       path: "fin-request",

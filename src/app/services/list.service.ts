@@ -302,12 +302,51 @@ export class ListService {
       }));
   }
 
+
+  addUserByAgent(data) {
+    const sUrl = API_URL + '/admin/addUserByAgent';
+    const body = JSON.stringify(data);
+    return this.http.post<any>(sUrl, body)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
   getSearchDriverSubscription(userid) {
     const sUrl = API_URL + `/admin/searchDriver/${userid}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res.data) {
           return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getSearchDriverAgent(userid) {
+    const sUrl = API_URL + `/admin/searchdriverAgent/${userid}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  connectDriverToAgent(data) {
+    const sUrl = API_URL + '/admin/connectDriverToAgent';
+    const body = JSON.stringify(data);
+    return this.http.post<any>(sUrl, body)
+      .pipe(map(res => {
+        if (res) {
+          return res;
         } else {
           return [];
         }

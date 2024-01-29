@@ -8,6 +8,7 @@ import { ListService } from "../../services/list.service";
 import { SocketService } from "src/app/services/socket.service";
 import { ActivatedRoute } from "@angular/router";
 import { AgentBalanceComponent } from "../agent-balance/agent-balance.component";
+import { ConnectToAgentComponent } from "../connect-to-agent/connect-to-agent.component";
 
 @Component({
   selector: 'app-agent-list-driver',
@@ -38,6 +39,7 @@ export class AgentListDriverComponent {
     public helper: HelperService,
     public listService: ListService,
     public authService: AuthService,
+    private route: ActivatedRoute,
     public socketService: SocketService) {
   }
 
@@ -55,7 +57,6 @@ export class AgentListDriverComponent {
 
   async getsumOfDriversSubcription(id) {
     this.listService.getsumOfDriversSubcription(id).toPromise().then((res) => {
-      console.log(res)
       if (res.status) {
         this.total_subscription_balance = res.data.total_subscription_balance;
       }
@@ -79,6 +80,20 @@ export class AgentListDriverComponent {
     dialogRef.afterClosed().subscribe(() => {
       this.getsumOfDriversSubcription(this.agent_id)
       this.getAgent(this.agent_id)
+      this.filterList()
+    })
+  }
+
+  connectAgent(): void {
+    const dialogRef = this.dialog.open(ConnectToAgentComponent, {
+      width: "550px",
+      panelClass: "custom-dialog-class",
+      data: { agent_id: this.agent_id },
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getsumOfDriversSubcription(this.agent_id)
+      this.getAgent(this.agent_id)
+      this.filterList()
     })
   }
 

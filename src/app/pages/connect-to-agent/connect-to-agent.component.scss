@@ -1,0 +1,20 @@
+.radio-group {
+    border: solid black 1px;
+    border-radius: 10px;
+    padding: 3px;
+    display: inline-flex;
+    margin: 5px;
+}
+
+.subscription {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    font-size: 16px;
+    margin-right: 10px;
+    padding: 5px;
+    span {
+        font-size: 13px;
+        font-weight: bolder;
+    }
+}

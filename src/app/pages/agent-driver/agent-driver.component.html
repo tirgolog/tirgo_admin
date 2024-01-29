@@ -3,10 +3,14 @@
       <div class="page-header__top">
          <h2 class="page-header__title title">Водители</h2>
             <div class="page-header__actions">
-               <h2 class="page-header__title title">Баланс агента: <span>{{agent_balance}}</span></h2>
-               <h2 class="page-header__title title">Сумма подписки балансов: <span>{{total_subscription_balance}}</span></h2>
+               <h5 class="page-header__title ">
+                 <p>  Баланс:  {{agent_balance | thousandSeparator }} сум</p></h5>
+               <h5 class="page-header__title ">Сумма оформленных подписок: <span>{{total_subscription_balance }} сум</span></h5>
+               <a (click)="goToAddDriverExisting()" class="page-header__btn btn-green" *ngIf="authService?.myrole?.add_driver">
+                  Оформить подписку
+               </a>
                <a (click)="goToAddDriver()" class="page-header__btn btn-green" *ngIf="authService?.myrole?.add_driver">
-                  Добавить
+                  Добавить Водителя
                </a>
             </div>
       </div>

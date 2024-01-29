@@ -1,72 +1,76 @@
 <main class="drivers">
-    <section class="page-header">
-        <div class="page-header__top">
-           <h2 class="page-header__title title">Водители</h2>
-              <div class="page-header__actions">
-                 <h2 class="page-header__title title">Баланс агента: <span>{{agent_balance}}</span></h2>
-                 <h2 class="page-header__title title">Сумма подписки балансов: <span>{{total_subscription_balance}}</span></h2>
-                 <a (click)="AgentBalance()" class="page-header__btn btn-green" >
-                    Баланс агента 
-                 </a>
-              </div>
-        </div>
-     </section>
-    <section class="table">
-       <mat-table [dataSource]="helper.agent_drivers">
-          <ng-container matColumnDef="id">
-             <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="iso_code">
-             <mat-header-cell *matHeaderCellDef>ISO </mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.iso_code}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="name">
-             <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="phone">
-             <mat-header-cell *matHeaderCellDef>Телефон</mat-header-cell>
-             <mat-cell *matCellDef="let row"> +{{row.phone}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="trucks">
-             <mat-header-cell *matHeaderCellDef>Транспорт</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{transportCheck(row.trucks)}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="raiting">
-             <mat-header-cell *matHeaderCellDef>Рейтинг</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.raiting}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="busy">
-             <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{busyCheck(row.busy)}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="moderation">
-             <mat-header-cell *matHeaderCellDef>Модерация</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{moderCheck(row.moderation)}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="date_reg">
-             <mat-header-cell *matHeaderCellDef>Дата регистрации</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.date_reg | formatTime: 'DD.MM.YYYY'}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="date_last_login">
-             <mat-header-cell *matHeaderCellDef>Последний вход</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.date_last_login | formatTime: 'DD.MM.YYYY в HH:mm'}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="orders">
-             <mat-header-cell *matHeaderCellDef>Заказы</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.orders && row.orders.length ? row.orders.length : 'Нет'}} </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="lat">
-             <mat-header-cell *matHeaderCellDef>Геопозиция</mat-header-cell>
-             <mat-cell *matCellDef="let row"> {{row.lat ? 'Есть разрешение':'Нет разрешения'}} </mat-cell>
-          </ng-container>
-          <mat-header-row
-             *matHeaderRowDef="['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-header-row>
-          <mat-row 
-             *matRowDef="let row; columns: ['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-row>
-       </mat-table>
-       <mat-paginator [length]="helper.agent_drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
-          (page)="handlePage($event)"></mat-paginator>
-    </section>
- </main>
+   <section class="">
+      <div class="page-header__top">
+         <h2 class="page-header__title title">Водители</h2>
+         <div class="page-header__actions">
+            <h5 class="page-header__title ">Баланс: <span>{{agent_balance | thousandSeparator }} сум</span></h5>
+      
+            <h5 class="page-header__title ">Сумма оформленных подписок: <span>{{total_subscription_balance }} сум</span></h5>
+            <a (click)="connectAgent()" class="page-header__btn btn-green">
+               Прикрепите драйвер
+            </a>
+            <a (click)="AgentBalance()" class="page-header__btn btn-green">
+               Баланс агента
+            </a>
+         </div>
+      </div>
+   </section>
+   <section class="table">
+      <mat-table [dataSource]="helper.agent_drivers">
+         <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="iso_code">
+            <mat-header-cell *matHeaderCellDef>ISO </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.iso_code}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>ФИО</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef>Телефон</mat-header-cell>
+            <mat-cell *matCellDef="let row"> +{{row.phone}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="trucks">
+            <mat-header-cell *matHeaderCellDef>Транспорт</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{transportCheck(row.trucks)}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="raiting">
+            <mat-header-cell *matHeaderCellDef>Рейтинг</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.raiting}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="busy">
+            <mat-header-cell *matHeaderCellDef>Статус</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{busyCheck(row.busy)}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="moderation">
+            <mat-header-cell *matHeaderCellDef>Модерация</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{moderCheck(row.moderation)}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="date_reg">
+            <mat-header-cell *matHeaderCellDef>Дата регистрации</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.date_reg | formatTime: 'DD.MM.YYYY'}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="date_last_login">
+            <mat-header-cell *matHeaderCellDef>Последний вход</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.date_last_login | formatTime: 'DD.MM.YYYY в HH:mm'}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="orders">
+            <mat-header-cell *matHeaderCellDef>Заказы</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.orders && row.orders.length ? row.orders.length : 'Нет'}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="lat">
+            <mat-header-cell *matHeaderCellDef>Геопозиция</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.lat ? 'Есть разрешение':'Нет разрешения'}} </mat-cell>
+         </ng-container>
+         <mat-header-row
+            *matHeaderRowDef="['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-header-row>
+         <mat-row
+            *matRowDef="let row; columns: ['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="helper.agent_drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+         (page)="handlePage($event)"></mat-paginator>
+   </section>
+</main>
