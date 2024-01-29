@@ -9,12 +9,12 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService  
     ) {
 
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.authService.user_type == 4 && state.url !== '/agent-drivers') {
+    if(this.authService.user_type == 4 && state.url !== '/agent-drivers' && state.url !== '/auth') {
         return false
     } else {
         return true
