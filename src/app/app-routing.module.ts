@@ -61,6 +61,7 @@ import { AgentDriverComponent } from './pages/agent-driver/agent-driver.componen
 import { AgentListComponent } from './pages/agent-list/agent-list.component';
 import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-driver.component';
 import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-payment-list.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
    {
@@ -70,311 +71,373 @@ const routes: Routes = [
    },
    {
       path: "loading",
+      canActivate: [AuthGuard],
       component: LoadingComponent,
       title: "Загрузка"
    },
    {
       path: "dashboard",
+      canActivate: [AuthGuard],
       component: HomeComponent,
       title: "Главная"
    },
    {
       path: "users",
+      canActivate: [AuthGuard],
       component: UsersComponent,
       title: "Все пользователи"
    },
    {
       path: "agent-list",
+      canActivate: [AuthGuard],
       component: AgentListComponent,
       title: "Список агентов"
    },
    {
       path: "agent-list/:id",
+      canActivate: [AuthGuard],
       component: AgentListDriverComponent,
       title: "Список агентов"
    },
    {
       path: "user",
+      canActivate: [AuthGuard],
       component: UserComponent,
       title: "Подробнее о пользователе"
    },
    {
       path: "add-user",
+      canActivate: [AuthGuard],
       component: AddUserComponent,
       title: "Все пользователи / Добавить пользователя"
    },
    {
       path: "partners",
+      canActivate: [AuthGuard],
       component: PartnersComponent,
       title: "Партнеры"
    },
    {
       path: "partner/:id",
+      canActivate: [AuthGuard],
       component: PartnerComponent,
       title: "Подробнее о Партнере"
    },
    {
       path: "add-partner",
+      canActivate: [AuthGuard],
       component: AddPartnerComponent,
       title: "Добавить Партнера"
    },
    {
       path: "shippers",
+      canActivate: [AuthGuard],
       component: ShippersComponent,
       title: "Грузоотправители"
    },
    {
       path: "drivers",
+      canActivate: [AuthGuard],
       component: DriversComponent,
       title: "Водители"
    },
    {
       path: "drivers-payment-list/:id",
+      canActivate: [AuthGuard],
       component: DriverPaymentListComponent,
       title: "Список платежей"
    },
    {
       path: "agent-drivers",
+      canActivate: [AuthGuard],
       component: AgentDriverComponent,
       title: "Водитель агента"
    },
    {
       path: "fin-request",
+      canActivate: [AuthGuard],
       component: FinRequestsComponent,
       title: "Запрос на финансирование"
    },
    {
       path: "driver",
+      canActivate: [AuthGuard],
       component: DriverComponent,
       title: "Подробнее о водителе"
    },
    {
       path: "add-driver",
+      canActivate: [AuthGuard],
       component: AddDriverComponent,
       title: "Водители: Добавление"
    },
    {
       path: "orders/:status",
+      canActivate: [AuthGuard],
       component: OrdersComponent,
       title: "Заказы"
    },
    {
       path: "order",
+      canActivate: [AuthGuard],
       component: OrderComponent,
       title: "Подробнее о заказах"
    },
    {
       path: "transactions",
+      canActivate: [AuthGuard],
       component: TransactionsComponent,
       title: "Транзакции"
    },
    {
       path: "transaction",
+      canActivate: [AuthGuard],
       component: TransactionComponent,
       title: "Детали транзакции"
    },
    {
       path: "tracking",
+      canActivate: [AuthGuard],
       component: TrackingComponent,
       title: "Трекинг"
    },
    {
       path: "admins",
+      canActivate: [AuthGuard],
       component: AdminsComponent,
       title: "Администраторы"
    },
    {
       path: "add-admin",
+      canActivate: [AuthGuard],
       component: AddAdminComponent,
       title: "Админы: Добавление"
    },
    {
       path: "roles",
+      canActivate: [AuthGuard],
       component: RolesComponent,
       title: "Роли пользователей"
    },
    {
       path: "add-role",
+      canActivate: [AuthGuard],
       component: AddRoleComponent,
       title: "Роли пользователей: Добавление"
    },
    {
       path: "rates",
+      canActivate: [AuthGuard],
       component: RatesComponent,
       title: "Подписки"
    },
    {
       path: "add-rate",
+      canActivate: [AuthGuard],
       component: AddRateComponent,
       title: "Подписки: Добавление"
    },
    {
       path: "promocodes",
+      canActivate: [AuthGuard],
       component: PromocodesComponent,
       title: "Промо-коды"
    },
    {
       path: "add-promocode",
+      canActivate: [AuthGuard],
       component: AddPromocodeComponent,
       title: "Промо-коды: Добавление"
    },
    {
       path: "car-types",
+      canActivate: [AuthGuard],
       component: CarTypesComponent,
       title: "Типы транспорта"
    },
    {
       path: "add-car-type",
+      canActivate: [AuthGuard],
       component: AddCarTypeComponent,
       title: "Типы транспорта: Добавление"
    },
    {
       path: "cargo-types",
+      canActivate: [AuthGuard],
       component: CargoTypesComponent,
       title: "Типы грузов"
    },
    {
       path: "add-cargo-type",
+      canActivate: [AuthGuard],
       component: AddCargoTypeComponent,
       title: "Типы грузов: Добавление"
    },
    {
       path: "review-badges",
+      canActivate: [AuthGuard],
       component: ReviewBadgesComponent,
       title: "Критерии отзывов"
    },
    {
       path: "add-review-badge",
+      canActivate: [AuthGuard],
       component: AddReviewBadgeComponent,
       title: "Критерии отзывов: Добавление"
    },
    {
       path: "countries",
+      canActivate: [AuthGuard],
       component: CountriesComponent,
       title: "Страны"
    },
    {
       path: "add-country",
+      canActivate: [AuthGuard],
       component: AddCountryComponent,
       title: "Страны: Добавление"
    },
    {
       path: "states",
+      canActivate: [AuthGuard],
       component: StatesComponent,
       title: "Страны: Регионы"
    },
    {
       path: "add-state",
+      canActivate: [AuthGuard],
       component: AddStateComponent,
       title: "Страны | Регионы: Добавление"
    },
    {
       path: "citys",
+      canActivate: [AuthGuard],
       component: CitysComponent,
       title: "Страны: Города"
    },
    {
       path: "add-city",
+      canActivate: [AuthGuard],
       component: AddCityComponent,
       title: "Страны | Города: Добавление"
    },
    {
       path: "reviews",
+      canActivate: [AuthGuard],
       component: ReviewsComponent,
       title: "Отзывы"
    },
    {
       path: "chat",
+      canActivate: [AuthGuard],
       component: ChatComponent,
       title: "Чат"
    },
    {
       path: "settings",
+      canActivate: [AuthGuard],
       component: SettingsComponent,
       title: "Настройки"
    },
    {
       path: "profile",
+      canActivate: [AuthGuard],
       component: ProfileComponent,
       title: "Профиль"
    },
    {
       path: "auth",
+      canActivate: [AuthGuard],
       component: AuthComponent,
       title: "Регистрация"
    },
    {
       path: "viewphoto",
+      canActivate: [AuthGuard],
       component: ViewphotoComponent,
       title: "Просмотр фото"
    },
    {
       path: "activity",
+      canActivate: [AuthGuard],
       component: ActivityComponent,
       title: "Активность пользователей"
    },
    {
       path: "viewadmin",
+      canActivate: [AuthGuard],
       component: ViewadminComponent,
       title: "Просмотр администратора"
    },
    {
       path: "createorerd",
+      canActivate: [AuthGuard],
       component: CreateorderComponent,
       title: "Просмотр администратора"
    },
    {
       path: "routers-truck",
+      canActivate: [AuthGuard],
       component: RoutersTruckComponent,
       title: "Маршруты"
    },
    {
       path: "loading",
+      canActivate: [AuthGuard],
       component: LoadingComponent,
       title: "Загрузка"
    },
    {
       path: "archive",
+      canActivate: [AuthGuard],
       component: ArchiveComponent,
       title: "Архивные водители"
    },
    {
       path: "securetrans",
+      canActivate: [AuthGuard],
       component: SecuretransComponent,
       title: "Безопасная сделка"
    },
    {
       path: "exchangerate",
+      canActivate: [AuthGuard],
       component: ExchangerateComponent,
       title: "Курс валют"
    },
    {
       path: "moderation",
+      canActivate: [AuthGuard],
       component: ModerationComponent,
       title: "Модерация"
    },
    {
       path: "moderation-confirm/:id",
+      canActivate: [AuthGuard],
       component: ModerationConfirmComponent,
       title: "Модерация"
    },
    {
       path: "moderation/:id",
+      canActivate: [AuthGuard],
       component: EditModerationComponent,
       title: "Модерация"
    },
    {
       path: "drivers-verification",
+      canActivate: [AuthGuard],
       component: DriversVerificationComponent,
       title: "Водители проверка"
    },
    {
       path: "drivers-verified",
+      canActivate: [AuthGuard],
       component: DriverVerifedComponent,
       title: "Проверенный водитель"
    },
    {
       path: "subcription-types",
+      canActivate: [AuthGuard],
       component: SubscriptionsComponent,
       title: "Типы грузов"
    },
