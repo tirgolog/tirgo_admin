@@ -136,6 +136,7 @@ import { AddDriverSubscriptionComponent } from './pages/add-driver-subscription/
 import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-payment-list.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { AuthGuard } from './guards/auth.guard';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -274,6 +275,7 @@ const mapConfig: YaConfig = {
    ],
 
    providers: [
+      AuthGuard,
       { provide: MatDialogRef, useValue: {}}, { provide: MAT_DIALOG_DATA, useValue: {} },
       { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },
       {
