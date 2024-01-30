@@ -4,8 +4,11 @@
          <h2 class="page-header__title title">Водители</h2>
          <div class="page-header__actions">
             <h5 class="page-header__title ">Баланс: <span>{{agent_balance | thousandSeparator }} сум</span></h5>
-      
-            <h5 class="page-header__title ">Сумма оформленных подписок: <span>{{total_subscription_balance }} сум</span></h5>
+
+            <h5 class="page-header__title ">Сумма оформленных подписок: <span>{{total_subscription_balance | thousandSeparator }} сум</span></h5>
+            <a (click)="subscription()" class="page-header__btn btn-green">
+               История транзакции
+            </a>
             <a (click)="connectAgent()" class="page-header__btn btn-green">
                Прикрепите драйвер
             </a>
@@ -67,7 +70,7 @@
          </ng-container>
          <mat-header-row
             *matHeaderRowDef="['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-header-row>
-         <mat-row
+         <mat-row (click)="goToColumn(row.id)"
             *matRowDef="let row; columns: ['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-row>
       </mat-table>
       <mat-paginator [length]="helper.agent_drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"

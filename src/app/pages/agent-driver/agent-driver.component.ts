@@ -9,6 +9,7 @@ import { SocketService } from "src/app/services/socket.service";
 import { AddAgentDriverComponent } from "../add-agent-driver/add-agent-driver.component";
 import { AgentDriverDetailComponent } from "../agent-driver-detail/agent-driver-detail.component";
 import { AddSubsciptionExitingComponent } from "../add-subsciption-exiting/add-subsciption-exiting.component";
+import { HistoryTransactionDriverAgentComponent } from "../history-transaction-driver-agent/history-transaction-driver-agent.component";
 
 @Component({
   selector: 'app-agent-driver',
@@ -55,7 +56,6 @@ export class AgentDriverComponent {
       if (res) {
         this.authService.currentUser = res;
         this.agent_id = this.authService.currentUser?.id;
-        console.log(this.authService.currentUser)
         this.getsumOfDriversSubcription(this.agent_id)
         this.getAgent(this.agent_id)
       }
@@ -67,15 +67,23 @@ export class AgentDriverComponent {
   async getsumOfDriversSubcription(id) {
     this.listService.getsumOfDriversSubcription(id).toPromise().then((res) => {
       if (res.status) {
-        this.total_subscription_balance = res.data.total_subscription_balance;
+        this.total_subscription_balance = res.data.total_sum;
       }
     })
   }
 
+  subscription(){
+    const dialogRef = this.dialog.open(HistoryTransactionDriverAgentComponent, {
+      width: "1000px",
+      height: "600px",
+      data:this.agent_id,
+      panelClass: "custom-dialog-class",
+    });
+  }
   async getAgent(id) {
-    this.listService.getAgent(id).toPromise().then((res) => {
+    this.listService.getAgentBalanse(id).toPromise().then((res) => {
       if (res.status) {
-        this.agent_balance = res.data.agent_balance;
+        this.agent_balance = res.data.total_amount;
       }
     })
   }
@@ -100,6 +108,8 @@ export class AgentDriverComponent {
         if (res) {
           this.authService.currentUser = res;
           this.agent_id = this.authService.currentUser?.id
+          this.getsumOfDriversSubcription(this.agent_id)
+          this.getAgent(this.agent_id)
           let newusers = await this.listService
             .getAllDriversAgent(
               0,
@@ -126,6 +136,8 @@ export class AgentDriverComponent {
         if (res) {
           this.authService.currentUser = res;
           this.agent_id = this.authService.currentUser?.id
+          this.getsumOfDriversSubcription(this.agent_id)
+          this.getAgent(this.agent_id)
           let newusers = await this.listService
             .getAllDriversAgent(
               0,

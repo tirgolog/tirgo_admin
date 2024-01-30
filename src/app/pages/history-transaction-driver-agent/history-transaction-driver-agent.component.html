@@ -1,0 +1,57 @@
+<main class="add-driver">
+   <section class="page-header">
+      <div class="page-header__top">
+         <h2 class="page-header__title title">История транзакции</h2>
+      </div>
+   </section>
+   <section class="table">
+      <mat-table [dataSource]="subscritions">
+         <ng-container matColumnDef="index">
+            <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+            <mat-cell *matCellDef="let element; let i = index;">{{i+1}}</mat-cell>
+          </ng-container>
+         <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef>Сумма</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.amount  | thousandSeparator}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef>Тип</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+               <span *ngIf="row.type=='Пополнение'" class="tw-text-green-500">
+                  {{row.type}}
+               </span>
+
+               <span *ngIf="row.type=='Подписка'" class="tw-text-red-500">
+                  {{row.type}}
+               </span>
+
+            </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="driverId">
+            <mat-header-cell *matHeaderCellDef> Водитель</mat-header-cell>
+            <mat-cell *matCellDef="let row"> 
+               {{row.user_name}} 
+               <span *ngIf="row.userid" class="tw-mx-2"> ID: </span>
+               {{row.userid}}
+             </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Дата Время </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.created_at | date : "YYYY/MM/dd HH:mm"}} </mat-cell>
+         </ng-container>
+         <mat-header-row
+            *matHeaderRowDef="['index','amount', 'type', 'driverId', 'date']"></mat-header-row>
+         <mat-row
+            *matRowDef="let row; columns: ['index', 'amount', 'type', 'driverId', 'date']"></mat-row>
+      </mat-table>
+   </section>
+</main>
+
+<!-- {
+   "id": 1,
+   "agent_id": "6308",
+   "name": "Ibragimov Jamshid Tohirovich",
+   "amount": "333",
+   "type": "Пополнение",
+   "created_at": "2024-01-30T08:42:19.000Z"
+}, -->

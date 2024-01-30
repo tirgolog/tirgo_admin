@@ -23,10 +23,8 @@ export class AgentBalanceComponent {
      private toastr: ToastrService,
      public helper: HelperService) {
      if (this.dataDialog) {
-      console.log(this.dataDialog)
         this.data.agent_id = this.dataDialog.agent_id;
-        this.data.agent_balance = this.dataDialog.agent_balance;
-    
+      //this.data.agent_balance = this.dataDialog.agent_balance;
      }
   }
   close() {

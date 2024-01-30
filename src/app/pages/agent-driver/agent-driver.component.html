@@ -5,7 +5,10 @@
             <div class="page-header__actions">
                <h5 class="page-header__title ">
                  <p>  Баланс:  {{agent_balance | thousandSeparator }} сум</p></h5>
-               <h5 class="page-header__title ">Сумма оформленных подписок: <span>{{total_subscription_balance }} сум</span></h5>
+               <h5 class="page-header__title ">Сумма оформленных подписок: <span>{{total_subscription_balance   | thousandSeparator  }} сум</span></h5>
+               <a (click)="subscription()" class="page-header__btn btn-green">
+                  История транзакции
+               </a>
                <a (click)="goToAddDriverExisting()" class="page-header__btn btn-green" *ngIf="authService?.myrole?.add_driver">
                   Оформить подписку
                </a>

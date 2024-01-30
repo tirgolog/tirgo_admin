@@ -55,7 +55,7 @@ export class AgentDriverDetailComponent {
         if (this.user.agent_id) {
             this.getAgent(this.user.agent_id)
         }
-
+  console.log(this.user)
         if (this.user.subscription_id) {
             this.getSubscription(this.user.subscription_id)
         }
