@@ -9,6 +9,8 @@ import { SocketService } from "src/app/services/socket.service";
 import { ActivatedRoute } from "@angular/router";
 import { AgentBalanceComponent } from "../agent-balance/agent-balance.component";
 import { ConnectToAgentComponent } from "../connect-to-agent/connect-to-agent.component";
+import { AgentDriverDetailComponent } from "../agent-driver-detail/agent-driver-detail.component";
+import { HistoryTransactionDriverComponent } from "../history-transaction-driver/history-transaction-driver.component";
 
 @Component({
   selector: 'app-agent-list-driver',
@@ -39,7 +41,6 @@ export class AgentListDriverComponent {
     public helper: HelperService,
     public listService: ListService,
     public authService: AuthService,
-    private route: ActivatedRoute,
     public socketService: SocketService) {
   }
 
@@ -58,15 +59,34 @@ export class AgentListDriverComponent {
   async getsumOfDriversSubcription(id) {
     this.listService.getsumOfDriversSubcription(id).toPromise().then((res) => {
       if (res.status) {
-        this.total_subscription_balance = res.data.total_subscription_balance;
+        this.total_subscription_balance = res.data.total_sum;
       }
     })
   }
 
+
+  subscription(){
+    const dialogRef = this.dialog.open(HistoryTransactionDriverComponent, {
+      width: "1000px",
+      height: "600px",
+      data:this.agent_id,
+      panelClass: "custom-dialog-class",
+    });
+  }
+  
+  goToColumn(ev: any): void {
+    const dialogRef = this.dialog.open(AgentDriverDetailComponent, {
+      width: "90%",
+      height: "80%",
+      panelClass: "custom-dialog-class",
+      data: ev,
+    });
+  }
+  
   async getAgent(id) {
-    this.listService.getAgent(id).toPromise().then((res) => {
+    this.listService.getAgentBalanse(id).toPromise().then((res) => {
       if (res.status) {
-        this.agent_balance = res.data.agent_balance;
+        this.agent_balance = res.data.total_amount;
       }
     })
   }

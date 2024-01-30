@@ -70,6 +70,14 @@ export class ListService {
     return this.http.post<any>(sUrl, body);
   }
 
+  getAllSubscriptionHistory(agent_id) {
+    const sUrl = API_URL + '/admin/subscription-history';
+    const body = JSON.stringify({
+      agent_id,
+    });
+    return this.http.post<any>(sUrl, body);
+  }
+
   getAllunVerifiedDrivers() {
     const sUrl = API_URL + '/users/unverified-verifications';
     return this.http.get<any>(sUrl)
@@ -96,6 +104,18 @@ export class ListService {
 
   getAgent(id) {
     const sUrl = API_URL + `/admin/getAgent/${id}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res && res.data) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getAgentBalanse(id) {
+    const sUrl = API_URL + `/admin/getAgentBalanse/${id}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res && res.data) {

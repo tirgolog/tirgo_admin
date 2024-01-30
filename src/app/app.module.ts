@@ -139,6 +139,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { AuthGuard } from './guards/auth.guard';
 import { ConnectToAgentComponent } from './pages/connect-to-agent/connect-to-agent.component';
 import { AddSubsciptionExitingComponent } from './pages/add-subsciption-exiting/add-subsciption-exiting.component';
+import { HistoryTransactionDriverComponent } from './pages/history-transaction-driver/history-transaction-driver.component';
+import { HistoryTransactionDriverAgentComponent } from './pages/history-transaction-driver-agent/history-transaction-driver-agent.component';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -234,6 +236,8 @@ const mapConfig: YaConfig = {
       DriverPaymentListComponent,
       ConnectToAgentComponent,
       AddSubsciptionExitingComponent,
+      HistoryTransactionDriverComponent,
+      HistoryTransactionDriverAgentComponent,
    ],
    imports: [
       CommonModule,
