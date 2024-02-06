@@ -22,7 +22,8 @@
 }
 
 .menu {
-   padding: rem(15) 0;
+   padding:  40px 0;
+   // padding: rem(15) 0;
 
    &__list {
       display: grid;
@@ -148,8 +149,8 @@
 
 .logout-list{
 
-   position: absolute;
-   bottom: 0;
+   // position: absolute;
+   // bottom: 0;
    background-color: #fff;
 
    .log_out{
