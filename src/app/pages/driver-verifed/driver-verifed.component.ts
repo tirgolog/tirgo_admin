@@ -49,8 +49,10 @@ export class DriverVerifedComponent {
 
   goToColumn(ev: any): void {
     const dialogRef = this.dialog.open(DriverVerifyComponent, {
-      width: '60%',
-      height: '70%',
+      minWidth: '40vw',
+      maxWidth: '60vw',
+      minHeight: '60vh',
+      maxHeight: '90vh',
       panelClass: 'custom-dialog-class',
       data: ev
     });

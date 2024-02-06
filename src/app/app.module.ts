@@ -141,6 +141,7 @@ import { ConnectToAgentComponent } from './pages/connect-to-agent/connect-to-age
 import { AddSubsciptionExitingComponent } from './pages/add-subsciption-exiting/add-subsciption-exiting.component';
 import { HistoryTransactionDriverComponent } from './pages/history-transaction-driver/history-transaction-driver.component';
 import { HistoryTransactionDriverAgentComponent } from './pages/history-transaction-driver-agent/history-transaction-driver-agent.component';
+import { StartsWith998Pipe } from './pipes/starts-with998.pipe';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -238,6 +239,7 @@ const mapConfig: YaConfig = {
       AddSubsciptionExitingComponent,
       HistoryTransactionDriverComponent,
       HistoryTransactionDriverAgentComponent,
+      StartsWith998Pipe,
    ],
    imports: [
       CommonModule,
