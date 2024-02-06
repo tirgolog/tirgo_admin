@@ -27,7 +27,11 @@
       </li>
 
       <li class="info">
-        <span *ngIf="data.phoneNumber" class="info-label">Телефон: </span><span>+998 {{ data.phoneNumber }}</span>
+        <span *ngIf="data.phoneNumber" class="info-label">Телефон: </span><span>
+          <span *ngIf="data.phoneNumber | startsWith998; else add998">{{ data.phoneNumber }}</span>
+          <ng-template #add998>+998 {{ data.phoneNumber }}</ng-template>
+          
+        </span>
       </li>
 
       <li class="info">
