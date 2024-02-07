@@ -100,8 +100,10 @@ export class DriversComponent {
 
   goToAddDriverSubscription(): void {
     const dialogRef = this.dialog.open(AddDriverSubscriptionComponent, {
-      width: "30%",
-      minHeight: "400px",
+      minWidth: '40vw',
+      maxWidth: '65vw',
+      minHeight: '60vh',
+      maxHeight: '80vh',
       panelClass: "custom-dialog-class",
     });
     dialogRef.afterClosed().subscribe(async (data) => {

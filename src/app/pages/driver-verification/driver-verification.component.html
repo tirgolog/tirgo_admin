@@ -24,7 +24,7 @@
                   </mat-label>
                   <input matInput type="text" [(ngModel)]="this.driver.bank_card"  [ngModelOptions]="{standalone: true}"/>
                 </mat-form-field>
-                <div class="tw-flex tw-justify-between tw-items-center images-passport">
+                <div class="tw-flex tw-justify-between tw-items-center tw-text-xs images-passport">
                   <button class="image-box">
                     <p (click)="preview(this.driver.techpassport_photo1)">
                       Фото тех паспорта 1
@@ -70,12 +70,7 @@
                   <mat-label>Номер телефона</mat-label>
                   <input matInput type="text" [(ngModel)]="this.driver.phone"  [ngModelOptions]="{standalone: true}"/>
                 </mat-form-field>
-              </div>
-            </div>
-          </div>
-          <div class="tw-grid tw-gap-5 tw-content-start">
-            <div class="view__informate view__block">
-              <div class="view__list">
+
                 <mat-form-field class="form__input">
                   <mat-label>Гос. номер Тягача </mat-label>
                   <input matInput type="text" [(ngModel)]="this.driver.state_registration_truckNumber" [ngModelOptions]="{standalone: true}" />
@@ -111,12 +106,7 @@
                     </button>
                   </button>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="tw-grid tw-gap-5 tw-content-start">
-            <div class="view__docs">
-              <div class="view__list">
+
                 <mat-form-field class="form__input">
                   <mat-label>Марка транспорта </mat-label>
                   <input matInput type="text" [(ngModel)]="this.driver.brand_name" [ngModelOptions]="{standalone: true}" />
