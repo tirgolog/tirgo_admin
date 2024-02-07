@@ -44,7 +44,7 @@
       <mat-table [dataSource]="helper.users">
          <ng-container matColumnDef="index">
             <mat-header-cell *matHeaderCellDef>No. </mat-header-cell>
-            <mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row?.descending_count}} </mat-cell>
           </ng-container>
          <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
