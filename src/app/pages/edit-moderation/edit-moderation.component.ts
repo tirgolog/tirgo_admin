@@ -155,9 +155,7 @@ export class EditModerationComponent implements OnInit {
   }
 
   verifyTransaction(transaction) {
-    console.log(transaction.amount);
-    console.log(this.balance);
-    if (transaction.amount > this.balance) {
+    if (transaction.amount <= this.balance) {
       this.list.verifyTransaction(transaction.id).subscribe((res) => {
         if (res.success) {
           this.getBalance();
