@@ -155,7 +155,7 @@ export class EditModerationComponent implements OnInit {
   }
 
   verifyTransaction(transaction) {
-    if (transaction.amount <= this.balance) {
+    if (transaction.amount <= this.balance||transaction.transactionType=='topup') {
       this.list.verifyTransaction(transaction.id).subscribe((res) => {
         if (res.success) {
           this.getBalance();
