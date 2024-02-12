@@ -17,7 +17,7 @@ export class EditModerationComponent implements OnInit {
   @ViewChild("dialogPreview") dialogPreview: TemplateRef<any>;
 
   fileApi = 'https://merchant.tirgo.io/api/v1/file/download/';
-  selectedFileNames:any;
+  selectedFileNames: any;
   passportFile: FileList;
   passportNames: string[] = [];
 
@@ -30,9 +30,9 @@ export class EditModerationComponent implements OnInit {
   data
   transactionRequest: any[] = [];
   transaction: any;
-  balance:any;
-  frozenBalance:any;
-  image:any;
+  balance: any;
+  frozenBalance: any;
+  image: any;
 
   sizespage = [
     50, 100, 200, 500, 1000, 5000
@@ -88,7 +88,7 @@ export class EditModerationComponent implements OnInit {
 
   getBalance() {
     this.list.getMerchantBalance(this.data.id).subscribe((res) => {
-      if(res.success) {
+      if (res.success) {
         this.balance = res.data.activeBalance;
         this.frozenBalance = res.data.frozenBalance;
       }
@@ -135,7 +135,7 @@ export class EditModerationComponent implements OnInit {
     if (!item.verified && !item.rejected) {
       this.transaction = item;
       console.log(this.transaction);
-      
+
       const dialogRef = this.dialog.open(this.dialogRef, {
         data: item,
       });
@@ -154,14 +154,26 @@ export class EditModerationComponent implements OnInit {
     // this.helper.global_loading = false;
   }
 
-  verifyTransaction(id) {
-    this.list.verifyTransaction(id).subscribe((res) => {
-      if (res) {
-        this.getBalance();
-        this.dialog.closeAll();
-        this.toastr.success('Успешно завершено')
-      }
-    })
+  verifyTransaction(transaction) {
+    console.log(transaction.amount);
+    console.log(this.balance);
+    if (transaction.amount > this.balance) {
+      this.list.verifyTransaction(transaction.id).subscribe((res) => {
+        if (res.success) {
+          this.getBalance();
+          this.dialog.closeAll();
+          this.toastr.success('Успешно завершено')
+        } else {
+          if (res.errors[0] = 'notEnoughBalance') {
+            this.toastr.error('Баланса не хватает')
+          } else {
+            this.toastr.error('Не успешно завершено')
+          }
+        }
+      })
+    } else {
+      this.toastr.error('Баланса не хватает')
+    }
   }
 
   rejectTransaction(id) {
@@ -172,49 +184,49 @@ export class EditModerationComponent implements OnInit {
       }
     })
   }
-  
+
   addItem() {
-    this.data.bankAccounts.push({account:'', currencyName: 'USD'});
+    this.data.bankAccounts.push({ account: '', currencyName: 'USD' });
   }
 
   removeItem(i) {
-    this.data.bankAccounts.splice(1,i);
+    this.data.bankAccounts.splice(1, i);
   }
 
   preview(image?: string): void {
-    if(image) {
+    if (image) {
       this.image = image;
       const dialog = this.dialog.open(this.dialogPreview, {
-          data: image,
-          height: "600px",
-          width: "800px",
-          panelClass: 'custom-dialog-class',
+        data: image,
+        height: "600px",
+        width: "800px",
+        panelClass: 'custom-dialog-class',
       });
-    }    
-    
+    }
+
   }
 
   selectFile(event: any, name: string) {
-  if (name == "logoFilePath") this.selectedFileNames = event.target.files[0].name;
-  if (name == "registrationCertificateFilePath")
-    this.certificateNames = event.target.files[0].name;
-  if (name == "passportFilePath")
-    this.passportNames = event.target.files[0].name;
-  
-  const file = event.target.files[0];
-  const formData = new FormData();
-  formData.append("file", file, file.name);
-  this.authService.fileUpload(formData).subscribe(
-    (response) => {
-      if (response) {
-        this.toastr.success('Файл успешно загружен')
-        this.data[name] = response.filename;
-      }
-    },
-    (error) => {
+    if (name == "logoFilePath") this.selectedFileNames = event.target.files[0].name;
+    if (name == "registrationCertificateFilePath")
+      this.certificateNames = event.target.files[0].name;
+    if (name == "passportFilePath")
+      this.passportNames = event.target.files[0].name;
+
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file, file.name);
+    this.authService.fileUpload(formData).subscribe(
+      (response) => {
+        if (response) {
+          this.toastr.success('Файл успешно загружен')
+          this.data[name] = response.filename;
+        }
+      },
+      (error) => {
         this.toastr.error(error.message)
-    }
-  );
+      }
+    );
   }
 
 }
