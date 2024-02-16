@@ -16,7 +16,7 @@
 
 .images-passport {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 
@@ -71,9 +71,11 @@
   align-items: center;
   p{
     cursor: pointer;
-    font-size: 14px;
+    font-size: 12px;
   }
   img {
+    cursor: pointer;
+    margin-left: 20px;
     object-fit: contain;
     max-width: 70px;
     max-height: 57px;
@@ -93,6 +95,7 @@
   background-color: #ff5252;
   border-radius: 50%;
   height: 3rem;
+  margin-left: 20px;
   overflow: hidden;
   position: relative;
   width: 3rem;
@@ -139,4 +142,15 @@ input[type="file"] {
       position: absolute;
       top: 0;
   }
+}
+
+.passport-button {
+  position: absolute;
+  height: 34px;
+  width: 80px;
+  background-color:#D9D9D9;
+  margin-left: -150px;
+  margin-top: 2px;
+  border-radius: 20px;
+  padding: 10px;
 }

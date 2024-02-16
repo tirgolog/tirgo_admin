@@ -13,7 +13,7 @@
                 <mat-form-field class="form__input">
                   <mat-label>Фото паспорта с лицом селфи </mat-label>
                   <input matInput type="text" [(ngModel)]="this.driver.selfies_with_passport"  [ngModelOptions]="{standalone: true}"/>
-                  <button class="passport-button" (click)="preview(this.driver.selfies_with_passport)"> open</button>
+                  <button class="passport-button tw-text-xs" (click)="preview(this.driver.selfies_with_passport)"> open</button>
                   <button class="file-upload-button-passport">
                     <input type="file" name="image"
                       (change)="processFile($event, this.driver.selfies_with_passport, 'selfies_with_passport')" />
@@ -24,7 +24,7 @@
                   </mat-label>
                   <input matInput type="text" [(ngModel)]="this.driver.bank_card"  [ngModelOptions]="{standalone: true}"/>
                 </mat-form-field>
-                <div class="tw-flex tw-justify-between tw-items-center tw-text-xs images-passport">
+                <div class="tw-flex tw-justify-around tw-items-center images-passport">
                   <button class="image-box">
                     <p (click)="preview(this.driver.techpassport_photo1)">
                       Фото тех паспорта 1
