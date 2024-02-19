@@ -11,7 +11,7 @@ import { SpollersService } from 'src/app/services/spollers.service';
   templateUrl: './history-transaction-driver-agent.component.html',
   styleUrls: ['./history-transaction-driver-agent.component.scss']
 })
-export class HistoryTransactionDriverAgentComponent{
+export class HistoryTransactionDriverAgentComponent {
   subscritions: any[] = [];
   subscrition_count: any;
   sizespage = [50, 100, 200, 500, 1000, 5000];
@@ -24,19 +24,21 @@ export class HistoryTransactionDriverAgentComponent{
     public listService: ListService,
     public authService: AuthService,
     public socketService: SocketService) {
-    console.log(data);
-    this.agent_id=data
+    this.agent_id = data;
     this.filterList()
   }
 
-  async filterList() {
-    this.helper.global_loading = true;
-    let newusers = await this.listService
+  filterList() {
+    this.listService
       .getAllSubscriptionHistory(
         this.agent_id,
       )
-      .toPromise();
-    this.subscritions = newusers.data;
-    this.helper.global_loading = false;
+      .subscribe((newusers: any) => {
+        if (newusers.status) {
+          this.subscritions = newusers.data;
+          this.subscrition_count = newusers.data_count;
+        } else {
+        }
+      })
   }
 }

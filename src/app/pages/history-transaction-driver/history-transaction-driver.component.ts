@@ -26,18 +26,25 @@ export class HistoryTransactionDriverComponent {
     public authService: AuthService,
     public socketService: SocketService) {
     console.log(data);
-    this.agent_id=data
+    this.agent_id = data
     this.filterList()
   }
 
-  async filterList() {
-    this.helper.global_loading = true;
-    let newusers = await this.listService
+   filterList() {
+    this.listService
       .getAllSubscriptionHistory(
         this.agent_id,
       )
-      .toPromise();
-    this.subscritions = newusers.data;
-    this.helper.global_loading = false;
+      .subscribe((newusers: any) => {
+        this.helper.global_loading = false;
+        console.log(newusers)
+        if (newusers.status) {
+          console.log(newusers);
+          this.subscritions = newusers.data;
+          this.subscrition_count = newusers.data_count;
+        } else {
+        }
+      })
+
   }
 }

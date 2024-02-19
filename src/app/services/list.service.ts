@@ -75,7 +75,13 @@ export class ListService {
     const body = JSON.stringify({
       agent_id,
     });
-    return this.http.post<any>(sUrl, body);
+    return this.http.post<any>(sUrl, body).pipe(map(res => {
+      if (res && res.data) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
   }
 
   getAllunVerifiedDrivers() {
