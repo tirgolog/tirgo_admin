@@ -44,7 +44,6 @@ export class ConnectToAgentComponent implements OnInit {
       const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
       if (confirm) {
          this.listService.connectDriverToAgent(this.dataUser).subscribe(res => {
-          console.log(res)
           if (res.status) {
             this.dialog.closeAll();
             this.toastr.success('Драйвер успешно прикрепился')

@@ -71,7 +71,7 @@ export class AddAdminComponent {
          if (confirm) {
             await this.helper.loadingCreate();
             if (this.isAgent) {
-               const res = await this.authService.addAdmin(this.name, this.role, this.username, this.password, this.phone, this.editaid, this.agent_balance).toPromise();
+               const res = await this.authService.addAdmin(this.name, this.role, this.username, this.password, this.phone, this.editaid).toPromise();
                if (res.status) {
                   await this.helper.loadingClose();
                   this.toastr.success(this.editaid ? 'Информация успешно изменена' : 'Администратор добавлен')
