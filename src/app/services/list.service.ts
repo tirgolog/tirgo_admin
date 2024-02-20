@@ -354,8 +354,19 @@ export class ListService {
       }));
   }
 
-  getSearchDriverAgent(userid) {
-    const sUrl = API_URL + `/admin/searchdriverAgent/${userid}`;
+  getSearchDriverAgentAdmin(userid) {
+    const sUrl = API_URL + `/admin/searchdriverAgentAdmin/${userid}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+  getSearchDriverAgent(userid, agentid?:number) {
+    const sUrl = API_URL + `/admin/searchdriverAgent/${userid}/${agentid}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res.data) {

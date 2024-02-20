@@ -31,7 +31,7 @@ export class ConnectToAgentComponent implements OnInit {
   }
 
   async searchUser(user_id) {
-    this.listService.getSearchDriverAgent(user_id).subscribe(res => {
+    this.listService.getSearchDriverAgentAdmin(user_id).subscribe(res => {
       this.dataUser.phone = res.phone;
       this.dataUser.name = res.name;
     })
