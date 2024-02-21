@@ -39,7 +39,7 @@ export class AddSubsciptionExitingComponent implements OnInit {
   }
 
   async searchUser(user_id) {
-    this.listService.getSearchDriverAgent(user_id, this.authService.currentUser.id).subscribe(res => {
+    this.listService.getSearchDriverAgentAdmin(user_id).subscribe(res => {
       this.dataUser.name = res.name;
       this.dataUser.phone = res.phone;
     })

@@ -11,15 +11,19 @@
             <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
          </ng-container>
 
-
          <ng-container matColumnDef="phone">
             <mat-header-cell *matHeaderCellDef>phone</mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.phone}} </mat-cell>
          </ng-container>
+         
+         <ng-container matColumnDef="username">
+            <mat-header-cell *matHeaderCellDef>username</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.username}} </mat-cell>
+         </ng-container>
          <!-- Header and Row Declarations -->
-         <mat-header-row *matHeaderRowDef="['id',  'name', 'phone']"></mat-header-row>
+         <mat-header-row *matHeaderRowDef="['id',  'name','username', 'phone']"></mat-header-row>
          <mat-row [routerLink]="['/agent-list', row.id]"
-            *matRowDef="let row; columns: ['id',  'name' , 'phone']"></mat-row>
+            *matRowDef="let row; columns: ['id',  'name' , 'username', 'phone']"></mat-row>
       </mat-table>
       <mat-paginator [length]="count" showFirstLastButtons [pageSizeOptions]="sizespage"
          (page)="handlePage($event)"></mat-paginator>
