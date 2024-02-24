@@ -202,7 +202,6 @@ export class OrdersComponent {
     this.helper.orders = this.helper.orders.concat(...neworders.data);
     this.helper.orders_count = neworders.data_count;
   }
-
   async filterList() {
     this.helper.isLoading = true;
     let neworders = await this.listService

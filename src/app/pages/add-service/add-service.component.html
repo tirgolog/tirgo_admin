@@ -1,0 +1,29 @@
+<main class="add-car-type">
+    <section class="page-header">
+        <div class="page-header__top">
+            <h2 class="page-header__title title">Типы услуг: Добавление</h2>
+        </div>
+    </section>
+    <form class="page-form">
+        <div class="page-form__main">
+            <div class="form__group ">
+                <ng-container>
+                    <mat-form-field class="form__input tw-w-full">
+                        <mat-label>Название </mat-label>
+                        <input matInput type="text" name="name" readonly [(ngModel)]="service.name"  [ngModelOptions]="{standalone: true}"/>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="form__input tw-w-full">
+                        <mat-label>Цена</mat-label>
+                        <input matInput type="text" name="amount" readonly [(ngModel)]="service.price"  [ngModelOptions]="{standalone: true}"/>
+                    </mat-form-field>
+                    <br>
+                </ng-container>
+            </div>
+        </div>
+        <div class="tw-flex tw-justify-end tw-mt-5">
+            <button class="page-form__btn btn-red tw-mr-5"  (click)="dialog.closeAll()">Отменить</button>
+            <button class="page-form__btn btn-green" (click)="addService()">Сохранить</button>
+        </div>
+    </form>
+</main>

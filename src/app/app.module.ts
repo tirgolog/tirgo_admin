@@ -142,6 +142,8 @@ import { AddSubsciptionExitingComponent } from './pages/add-subsciption-exiting/
 import { HistoryTransactionDriverComponent } from './pages/history-transaction-driver/history-transaction-driver.component';
 import { HistoryTransactionDriverAgentComponent } from './pages/history-transaction-driver-agent/history-transaction-driver-agent.component';
 import { StartsWith998Pipe } from './pipes/starts-with998.pipe';
+import { AddServiceComponent } from './pages/add-service/add-service.component';
+import { ServiceTypesComponent } from './pages/service-types/service-types.component';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -240,6 +242,8 @@ const mapConfig: YaConfig = {
       HistoryTransactionDriverComponent,
       HistoryTransactionDriverAgentComponent,
       StartsWith998Pipe,
+      AddServiceComponent,
+      ServiceTypesComponent,
    ],
    imports: [
       CommonModule,
