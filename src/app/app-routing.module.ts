@@ -62,6 +62,7 @@ import { AgentListComponent } from './pages/agent-list/agent-list.component';
 import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-driver.component';
 import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-payment-list.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ServiceTypesComponent } from './pages/service-types/service-types.component';
 
 const routes: Routes = [
    {
@@ -262,6 +263,12 @@ const routes: Routes = [
       title: "Типы транспорта: Добавление"
    },
    {
+      path: "service-types",
+      canActivate: [AuthGuard],
+      component: ServiceTypesComponent,
+      title: "Типы услуг"
+   },
+   {
       path: "cargo-types",
       canActivate: [AuthGuard],
       component: CargoTypesComponent,
@@ -440,7 +447,7 @@ const routes: Routes = [
       canActivate: [AuthGuard],
       component: SubscriptionsComponent,
       title: "Типы грузов"
-   },
+   }
 ];
 
 @NgModule({
