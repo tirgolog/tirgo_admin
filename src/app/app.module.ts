@@ -144,6 +144,8 @@ import { HistoryTransactionDriverAgentComponent } from './pages/history-transact
 import { StartsWith998Pipe } from './pipes/starts-with998.pipe';
 import { AddServiceComponent } from './pages/add-service/add-service.component';
 import { ServiceTypesComponent } from './pages/service-types/service-types.component';
+import { ApplyServiceComponent } from './pages/apply-service/apply-service.component';
+import { ApplyServiceHistoryComponent } from './pages/apply-service-history/apply-service-history.component';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -244,6 +246,8 @@ const mapConfig: YaConfig = {
       StartsWith998Pipe,
       AddServiceComponent,
       ServiceTypesComponent,
+      ApplyServiceComponent,
+      ApplyServiceHistoryComponent
    ],
    imports: [
       CommonModule,

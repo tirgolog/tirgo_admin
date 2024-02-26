@@ -3,7 +3,14 @@
       <div class="page-header__top">
          <h2 class="page-header__title title">Водители</h2>
          <div class="page-header__actions">
-            <button routerLink="/fin-request" class="page-header__btn btn-green" [matBadgeHidden]="!fin_requests || fin_requests == 0" matBadge="{{ fin_requests }}"
+            <button class="page-header__btn btn-green" (click)="applyService()" *ngIf="authService?.myrole?.send_push">
+               Оформить услугу
+            </button>
+            <button class="page-header__btn btn-green" [routerLink]="['/apply-service-history']" *ngIf="authService?.myrole?.send_push">
+               История оформление услуг
+            </button>
+            <button routerLink="/fin-request" class="page-header__btn btn-green"
+               [matBadgeHidden]="!fin_requests || fin_requests == 0" matBadge="{{ fin_requests }}"
                matBadgePosition="after" matBadgeColor="warn">
                Фин.Запросы
             </button>
@@ -12,10 +19,11 @@
                Отправить пуш всем
             </button>
 
-            <button class="page-header__btn btn-green" (click)="goToAddDriverSubscription()" *ngIf="authService?.myrole?.send_push">
+            <button class="page-header__btn btn-green" (click)="goToAddDriverSubscription()"
+               *ngIf="authService?.myrole?.send_push">
                Оформить подписку
             </button>
-            
+
             <a (click)="goToAddDriver()" class="page-header__btn btn-green" *ngIf="authService?.myrole?.add_driver">
                Добавить
             </a>
@@ -43,7 +51,7 @@
                </select>
             </span>
             <span>
-               <select name="select" class="page__search" [(ngModel)]="typetransport"  (change)="categoryFind($event)">
+               <select name="select" class="page__search" [(ngModel)]="typetransport" (change)="categoryFind($event)">
                   <option value="all">Все типы транспорта</option>
                   <ng-container *ngFor="let row of helper.typetruck">
                      <option [value]="row.id">{{row.name}}</option>
@@ -52,7 +60,8 @@
             </span>
 
             <span>
-               <select name="select" class="page__search" [(ngModel)]="subscription" (change)="selectSubscription($event)">
+               <select name="select" class="page__search" [(ngModel)]="subscription"
+                  (change)="selectSubscription($event)">
                   <option value="all">Без подписки </option>
                   <option value="subscription">Подписка</option>
                </select>
@@ -71,7 +80,7 @@
          <ng-container matColumnDef="index">
             <mat-header-cell *matHeaderCellDef>No. </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row?.descending_count}} </mat-cell>
-          </ng-container>
+         </ng-container>
          <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
