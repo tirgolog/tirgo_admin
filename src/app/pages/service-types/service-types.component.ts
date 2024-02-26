@@ -15,7 +15,7 @@ import { AddServiceComponent } from '../add-service/add-service.component';
   host: { "id": "main" }
 })
 export class ServiceTypesComponent {
-  subscriptions
+  serviceTypes: any;
   sizespage = [
     50, 100, 200, 500, 1000, 5000
   ]
@@ -27,7 +27,11 @@ export class ServiceTypesComponent {
     public listService: ListService,
     public router: Router,
     private toastr: ToastrService
-  ) { }
+  ) { 
+    this.serviceTypes = [
+     { id: 1, name: 'Name', priceKZT: '10',priceUZS:'20'}
+    ]
+  }
   createService() {
     const dialogRef = this.dialog.open(AddServiceComponent, {
       width: '150',
@@ -35,7 +39,16 @@ export class ServiceTypesComponent {
       panelClass: 'custom-dialog-class',
     });
   }
-  goToColumn(row) { }
+  goToColumn(row) { 
+    const dialogRef = this.dialog.open(AddServiceComponent, {
+      minWidth: '40vw',
+      maxWidth: '65vw',
+      minHeight: '60vh',
+      maxHeight: '80vh',
+      data: row,
+      panelClass: "custom-dialog-class",
+    });
+  }
   handlePage(ev) { }
   delete(id) { }
 }
