@@ -14,10 +14,14 @@
                     </mat-form-field>
                     <br>
                     <mat-form-field class="form__input tw-w-full">
-                        <mat-label>Цена</mat-label>
-                        <input matInput type="text" name="amount" readonly [(ngModel)]="service.price"  [ngModelOptions]="{standalone: true}"/>
+                        <mat-label>Цена (в KZT)</mat-label>
+                        <input matInput type="text" name="priceKZT" readonly [(ngModel)]="service.priceKZT"  [ngModelOptions]="{standalone: true}"/>
                     </mat-form-field>
                     <br>
+                    <mat-form-field class="form__input tw-w-full">
+                        <mat-label>Цена (в UZS)</mat-label>
+                        <input matInput type="text" name="priceUZS" readonly [(ngModel)]="service.priceUZS"  [ngModelOptions]="{standalone: true}"/>
+                    </mat-form-field>
                 </ng-container>
             </div>
         </div>
