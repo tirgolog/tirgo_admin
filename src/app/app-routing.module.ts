@@ -63,6 +63,7 @@ import { AgentListDriverComponent } from './pages/agent-list-driver/agent-list-d
 import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-payment-list.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ServiceTypesComponent } from './pages/service-types/service-types.component';
+import { ApplyServiceHistoryComponent } from './pages/apply-service-history/apply-service-history.component';
 
 const routes: Routes = [
    {
@@ -447,6 +448,12 @@ const routes: Routes = [
       canActivate: [AuthGuard],
       component: SubscriptionsComponent,
       title: "Типы грузов"
+   },
+   {
+      path: "apply-service-history",
+      canActivate: [AuthGuard],
+      component: ApplyServiceHistoryComponent,
+      title: "История оформление услуг"
    }
 ];
 

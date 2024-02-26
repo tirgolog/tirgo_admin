@@ -10,6 +10,7 @@ import { AddDriverComponent } from "../add-driver/add-driver.component";
 import { ListService } from "../../services/list.service";
 import { SocketService } from "src/app/services/socket.service";
 import { AddDriverSubscriptionComponent } from "../add-driver-subscription/add-driver-subscription.component";
+import { ApplyServiceComponent } from "../apply-service/apply-service.component";
 
 @Component({
   selector: "app-drivers",
@@ -40,7 +41,7 @@ export class DriversComponent {
     public listService: ListService,
     public authService: AuthService,
     public socketService: SocketService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.spoller.initSpollers();
@@ -257,7 +258,15 @@ export class DriversComponent {
     this.reverse = !this.reverse;
     this.sort = ev.target.value;
   }
-
+  applyService() {
+    const dialogRef = this.dialog.open(ApplyServiceComponent, {
+      minWidth: '40vw',
+      maxWidth: '65vw',
+      minHeight: '60vh',
+      maxHeight: '80vh',
+      panelClass: "custom-dialog-class",
+    });
+  }
   getReqFinance() {
     this.socketService.updateFinRequests().subscribe((res: any) => {
       let finRequests = [];
