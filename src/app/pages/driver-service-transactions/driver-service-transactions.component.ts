@@ -50,7 +50,9 @@ export class DriverServiceTransactionsComponent {
         e.pageSize,
         this.id,
       )
-      .toPromise();
+      .toPromise().catch(err => {
+        this.helper.global_loading = false;
+      })
     this.payments = newusers.data;
     this.payments_count = newusers.data_count;
     this.helper.global_loading = false;
@@ -64,7 +66,9 @@ export class DriverServiceTransactionsComponent {
         50,
         this.id,
       )
-      .toPromise();
+      .toPromise().catch(err => {
+        this.helper.global_loading = false;
+      })
     this.payments = newusers.data;
     this.payments_count = newusers.data_count;
     this.helper.global_loading = false;

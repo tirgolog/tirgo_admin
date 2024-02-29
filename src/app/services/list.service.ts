@@ -97,8 +97,7 @@ export class ListService {
 
   getAllTransactions(from, limit) {
     const sUrl = API_URL + '/admin/services-transaction';
-    return this.http.post<any>(sUrl, JSON.stringify(from, limit)).pipe(map(res => {
-      console.log(res)
+    return this.http.post<any>(sUrl, JSON.stringify({from, limit})).pipe(map(res => {
       if (res && res.data) {
         return res;
       } else {
@@ -214,7 +213,7 @@ export class ListService {
 
   getServiceTransactionByUserId(from, limit, userid) {
     const sUrl = API_URL + `/admin/services-transaction/${userid}`;
-    return this.http.post<any>(sUrl, JSON.stringify(from, limit,userid))
+    return this.http.post<any>(sUrl, JSON.stringify({from, limit,userid}))
       .pipe(map(res => {
         if (res) {
           return res;

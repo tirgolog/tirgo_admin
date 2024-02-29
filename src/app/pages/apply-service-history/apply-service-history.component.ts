@@ -39,14 +39,15 @@ export class ApplyServiceHistoryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.listService.getAllTransactions(0,50).subscribe(res=>{
-      console.log(res)
-      this.drivers = res.data
+    this.listService.getAllTransactions(1, 50).subscribe(res => {
+      if (res.status) {
+        this.drivers = res.data
+      }
     })
   }
 
-  goToColumn(id) {}
- async handlePage(event) {
+  goToColumn(id) { }
+  async handlePage(event) {
     this.helper.global_loading = true;
     let from = event.pageIndex * event.pageSize;
     let newusers = await this.listService
@@ -54,7 +55,9 @@ export class ApplyServiceHistoryComponent implements OnInit {
         from,
         event.pageSize,
       )
-      .toPromise();
+      .toPromise().catch(err => {
+        this.helper.global_loading = false;
+      })
     this.drivers = newusers.data;
     this.helper.drivers_count = newusers.data_count;
     this.helper.global_loading = false;
