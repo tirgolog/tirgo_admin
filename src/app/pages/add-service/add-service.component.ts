@@ -27,7 +27,6 @@ export class AddServiceComponent {
 
 
   onInputChange(target: any, key): void {
-    
     if (target.value != 0 || target.value != '') {
       this.listService.getAllCountMoney(key, target.value).subscribe(res => {
         if (key === 'KZT') {

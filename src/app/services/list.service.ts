@@ -38,10 +38,10 @@ export class ListService {
   }
 
 
-  getAllDrivers(from: number, limit: number, id, phone, dateReg, dateLogin, name, indentificator, typetransport, subscription) {
+  getAllDrivers(from: number, limit: number, id, phone, dateReg, dateLogin, name, indentificator, typetransport, subscription, is_service) {
     const sUrl = API_URL + '/reborn/getAllDrivers';
     const body = JSON.stringify({
-      from, limit, id, phone, dateReg, dateLogin, name, indentificator, typetransport, subscription
+      from, limit, id, phone, dateReg, dateLogin, name, indentificator, typetransport, subscription,is_service
     });
     return this.http.post<any>(sUrl, body);
   }
@@ -87,6 +87,18 @@ export class ListService {
   getAllServies() {
     const sUrl = API_URL + '/admin/services';
     return this.http.get<any>(sUrl).pipe(map(res => {
+      if (res && res.data) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
+  }
+
+  getAllTransactions(from, limit) {
+    const sUrl = API_URL + '/admin/services-transaction';
+    return this.http.post<any>(sUrl, JSON.stringify(from, limit)).pipe(map(res => {
+      console.log(res)
       if (res && res.data) {
         return res;
       } else {
@@ -191,6 +203,18 @@ export class ListService {
   getPaymentByUserId(id) {
     const sUrl = API_URL + `/admin/paymentFullBalance/${id}`;
     return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getServiceTransactionByUserId(from, limit, userid) {
+    const sUrl = API_URL + `/admin/services-transaction/${userid}`;
+    return this.http.post<any>(sUrl, JSON.stringify(from, limit,userid))
       .pipe(map(res => {
         if (res) {
           return res;
@@ -375,6 +399,19 @@ export class ListService {
       }));
   }
 
+  addDriverServices(data) {
+    const sUrl = API_URL + '/admin/addDriverServices';
+    const body = JSON.stringify(data);
+    return this.http.post<any>(sUrl, body)
+      .pipe(map(res => {
+        if (res) {
+          return res;
+        } else {
+          return [];
+        }
+      }));
+  }
+  
   getSearchDriverSubscription(userid) {
     const sUrl = API_URL + `/admin/searchDriver/${userid}`;
     return this.http.get<any>(sUrl)
@@ -389,6 +426,18 @@ export class ListService {
 
   getSearchDriverAgentAdmin(userid) {
     const sUrl = API_URL + `/admin/searchdriverAgentAdmin/${userid}`;
+    return this.http.get<any>(sUrl)
+      .pipe(map(res => {
+        if (res.data) {
+          return res.data;
+        } else {
+          return [];
+        }
+      }));
+  }
+
+  getSearchAlphaPaymentAdmin(userid) {
+    const sUrl = API_URL + `/admin/alpha-payment/${userid}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
         if (res.data) {

@@ -33,8 +33,7 @@ export class DriverComponent {
         public authService: AuthService,
         private toastr: ToastrService,
         public helper: HelperService,
-        public listService: ListService,
-    ) {
+        public listService: ListService) {
         this.user = { merch_id: '' }
     }
     returnAcceptOrder(items) {

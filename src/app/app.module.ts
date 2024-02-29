@@ -146,6 +146,7 @@ import { AddServiceComponent } from './pages/add-service/add-service.component';
 import { ServiceTypesComponent } from './pages/service-types/service-types.component';
 import { ApplyServiceComponent } from './pages/apply-service/apply-service.component';
 import { ApplyServiceHistoryComponent } from './pages/apply-service-history/apply-service-history.component';
+import { DriverServiceTransactionsComponent } from './pages/driver-service-transactions/driver-service-transactions.component';
 registerLocaleData(ruLocale);
 
 const mapConfig: YaConfig = {
@@ -247,7 +248,8 @@ const mapConfig: YaConfig = {
       AddServiceComponent,
       ServiceTypesComponent,
       ApplyServiceComponent,
-      ApplyServiceHistoryComponent
+      ApplyServiceHistoryComponent,
+      DriverServiceTransactionsComponent
    ],
    imports: [
       CommonModule,

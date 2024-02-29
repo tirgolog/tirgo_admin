@@ -64,6 +64,7 @@ import { DriverPaymentListComponent } from './pages/driver-payment-list/driver-p
 import { AuthGuard } from './guards/auth.guard';
 import { ServiceTypesComponent } from './pages/service-types/service-types.component';
 import { ApplyServiceHistoryComponent } from './pages/apply-service-history/apply-service-history.component';
+import { DriverServiceTransactionsComponent } from './pages/driver-service-transactions/driver-service-transactions.component';
 
 const routes: Routes = [
    {
@@ -147,6 +148,12 @@ const routes: Routes = [
       path: "drivers-payment-list/:id",
       canActivate: [AuthGuard],
       component: DriverPaymentListComponent,
+      title: "Список платежей"
+   },
+   {
+      path: "drivers-service-list/:id",
+      canActivate: [AuthGuard],
+      component: DriverServiceTransactionsComponent,
       title: "Список платежей"
    },
    {

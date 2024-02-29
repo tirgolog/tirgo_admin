@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
           }
         }
       });
-    this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null, null).subscribe(res => {
+    this.listService.getAllDrivers(0, 50, null, null, null, null, null, null, null, null, 0).subscribe(res => {
       if (res.status) {
         this.helper.drivers = res.data;
         this.helper.drivers_count = res.data_count;

@@ -1,0 +1,43 @@
+<main class="drivers">
+    <section class="page-header">
+       <div class="page-header__top">
+          <h2 class="page-header__title title">Список платежей</h2>
+       </div>
+    </section>
+    <section class="table">
+        <mat-table [dataSource]="payments">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row?.id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="service_id">
+              <mat-header-cell *matHeaderCellDef>Идентификатор услуги </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row?.service_id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Наименование услуги</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row?.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <mat-header-cell *matHeaderCellDef>Дата и Время</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row?.createAt | formatTime: 'DD.MM.YYYY'}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="price_kzs">
+              <mat-header-cell *matHeaderCellDef>Стоимость KZS</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row?.price_kzs}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="price_uzs">
+              <mat-header-cell *matHeaderCellDef>Стоимость UZS</mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row?.price_uzs}} </mat-cell>
+            </ng-container>
+          <!-- Header and Row Declarations -->
+          <mat-header-row
+            *matHeaderRowDef="['id', 'service_id', 'name', 'date', 'price_kzs', 'price_uzs']"></mat-header-row>
+          <mat-row 
+            *matRowDef="let row; columns: ['id', 'service_id', 'name', 'date', 'price_kzs', 'price_uzs']"></mat-row>
+          </mat-table>
+          
+            <mat-paginator [length]="payments_count" showFirstLastButtons [pageSizeOptions]="sizespage"
+               (page)="handlePage($event)"></mat-paginator>
+    </section>
+ </main>

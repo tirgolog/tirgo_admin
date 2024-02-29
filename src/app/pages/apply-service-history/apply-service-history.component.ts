@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { SpollersService } from "src/app/services/spollers.service";
 import { AuthService } from "../../services/auth.service";
@@ -12,7 +12,7 @@ import { SocketService } from "src/app/services/socket.service";
   styleUrls: ["./apply-service-history.component.scss"],
   host: { id: "main" },
 })
-export class ApplyServiceHistoryComponent {
+export class ApplyServiceHistoryComponent implements OnInit {
   id: string = "";
   phone: string = "";
   indentificator: string = "";
@@ -37,8 +37,27 @@ export class ApplyServiceHistoryComponent {
     public socketService: SocketService
   ) { }
 
-  ngOninit() {}
+
+  ngOnInit(): void {
+    this.listService.getAllTransactions(0,50).subscribe(res=>{
+      console.log(res)
+      this.drivers = res.data
+    })
+  }
 
   goToColumn(id) {}
-  handlePage(event) {}
+ async handlePage(event) {
+    this.helper.global_loading = true;
+    let from = event.pageIndex * event.pageSize;
+    let newusers = await this.listService
+      .getAllTransactions(
+        from,
+        event.pageSize,
+      )
+      .toPromise();
+    this.drivers = newusers.data;
+    this.helper.drivers_count = newusers.data_count;
+    this.helper.global_loading = false;
+
+  }
 }

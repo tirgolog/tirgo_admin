@@ -4,6 +4,7 @@ import { SpollersService } from "src/app/services/spollers.service";
 import { AuthService } from "../../services/auth.service";
 import { HelperService } from "../../services/helper.service";
 import { ListService } from "../../services/list.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-apply-service",
@@ -12,14 +13,15 @@ import { ListService } from "../../services/list.service";
   host: { id: "main" },
 })
 export class ApplyServiceComponent {
-  subscription
+  services
   dataUser = {
     user_id: '',
-    agent_id: 0,
     phone: '',
     name: '',
-    subscription_id: 0,
-    balance: ''
+    services_id: 0,
+    balance: '',
+    price_uzs: '',
+    price_kzs: ''
   };
   constructor(
     public dialog: MatDialog,
@@ -27,28 +29,45 @@ export class ApplyServiceComponent {
     public helper: HelperService,
     public listService: ListService,
     public authService: AuthService,
-  ) { }
+    public toastr: ToastrService) { }
   ngOnInit() {
-    this.getAllSubcription();
-   }
-
-  async getAllSubcription() {
-    this.subscription = await this.listService.getAllSubscription().toPromise()
+    this.getAllServices();
   }
 
-  applyService() {
+  async getAllServices() {
+    this.services = await this.listService.getAllServies().toPromise();
+  }
 
+  async applyService() {
+    if (!this.dataUser.name || !this.dataUser.phone || !this.dataUser.user_id || !this.dataUser.services_id) {
+      await this.helper.openDialogConfirm('Ошибка', 'Не все поля заполнены корректно', 1)
+    } else {
+      const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
+      if (confirm) {
+        await this.listService.addDriverServices(this.dataUser).subscribe(res => {
+          if (res.status) {
+            this.toastr.success('Служба успешно подключилась к драйверу')
+            this.dialog.closeAll();
+          } else {
+            this.toastr.error(res.error)
+          }
+        });
+      }
+    }
   }
   searchUser(user_id) {
-    if(user_id) {
-      this.listService.getSearchDriverAgentAdmin(user_id).subscribe(res => {
-        this.dataUser.name = res.name;
-        this.dataUser.phone = res.phone;
+    if (user_id) {
+      this.listService.getSearchAlphaPaymentAdmin(user_id).subscribe(res => {
+        this.dataUser.phone = res.user.phone;
+        this.dataUser.name = res.user.name;
+        this.dataUser.balance = res.total_amount;
       })
     }
   }
-  onChange(event:any) { 
-    this.dataUser.subscription_id = event.value;
+  onChange(event: any) {
+    this.dataUser.services_id = event.value.id;
+    this.dataUser.price_uzs = event.value.price_uzs;
+    this.dataUser.price_kzs = event.value.price_kzs;
   }
 
 }

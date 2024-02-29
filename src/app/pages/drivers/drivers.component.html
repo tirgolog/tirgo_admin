@@ -66,6 +66,14 @@
                   <option value="subscription">Подписка</option>
                </select>
             </span>
+
+            <span>
+               <select name="select" class="page__search" [(ngModel)]="is_service"
+                  (change)="selectSubscription($event)">
+                  <option value="0">Без услуга </option>
+                  <option value="1">Услуга</option>
+               </select>
+            </span>
          </div>
          <div class="filter-buttons">
             <button class="page__btn btn-custom" (click)="filterList()">

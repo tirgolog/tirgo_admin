@@ -30,6 +30,7 @@ export class DriversComponent {
   fin_requests = 0;
   sort: string = "id";
   reverse: boolean = true;
+  is_service: number = 0;
 
   gridOptions: any;
   drivers: any[] = [];
@@ -151,6 +152,7 @@ export class DriversComponent {
         this.indentificator,
         this.typetransport !== "all" ? this.typetransport : null,
         this.subscription !== "all" ? this.subscription : null,
+        this.is_service
       )
       .toPromise();
     this.helper.drivers = newusers.data;
@@ -173,6 +175,7 @@ export class DriversComponent {
         this.indentificator,
         this.typetransport !== "all" ? this.typetransport : null,
         this.subscription !== "all" ? this.subscription : null,
+        this.is_service
       )
       .toPromise();
     this.helper.drivers = this.helper.drivers.concat(...newusers.data);
@@ -192,6 +195,7 @@ export class DriversComponent {
         this.indentificator,
         this.typetransport !== "all" ? this.typetransport : null,
         this.subscription !== "all" ? this.subscription : null,
+        this.is_service
       )
       .toPromise();
     this.helper.drivers = newusers.data;
@@ -208,8 +212,9 @@ export class DriversComponent {
     this.typetransport = "all";
     this.subscription = "all";
     this.helper.isLoading = true;
+    this.is_service = 0;
     let newusers = await this.listService
-      .getAllDrivers(0, 50, null, null, null, null, null, null, null, null)
+      .getAllDrivers(0, 50, null, null, null, null, null, null, null, null, this.is_service)
       .toPromise();
     this.helper.drivers = newusers.data;
     this.helper.drivers_count = newusers.count;
@@ -252,6 +257,10 @@ export class DriversComponent {
 
   selectSubscription(ev) {
     this.subscription = ev.target.value;
+  }
+
+  selectService(ev) {
+    this.is_service = ev.target.value;
   }
 
   changeSort(ev) {
