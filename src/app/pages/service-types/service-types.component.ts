@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ import { AddServiceComponent } from '../add-service/add-service.component';
   styleUrls: ['./service-types.component.scss'],
   host: { "id": "main" }
 })
-export class ServiceTypesComponent {
+export class ServiceTypesComponent implements OnInit {
   serviceTypes: any;
   sizespage = [
     50, 100, 200, 500, 1000, 5000
@@ -28,19 +28,27 @@ export class ServiceTypesComponent {
     public router: Router,
     private toastr: ToastrService
   ) { 
-    this.serviceTypes = [
-     { id: 1, name: 'Name', priceKZT: '10',priceUZS:'20'}
-    ]
+ 
+  }
+  ngOnInit(): void {
+    this.getAll()
   }
   createService() {
     const dialogRef = this.dialog.open(AddServiceComponent, {
-      width: '150',
-      height: '150',
+      autoFocus: false,
+      minWidth: '40vw',
+      maxWidth: '65vw',
+      minHeight: '60vh',
+      maxHeight: '80vh',
       panelClass: 'custom-dialog-class',
     });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      this.getAll()
+    })
   }
   goToColumn(row) { 
     const dialogRef = this.dialog.open(AddServiceComponent, {
+      autoFocus: false,
       minWidth: '40vw',
       maxWidth: '65vw',
       minHeight: '60vh',
@@ -48,7 +56,24 @@ export class ServiceTypesComponent {
       data: row,
       panelClass: "custom-dialog-class",
     });
+    dialogRef.afterClosed().subscribe(async (data) => {
+      this.getAll()
+    })
+  }
+  getAll() {
+    this.listService.getAllServies().subscribe(res => {
+      this.serviceTypes = res.data
+    })
   }
   handlePage(ev) { }
-  delete(id) { }
+
+  async delete(id: number) {
+    const res = await this.authService.DeleteTypeSubscription(id).toPromise();
+    if (res.status) {
+      this.toastr.success('Удаление услуг')
+      this.getAll()
+    } else {
+      this.toastr.error(res.error)
+    }
+  }
 }

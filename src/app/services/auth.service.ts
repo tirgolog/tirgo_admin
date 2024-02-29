@@ -289,6 +289,11 @@ export class AuthService {
       const sUrl = API_URL + `/admin/subscription/${id}`;
       return this.http.delete<any>(sUrl);
    }
+
+   DeleteTypeServices(id) {
+      const sUrl = API_URL + `/admin/services/${id}`;
+      return this.http.delete<any>(sUrl);
+   }
    
    getUserInfo(id: any) {
       const sUrl = API_URL + '/reborn/getUserInfo';

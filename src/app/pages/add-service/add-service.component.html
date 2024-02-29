@@ -10,17 +10,17 @@
                 <ng-container>
                     <mat-form-field class="form__input tw-w-full">
                         <mat-label>Название </mat-label>
-                        <input matInput type="text" name="name" readonly [(ngModel)]="service.name"  [ngModelOptions]="{standalone: true}"/>
+                        <input matInput type="text" name="name"  [(ngModel)]="service.name" />
                     </mat-form-field>
                     <br>
                     <mat-form-field class="form__input tw-w-full">
                         <mat-label>Цена (в KZT)</mat-label>
-                        <input matInput type="text" name="priceKZT" readonly [(ngModel)]="service.priceKZT"  [ngModelOptions]="{standalone: true}"/>
+                        <input matInput type="text" name="price_kzs"  (input)="onInputChange($event.target, 'KZT')"  [(ngModel)]="service.price_kzs"  />
                     </mat-form-field>
                     <br>
                     <mat-form-field class="form__input tw-w-full">
                         <mat-label>Цена (в UZS)</mat-label>
-                        <input matInput type="text" name="priceUZS" readonly [(ngModel)]="service.priceUZS"  [ngModelOptions]="{standalone: true}"/>
+                        <input matInput type="text" name="price_uzs"  (input)="onInputChange($event.target, 'UZS')"   [(ngModel)]="service.price_uzs"  />
                     </mat-form-field>
                 </ng-container>
             </div>

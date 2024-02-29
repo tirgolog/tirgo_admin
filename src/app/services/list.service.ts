@@ -84,6 +84,39 @@ export class ListService {
     }));
   }
 
+  getAllServies() {
+    const sUrl = API_URL + '/admin/services';
+    return this.http.get<any>(sUrl).pipe(map(res => {
+      if (res && res.data) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
+  }
+
+  postService(body) {
+    const sUrl = API_URL + '/admin/services';
+    return this.http.post<any>(sUrl, body);
+  }
+
+  editService(body, id) {
+    const sUrl = API_URL + `/admin/services/${id}`;
+    return this.http.put<any>(sUrl, body);
+  }
+
+    getAllCountMoney(key, amount) {
+    const sUrl = API_URL + `/admin/curence/${key}/${amount}`;
+    return this.http.get<any>(sUrl).pipe(map(res => {
+      if (res && res.data) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
+  }
+
+
   getAllunVerifiedDrivers() {
     const sUrl = API_URL + '/users/unverified-verifications';
     return this.http.get<any>(sUrl)
@@ -365,7 +398,7 @@ export class ListService {
         }
       }));
   }
-  getSearchDriverAgent(userid, agentid?:number) {
+  getSearchDriverAgent(userid, agentid?: number) {
     const sUrl = API_URL + `/admin/searchdriverAgent/${userid}/${agentid}`;
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
