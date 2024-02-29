@@ -28,6 +28,11 @@ export class AddRoleComponent {
       activity:false,
       add_driver_to_order:false,
       send_push:false,
+      is_admin_page: false,
+      is_fin_request: false,
+      is_merchant_page: false,
+      is_agent_page: false,
+      is_driver_verification: false
    }
    constructor(
        @Inject(MAT_DIALOG_DATA) public data: any,
@@ -43,6 +48,11 @@ export class AddRoleComponent {
       if (this.data){
          this.id = this.data.id;
          this.newdata.name = this.data.name;
+         this.newdata.is_admin_page = this.data.is_admin_page === 1;
+         this.newdata.is_fin_request = this.data.is_fin_request === 1;
+         this.newdata.is_merchant_page = this.data.is_merchant_page === 1;
+         this.newdata.is_agent_page = this.data.is_agent_page === 1;
+         this.newdata.is_driver_verification = this.data.is_driver_verification === 1;
          this.newdata.add_driver = this.data.add_driver === 1;
          this.newdata.add_client = this.data.add_client === 1;
          this.newdata.add_order = this.data.add_order === 1;
