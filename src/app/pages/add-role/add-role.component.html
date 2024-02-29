@@ -21,6 +21,24 @@
          <div class="form__group 2xl:tw-col-start-1 2xl:tw-col-end-4">
             <h3 class="form__title title-sec">Разрешения</h3>
             <div class="add-role__checkboxes">
+
+               <mat-checkbox class="form__checkbox" color="primary" (change)="newdata.is_admin_page = $event.checked" [checked]="newdata.is_admin_page">
+                  Просмотр Администраторы
+               </mat-checkbox>
+               <mat-checkbox class="form__checkbox" color="primary" (change)="newdata.is_fin_request = $event.checked" [checked]="newdata.is_fin_request">
+                  Просмотр Фин. Запросы,
+               </mat-checkbox>
+               <mat-checkbox class="form__checkbox" color="primary" (change)="newdata.is_merchant_page = $event.checked" [checked]="newdata.is_merchant_page">
+                  Просмотр Мерчанты
+               </mat-checkbox>
+               <mat-checkbox class="form__checkbox" color="primary" (change)="newdata.is_agent_page = $event.checked" [checked]="newdata.is_agent_page">
+                  Просмотр Агенты
+               </mat-checkbox>
+               <mat-checkbox class="form__checkbox" color="primary" (change)="newdata.is_driver_verification = $event.checked" [checked]="newdata.is_driver_verification">
+                  Просмотр Верификация Водетелей
+               </mat-checkbox>
+
+
                <mat-checkbox class="form__checkbox" color="primary" (change)="newdata.add_driver = $event.checked" [checked]="newdata.add_driver">
                   Добавление водителя
                </mat-checkbox>

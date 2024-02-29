@@ -38,6 +38,32 @@ export class RolesComponent {
    colDefs: ColDef[] = [
       { headerName: 'ID', field: "id", width: 70,},
       { headerName: 'ФИО', field: "name" },
+      { headerName: 'Администраторы', field: "is_admin_page", width: 200, resizable:true,
+         valueGetter: params => {
+            return params.data.is_admin_page ? "Да":'Нет';
+         }
+      },
+      { headerName: 'Фин. Запросы', field: "", width: 200, resizable:true,
+         valueGetter: params => {
+            return params.data.is_fin_request ? "Да":'Нет';
+         }
+      },
+      { headerName: 'Мерчанты', field: "is_merchant_page", width: 200, resizable:true,
+         valueGetter: params => {
+            return params.data.is_merchant_page ? "Да":'Нет';
+         }
+      },
+      { headerName: 'Агенты', field: "is_agent_page", width: 200, resizable:true,
+         valueGetter: params => {
+            return params.data.is_agent_page ? "Да":'Нет';
+         }
+      },
+      { headerName: 'Верификация Водетелей', field: "is_driver_verification", width: 200, resizable:true,
+         valueGetter: params => {
+            return params.data.is_driver_verification ? "Да":'Нет';
+         }
+      },
+
       { headerName: 'Добавление водителя', field: "add_driver", width: 200, resizable:true,
          valueGetter: params => {
             return params.data.add_driver ? "Да":'Нет';
