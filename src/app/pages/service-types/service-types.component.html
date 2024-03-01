@@ -3,6 +3,12 @@
         <div class="page-header__top">
             <h2 class="page-header__title title">Типы услуг</h2>
             <div class="page-header__actions">
+                <div style="text-align: center">
+                    <div style="font-weight: 600">Казахский тенге</div>
+                    <div>{{paymentCourse}} сум</div>
+                </div>
+            </div>
+            <div class="page-header__actions">
                 <a class="page-header__btn btn-green" (click)="createService()">
                     Добавить
                 </a>
@@ -10,6 +16,7 @@
         </div>
     </section>
     <section class="table">
+
         <mat-table [dataSource]="serviceTypes">
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
@@ -28,6 +35,11 @@
             <ng-container matColumnDef="priceUZS">
                 <mat-header-cell *matHeaderCellDef>Цена (в UZS)</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{ row.price_uzs }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="rate">
+                <mat-header-cell *matHeaderCellDef>Ставка</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{ row.rate }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="actions">
@@ -52,9 +64,9 @@
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="['id', 'name', 'priceKZT','priceUZS', 'actions']"></mat-header-row>
+            <mat-header-row *matHeaderRowDef="['id', 'name', 'priceKZT','priceUZS', 'rate', 'actions']"></mat-header-row>
             <mat-row (click)="goToColumn(row)"
-                *matRowDef="let row;columns: ['id', 'name', 'priceKZT','priceUZS', 'actions']"></mat-row>
+                *matRowDef="let row;columns: ['id', 'name', 'priceKZT','priceUZS', 'rate', 'actions']"></mat-row>
         </mat-table>
         <mat-paginator [length]="helper.users_count" showFirstLastButtons [pageSizeOptions]="sizespage"
             (page)="handlePage($event)"></mat-paginator>

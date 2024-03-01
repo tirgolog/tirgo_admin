@@ -21,7 +21,8 @@ export class ApplyServiceComponent {
     services_id: 0,
     balance: '',
     price_uzs: '',
-    price_kzs: ''
+    price_kzs: '',
+    rate:''
   };
   constructor(
     public dialog: MatDialog,
@@ -68,6 +69,7 @@ export class ApplyServiceComponent {
     this.dataUser.services_id = event.value.id;
     this.dataUser.price_uzs = event.value.price_uzs;
     this.dataUser.price_kzs = event.value.price_kzs;
+    this.dataUser.rate = event.value.rate;
   }
 
 }

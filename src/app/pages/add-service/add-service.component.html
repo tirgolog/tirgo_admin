@@ -22,6 +22,11 @@
                         <mat-label>Цена (в UZS)</mat-label>
                         <input matInput type="text" name="price_uzs"  (input)="onInputChange($event.target, 'UZS')"   [(ngModel)]="service.price_uzs"  />
                     </mat-form-field>
+
+                    <mat-form-field class="form__input tw-w-full">
+                        <mat-label>Ставка</mat-label>
+                        <input matInput type="text" name="rate"  readonly="" [(ngModel)]="service.rate"  />
+                    </mat-form-field>
                 </ng-container>
             </div>
         </div>

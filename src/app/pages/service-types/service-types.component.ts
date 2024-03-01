@@ -16,6 +16,7 @@ import { AddServiceComponent } from '../add-service/add-service.component';
 })
 export class ServiceTypesComponent implements OnInit {
   serviceTypes: any;
+  paymentCourse: any;
   sizespage = [
     50, 100, 200, 500, 1000, 5000
   ]
@@ -26,38 +27,38 @@ export class ServiceTypesComponent implements OnInit {
     public authService: AuthService,
     public listService: ListService,
     public router: Router,
-    private toastr: ToastrService
-  ) { 
- 
-  }
+    private toastr: ToastrService) {}
   ngOnInit(): void {
-    this.getAll()
+    this.getAll();
+    this.getPaymentCourse()
   }
   createService() {
     const dialogRef = this.dialog.open(AddServiceComponent, {
       autoFocus: false,
-      minWidth: '40vw',
-      maxWidth: '65vw',
-      minHeight: '60vh',
+      minWidth: '35vw',
+      maxWidth: '55vw',
+      minHeight: '35vh',
       maxHeight: '80vh',
       panelClass: 'custom-dialog-class',
     });
     dialogRef.afterClosed().subscribe(async (data) => {
       this.getAll()
+      this.getPaymentCourse()
     })
   }
-  goToColumn(row) { 
+  goToColumn(row) {
     const dialogRef = this.dialog.open(AddServiceComponent, {
       autoFocus: false,
-      minWidth: '40vw',
-      maxWidth: '65vw',
-      minHeight: '60vh',
+      minWidth: '35vw',
+      maxWidth: '55vw',
+      minHeight: '35vh',
       maxHeight: '80vh',
       data: row,
       panelClass: "custom-dialog-class",
     });
     dialogRef.afterClosed().subscribe(async (data) => {
       this.getAll()
+      this.getPaymentCourse()
     })
   }
   getAll() {
@@ -65,8 +66,14 @@ export class ServiceTypesComponent implements OnInit {
       this.serviceTypes = res.data
     })
   }
-  handlePage(ev) { }
 
+  getPaymentCourse() {
+    this.listService.getPaymentCourse().subscribe(res => {
+      this.paymentCourse = res.data
+    })
+  }
+
+  handlePage(ev) { }
   async delete(id: number) {
     const res = await this.authService.DeleteTypeSubscription(id).toPromise();
     if (res.status) {

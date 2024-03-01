@@ -39,7 +39,7 @@ export class ApplyServiceHistoryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.listService.getAllTransactions(1, 50).subscribe(res => {
+    this.listService.getAllTransactions(0, 50).subscribe(res => {
       if (res.status) {
         this.drivers = res.data
       }

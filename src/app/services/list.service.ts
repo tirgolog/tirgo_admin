@@ -84,6 +84,17 @@ export class ListService {
     }));
   }
 
+  getPaymentCourse() {
+    const sUrl = API_URL + '/admin/curence/course';
+    return this.http.get<any>(sUrl).pipe(map(res => {
+      if (res && res.data) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
+  }
+
   getAllServies() {
     const sUrl = API_URL + '/admin/services';
     return this.http.get<any>(sUrl).pipe(map(res => {
@@ -212,7 +223,7 @@ export class ListService {
   }
 
   getServiceTransactionByUserId(from, limit, userid) {
-    const sUrl = API_URL + `/admin/services-transaction/${userid}`;
+    const sUrl = API_URL + `/admin/services-transaction/user`;
     return this.http.post<any>(sUrl, JSON.stringify({from, limit,userid}))
       .pipe(map(res => {
         if (res) {

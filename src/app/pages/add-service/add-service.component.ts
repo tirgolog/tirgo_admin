@@ -12,7 +12,7 @@ import { ListService } from "src/app/services/list.service";
   host: { "id": "main" }
 })
 export class AddServiceComponent {
-  service = { id: null, name: null, price_kzs: null, price_uzs: null }
+  service = { id: null, name: null, price_kzs: null, price_uzs: null, rate:null }
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     public listService: ListService,
     private toastr: ToastrService,
@@ -21,10 +21,17 @@ export class AddServiceComponent {
 
   ngOnInit() {
     if (this.data) {
+      console.log(this.data)
       this.service = this.data;
+    }else{
+      this.getPaymentCourse()
     }
   }
-
+  getPaymentCourse() {
+    this.listService.getPaymentCourse().subscribe(res => {
+      this.service.rate = res.data
+    })
+  }
 
   onInputChange(target: any, key): void {
     if (target.value != 0 || target.value != '') {
