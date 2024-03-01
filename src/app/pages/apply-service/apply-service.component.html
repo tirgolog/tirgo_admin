@@ -35,6 +35,12 @@
                         <input matInput type="text" inputmode="tel" name="balance" readonly
                             [(ngModel)]="dataUser.balance" [ngModelOptions]="{standalone: true}" />
                     </mat-form-field>
+
+                    <mat-form-field class="form__input tw-w-full">
+                        <mat-label>подписка</mat-label>
+                        <input matInput type="text" inputmode="tel" name="to_subscription" readonly
+                            [(ngModel)]="dataUser.to_subscription" [ngModelOptions]="{standalone: true}" />
+                    </mat-form-field>
                     <div class="tw-flex tw-mt-5">
                         <mat-radio-group  required (change)="onChange($event)">
                             <mat-radio-button *ngFor="let row of services.data" [value]="row" class="radio-group">

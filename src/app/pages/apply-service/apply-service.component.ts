@@ -5,12 +5,16 @@ import { AuthService } from "../../services/auth.service";
 import { HelperService } from "../../services/helper.service";
 import { ListService } from "../../services/list.service";
 import { ToastrService } from "ngx-toastr";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-apply-service",
   templateUrl: "./apply-service.component.html",
   styleUrls: ["./apply-service.component.scss"],
   host: { id: "main" },
+  providers: [
+    DatePipe
+  ]
 })
 export class ApplyServiceComponent {
   services
@@ -22,9 +26,11 @@ export class ApplyServiceComponent {
     balance: '',
     price_uzs: '',
     price_kzs: '',
-    rate:''
+    to_subscription: '',
+    rate: ''
   };
   constructor(
+    public datePipe: DatePipe,
     public dialog: MatDialog,
     public spoller: SpollersService,
     public helper: HelperService,
@@ -59,9 +65,11 @@ export class ApplyServiceComponent {
   searchUser(user_id) {
     if (user_id) {
       this.listService.getSearchAlphaPaymentAdmin(user_id).subscribe(res => {
-        this.dataUser.phone = res.user.phone;
-        this.dataUser.name = res.user.name;
-        this.dataUser.balance = res.total_amount;
+        console.log(res)
+        this.dataUser.phone = res.phone;
+        this.dataUser.name = res.name;
+        this.dataUser.balance = res.balance;
+        this.dataUser.to_subscription = this.datePipe.transform(res.to_subscription, 'dd/MM/yyyy') ;
       })
     }
   }
