@@ -10,6 +10,10 @@
         <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row?.id}} </mat-cell>
       </ng-container>
+      <ng-container matColumnDef="userid">
+        <mat-header-cell *matHeaderCellDef>Идентификатор водителя</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row?.userid}} </mat-cell>
+      </ng-container>
       <ng-container matColumnDef="service_id">
         <mat-header-cell *matHeaderCellDef>Идентификатор услуги </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row?.service_id}} </mat-cell>
@@ -36,9 +40,9 @@
       </ng-container>
     <!-- Header and Row Declarations -->
     <mat-header-row
-      *matHeaderRowDef="['id', 'service_id', 'name', 'date', 'price_kzs', 'price_uzs', 'rate']"></mat-header-row>
+      *matHeaderRowDef="['id', 'userid', 'service_id', 'name', 'date', 'price_kzs', 'price_uzs', 'rate']"></mat-header-row>
     <mat-row (click)="goToColumn(row.id)"
-      *matRowDef="let row; columns: ['id', 'service_id', 'name', 'date', 'price_kzs', 'price_uzs', 'rate']"></mat-row>
+      *matRowDef="let row; columns: ['id', 'userid', 'service_id', 'name', 'date', 'price_kzs', 'price_uzs', 'rate']"></mat-row>
     </mat-table>
     <mat-paginator [length]="helper.drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
       (page)="handlePage($event)"></mat-paginator>
