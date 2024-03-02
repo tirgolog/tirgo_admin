@@ -75,7 +75,7 @@ export class ServiceTypesComponent implements OnInit {
 
   handlePage(ev) { }
   async delete(id: number) {
-    const res = await this.authService.DeleteTypeSubscription(id).toPromise();
+    const res = await this.authService.DeleteTypeServices(id).toPromise();
     if (res.status) {
       this.toastr.success('Удаление услуг')
       this.getAll()

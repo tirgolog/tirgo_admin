@@ -35,7 +35,6 @@ export class ApiInterceptor implements HttpInterceptor {
         });
       } 
        
-  
       return next.handle(authReq).pipe(
         map((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {}

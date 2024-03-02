@@ -46,30 +46,33 @@ export class ApplyServiceComponent {
   }
 
   async applyService() {
-    if (!this.dataUser.name || !this.dataUser.phone || !this.dataUser.user_id || !this.dataUser.services_id) {
-      await this.helper.openDialogConfirm('Ошибка', 'Не все поля заполнены корректно', 1)
-    } else {
-      const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
-      if (confirm) {
-        await this.listService.addDriverServices(this.dataUser).subscribe(res => {
-          if (res.status) {
-            this.toastr.success('Служба успешно подключилась к драйверу')
-            this.dialog.closeAll();
-          } else {
-            this.toastr.error(res.error)
-          }
-        });
+    if (!this.dataUser.to_subscription) {
+      this.toastr.info('У драйвера нет подписки или она уже закончилась')
+    }else{
+      if (!this.dataUser.name || !this.dataUser.phone || !this.dataUser.user_id || !this.dataUser.services_id) {
+        await this.helper.openDialogConfirm('Ошибка', 'Не все поля заполнены корректно', 1)
+      } else {
+        const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
+        if (confirm) {
+          await this.listService.addDriverServices(this.dataUser).subscribe(res => {
+            if (res.status) {
+              this.toastr.success('Служба успешно подключилась к драйверу')
+              this.dialog.closeAll();
+            } else {
+              this.toastr.error(res.error)
+            }
+          });
+        }
       }
     }
   }
   searchUser(user_id) {
     if (user_id) {
       this.listService.getSearchAlphaPaymentAdmin(user_id).subscribe(res => {
-        console.log(res)
-        this.dataUser.phone = res.phone;
-        this.dataUser.name = res.name;
-        this.dataUser.balance = res.balance;
-        this.dataUser.to_subscription = this.datePipe.transform(res.to_subscription, 'dd/MM/yyyy') ;
+        this.dataUser.phone = res.user.phone;
+        this.dataUser.name = res.user.name;
+        this.dataUser.balance = res.total_amount;
+        this.dataUser.to_subscription = this.datePipe.transform(res.user.to_subscription, 'dd/MM/yyyy') ;
       })
     }
   }
