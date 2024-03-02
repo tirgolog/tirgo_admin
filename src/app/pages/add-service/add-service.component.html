@@ -20,12 +20,12 @@
                     <br>
                     <mat-form-field class="form__input tw-w-full">
                         <mat-label>Цена (в UZS)</mat-label>
-                        <input matInput type="text" name="price_uzs"  (input)="onInputChange($event.target, 'UZS')"   [(ngModel)]="service.price_uzs"  />
+                        <input matInput type="text" name="price_uzs"   [(ngModel)]="service.price_uzs"  />
                     </mat-form-field>
 
                     <mat-form-field class="form__input tw-w-full">
                         <mat-label>Ставка</mat-label>
-                        <input matInput type="text" name="rate"  readonly="" [(ngModel)]="service.rate"  />
+                        <input matInput type="text" name="rate"  [(ngModel)]="service.rate"  (input)="onInputChangeTarget($event.target)"  />
                     </mat-form-field>
                 </ng-container>
             </div>
