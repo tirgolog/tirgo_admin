@@ -17,6 +17,7 @@ import { DatePipe } from "@angular/common";
   ]
 })
 export class ApplyServiceComponent {
+  formattedData: any[] = []
   services
   dataUser = {
     user_id: '',
@@ -27,7 +28,8 @@ export class ApplyServiceComponent {
     price_uzs: '',
     price_kzs: '',
     to_subscription: '',
-    rate: ''
+    rate: '',
+    services: []
   };
   constructor(
     public datePipe: DatePipe,
@@ -46,15 +48,32 @@ export class ApplyServiceComponent {
   }
 
   async applyService() {
+    this.dataUser.services.forEach(service => {
+      const formattedService = {
+        phone: this.dataUser.phone,
+        service_id: service.id,
+        price_uzs: service.price_uzs,
+        price_kzt: service.price_kzs,
+      };
+      this.formattedData.push(formattedService);
+    });
+
+    let dataSend = {
+      user_id: this.dataUser.user_id,
+      services: this.formattedData
+    };
+    this.formattedData = [];
+
     if (!this.dataUser.to_subscription) {
       this.toastr.info('У драйвера нет подписки или она уже закончилась')
-    }else{
+    }
+    else {
       if (!this.dataUser.name || !this.dataUser.phone || !this.dataUser.user_id || !this.dataUser.services_id) {
         await this.helper.openDialogConfirm('Ошибка', 'Не все поля заполнены корректно', 1)
       } else {
         const confirm = await this.helper.openDialogConfirm('Вы уверены?', 'Вы уверены что хотите добавить данного пользователя?', 2)
         if (confirm) {
-          await this.listService.addDriverServices(this.dataUser).subscribe(res => {
+          await this.listService.addDriverServices(dataSend).subscribe(res => {
             if (res.status) {
               this.toastr.success('Служба успешно подключилась к драйверу')
               this.dialog.closeAll();
@@ -72,15 +91,28 @@ export class ApplyServiceComponent {
         this.dataUser.phone = res.user.phone;
         this.dataUser.name = res.user.name;
         this.dataUser.balance = res.total_amount;
-        this.dataUser.to_subscription = this.datePipe.transform(res.user.to_subscription, 'dd/MM/yyyy') ;
+        this.dataUser.to_subscription = this.datePipe.transform(res.user.to_subscription, 'dd/MM/yyyy');
       })
     }
   }
-  onChange(event: any) {
-    this.dataUser.services_id = event.value.id;
-    this.dataUser.price_uzs = event.value.price_uzs;
-    this.dataUser.price_kzs = event.value.price_kzs;
-    this.dataUser.rate = event.value.rate;
+  onChange(event, service: any) {
+    if (event.checked) {
+      let serviceAlreadySelected = false;
+      for (let i = 0; i < this.dataUser.services.length; i++) {
+        if (this.dataUser.services[i].id === service.id) {
+          serviceAlreadySelected = true;
+          break;
+        }
+      }
+      if (!serviceAlreadySelected) {
+        this.dataUser.services.push(service);
+      }
+    } else {
+      const index = this.dataUser.services.findIndex(s => s.id === service.id);
+      if (index !== -1) {
+        this.dataUser.services.splice(index, 1);
+      }
+    }
   }
 
 }
