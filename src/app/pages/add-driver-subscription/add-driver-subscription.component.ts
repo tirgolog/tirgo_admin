@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { ListService } from 'src/app/services/list.service';
 
@@ -16,15 +18,20 @@ export class AddDriverSubscriptionComponent implements OnInit {
     amount: '',
     name: '',
     subscription_id: 0,
+    admin_id: 0,
   };
   subscription: any[] = []
   loading: boolean = false;
+  decoded:any;
   constructor(
     private toastr: ToastrService,
     public listService: ListService,
     public helper: HelperService,
+    public authService: AuthService,
     public dialog: MatDialog) { }
-  ngOnInit(): void {
+ ngOnInit(): void {
+    this.decoded = jwtDecode((localStorage.getItem('jwttirgotoken')))
+    this.dataUser.admin_id = this.decoded.id;
     this.getAllSubcription()
   }
 

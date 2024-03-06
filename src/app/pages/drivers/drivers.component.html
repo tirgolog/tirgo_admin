@@ -6,7 +6,8 @@
             <button class="page-header__btn btn-green" (click)="applyService()" *ngIf="authService?.myrole?.send_push">
                Оформить услугу
             </button>
-            <button class="page-header__btn btn-green" [routerLink]="['/apply-service-history']" *ngIf="authService?.myrole?.send_push">
+            <button class="page-header__btn btn-green" [routerLink]="['/apply-service-history']"
+               *ngIf="authService?.myrole?.send_push">
                История оформление услуг
             </button>
             <button routerLink="/fin-request" class="page-header__btn btn-green"
@@ -123,11 +124,25 @@
          </ng-container>
          <ng-container matColumnDef="date_reg">
             <mat-header-cell *matHeaderCellDef>Дата регистрации</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.date_reg | formatTime: 'DD.MM.YYYY'}} </mat-cell>
+            <mat-cell *matCellDef="let row">
+               <span *ngIf="row.date_reg">
+                  {{row.date_reg | date: 'dd.mm.yyy'}}
+               </span>
+               <span *ngIf="!row.date_reg">
+                  -
+               </span>
+            </mat-cell>
          </ng-container>
          <ng-container matColumnDef="date_last_login">
             <mat-header-cell *matHeaderCellDef>Последний вход</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.date_last_login | formatTime: 'DD.MM.YYYY в HH:mm'}} </mat-cell>
+            <mat-cell *matCellDef="let row">
+               <span *ngIf="row.date_last_login">
+                  {{row.date_last_login | date: 'dd.mm.yyy'}}
+               </span>
+               <span *ngIf="!row.date_last_login">
+                  -
+               </span>
+            </mat-cell>
          </ng-container>
          <ng-container matColumnDef="orders">
             <mat-header-cell *matHeaderCellDef>Заказы</mat-header-cell>
