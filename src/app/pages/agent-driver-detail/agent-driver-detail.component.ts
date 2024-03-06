@@ -44,7 +44,7 @@ export class AgentDriverDetailComponent {
         return newitems.length
     }
     async ngOnInit() {
-        this.file_url = 'https://admin.tirgo.io/file/'
+        this.file_url = 'https://admin.tirgo.io/api/file/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
             this.user = res.data

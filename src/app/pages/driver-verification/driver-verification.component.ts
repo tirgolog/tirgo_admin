@@ -37,7 +37,7 @@ export class DriverVerificationComponent {
 
     async ngOnInit() {
         this.authService.typetruck = await this.authService.getTypeTruck().toPromise();
-        this.file_url = 'https://admin.tirgo.io/file/'
+        this.file_url = 'https://admin.tirgo.io/api/file/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
             this.user = res.data
