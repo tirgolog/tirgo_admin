@@ -45,7 +45,7 @@ export class DriverComponent {
         return newitems.length
     }
     async ngOnInit() {
-        this.file_url = 'http://localhost:7790/file/'
+        this.file_url = 'https://admin.tirgo.io/file/'
         const res = await this.authService.getUserInfo(+this.data).toPromise();
         if (res.status) {
             this.user = res.data
