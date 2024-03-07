@@ -54,7 +54,8 @@ export class ApplyServiceComponent {
       const formattedService = {
         service_id: service.id,
         price_uzs: service.price_uzs,
-        price_kzt: service.price_kzs,
+        price_kzs: service.price_kzs,
+        rate: service.rate,
       };
       this.formattedData.push(formattedService);
     });
