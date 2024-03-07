@@ -18,9 +18,13 @@
     <section class="table">
 
         <mat-table [dataSource]="serviceTypes">
+            <ng-container matColumnDef="index">
+                <mat-header-cell *matHeaderCellDef>No </mat-header-cell>
+                <mat-cell *matCellDef="let row; let i = index"> {{ i + 1 }} </mat-cell>
+            </ng-container>
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef>ID </mat-header-cell>
-                <mat-cell *matCellDef="let row; let i = index"> {{ i + 1 }} </mat-cell>
+                <mat-cell *matCellDef="let row; let i = index"> {{row.id }} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef>Имя</mat-header-cell>
@@ -64,9 +68,9 @@
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="['id', 'name', 'priceKZT','priceUZS', 'rate', 'actions']"></mat-header-row>
+            <mat-header-row *matHeaderRowDef="['index','id', 'name', 'priceKZT','priceUZS', 'rate', 'actions']"></mat-header-row>
             <mat-row (click)="goToColumn(row)"
-                *matRowDef="let row;columns: ['id', 'name', 'priceKZT','priceUZS', 'rate', 'actions']"></mat-row>
+                *matRowDef="let row;columns: ['index','id', 'name', 'priceKZT','priceUZS', 'rate', 'actions']"></mat-row>
         </mat-table>
         <mat-paginator [length]="helper.users_count" showFirstLastButtons [pageSizeOptions]="sizespage"
             (page)="handlePage($event)"></mat-paginator>
