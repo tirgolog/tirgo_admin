@@ -39,7 +39,7 @@
             <input matInput type="text" inputmode="tel" name="to_subscription" readonly
               [(ngModel)]="dataUser.to_subscription" [ngModelOptions]="{standalone: true}" />
           </mat-form-field>
-          <div class="tw-flex tw-mt-5">
+          <div class="tw-flex tw-mt-5" style="display: flex;flex-wrap: wrap;">
             <ng-container>
               <div *ngFor="let row of services?.data" class="checkbox-group">
                 <mat-checkbox (change)="onChange($event,row)">
