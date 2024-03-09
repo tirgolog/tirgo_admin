@@ -76,9 +76,9 @@
             <mat-cell *matCellDef="let row"> {{row.lat ? 'Есть разрешение':'Нет разрешения'}} </mat-cell>
          </ng-container>
          <mat-header-row
-            *matHeaderRowDef="['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-header-row>
+            *matHeaderRowDef="['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy',  'date_reg',  'orders', 'lat']"></mat-header-row>
          <mat-row (click)="goToColumn(row.id)"
-            *matRowDef="let row; columns: ['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy', 'moderation', 'date_reg', 'date_last_login', 'orders', 'lat']"></mat-row>
+            *matRowDef="let row; columns: ['id', 'iso_code', 'name', 'phone', 'trucks', 'raiting', 'busy',  'date_reg',  'orders', 'lat']"></mat-row>
       </mat-table>
       <mat-paginator [length]="helper.agent_drivers_count" showFirstLastButtons [pageSizeOptions]="sizespage"
          (page)="handlePage($event)"></mat-paginator>
