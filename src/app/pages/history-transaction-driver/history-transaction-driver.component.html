@@ -6,7 +6,7 @@
    </section>
    <section class="table">
       <mat-table [dataSource]="subscritions">
-         <ng-container matColumnDef="index">
+         <ng-container matColumnDef="index" >
             <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
             <mat-cell *matCellDef="let element; let i = index;">{{i+1}}</mat-cell>
           </ng-container>

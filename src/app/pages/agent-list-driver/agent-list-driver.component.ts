@@ -67,8 +67,10 @@ export class AgentListDriverComponent {
 
   subscription(){
     const dialogRef = this.dialog.open(HistoryTransactionDriverComponent, {
-      width: "1000px",
-      height: "600px",
+      minWidth: '60vw',
+      maxWidth: '80vw',
+      minHeight: '70vh',
+      maxHeight: '80vh',
       data:this.agent_id,
       panelClass: "custom-dialog-class",
     });

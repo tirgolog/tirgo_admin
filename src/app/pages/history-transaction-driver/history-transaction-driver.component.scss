@@ -1,0 +1,28 @@
+@import "base";
+
+/*[class*="mat-column-"] {
+  flex: 0 0 10%;
+}*/
+.mat-column-index {
+    flex: 0 0 3% !important;
+}
+
+.mat-column-admin {
+    flex: 0 0 15% !important;
+}
+
+.mat-column-agent {
+    flex: 0 0 10% !important;
+}
+
+.mat-column-amount {
+    flex: 0 0 15% !important;
+}
+
+.mat-column-type {
+    flex: 0 0 15% !important;
+}
+
+.mat-column-driverId {
+    flex: 0 0 25% !important;
+}
