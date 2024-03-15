@@ -6,7 +6,12 @@
             <button class="page-header__btn btn-green" (click)="applyService()" *ngIf="authService?.myrole?.send_push">
                Оформить услугу
             </button>
-            <button class="page-header__btn btn-green" [routerLink]="['/apply-service-history']"
+            <button 
+               class="page-header__btn btn-green" 
+               [routerLink]="['/apply-service-history']"
+               matBadge="{{ count }}"
+               matBadgePosition="after"
+               matBadgeColor="warn"
                *ngIf="authService?.myrole?.send_push">
                История оформление услуг
             </button>

@@ -31,18 +31,17 @@ export class DriversComponent {
   sort: string = "id";
   reverse: boolean = true;
   is_service: number = 0;
-
   gridOptions: any;
   drivers: any[] = [];
   sizespage = [50, 100, 200, 500, 1000, 5000];
+  count: number=0;
   constructor(
     public dialog: MatDialog,
     public spoller: SpollersService,
     public helper: HelperService,
     public listService: ListService,
     public authService: AuthService,
-    public socketService: SocketService
-  ) { }
+    public socketService: SocketService) { }
 
   ngOnInit(): void {
     this.spoller.initSpollers();
@@ -56,6 +55,16 @@ export class DriversComponent {
     this.gridOptions.resizable = true;
     this.updateListDrivers();
     this.getReqFinance();
+    this.getTransactionCount();
+  }
+
+
+  getTransactionCount(){
+    this.listService.getAllTransactionsCount().subscribe(res => {
+      if (res.status) {
+        this.count = res.data.count
+      }
+    })
   }
 
   downloadFile(filename) {

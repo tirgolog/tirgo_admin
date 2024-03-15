@@ -117,6 +117,39 @@ export class ListService {
     }));
   }
 
+  getAllTransactionsCount() {
+    const sUrl = API_URL + '/admin/services-transaction/count';
+    return this.http.get<any>(sUrl).pipe(map(res => {
+      if (res && res.data) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
+  }
+
+  postTransactionStatus(id) {
+    const sUrl = API_URL + '/admin/services-transaction/status';
+    return this.http.post<any>(sUrl, JSON.stringify({id})).pipe(map(res => {
+      if (res && res) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
+  }
+
+  postTransactionStatusBy(id, status) {
+    const sUrl = API_URL + '/admin/services-transaction/status/by';
+    return this.http.post<any>(sUrl, JSON.stringify({id, status})).pipe(map(res => {
+      if (res && res) {
+        return res;
+      } else {
+        return [];
+      }
+    }));
+  }
+
   postService(body) {
     const sUrl = API_URL + '/admin/services';
     return this.http.post<any>(sUrl, body);
