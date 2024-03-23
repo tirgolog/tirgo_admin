@@ -30,7 +30,7 @@ export class DriversComponent {
   fin_requests = 0;
   sort: string = "id";
   reverse: boolean = true;
-  is_service: number = 0;
+  is_service: number = 2;
   gridOptions: any;
   drivers: any[] = [];
   sizespage = [50, 100, 200, 500, 1000, 5000];
@@ -221,7 +221,7 @@ export class DriversComponent {
     this.typetransport = "all";
     this.subscription = "all";
     this.helper.isLoading = true;
-    this.is_service = 0;
+    this.is_service = 2;
     let newusers = await this.listService
       .getAllDrivers(0, 50, null, null, null, null, null, null, null, null, this.is_service)
       .toPromise();

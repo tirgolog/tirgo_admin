@@ -68,7 +68,8 @@
             <span>
                <select name="select" class="page__search" [(ngModel)]="subscription"
                   (change)="selectSubscription($event)">
-                  <option value="all">Без подписки </option>
+                  <option value="all">Все</option>
+                  <option value="without_subscription">Без подписки </option>
                   <option value="subscription">Подписка</option>
                </select>
             </span>
@@ -76,6 +77,7 @@
             <span>
                <select name="select" class="page__search" [(ngModel)]="is_service"
                   (change)="selectSubscription($event)">
+                  <option value="2">Все</option>
                   <option value="0">Без услуга </option>
                   <option value="1">Услуга</option>
                </select>
